@@ -1,0 +1,34 @@
+export Descriptor_Deck_pion_TEST_Alpha_1 is TDeckDescriptor
+(
+    DeckIdentifier = 'pion_TEST_Alpha_1'
+    DeckDivision = $/GFX/Division/Descriptor_Deck_Division_TEST_solo
+    Superior = $/UI/BattleOrder/TEST_Subordination
+    DeckPackList =
+    [
+        ~/Descriptor_StrategicPack_UnitA_1,
+        ~/Descriptor_StrategicPack_UnitB_1,
+        ~/Descriptor_StrategicPack_UnitC_1,
+        ~/Descriptor_StrategicPack_UnitA_1,
+        ~/Descriptor_StrategicPack_UnitB_1,
+    ]
+    DeckCombatGroupList =
+    [
+        ~/Descriptor_CombatGroup_pion_TEST_Alpha_1_HQ,
+        ~/Descriptor_CombatGroup_pion_TEST_Alpha_1_A,
+    ]
+)
+
+export Descriptor_Deck_pion_TEST_Bravo_1 is TDeckDescriptor
+(
+    DeckIdentifier = 'pion_TEST_Bravo_1'
+    DeckDivision = $/GFX/Division/Descriptor_Deck_Division_TEST_solo
+    Superior = $/UI/BattleOrder/TEST_Subordination
+    DeckPackList =
+    [
+        ~/Descriptor_StrategicPack_UnitA_1,
+    ]
+    DeckCombatGroupList =
+    [
+        ~/Descriptor_CombatGroup_pion_TEST_Bravo_1_HQ,
+    ]
+)

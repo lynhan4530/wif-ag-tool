@@ -1,0 +1,93 @@
+export Descriptor_Unit_WF_M1A2_SEPV2_Abrams_US is TEntityDescriptor
+(
+    DescriptorId = GUID:{454ef2bc-ff1e-42fd-9c64-7988718c197d}
+    ClassNameForDebug = 'Unit_WF_M1A2_SEPV2_Abrams_US'
+    ModulesDescriptors = [
+        TTypeUnitModuleDescriptor
+        (
+            Coalition = ECoalition/NATO
+            MotherCountry = 'US'
+        ),
+        TDamageModuleDescriptor
+        (
+            HitRollECM = 0.0
+        ),
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue = 652
+            UnitDefenseValue = 497
+            UnitBonusXpPerLevelValue = 1
+        ),
+        TUnitUIModuleDescriptor
+        (
+            PriceCategory = 'tank_A'
+            UnitRole = 'armor'
+            SpecialtiesList = [
+                '_smoke_launcher',
+                'Thermals2',
+            ]
+            NameToken = 'WFM1ASV2'
+        ),
+    ]
+)
+
+export Descriptor_Unit_WF_M2A4_Bradley_US is TEntityDescriptor
+(
+    DescriptorId = GUID:{ac17b0b3-412f-46fe-b2f8-6344f3947eec}
+    ClassNameForDebug = 'Unit_WF_M2A4_Bradley_US'
+    ModulesDescriptors = [
+        TTypeUnitModuleDescriptor
+        (
+            Coalition = ECoalition/NATO
+            MotherCountry = 'US'
+        ),
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue = 171
+            UnitDefenseValue = 86
+            UnitBonusXpPerLevelValue = 1
+        ),
+        TUnitUIModuleDescriptor
+        (
+            PriceCategory = 'tank_A'
+            UnitRole = 'ifv'
+            SpecialtiesList = [
+                '_ifv',
+                '_eo_dazzler',
+                'Thermals2',
+                '_era',
+                'MRAP',
+            ]
+            NameToken = 'WFM2BA4A'
+        ),
+    ]
+)
+
+export Descriptor_Unit_WF_T90M_RUS is TEntityDescriptor
+(
+    DescriptorId = GUID:{bbbbbbbb-0000-1111-2222-cccccccccccc}
+    ClassNameForDebug = 'Unit_WF_T90M_RUS'
+    ModulesDescriptors = [
+        TTypeUnitModuleDescriptor
+        (
+            Coalition = ECoalition/PACT
+            MotherCountry = 'RUS'
+        ),
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue = 580
+            UnitDefenseValue = 440
+            UnitBonusXpPerLevelValue = 1
+        ),
+        TUnitUIModuleDescriptor
+        (
+            PriceCategory = 'tank_A'
+            UnitRole = 'armor'
+            SpecialtiesList = [
+                '_smoke_launcher',
+                '_era',
+            ]
+            NameToken = 'WFT90M01'
+        ),
+    ]
+)

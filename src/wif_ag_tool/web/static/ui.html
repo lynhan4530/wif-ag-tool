@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>WIF AG Tool</title>
+<style>
+  :root { color-scheme: dark; }
+  body { font-family: ui-monospace, Consolas, Menlo, monospace; background:#181a1f; color:#dde; margin:0; }
+  header { background:#23262d; padding:8px 12px; border-bottom:1px solid #333; display:flex; gap:16px; align-items:center; }
+  header h1 { font-size:14px; margin:0; }
+  main { display:grid; grid-template-columns: 320px 1fr; gap:0; height:calc(100vh - 38px); }
+  section { padding:8px 12px; overflow:auto; border-right:1px solid #2a2d34; }
+  h2 { font-size:12px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:8px 0 4px; }
+  select, input { background:#1f2228; color:#dde; border:1px solid #333; padding:3px 6px; font:inherit; }
+  button { background:#2d4; color:#000; border:0; padding:2px 6px; font:inherit; cursor:pointer; }
+  button.del { background:#d44; color:#fff; }
+  .row { display:flex; gap:6px; align-items:center; padding:2px 0; }
+  .deck { cursor:pointer; padding:2px 4px; }
+  .deck.active { background:#234; }
+  .unit { display:grid; grid-template-columns: 40px 1fr 60px 60px 30px; gap:6px; padding:2px 4px; border-bottom:1px solid #23262d; align-items:center; }
+  .unit img { width:36px; height:24px; object-fit:contain; background:#0c0e12; border:1px solid #23262d; }
+  .unit img.missing { visibility:hidden; }
+  .assignments { border-top:2px solid #333; padding:8px 12px; }
+  .assignment { display:grid; grid-template-columns: 1fr repeat(3, auto) auto auto auto; gap:8px; align-items:center; padding:2px 0; }
+  .xp label { margin-right:4px; }
+  .num { width:60px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎮 WIF AG Tool</h1>
+  <span id="campaign">Campaign: —</span>
+  <span style="flex:1"></span>
+  <button id="refresh">Refresh decks</button>
+  <button id="export">Export NDF</button>
+</header>
+<main>
+  <section id="leftCol">
+    <h2>Decks</h2>
+    <div class="row">
+      <label>Nation</label>
+      <select id="deckNation">
+        <option value="">all</option>
+        <option>US</option><option>SOV</option><option>FR</option>
+        <option>GER</option><option>UK</option><option>BEL</option>
+      </select>
+    </div>
+    <div id="deckList"></div>
+  </section>
+  <section id="rightCol">
+    <h2>WIF Units</h2>
+    <div class="row">
+      <label>Nation</label>
+      <select id="unitNation">
+        <option value="">all</option>
+        <option>US</option><option>RUS</option><option>FR</option>
+        <option>GER</option><option>UK</option><option>BEL</option>
+        <option>NL</option><option>DNR</option>
+      </select>
+      <label>Role</label>
+      <select id="unitRole">
+        <option value="all">all</option>
+        <option>armor</option><option>ifv</option>
+        <option>helicopter</option><option>plane</option>
+        <option>infantry</option><option>artillery</option>
+      </select>
+      <input id="unitSearch" placeholder="search" size="14">
+    </div>
+    <div id="unitList"></div>
+  </section>
+</main>
+<div class="assignments">
+  <h2>Assigned WIF Units — <span id="currentDeck">(no deck selected)</span></h2>
+  <div id="assignList"></div>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+let currentDeck = null;
+let allUnits = [];
+let allDecks = [];
+
+async function loadDecks() {
+  const nation = $("deckNation").value;
+  const url = "/api/decks" + (nation ? `?nation=${nation}` : "");
+  allDecks = await fetch(url).then(r => r.json());
+  const list = $("deckList");
+  list.innerHTML = "";
+  for (const d of allDecks) {
+    const el = document.createElement("div");
+    el.className = "deck" + (d.name === currentDeck ? " active" : "");
+    el.textContent = `${d.name.replace("Descriptor_Deck_pion_","")}  (${d.pack_count}p)`;
+    el.onclick = () => selectDeck(d.name);
+    list.appendChild(el);
+  }
+}
+
+async function loadUnits() {
+  const nation = $("unitNation").value;
+  const role = $("unitRole").value;
+  const q = $("unitSearch").value;
+  const params = new URLSearchParams();
+  if (nation) params.set("nation", nation);
+  if (role && role !== "all") params.set("role", role);
+  if (q) params.set("q", q);
+  allUnits = await fetch("/api/wif_units?" + params).then(r => r.json());
+  const list = $("unitList");
+  list.innerHTML = "";
+  for (const u of allUnits) {
+    const el = document.createElement("div");
+    el.className = "unit";
+    el.innerHTML = `
+      <img src="/api/unit_icon/${u.name}" loading="lazy" onerror="this.classList.add('missing')">
+      <span>${u.name}</span><span>A:${u.attack}</span><span>D:${u.defense}</span>
+    `;
+    const btn = document.createElement("button");
+    btn.textContent = "+";
+    btn.onclick = () => assignUnit(u);
+    el.appendChild(btn);
+    list.appendChild(el);
+  }
+}
+
+async function selectDeck(name) {
+  currentDeck = name;
+  $("currentDeck").textContent = name;
+  await loadDecks();
+  await loadAssignments();
+}
+
+async function loadAssignments() {
+  if (!currentDeck) return;
+  const d = await fetch(`/api/deck/${currentDeck}`).then(r => r.json());
+  const list = $("assignList");
+  list.innerHTML = "";
+  for (const a of (d.assignments || [])) {
+    const el = document.createElement("div");
+    el.className = "assignment";
+    el.innerHTML = `
+      <span>${a.unit_id}</span>
+      <span class="xp">
+        <label><input type="checkbox" ${a.xp_levels.includes(1)?"checked":""} data-xp="1"> XP1</label>
+        <label><input type="checkbox" ${a.xp_levels.includes(2)?"checked":""} data-xp="2"> XP2</label>
+        <label><input type="checkbox" ${a.xp_levels.includes(3)?"checked":""} data-xp="3"> XP3</label>
+      </span>
+      <span>ATK<input class="num atk" type="number" value="${a.attack_override ?? ""}" placeholder="auto"></span>
+      <span>DEF<input class="num def" type="number" value="${a.defense_override ?? ""}" placeholder="auto"></span>
+      <span>n<input class="num cnt" type="number" value="${a.count}" min="1"></span>
+      <button>save</button>
+      <button class="del">x</button>
+    `;
+    el.querySelector("button:not(.del)").onclick = () => saveAssignmentRow(el, a);
+    el.querySelector("button.del").onclick = () => removeAssignment(a);
+    list.appendChild(el);
+  }
+}
+
+async function assignUnit(u) {
+  if (!currentDeck) { alert("select a deck first"); return; }
+  await fetch("/api/assign", {
+    method:"POST", headers:{"content-type":"application/json"},
+    body: JSON.stringify({deck_name: currentDeck, unit_id: u.name, xp_levels:[1], count:1}),
+  });
+  await loadAssignments();
+}
+
+async function saveAssignmentRow(el, a) {
+  const xps = [...el.querySelectorAll(".xp input:checked")].map(i => Number(i.dataset.xp));
+  const body = {
+    deck_name: a.deck_name,
+    unit_id: a.unit_id,
+    xp_levels: xps.length ? xps : [1],
+    count: Number(el.querySelector(".cnt").value) || 1,
+    attack_override: el.querySelector(".atk").value ? Number(el.querySelector(".atk").value) : null,
+    defense_override: el.querySelector(".def").value ? Number(el.querySelector(".def").value) : null,
+  };
+  await fetch("/api/assign", {
+    method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(body),
+  });
+  await loadAssignments();
+}
+
+async function removeAssignment(a) {
+  await fetch(`/api/assign/${a.deck_name}/${a.unit_id}`, { method:"DELETE" });
+  await loadAssignments();
+}
+
+$("deckNation").onchange = loadDecks;
+$("unitNation").onchange = loadUnits;
+$("unitRole").onchange = loadUnits;
+$("unitSearch").oninput = loadUnits;
+$("refresh").onclick = async () => {
+  await fetch("/api/refresh", {method:"POST"});
+  await loadDecks();
+};
+$("export").onclick = async () => {
+  const resp = await fetch("/api/export", {method:"POST"});
+  if (!resp.ok) { alert("export failed: " + await resp.text()); return; }
+  const blob = await resp.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "wif_ag_export.zip"; a.click();
+};
+
+(async () => {
+  const camps = await fetch("/api/campaigns").then(r => r.json()).catch(() => []);
+  if (camps.length) {
+    const c = camps[0];
+    $("campaign").textContent = `Campaign: ${c.campaign || "?"} — ${(c.factions || []).join(" vs ")}`;
+  }
+  await loadDecks();
+  await loadUnits();
+})();
+</script>
+</body>
+</html>

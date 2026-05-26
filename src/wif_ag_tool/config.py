@@ -1,0 +1,46 @@
+"""Path configuration for the WIF AG Tool.
+
+All paths are resolved at import time from environment variables or hardcoded
+Windows defaults. Tests override these by passing paths directly to parser functions
+rather than using these constants.
+"""
+
+from __future__ import annotations
+import os
+from pathlib import Path
+
+# ── WIF source (read-only) ────────────────────────────────────────────────────
+WIF_ROOT = Path(os.environ.get(
+    "WIF_ROOT",
+    r"G:\Project\A-World-In-Flames"
+))
+WIF_UNITE_DESCRIPTOR = WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
+WIF_BUTTON_TEXTURES  = WIF_ROOT / "Generated" / "UserInterface" / "Textures" / "ButtonTexturesUnites.ndf"
+WIF_UNITS_CSV        = WIF_ROOT / "Localisation" / "A World in Flames" / "UNITS.csv"
+
+# ── Vanilla recon (read-only reference extracted from base.zip) ───────────────
+VANILLA_ROOT = Path(os.environ.get(
+    "VANILLA_ROOT",
+    r"G:\Warno_mod\vanilla_recon\GameData"
+))
+VANILLA_DECKS_DIR        = VANILLA_ROOT / "Generated" / "Gameplay" / "Decks"
+VANILLA_STRATEGIC_DECKS  = VANILLA_DECKS_DIR / "StrategicDecks.ndf"
+VANILLA_STRATEGIC_PACKS  = VANILLA_DECKS_DIR / "StrategicPacks.ndf"
+VANILLA_COMBAT_GROUPS    = VANILLA_DECKS_DIR / "StrategicCombatGroups.ndf"
+
+# ── WARNO install + mod ───────────────────────────────────────────────────────
+WARNO_MODS_DIR = Path(os.environ.get(
+    "WARNO_MODS_DIR",
+    r"G:\Program Files (x86)\Steam\steamapps\common\WARNO\Mods"
+))
+
+# ── Steam save files ──────────────────────────────────────────────────────────
+SAVES_DIR = Path(os.environ.get(
+    "WARNO_SAVES_DIR",
+    r"G:\Program Files (x86)\Steam\userdata\142459089\1611600\remote"
+))
+
+# ── Tool working directory ────────────────────────────────────────────────────
+TOOL_ROOT        = Path(__file__).parent.parent.parent   # G:\Warno_mod\wif_ag_tool
+ASSIGNMENTS_FILE = TOOL_ROOT / "assignments.json"
+CACHE_FILE       = TOOL_ROOT / ".deck_cache.json"        # refreshed after every patch

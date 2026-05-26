@@ -1,0 +1,33 @@
+Descriptor_CombatGroup_pion_TEST_Alpha_1_HQ is TDeckCombatGroupDescriptor
+(
+    Name = "AAAAAAAAAA"
+    SmartGroupList =
+    [
+        TDeckSmartGroupDescriptor
+        (
+            Name = "BBBBBBBBBB"
+            IsHQ = True
+            PackIndexUnitNumberList =
+            [
+                (0,1),
+            ]
+        ),
+    ]
+)
+
+Descriptor_CombatGroup_pion_TEST_Alpha_1_A is TDeckCombatGroupDescriptor
+(
+    Name = "CCCCCCCCCC"
+    SmartGroupList =
+    [
+        TDeckSmartGroupDescriptor
+        (
+            Name = "DDDDDDDDDD"
+            PackIndexUnitNumberList =
+            [
+                (1,2),
+                (2,2),
+            ]
+        ),
+    ]
+)

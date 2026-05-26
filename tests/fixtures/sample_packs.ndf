@@ -1,0 +1,23 @@
+Descriptor_StrategicPack_UnitA_1 is DeckPackDescriptor
+(
+    Xp = 1
+    Unit = $/GFX/Unit/Descriptor_Unit_UnitA
+)
+
+Descriptor_StrategicPack_UnitB_1 is DeckPackDescriptor
+(
+    Xp = 1
+    Unit = $/GFX/Unit/Descriptor_Unit_UnitB
+)
+
+Descriptor_StrategicPack_UnitC_1 is DeckPackDescriptor
+(
+    Xp = 1
+    Unit = $/GFX/Unit/Descriptor_Unit_UnitC
+)
+
+Descriptor_StrategicPack_WithTransport_0 is DeckPackDescriptor
+(
+    Transport = $/GFX/Unit/Descriptor_Unit_VehicleX
+    Unit = $/GFX/Unit/Descriptor_Unit_InfantryY
+)
