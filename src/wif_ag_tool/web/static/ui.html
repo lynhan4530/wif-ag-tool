@@ -138,7 +138,7 @@
   .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
   .replica-list { padding:6px 8px; }
-  .replica-row { display:grid; grid-template-columns: 18px 1fr 80px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
+  .replica-row { display:grid; grid-template-columns: 18px 1fr 90px 80px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
   .replica-row:hover { background:#1f2228; }
   .replica-row.dragging { opacity:.4; }
   .drag-handle { cursor:grab; color:#666; user-select:none; }
@@ -276,6 +276,58 @@ const getNormalizedRole = u => {
   if (r.includes("engineer")) return "engineer";
   return "unknown";
 };
+
+function getFriendlyCGName(name) {
+  if (!name) return "";
+  if (name.includes("_WIF_") || name.includes("WIF_")) {
+    const match = name.match(/WIF_([A-Za-z0-9_]+)/);
+    if (match) {
+      return `WIF — ${match[1].toUpperCase()}`;
+    }
+  }
+  let clean = name.replace("Descriptor_CombatGroup_pion_", "").replace("Descriptor_CombatGroup_", "");
+  if (state.activeDeck) {
+    const deckShort = state.activeDeck.replace("Descriptor_Deck_pion_", "");
+    const baseDeck = deckShort.replace(/_\d+$/, "");
+    if (clean.startsWith(deckShort + "_")) {
+      clean = clean.slice(deckShort.length + 1);
+    } else if (clean.startsWith(baseDeck + "_")) {
+      clean = clean.slice(baseDeck.length + 1);
+    }
+  }
+  let parts = clean.split("_");
+  if (parts.length > 1) {
+    const first = parts[0];
+    const rest = parts.slice(1).join(" ");
+    return `${first}-${rest}`.toUpperCase();
+  }
+  return clean.toUpperCase();
+}
+
+function getAvailableGroups() {
+  if (!state.vanilla || !state.vanilla.combat_groups) {
+    return ["A", "B", "C", "HQ"];
+  }
+  const groups = [];
+  const deckShort = state.activeDeck.replace("Descriptor_Deck_pion_", "");
+  const baseDeck = deckShort.replace(/_\d+$/, "");
+  for (const cg of state.vanilla.combat_groups) {
+    let clean = cg.name.replace("Descriptor_CombatGroup_pion_", "").replace("Descriptor_CombatGroup_", "");
+    if (clean.startsWith(deckShort + "_")) {
+      clean = clean.slice(deckShort.length + 1);
+    } else if (clean.startsWith(baseDeck + "_")) {
+      clean = clean.slice(baseDeck.length + 1);
+    }
+    const part = clean.split("_")[0];
+    if (part && !groups.includes(part)) {
+      groups.push(part);
+    }
+  }
+  if (groups.length === 0) {
+    return ["A", "B", "C", "HQ"];
+  }
+  return groups;
+}
 
 // Render a unit-bearing line with thumbnail + display name. Adds data-unit-id so the
 // global tooltip handler can find it. Extra is appended after the name (e.g. count, xp).
@@ -441,7 +493,7 @@ function renderCenterPane() {
   for (const cg of v.combat_groups) {
     const block = el("div", { class: "cg" });
     block.appendChild(el("div", { class: "cg-head" },
-      deckShort(cg.name).replace(/^[A-Za-z]+_[A-Za-z0-9]+_\d+_/, ""),
+      getFriendlyCGName(cg.name),
       cg.smart_groups.some(s => s.is_hq) ? el("span", { class: "hq" }, "HQ") : null,
     ));
     for (const sg of cg.smart_groups) {
@@ -525,6 +577,10 @@ function renderReplicaRow(row, i) {
       el("span", { class: "name" }, unitDisplay(row.unit_id)),
       !unitResolved(row.unit_id)
         ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+    ),
+    el("span", {},
+      el("span", { class: "field-label" }, "GP"),
+      mkSelect(getAvailableGroups(), row.group_name || getAvailableGroups()[0], v => { row.group_name = v; markReplicaDirty(); }),
     ),
     el("span", {},
       el("span", { class: "field-label" }, "XP"),
@@ -875,8 +931,10 @@ async function reloadModalUnits() {
 function closeModal() { state.modalOpen = false; render(); }
 
 function addUnitToReplica(u) {
+  const groups = getAvailableGroups();
   state.replicaUnits.push({
     unit_id: u.name, xp: 1, count: 1, attack_override: null, defense_override: null,
+    group_name: groups[0] || "A",
   });
   markReplicaDirty();
 }

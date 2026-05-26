@@ -65,6 +65,7 @@ class Assignment:
     defense_override: int | None = None
     order: int = 0          # position within its deck's replica (drives output ordering)
     seq: int = 0            # disambiguates same unit added more than once to one deck (suffix _1/_2/_3)
+    group_name: str = "A"   # combat group within the deck (e.g. "A", "B", "C", "HQ")
 
     def pack_name(self, xp: int) -> str:
         """Generated StrategicPack descriptor name for a given XP level.
@@ -76,11 +77,6 @@ class Assignment:
         return f"Descriptor_StrategicPack_{self.unit_id}{suffix}_{xp}"
 
     def combat_group_name(self) -> str:
-        """Generated CombatGroup descriptor name.
-
-        seq>0 → append `_<seq>` so multiple combat groups for the same unit in one deck
-        don't collide.
-        """
+        """Generated CombatGroup descriptor name based on group_name."""
         deck_short = self.deck_name.replace("Descriptor_Deck_pion_", "")
-        suffix = f"_{self.seq}" if self.seq else ""
-        return f"Descriptor_CombatGroup_{deck_short}_WIF_{self.unit_id}{suffix}"
+        return f"Descriptor_CombatGroup_{deck_short}_WIF_{self.group_name}"

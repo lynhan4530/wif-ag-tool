@@ -113,8 +113,8 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     units, decks = _build(fixture_units_path, fixture_deck_path, [])
     replicas_file = tmp_path / "wif_replicas.json"
     rmod.save_replica(DECK_NAME, [
-        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1},
-        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 3, "count": 1},
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1, "group_name": "A"},
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 3, "count": 1, "group_name": "B"},
     ], path=replicas_file)
     store = rmod.load_replicas(replicas_file)
     paths = export_from_replicas(decks, units, tmp_path / "out", replicas=store)
@@ -123,9 +123,9 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     # First seq has no suffix; second gets _1
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1_3" in packs_text
-    # Combat groups disambiguate
-    assert "_WIF_WF_M1A2_SEPV2_Abrams_US is" in groups_text
-    assert "_WIF_WF_M1A2_SEPV2_Abrams_US_1 is" in groups_text
+    # Combat groups disambiguate by group_name
+    assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_A is" in groups_text
+    assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_B is" in groups_text
 
 
 def test_migrate_legacy_assignments(tmp_path):

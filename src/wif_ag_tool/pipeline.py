@@ -12,7 +12,7 @@ from wif_ag_tool.models import Assignment, DeckState, WifUnit
 from wif_ag_tool.parser.unit_parser import parse_wif_units
 from wif_ag_tool.parser.deck_parser import parse_deck
 from wif_ag_tool.generator.pack_generator import generate_packs_for_assignment
-from wif_ag_tool.generator.group_generator import generate_combat_group
+from wif_ag_tool.generator.group_generator import generate_combat_group, generate_grouped_combat_group
 from wif_ag_tool.generator.deck_patcher import generate_deck_patch
 from wif_ag_tool.generator.localisation import generate_platoons_rows
 from wif_ag_tool import replicas as _replicas
@@ -77,17 +77,48 @@ def run_export(
             pack_list=list(deck.pack_list),
             combat_group_list=list(deck.combat_group_list),
         )
+        
+        # Group deck assignments by group_name while keeping order
+        groups_map: dict[str, list[Assignment]] = {}
+        group_order: list[str] = []
+        for a in deck_assignments:
+            gname = a.group_name or "A"
+            if gname not in groups_map:
+                groups_map[gname] = []
+                group_order.append(gname)
+            groups_map[gname].append(a)
+
         new_packs: list[str] = []
         new_groups: list[str] = []
-        for a in deck_assignments:
-            packs_blocks.append(generate_packs_for_assignment(a))
-            groups_blocks.append(generate_combat_group(a, running, existing_tokens))
-            for xp in a.xp_levels:
-                pack_ref = a.pack_name(xp)
-                new_packs.append(pack_ref)
-                running.pack_list.append(pack_ref)
-            new_groups.append(a.combat_group_name())
-            running.combat_group_list.append(new_groups[-1])
+
+        for gname in group_order:
+            group_assignments = groups_map[gname]
+            
+            # Generate packs for all assignments in this group
+            for a in group_assignments:
+                packs_blocks.append(generate_packs_for_assignment(a))
+                
+            # Generate the single combat group for this group
+            combat_group_block = generate_grouped_combat_group(
+                gname=gname,
+                deck_name=deck_name,
+                assignments=group_assignments,
+                deck_state=running,
+                existing_tokens=existing_tokens
+            )
+            groups_blocks.append(combat_group_block)
+            
+            # Append packs to running deck and new_packs list
+            for a in group_assignments:
+                for xp in a.xp_levels:
+                    pack_ref = a.pack_name(xp)
+                    new_packs.append(pack_ref)
+                    running.pack_list.append(pack_ref)
+                    
+            cg_name = group_assignments[0].combat_group_name()
+            new_groups.append(cg_name)
+            running.combat_group_list.append(cg_name)
+
         deck_patches.append(generate_deck_patch(deck_name, new_packs, new_groups))
 
     csv_text = generate_platoons_rows(assignments, units)

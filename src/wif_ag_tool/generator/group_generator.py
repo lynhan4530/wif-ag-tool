@@ -19,15 +19,37 @@ def generate_combat_group(
     The SmartGroup at position i references pack index (deck.next_index + i).
     Tokens are added to *existing_tokens* in-place so callers can keep accumulating.
     """
-    group_name = assignment.combat_group_name()
+    return generate_grouped_combat_group(
+        gname=assignment.group_name,
+        deck_name=assignment.deck_name,
+        assignments=[assignment],
+        deck_state=deck_state,
+        existing_tokens=existing_tokens,
+    )
+
+
+def generate_grouped_combat_group(
+    gname: str,
+    deck_name: str,
+    assignments: list[Assignment],
+    deck_state: DeckState,
+    existing_tokens: set[str],
+) -> str:
+    """Emit one TDeckCombatGroupDescriptor containing smart groups for *assignments*.
+
+    Each smart group references the next pack index.
+    Tokens are added to *existing_tokens* in-place.
+    """
+    deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
+    group_name = f"Descriptor_CombatGroup_{deck_short}_WIF_{gname}"
+
     group_token = make_unique_token(
-        group_token_key(assignment.unit_id, assignment.seq),
-        assignment.deck_name,
+        f"cg_WIF_{gname}",
+        deck_name,
         existing_tokens,
     )
     existing_tokens.add(group_token)
 
-    base_index = deck_state.next_index
     lines = [
         f"{group_name} is TDeckCombatGroupDescriptor",
         "(",
@@ -35,23 +57,27 @@ def generate_combat_group(
         "    SmartGroupList =",
         "    [",
     ]
-    for offset, xp in enumerate(assignment.xp_levels):
-        smart_token = make_unique_token(
-            smart_token_key(assignment.unit_id, xp, assignment.seq),
-            assignment.deck_name,
-            existing_tokens,
-        )
-        existing_tokens.add(smart_token)
-        index = base_index + offset
-        lines.extend([
-            "        TDeckSmartGroupDescriptor",
-            "        (",
-            f'            Name = "{smart_token}"',
-            "            PackIndexUnitNumberList =",
-            "            [",
-            f"                ({index},{assignment.count}),",
-            "            ]",
-            "        ),",
-        ])
+
+    current_index = deck_state.next_index
+    for a in assignments:
+        for offset, xp in enumerate(a.xp_levels):
+            smart_token = make_unique_token(
+                smart_token_key(a.unit_id, xp, a.seq),
+                a.deck_name,
+                existing_tokens,
+            )
+            existing_tokens.add(smart_token)
+            lines.extend([
+                "        TDeckSmartGroupDescriptor",
+                "        (",
+                f'            Name = "{smart_token}"',
+                "            PackIndexUnitNumberList =",
+                "            [",
+                f"                ({current_index},{a.count}),",
+                "            ]",
+                "        ),",
+            ])
+            current_index += 1
+
     lines.extend(["    ]", ")"])
     return "\n".join(lines)

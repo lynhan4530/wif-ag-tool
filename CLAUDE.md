@@ -921,5 +921,11 @@ The generator always uses this fresh value — index drift is impossible.
 - **Vanilla Localisation Loading**: Configured [app.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/app.py) to load vanilla names from the game's `Mods/ExampleAssets/Localisation/UNITS.csv` first and merge them with WIF's custom CSV. This resolves vanilla deck and unit name tokens to friendly display names and eliminates UI warning badges.
 - **Role Fallback SVG Icons**: Implemented a CSS SVG role-based fallback system in [ui.html](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/static/ui.html). If a unit's PNG thumbnail is missing from the local mod folder, the image gracefully hides to reveal a clean centered military silhouette matching the unit's role (Tank, Helicopter, Fighter Jet, Soldier, APC, Howitzer, AA, Recon, Supply, Engineer).
 - **Catalogue Load Refresh**: Modified the asynchronous unit catalog loading to trigger `render()` once complete, ensuring assets display immediately upon page load.
+- **WIF Combat Group Grouping & Name Formatting**:
+  - Added support for grouping multiple WIF assignments under specific combat groups (like `"A"`, `"B"`, `"C"`, `"HQ"`) by adding `group_name` to `Assignment` in [models.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/models.py).
+  - Modified [group_generator.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/generator/group_generator.py) to generate single grouped combat group descriptors bundling all assignments for the same group.
+  - Implemented automatic sorting and grouping in [pipeline.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/pipeline.py) and [localisation.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/generator/localisation.py) to prevent NDF/CSV sequence mismatch.
+  - Added UI grid support for the group dropdown and dynamically populated valid group choices in [ui.html](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/static/ui.html).
+  - Prettified raw NDF combat group descriptors in the UI to display clean, user-friendly names (e.g. `Descriptor_CombatGroup_pion_US_22TFS_A_22nd_TFS` -> `A-22ND TFS` and `US_22TFS_WIF_A` -> `WIF — A`).
 
 *Credits: Designed & developed with ❤️ by **Antigravity**, your agentic AI coding companion from Google DeepMind's Advanced Agentic Coding team.*
