@@ -198,6 +198,7 @@ const state = {
   modalFilters: { nation: "", role: "all", q: "" },
   exportOpen: false,
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
+  deckQuery: "",
 };
 
 const $ = sel => document.querySelector(sel);
@@ -377,10 +378,24 @@ function unitLine(unit_id, extras) {
 // ── render ───────────────────────────────────────────────────────────────────
 function render() {
   const root = $("#root");
+  const activeId = document.activeElement?.id;
+  const selStart = document.activeElement?.selectionStart;
+  const selEnd = document.activeElement?.selectionEnd;
+
   root.innerHTML = "";
   root.appendChild(state.view === "picker" ? renderPicker() : renderSession());
   if (state.modalOpen) root.appendChild(renderModal());
   if (state.exportOpen) root.appendChild(renderExportDialog());
+
+  if (activeId) {
+    const activeEl = document.getElementById(activeId);
+    if (activeEl) {
+      activeEl.focus();
+      if (selStart !== undefined && selStart !== null) {
+        try { activeEl.setSelectionRange(selStart, selEnd); } catch (e) {}
+      }
+    }
+  }
 }
 
 function renderPicker() {
@@ -473,9 +488,29 @@ function renderLeftPane() {
   }
   pane.appendChild(grid);
 
-  pane.appendChild(el("h2", {}, `Decks (${state.decks.length})`));
+  pane.appendChild(el("div", { class: "pad", style: "border-bottom:1px solid #2a2d34; display:flex; gap:6px; align-items:center;" },
+    el("span", { class: "field-label" }, "🔍"),
+    el("input", {
+      id: "deck-search-input",
+      type: "text",
+      placeholder: "search decks...",
+      value: state.deckQuery || "",
+      style: "width: 100%; font-size: 11px; padding: 4px 8px;",
+      oninput: e => { state.deckQuery = e.target.value; render(); }
+    })
+  ));
+
+  const query = (state.deckQuery || "").toLowerCase().trim();
+  const filteredDecks = state.decks.filter(d => {
+    const display = (d.display_name || "").toLowerCase();
+    const name = d.name.toLowerCase();
+    const short = (d.short || "").toLowerCase();
+    return !query || display.includes(query) || name.includes(query) || short.includes(query);
+  });
+
+  pane.appendChild(el("h2", {}, `Decks (${filteredDecks.length})`));
   const list = el("div");
-  for (const d of state.decks) {
+  for (const d of filteredDecks) {
     const display = d.display_name || deckShort(d.name);
     const subtitle = `${d.short || deckShort(d.name)} · ${d.pack_count}p`;
     const row = el("div", { class: "deck-row" + (d.name === state.activeDeck ? " active" : ""),
@@ -494,8 +529,8 @@ function renderLeftPane() {
     );
     list.appendChild(row);
   }
-  if (state.decks.length === 0) {
-    list.appendChild(el("div", { class: "pad hint" }, "Tick nations to populate this list."));
+  if (filteredDecks.length === 0) {
+    list.appendChild(el("div", { class: "pad hint" }, state.decks.length === 0 ? "Tick nations to populate this list." : "No matching decks found."));
   }
   pane.appendChild(list);
   return pane;
@@ -676,7 +711,7 @@ function renderModal() {
   filters.appendChild(mkSelect(["", ...NATIONS], f.nation, v => { f.nation = v; reloadModalUnits(); }));
   filters.appendChild(el("span", { class: "field-label" }, "Role"));
   filters.appendChild(mkSelect(ROLES, f.role, v => { f.role = v; reloadModalUnits(); }));
-  const search = el("input", { type: "text", placeholder: "search (e.g. Abrams)", value: f.q,
+  const search = el("input", { id: "modal-search-input", type: "text", placeholder: "search (e.g. Abrams)", value: f.q,
     oninput: e => { f.q = e.target.value; debounceReload(); } });
   filters.appendChild(search);
   if (dn && f.nation === "") {
@@ -843,7 +878,8 @@ const arraysEq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]
 
 async function reloadScopedDecks() {
   try {
-    state.decks = await api("GET", `/sessions/${state.activeSlug}/decks`);
+    const nations = (state.session.nation_scope || []).join(",");
+    state.decks = await api("GET", `/sessions/${state.activeSlug}/decks?nations=${nations}`);
   } catch (e) { toast("Failed to load decks: " + e.message, true); state.decks = []; }
   render();
 }

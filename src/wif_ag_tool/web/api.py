@@ -198,7 +198,12 @@ def sessions_decks(slug: str):
     if s is None:
         return jsonify({"error": "session not found"}), 404
     decks_map: dict[str, DeckState] = _state["decks"]
-    scoped = session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys())
+    nations_str = request.args.get("nations")
+    if nations_str is not None:
+        nations = [n.strip() for n in nations_str.split(",") if n.strip()]
+    else:
+        nations = s.get("nation_scope") or []
+    scoped = session_mod.scope_decks(nations, decks_map.keys())
     store = replicas_mod.load_replicas()
     return jsonify([
         {
