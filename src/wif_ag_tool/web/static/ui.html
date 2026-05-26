@@ -167,6 +167,39 @@
   .toast.err { background:#d44; color:#fff; }
   a.btn-link { background:#3a3f4a; color:#dde; padding:4px 10px; cursor:pointer; border-radius:3px; text-decoration:none; }
   .hint { color:#888; font-size:10px; }
+
+  /* custom searchable select */
+  .searchable-select { position:relative; display:inline-block; }
+  .searchable-select input { width:150px; font-size:11px; padding:2px 20px 2px 6px; height:22px; cursor:pointer; text-overflow:ellipsis; }
+  .searchable-select-dropdown {
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    max-height:150px;
+    overflow-y:auto;
+    background:#1f2228;
+    border:1px solid #444;
+    border-top:0;
+    z-index:5;
+    box-shadow:0 4px 6px rgba(0,0,0,.3);
+  }
+  .searchable-select-option {
+    padding:4px 6px;
+    cursor:pointer;
+    font-size:11px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .searchable-select-option:hover {
+    background:#2d3340;
+    color:#2d4;
+  }
+  .searchable-select-option.selected {
+    background:#234;
+    color:#2d4;
+  }
 </style>
 </head>
 <body>
@@ -636,7 +669,7 @@ function renderReplicaRow(row, i) {
         el("span", { class: "name" }, unitDisplay(row.unit_id)),
         getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
           el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
-          mkSelect(
+          mkSearchableSelect(
             ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
             row.transport_id || "(None)",
             v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
@@ -672,6 +705,74 @@ function renderReplicaRow(row, i) {
   );
   return node;
 }
+
+const mkSearchableSelect = (opts, val, onchange, labelFn) => {
+  const container = el("div", { class: "searchable-select" });
+  const valToLabel = new Map();
+  const labelToVal = new Map();
+  for (const o of opts) {
+    const label = labelFn ? labelFn(o) : o;
+    valToLabel.set(o, label);
+    labelToVal.set(label, o);
+  }
+  const currentLabel = valToLabel.get(val) || "";
+
+  const input = el("input", {
+    type: "text",
+    value: currentLabel,
+    placeholder: "Search transport...",
+    style: "background: #1f2228 url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23888888%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E') no-repeat right 6px center; background-size: 8px auto;",
+    onfocus: e => {
+      e.target.value = "";
+      renderDropdown(e.target.value);
+    },
+    onblur: e => {
+      setTimeout(() => {
+        const drop = container.querySelector(".searchable-select-dropdown");
+        if (drop) drop.remove();
+        input.value = valToLabel.get(val) || "";
+      }, 200);
+    },
+    oninput: e => {
+      renderDropdown(e.target.value);
+    }
+  });
+  container.appendChild(input);
+
+  function renderDropdown(filterText) {
+    let drop = container.querySelector(".searchable-select-dropdown");
+    if (!drop) {
+      drop = el("div", { class: "searchable-select-dropdown" });
+      container.appendChild(drop);
+    }
+    drop.innerHTML = "";
+    const lowerFilter = (filterText || "").toLowerCase();
+    const filteredOpts = opts.filter(o => {
+      const label = valToLabel.get(o) || "";
+      return label.toLowerCase().includes(lowerFilter);
+    });
+    if (filteredOpts.length === 0) {
+      drop.appendChild(el("div", { class: "searchable-select-option hint", style: "cursor:default; color:#777;" }, "No matches"));
+      return;
+    }
+    for (const o of filteredOpts) {
+      const label = valToLabel.get(o) || "";
+      const isSelected = o === val;
+      const optEl = el("div", {
+        class: `searchable-select-option${isSelected ? " selected" : ""}`,
+        title: label,
+        onmousedown: e => {
+          e.preventDefault();
+          onchange(o);
+          input.value = label;
+          drop.remove();
+        }
+      }, label);
+      drop.appendChild(optEl);
+    }
+  }
+  return container;
+};
 
 const mkSelect = (opts, val, onchange, labelFn) => {
   const s = el("select", { onchange: e => onchange(e.target.value) });
