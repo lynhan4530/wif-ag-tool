@@ -8,6 +8,14 @@ from wif_ag_tool.models import DeckState
 _RE_DECK_EXPORT = re.compile(r'^export (Descriptor_Deck_\S+) is TDeckDescriptor')
 _RE_DECK_PION = re.compile(r'^export (Descriptor_Deck_pion_\S+) is TDeckDescriptor')
 _RE_LIST_ITEM = re.compile(r'~/(Descriptor_\S+?),?\s*$')
+_RE_DECK_DIVISION = re.compile(
+    r'DeckDivision\s*=\s*\$/GFX/Division/Descriptor_Deck_Division_(\S+?)\s*$',
+    re.MULTILINE,
+)
+_RE_SUPERIOR = re.compile(
+    r'Superior\s*=\s*\$/UI/BattleOrder/(\S+?)_Subordination\s*$',
+    re.MULTILINE,
+)
 
 
 def parse_deck(path: Path, deck_name: str) -> DeckState:
@@ -29,7 +37,17 @@ def parse_deck(path: Path, deck_name: str) -> DeckState:
     pack_list = _extract_list_items(block, "DeckPackList")
     combat_group_list = _extract_list_items(block, "DeckCombatGroupList")
 
-    return DeckState(name=deck_name, pack_list=pack_list, combat_group_list=combat_group_list)
+    block_text = "\n".join(block)
+    div_m = _RE_DECK_DIVISION.search(block_text)
+    sup_m = _RE_SUPERIOR.search(block_text)
+
+    return DeckState(
+        name=deck_name,
+        pack_list=pack_list,
+        combat_group_list=combat_group_list,
+        division_ref=div_m.group(1) if div_m else "",
+        superior_ref=sup_m.group(1) if sup_m else "",
+    )
 
 
 def list_decks(path: Path, nation_prefix: str | None = None) -> list[str]:

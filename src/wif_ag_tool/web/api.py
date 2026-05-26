@@ -33,8 +33,11 @@ _state: dict[str, Any] = {
     "units": {},
     "decks": {},
     "icons": {},
-    "packs": {},          # name → StrategicPack
-    "combat_groups": {},  # name → CombatGroup
+    "packs": {},           # name → StrategicPack
+    "combat_groups": {},   # name → CombatGroup
+    "vanilla_units": {},   # name → WifUnit (vanilla parse)
+    "divisions": {},       # cfg_name → Division
+    "units_csv": {},       # TOKEN → REFTEXT
 }
 
 
@@ -45,12 +48,70 @@ def set_state(
     icons: dict[str, Path] | None = None,
     packs: dict | None = None,
     combat_groups: dict | None = None,
+    vanilla_units: dict[str, WifUnit] | None = None,
+    divisions: dict | None = None,
+    units_csv: dict[str, str] | None = None,
 ) -> None:
     if units is not None:        _state["units"] = units
     if decks is not None:        _state["decks"] = decks
     if icons is not None:        _state["icons"] = icons
     if packs is not None:        _state["packs"] = packs
     if combat_groups is not None: _state["combat_groups"] = combat_groups
+    if vanilla_units is not None: _state["vanilla_units"] = vanilla_units
+    if divisions is not None:    _state["divisions"] = divisions
+    if units_csv is not None:    _state["units_csv"] = units_csv
+
+
+def _deck_label(deck_name: str) -> dict:
+    """Resolve a deck name → friendly display label via Divisions.ndf + UNITS.csv.
+
+    Returns ``{display_name, short, resolved}``. ``resolved=False`` means the LOC
+    token did not land in any CSV — UI paints a ⚠ badge in that case.
+    """
+    short = deck_name.replace("Descriptor_Deck_pion_", "")
+    deck = _state["decks"].get(deck_name)
+    div = None
+    if deck and deck.division_ref:
+        div = _state["divisions"].get(deck.division_ref)
+    if div and div.division_name_token:
+        ref = _state["units_csv"].get(div.division_name_token)
+        if ref:
+            # Tail = part of deck name not covered by division ref
+            # e.g. deck pion_RDA_10MSD_16MSR_2 / division RDA_10MSD_solo → "16MSR_2"
+            tail = _deck_tail(short, deck.division_ref)
+            label = f"{ref} — {tail}" if tail else ref
+            return {"display_name": label, "short": short, "resolved": True}
+    # Fallback: prettify the short deck id
+    pretty = short.replace("_", " ")
+    return {"display_name": pretty, "short": short, "resolved": False}
+
+
+def _deck_tail(short: str, division_ref: str) -> str:
+    """Strip the division-ref prefix from a deck's short name so only the unique tail remains.
+
+    division_ref ``RDA_10MSD_solo`` → prefix ``RDA_10MSD_``;
+    short ``RDA_10MSD_16MSR_2`` → tail ``16MSR_2``.
+    """
+    base = division_ref.replace("_solo", "").replace("_multi", "")
+    if short.startswith(base + "_"):
+        return short[len(base) + 1:].replace("_", " ")
+    return short.replace("_", " ")
+
+
+def _serialize_unit(u: WifUnit) -> dict:
+    """Unit payload for API responses. Adds a pretty-id fallback for display_name."""
+    d = asdict(u)
+    if not d.get("display_name"):
+        d["display_name"] = u.name.removeprefix("WF_").replace("_", " ")
+        d["display_resolved"] = False
+    else:
+        d["display_resolved"] = True
+    return d
+
+
+def _lookup_unit(unit_id: str) -> WifUnit | None:
+    """Look up *unit_id* in WIF then vanilla maps."""
+    return _state["units"].get(unit_id) or _state["vanilla_units"].get(unit_id)
 
 
 # ── campaigns + sessions picker ──────────────────────────────────────────────
@@ -146,6 +207,7 @@ def sessions_decks(slug: str):
             "next_index": decks_map[name].next_index,
             "has_replica": bool(store.get(name, {}).get("saved")),
             "replica_unit_count": len(store.get(name, {}).get("units", [])),
+            **_deck_label(name),
         }
         for name in scoped
     ])
@@ -221,6 +283,7 @@ def decks_vanilla(deck_name: str):
         "name": deck.name,
         "pack_count": len(deck.pack_list),
         "combat_groups": cg_tree,
+        **_deck_label(deck.name),
     })
 
 
@@ -279,23 +342,45 @@ def wif_units():
             continue
         if role and role != "all" and u.role != role:
             continue
-        if q and q not in u.name.lower():
+        if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue
-        out.append(asdict(u))
+        out.append(_serialize_unit(u))
+    return jsonify(out)
+
+
+@api_bp.get("/vanilla_units")
+def vanilla_units():
+    """Mirror of /wif_units for vanilla. The SPA loads this once for tooltip lookups."""
+    nation = request.args.get("nation")
+    role = request.args.get("role")
+    q = (request.args.get("q") or "").lower()
+    units: dict[str, WifUnit] = _state["vanilla_units"]
+    out = []
+    for u in units.values():
+        if nation and u.nation != nation:
+            continue
+        if role and role != "all" and u.role != role:
+            continue
+        if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
+            continue
+        out.append(_serialize_unit(u))
     return jsonify(out)
 
 
 @api_bp.get("/unit_icon/<unit_id>")
 def unit_icon(unit_id: str):
-    units: dict[str, WifUnit] = _state["units"]
     icons: dict[str, Path] = _state["icons"]
-    unit = units.get(unit_id)
+    unit = _lookup_unit(unit_id)
     if not unit or not unit.button_texture:
         abort(404)
     png = icons.get(unit.button_texture)
     if not png or not png.exists():
         abort(404)
-    return send_file(str(png), mimetype="image/png")
+    resp = send_file(str(png), mimetype="image/png")
+    # Icons are stable per build; allow the browser to cache for a week so hover
+    # storms don't hammer the dev server.
+    resp.headers["Cache-Control"] = "public, max-age=604800"
+    return resp
 
 
 # ── refresh ──────────────────────────────────────────────────────────────────

@@ -120,6 +120,8 @@ def refresh_deck_cache(
             "pack_list": d.pack_list,
             "combat_group_list": d.combat_group_list,
             "next_index": d.next_index,
+            "division_ref": d.division_ref,
+            "superior_ref": d.superior_ref,
         }
         for name, d in decks.items()
     }
@@ -136,6 +138,8 @@ def load_deck_cache(cache_path: Path) -> dict[str, DeckState]:
             name=d["name"],
             pack_list=d["pack_list"],
             combat_group_list=d["combat_group_list"],
+            division_ref=d.get("division_ref", ""),
+            superior_ref=d.get("superior_ref", ""),
         )
         for name, d in payload.items()
     }

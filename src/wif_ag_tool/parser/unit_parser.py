@@ -11,7 +11,7 @@ from pathlib import Path
 from wif_ag_tool.models import WifUnit
 
 # ── compiled regexes ──────────────────────────────────────────────────────────
-_RE_EXPORT    = re.compile(r'^export (Descriptor_Unit_WF_\S+) is TEntityDescriptor')
+_RE_EXPORT    = re.compile(r'^export (Descriptor_Unit_\S+) is TEntityDescriptor')
 _RE_GUID      = re.compile(r'DescriptorId\s*=\s*GUID:\{([^}]+)\}')
 _RE_COUNTRY   = re.compile(r"MotherCountry\s*=\s*'(\w+)'")
 _RE_ATTACK    = re.compile(r'UnitAttackValue\s*=\s*(\d+)')
@@ -26,13 +26,20 @@ _RE_SPECIALTY = re.compile(r"'([^']+)'")   # used inside SpecialtiesList block
 def parse_wif_units(
     path: Path,
     nation_filter: str | None = None,
+    units_csv: dict[str, str] | None = None,
+    prefix: str | None = "WF_",
 ) -> dict[str, WifUnit]:
-    """Return all WF_ units from *path*, keyed by unit name (no Descriptor_Unit_ prefix).
+    """Return units from *path*, keyed by unit name (no Descriptor_Unit_ prefix).
 
     Args:
         path: Path to UniteDescriptor.ndf (WIF or vanilla).
         nation_filter: If set (e.g. "US"), only return units whose MotherCountry matches.
+        units_csv: Optional ``{NameToken: REFTEXT}`` mapping; when provided, populates
+            ``WifUnit.display_name`` for matching tokens. Defaults to ``{}``.
+        prefix: Restrict to units whose name begins with this string (default ``"WF_"``).
+            Pass ``None`` to include every unit in the file (vanilla mode).
     """
+    csv_map = units_csv or {}
     units: dict[str, WifUnit] = {}
     text = path.read_text(encoding="utf-8", errors="replace")
     blocks = _split_into_unit_blocks(text)
@@ -40,8 +47,12 @@ def parse_wif_units(
         unit = _parse_block(raw_name, block)
         if unit is None:
             continue
+        if prefix and not unit.name.startswith(prefix):
+            continue
         if nation_filter and unit.nation != nation_filter:
             continue
+        if unit.name_token:
+            unit.display_name = csv_map.get(unit.name_token, "")
         units[unit.name] = unit
     return units
 

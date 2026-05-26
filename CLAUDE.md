@@ -913,3 +913,13 @@ The generator always uses this fresh value — index drift is impossible.
 3. Assign M1A2 SEPV2 + M2A4 to `Descriptor_Deck_pion_US_11ACR_4` via UI → Export → check 3 files
 4. Copy output to AGPatchTest mod Decks folder, run `GenerateMod.bat` → no errors
 5. `LaunchModDevMode.bat` → F1 menu shows WF_ units in 11ACR deck
+
+---
+
+## May 2026 Updates & Enhancements (Implemented by Antigravity)
+
+- **Vanilla Localisation Loading**: Configured [app.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/app.py) to load vanilla names from the game's `Mods/ExampleAssets/Localisation/UNITS.csv` first and merge them with WIF's custom CSV. This resolves vanilla deck and unit name tokens to friendly display names and eliminates UI warning badges.
+- **Role Fallback SVG Icons**: Implemented a CSS SVG role-based fallback system in [ui.html](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/static/ui.html). If a unit's PNG thumbnail is missing from the local mod folder, the image gracefully hides to reveal a clean centered military silhouette matching the unit's role (Tank, Helicopter, Fighter Jet, Soldier, APC, Howitzer, AA, Recon, Supply, Engineer).
+- **Catalogue Load Refresh**: Modified the asynchronous unit catalog loading to trigger `render()` once complete, ensuring assets display immediately upon page load.
+
+*Credits: Designed & developed with ❤️ by **Antigravity**, your agentic AI coding companion from Google DeepMind's Advanced Agentic Coding team.*

@@ -38,12 +38,92 @@
   /* left */
   .nation-list { display:grid; grid-template-columns: 1fr 1fr; gap:2px 8px; margin-bottom:8px; font-size:12px; }
   .nation-list label { display:flex; gap:4px; align-items:center; cursor:pointer; }
-  .deck-row { padding:4px 12px; cursor:pointer; display:flex; gap:6px; align-items:center; border-bottom:1px solid #21232a; font-size:12px; }
+  .deck-row { padding:5px 12px; cursor:pointer; display:flex; gap:6px; align-items:flex-start; border-bottom:1px solid #21232a; font-size:12px; }
   .deck-row:hover { background:#23262d; }
   .deck-row.active { background:#234; }
-  .deck-row .badge { background:#2d4; color:#000; padding:0 5px; border-radius:8px; font-size:10px; }
-  .deck-row .ghost-x { margin-left:auto; opacity:.5; }
+  .deck-row .deck-label { flex:1; min-width:0; display:flex; flex-direction:column; }
+  .deck-row .deck-name { color:#dde; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .deck-row .deck-sub { color:#777; font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .deck-row .badge { background:#2d4; color:#000; padding:0 5px; border-radius:8px; font-size:10px; align-self:center; }
+  .deck-row .ghost-x { margin-left:auto; opacity:.5; align-self:center; }
   .deck-row .ghost-x:hover { opacity:1; color:#d44; }
+  .warn-mark { color:#e8a13b; font-size:10px; margin-left:4px; cursor:help; }
+
+  /* unit thumbnails (everywhere) */
+  .unit-thumb-container {
+    width:32px;
+    height:22px;
+    background:#0c0e12;
+    border:1px solid #23262d;
+    flex-shrink:0;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .unit-thumb-container::before {
+    content:"";
+    position:absolute;
+    width:16px;
+    height:16px;
+    opacity:0.35;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .unit-thumb-container.large {
+    width:64px;
+    height:44px;
+  }
+  .unit-thumb-container.large::before {
+    width:32px;
+    height:32px;
+  }
+  .unit-thumb {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:1;
+  }
+  .unit-line { display:flex; gap:6px; align-items:center; }
+  .unit-line .name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  /* fallback role SVGs */
+  .role-armor::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M22 15v-2h-3.13l-1.87-4.14C16.63 7.82 15.65 7 14.53 7H9v2h5.53l1.36 3H2v3c0 1.66 1.34 3 3 3h14c1.66 0 3-1.34 3-3zm-13 1H6v-2h3v2zm5 0h-3v-2h3v2zm5 0h-3v-2h3v2z'/%3E%3C/svg%3E"); }
+  .role-helicopter::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M22 10.6c0-.9-.7-1.6-1.6-1.6H17.8c-.8-1.5-2.2-2.5-3.8-2.8V4.2c1.2-.2 2-.8 2-1.2C16 2.4 14.2 2 12 2s-4 .4-4 1c0 .4.8 1 2 1.2v2C8.4 6.5 7 7.5 6.2 9H5.6C4.7 9 4 9.7 4 10.6v.4c0 .8.6 1.4 1.4 1.5l1 .3c.3.8.8 1.5 1.5 2.1l-.8 1.6c-.6.2-1.1.7-1.3 1.5C5.5 19 6.2 20 7.2 20h9.6c1 0 1.7-1 1.4-2-.2-.8-.7-1.3-1.3-1.5l-.8-1.6c.7-.6 1.2-1.3 1.5-2.1l1-.3c.8-.1 1.4-.7 1.4-1.5v-.4zM12 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z'/%3E%3C/svg%3E"); }
+  .role-plane::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l7 2.5z'/%3E%3C/svg%3E"); }
+  .role-infantry::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z'/%3E%3C/svg%3E"); }
+  .role-artillery::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M22 11h-2v-2h-2v2h-3.13l-1.87-4.14C12.63 5.82 11.65 5 10.53 5H3c-1.1 0-2 .9-2 2v6h18.87l1.36 3h-2.23c-.45-1.17-1.59-2-2.92-2-1.33 0-2.47.83-2.92 2H7.92c-.45-1.17-1.59-2-2.92-2-1.33 0-2.47.83-2.92 2H2v2h1.16c.45 1.17 1.59 2 2.92 2 1.33 0 2.47-.83 2.92-2h4.16c.45 1.17 1.59 2 2.92 2 1.33 0 2.47-.83 2.92-2H22v-2zM5.5 19c-.83 0-1.5-.67-1.5-1.5S4.67 15 5.5 15s1.5.67 1.5 1.5S6.33 19 5.5 19zm9.5 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
+  .role-aa::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M17 3H7c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm0-8c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z'/%3E%3C/svg%3E"); }
+  .role-recon::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M20 4h-3.33l-1.33-2h-6.68L7.33 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-8 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z'/%3E%3C/svg%3E"); }
+  .role-supply::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
+  .role-engineer::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.3C.5 6.7.9 9.8 2.9 11.8c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.6z'/%3E%3C/svg%3E"); }
+  .role-ifv::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M19 15v-4H5v4h14zm2-6h-3V7c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v2H3c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2zm-12.5 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
+  .role-unknown::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E"); }
+
+  /* tooltip */
+  #unit-tooltip {
+    position:fixed; left:0; top:0; z-index:50; pointer-events:none;
+    background:#1a1d22; border:1px solid #444; border-radius:4px;
+    box-shadow:0 6px 18px rgba(0,0,0,.55);
+    padding:10px 12px; width:280px; font-size:12px;
+    transition:opacity .08s; opacity:0;
+  }
+  #unit-tooltip[data-shown="1"] { opacity:1; }
+  #unit-tooltip .tt-head { display:flex; gap:10px; align-items:flex-start; margin-bottom:6px; }
+  #unit-tooltip img { width:64px; height:44px; object-fit:contain; background:#0c0e12; border:1px solid #2a2d34; flex-shrink:0; }
+  #unit-tooltip .tt-name { font-size:13px; color:#fff; font-weight:bold; }
+  #unit-tooltip .tt-id { font-size:10px; color:#778; word-break:break-all; }
+  #unit-tooltip .tt-row { display:flex; gap:8px; margin-top:3px; flex-wrap:wrap; }
+  #unit-tooltip .tt-chip { background:#2d3340; color:#9be; padding:1px 6px; border-radius:8px; font-size:10px; }
+  #unit-tooltip .tt-stat { color:#dde; }
+  #unit-tooltip .tt-stat b { color:#fff; }
+  #unit-tooltip .tt-specs { color:#bbb; font-size:11px; }
 
   /* center: vanilla tree */
   .cg { margin:6px 12px 12px; border-left:2px solid #2a2d34; padding-left:8px; }
@@ -117,6 +197,7 @@ const state = {
   modalUnits: [],
   modalFilters: { nation: "", role: "all", q: "" },
   exportOpen: false,
+  unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
 };
 
 const $ = sel => document.querySelector(sel);
@@ -169,6 +250,54 @@ const downloadBlob = (blob, name) => {
 
 const deckShort = name => name.replace("Descriptor_Deck_pion_", "");
 const unitShort = name => (name || "").replace(/^WF_/, "").replace(/_/g, " ");
+
+// Display name for a unit id: prefer resolved CSV name, fall back to pretty id.
+const unitDisplay = id => {
+  if (!id) return "";
+  const u = state.unitsIndex[id];
+  if (u && u.display_name && u.display_resolved) return u.display_name;
+  if (u && u.display_name) return u.display_name;
+  return unitShort(id);
+};
+const unitResolved = id => !!(state.unitsIndex[id] && state.unitsIndex[id].display_resolved);
+
+const getNormalizedRole = u => {
+  if (!u) return "unknown";
+  const r = (u.role || "").toLowerCase();
+  if (r.includes("armor") || r.includes("tank")) return "armor";
+  if (r.includes("ifv") || r.includes("apc") || r.includes("veh") || r.includes("carrier")) return "ifv";
+  if (r.includes("heli")) return "helicopter";
+  if (r.includes("plane") || r.includes("jet") || r.includes("fighter") || r.includes("bomber") || r.includes("aircraft")) return "plane";
+  if (r.includes("infantry") || r.includes("inf") || r.includes("commandos") || r.includes("chasseur") || r.includes("scout") || r.includes("sapper") || r.includes("rifles")) return "infantry";
+  if (r.includes("artillery") || r.includes("howz") || r.includes("mortar") || r.includes("gun")) return "artillery";
+  if (r.includes("aa") || r.includes("sam") || r.includes("spaag") || r.includes("missile") || r.includes("defence")) return "aa";
+  if (r.includes("recon")) return "recon";
+  if (r.includes("supply") || r.includes("truck") || r.includes("ammo")) return "supply";
+  if (r.includes("engineer")) return "engineer";
+  return "unknown";
+};
+
+// Render a unit-bearing line with thumbnail + display name. Adds data-unit-id so the
+// global tooltip handler can find it. Extra is appended after the name (e.g. count, xp).
+function unitLine(unit_id, extras) {
+  const u = state.unitsIndex[unit_id];
+  const role = getNormalizedRole(u);
+  const node = el("span", { class: "unit-line", "data-unit-id": unit_id || "" },
+    unit_id ? el("span", { class: `unit-thumb-container role-${role}` },
+      el("img", {
+        class: "unit-thumb",
+        src: `/api/unit_icon/${unit_id}`,
+        loading: "lazy",
+        onerror: e => { e.target.style.display = "none"; },
+      })
+    ) : null,
+    el("span", { class: "name" }, unitDisplay(unit_id)),
+    unit_id && !unitResolved(unit_id)
+      ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+    ...(extras || []),
+  );
+  return node;
+}
 
 // ── render ───────────────────────────────────────────────────────────────────
 function render() {
@@ -272,10 +401,18 @@ function renderLeftPane() {
   pane.appendChild(el("h2", {}, `Decks (${state.decks.length})`));
   const list = el("div");
   for (const d of state.decks) {
+    const display = d.display_name || deckShort(d.name);
+    const subtitle = `${d.short || deckShort(d.name)} · ${d.pack_count}p`;
     const row = el("div", { class: "deck-row" + (d.name === state.activeDeck ? " active" : ""),
       onclick: () => selectDeck(d.name) },
-      el("span", {}, deckShort(d.name)),
-      el("span", { class: "hint" }, `(${d.pack_count}p)`),
+      el("div", { class: "deck-label" },
+        el("span", { class: "deck-name" },
+          display,
+          d.resolved === false
+            ? el("span", { class: "warn-mark", title: "Division name token missing" }, "⚠") : null,
+        ),
+        el("span", { class: "deck-sub" }, subtitle),
+      ),
       d.has_replica ? el("span", { class: "badge" }, `WIF·${d.replica_unit_count}`) : null,
       d.has_replica ? el("span", { class: "ghost-x", title: "delete WIF replica",
         onclick: e => { e.stopPropagation(); deleteReplica(d.name); } }, "✕") : null,
@@ -292,12 +429,16 @@ function renderLeftPane() {
 // ── center pane ─────────────────────────────────────────────────────────────
 function renderCenterPane() {
   const pane = el("section", { class: "pane" });
-  pane.appendChild(el("h2", {}, state.activeDeck ? `Vanilla — ${deckShort(state.activeDeck)}` : "Vanilla deck (select a deck)"));
-  if (!state.vanilla) {
+  const v = state.vanilla;
+  const heading = state.activeDeck
+    ? (v && v.display_name ? `Vanilla — ${v.display_name}` : `Vanilla — ${deckShort(state.activeDeck)}`)
+    : "Vanilla deck (select a deck)";
+  pane.appendChild(el("h2", {}, heading));
+  if (!v) {
     pane.appendChild(el("div", { class: "pad hint" }, state.activeDeck ? "Loading…" : "Pick a deck on the left."));
     return pane;
   }
-  for (const cg of state.vanilla.combat_groups) {
+  for (const cg of v.combat_groups) {
     const block = el("div", { class: "cg" });
     block.appendChild(el("div", { class: "cg-head" },
       deckShort(cg.name).replace(/^[A-Za-z]+_[A-Za-z0-9]+_\d+_/, ""),
@@ -307,14 +448,21 @@ function renderCenterPane() {
       const sgEl = el("div", { class: "sg" });
       sgEl.appendChild(el("div", { class: "sg-head" }, sg.is_hq ? "▸ HQ slot" : "▸ slot"));
       for (const p of sg.packs) {
-        const label = p.unit
-          ? `[${p.index}] ${unitShort(p.unit)}${p.transport ? " ← " + unitShort(p.transport) : ""}`
-          : `[${p.index}] (pack missing)`;
-        sgEl.appendChild(el("div", { class: "pk" },
-          label,
-          el("span", { class: "x" }, ` ×${p.count}`),
-          p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
-        ));
+        const row = el("div", { class: "pk" });
+        row.appendChild(el("span", { class: "hint" }, `[${p.index}] `));
+        if (p.unit) {
+          row.appendChild(unitLine(p.unit, [
+            el("span", { class: "x" }, ` ×${p.count}`),
+            p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
+          ]));
+          if (p.transport) {
+            row.appendChild(el("span", { class: "hint" }, " ← "));
+            row.appendChild(unitLine(p.transport, []));
+          }
+        } else {
+          row.appendChild(el("span", {}, "(pack missing)"));
+        }
+        sgEl.appendChild(row);
       }
       block.appendChild(sgEl);
     }
@@ -353,6 +501,7 @@ function renderReplicaRow(row, i) {
   const node = el("div", {
     class: "replica-row",
     draggable: "true",
+    "data-unit-id": row.unit_id,
     ondragstart: e => { e.dataTransfer.setData("text/plain", i); node.classList.add("dragging"); },
     ondragend: () => node.classList.remove("dragging"),
     ondragover: e => { e.preventDefault(); },
@@ -368,7 +517,15 @@ function renderReplicaRow(row, i) {
     },
   },
     el("span", { class: "drag-handle" }, "⋮⋮"),
-    el("span", {}, unitShort(row.unit_id)),
+    el("span", { class: "unit-line" },
+      el("span", { class: `unit-thumb-container role-${getNormalizedRole(state.unitsIndex[row.unit_id])}` },
+        el("img", { class: "unit-thumb", src: `/api/unit_icon/${row.unit_id}`,
+          loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
+      ),
+      el("span", { class: "name" }, unitDisplay(row.unit_id)),
+      !unitResolved(row.unit_id)
+        ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+    ),
     el("span", {},
       el("span", { class: "field-label" }, "XP"),
       mkSelect(["1","2","3"], String(row.xp ?? 1), v => { row.xp = parseInt(v, 10); markReplicaDirty(); }),
@@ -442,9 +599,14 @@ function renderModal() {
     body.appendChild(el("div", { class: "pad hint" }, "No matches. Loosen the filters."));
   }
   for (const u of state.modalUnits) {
-    const row = el("div", { class: "modal-row" },
-      el("img", { src: `/api/unit_icon/${u.name}`, loading: "lazy", onerror: e => e.target.classList.add("missing") }),
-      el("span", {}, u.name),
+    const row = el("div", { class: "modal-row", "data-unit-id": u.name },
+      el("span", { class: `unit-thumb-container role-${getNormalizedRole(u)}` },
+        el("img", { src: `/api/unit_icon/${u.name}`, loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
+      ),
+      el("span", {},
+        u.display_name || u.name,
+        u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+      ),
       el("span", { class: "hint" }, `A:${u.attack}`),
       el("span", { class: "hint" }, `D:${u.defense}`),
       el("span", { class: "hint" }, u.role || ""),
@@ -719,6 +881,123 @@ function addUnitToReplica(u) {
   markReplicaDirty();
 }
 
+// ── units index (WIF + vanilla) ─────────────────────────────────────────────
+async function loadUnitsIndex() {
+  // Idempotent: only fetch once per page load. Both endpoints return the same shape.
+  if (Object.keys(state.unitsIndex).length > 0) return;
+  try {
+    const [wif, vanilla] = await Promise.all([
+      api("GET", "/wif_units"),
+      api("GET", "/vanilla_units"),
+    ]);
+    const ix = {};
+    for (const u of [...vanilla, ...wif]) {
+      // WIF overrides vanilla on collision (shouldn't happen — name spaces differ).
+      ix[u.name] = u;
+    }
+    state.unitsIndex = ix;
+    render();
+  } catch (e) {
+    toast("Failed to load unit catalogue: " + e.message, true);
+  }
+}
+
+// ── tooltip ─────────────────────────────────────────────────────────────────
+let tooltipEl = null;
+let tooltipFor = null;
+
+function ensureTooltip() {
+  if (tooltipEl) return tooltipEl;
+  tooltipEl = el("div", { id: "unit-tooltip", hidden: true });
+  document.body.appendChild(tooltipEl);
+  return tooltipEl;
+}
+
+function fillTooltip(unit_id) {
+  const t = ensureTooltip();
+  const u = state.unitsIndex[unit_id];
+  t.innerHTML = "";
+  if (!u) {
+    t.appendChild(el("div", { class: "tt-head" },
+      el("div", {},
+        el("div", { class: "tt-name" }, unitShort(unit_id)),
+        el("div", { class: "tt-id" }, unit_id + " (not in catalogue)"),
+      ),
+    ));
+    return;
+  }
+  const role = getNormalizedRole(u);
+  const head = el("div", { class: "tt-head" },
+    el("span", { class: `unit-thumb-container role-${role} large` },
+      el("img", { src: `/api/unit_icon/${unit_id}`, onerror: e => { e.target.style.display = "none"; } }),
+    ),
+    el("div", { style: "flex:1; min-width:0" },
+      el("div", { class: "tt-name" },
+        u.display_name || unitShort(unit_id),
+        u.display_resolved === false ? el("span", { class: "warn-mark", title: "LOC missing" }, " ⚠") : null,
+      ),
+      el("div", { class: "tt-id" }, unit_id),
+    ),
+  );
+  t.appendChild(head);
+  t.appendChild(el("div", { class: "tt-row" },
+    el("span", { class: "tt-chip" }, u.nation || "?"),
+    el("span", { class: "tt-chip" }, u.role || "?"),
+    u.xp_bonus ? el("span", { class: "tt-chip" }, `XP+${u.xp_bonus}/lvl`) : null,
+  ));
+  t.appendChild(el("div", { class: "tt-row" },
+    el("span", { class: "tt-stat" }, "ATK ", el("b", {}, String(u.attack ?? "?"))),
+    el("span", { class: "tt-stat" }, "DEF ", el("b", {}, String(u.defense ?? "?"))),
+  ));
+  if (u.specialties && u.specialties.length) {
+    t.appendChild(el("div", { class: "tt-specs" }, u.specialties.join(" · ")));
+  }
+}
+
+function positionTooltip(x, y) {
+  const t = ensureTooltip();
+  const m = 14;
+  const w = t.offsetWidth || 280;
+  const h = t.offsetHeight || 120;
+  let left = x + m;
+  let top = y + m;
+  if (left + w > window.innerWidth - 8) left = x - w - m;
+  if (top + h > window.innerHeight - 8) top = y - h - m;
+  if (left < 4) left = 4;
+  if (top < 4) top = 4;
+  t.style.left = left + "px";
+  t.style.top = top + "px";
+}
+
+document.addEventListener("mouseover", e => {
+  const target = e.target.closest("[data-unit-id]");
+  if (!target) return;
+  const id = target.getAttribute("data-unit-id");
+  if (!id) return;
+  tooltipFor = id;
+  fillTooltip(id);
+  const t = ensureTooltip();
+  t.hidden = false;
+  positionTooltip(e.clientX, e.clientY);
+  // Two-frame opacity transition so we don't flash an unstyled box.
+  requestAnimationFrame(() => t.setAttribute("data-shown", "1"));
+});
+
+document.addEventListener("mousemove", e => {
+  if (!tooltipFor) return;
+  positionTooltip(e.clientX, e.clientY);
+});
+
+document.addEventListener("mouseout", e => {
+  if (!tooltipFor) return;
+  const to = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest("[data-unit-id]");
+  if (to) return;  // moved between two unit rows — keep the tooltip alive
+  tooltipFor = null;
+  const t = ensureTooltip();
+  t.removeAttribute("data-shown");
+  t.hidden = true;
+});
+
 // ── init ────────────────────────────────────────────────────────────────────
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && state.modalOpen) closeModal();
@@ -729,6 +1008,7 @@ window.addEventListener("beforeunload", e => {
 });
 
 bootstrapPicker();
+loadUnitsIndex();
 </script>
 </body>
 </html>

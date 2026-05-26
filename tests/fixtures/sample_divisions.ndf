@@ -1,0 +1,27 @@
+export Descriptor_Deck_Division_RDA_10MSD_solo is TDeckDivisionDescriptor
+(
+    DescriptorId = GUID:{aaaaaaaa-1111-2222-3333-bbbbbbbbbbbb}
+    CfgName = 'RDA_10MSD_solo'
+    DivisionName = 'DIV10MSD'
+    InterfaceOrder = -1.0
+    DivisionCoalition = ECoalition/PACT
+    DivisionTags = ['STRAT', 'PACT', 'RDA']
+    DivisionRule = nil
+    EmblemTexture     = "Texture_Division_Emblem_RDA_10MSD"
+    StrategicLabelColor     = "division_RDA"
+    StandoutUnits =
+    [
+    ]
+)
+
+export Descriptor_Deck_Division_TEST_NoToken_solo is TDeckDivisionDescriptor
+(
+    DescriptorId = GUID:{cccccccc-4444-5555-6666-dddddddddddd}
+    CfgName = 'TEST_NoToken_solo'
+    DivisionCoalition = ECoalition/NATO
+    DivisionTags = ['STRAT', 'NATO']
+    EmblemTexture     = "Texture_Division_Emblem_TEST"
+    StandoutUnits =
+    [
+    ]
+)

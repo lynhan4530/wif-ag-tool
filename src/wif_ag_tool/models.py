@@ -17,6 +17,7 @@ class WifUnit:
     name_token: str     # NameToken for UNITS.csv localisation lookup
     specialties: list[str] = field(default_factory=list)
     button_texture: str = ""   # e.g. 'Texture_Button_Unit_M1A2_SEPV2' — resolves via icon_map
+    display_name: str = ""     # human-readable, from UNITS.csv via name_token; "" → fallback to pretty ID
 
     @property
     def descriptor_name(self) -> str:
@@ -35,6 +36,8 @@ class DeckState:
     name: str                       # e.g. "Descriptor_Deck_pion_US_11ACR_4"
     pack_list: list[str]            # ordered ~/Descriptor_StrategicPack_* refs
     combat_group_list: list[str]    # ordered ~/Descriptor_CombatGroup_* refs
+    division_ref: str = ""          # CfgName from DeckDivision, e.g. "RDA_10MSD_solo"
+    superior_ref: str = ""          # CfgName from Superior, e.g. "RDA_3eBrig10MSD"
 
     @property
     def next_index(self) -> int:

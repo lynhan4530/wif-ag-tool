@@ -27,6 +27,8 @@ VANILLA_DECKS_DIR        = VANILLA_ROOT / "Generated" / "Gameplay" / "Decks"
 VANILLA_STRATEGIC_DECKS  = VANILLA_DECKS_DIR / "StrategicDecks.ndf"
 VANILLA_STRATEGIC_PACKS  = VANILLA_DECKS_DIR / "StrategicPacks.ndf"
 VANILLA_COMBAT_GROUPS    = VANILLA_DECKS_DIR / "StrategicCombatGroups.ndf"
+VANILLA_DIVISIONS_NDF    = VANILLA_DECKS_DIR / "Divisions.ndf"
+VANILLA_UNITE_DESCRIPTOR = VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
 
 # ── WARNO install + mod ───────────────────────────────────────────────────────
 WARNO_MODS_DIR = Path(os.environ.get(

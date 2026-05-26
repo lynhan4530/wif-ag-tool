@@ -64,3 +64,22 @@ def test_list_decks_returns_all_pion(fixture_deck_path):
     names = list_decks(fixture_deck_path)
     assert "Descriptor_Deck_pion_TEST_Alpha_1" in names
     assert "Descriptor_Deck_pion_TEST_Bravo_1" in names
+
+
+def test_parse_deck_captures_division_ref(fixture_deck_path):
+    deck = parse_deck(fixture_deck_path, "Descriptor_Deck_pion_TEST_Alpha_1")
+    assert deck.division_ref == "TEST_solo"
+    assert deck.superior_ref == "TEST"
+
+
+def test_parse_unit_resolves_display_name_when_csv_provided(fixture_units_path):
+    csv_map = {"WFM1ASV2": "M1A2 SEPV2 Abrams", "WFT90M01": "T-90M"}
+    units = parse_wif_units(fixture_units_path, units_csv=csv_map)
+    assert units["WF_M1A2_SEPV2_Abrams_US"].display_name == "M1A2 SEPV2 Abrams"
+    assert units["WF_T90M_RUS"].display_name == "T-90M"
+
+
+def test_parse_unit_leaves_display_name_empty_when_token_missing(fixture_units_path):
+    # CSV map without WF_M2A4_Bradley_US's token → unresolved
+    units = parse_wif_units(fixture_units_path, units_csv={"WFM1ASV2": "Abrams"})
+    assert units["WF_M2A4_Bradley_US"].display_name == ""
