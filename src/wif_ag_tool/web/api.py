@@ -337,6 +337,8 @@ def decks_replica_delete(deck_name: str):
 @api_bp.get("/wif_units")
 def wif_units():
     nation = request.args.get("nation")
+    if nation == "RDA":
+        nation = "DDR"
     role = request.args.get("role")
     q = (request.args.get("q") or "").lower()
     units: dict[str, WifUnit] = _state["units"]
@@ -356,6 +358,8 @@ def wif_units():
 def vanilla_units():
     """Mirror of /wif_units for vanilla. The SPA loads this once for tooltip lookups."""
     nation = request.args.get("nation")
+    if nation == "RDA":
+        nation = "DDR"
     role = request.args.get("role")
     q = (request.args.get("q") or "").lower()
     units: dict[str, WifUnit] = _state["vanilla_units"]

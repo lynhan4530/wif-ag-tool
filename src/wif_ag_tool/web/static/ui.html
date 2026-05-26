@@ -265,7 +265,7 @@ const getNormalizedRole = u => {
   if (!u) return "unknown";
   const r = (u.role || "").toLowerCase();
   if (r.includes("armor") || r.includes("tank")) return "armor";
-  if (r.includes("ifv") || r.includes("apc") || r.includes("veh") || r.includes("carrier")) return "ifv";
+  if (r.includes("ifv") || r.includes("apc") || r.includes("veh") || r.includes("carrier") || r.includes("transport")) return "ifv";
   if (r.includes("heli")) return "helicopter";
   if (r.includes("plane") || r.includes("jet") || r.includes("fighter") || r.includes("bomber") || r.includes("aircraft")) return "plane";
   if (r.includes("infantry") || r.includes("inf") || r.includes("commandos") || r.includes("chasseur") || r.includes("scout") || r.includes("sapper") || r.includes("rifles")) return "infantry";
@@ -333,10 +333,15 @@ function getAvailableTransports() {
   if (!state.activeDeck) return [];
   const dn = state.activeDeck.split("_")[3];
   if (!dn) return [];
+  const matchNation = (unation, dnation) => {
+    if (unation === dnation) return true;
+    if (unation === "DDR" && dnation === "RDA") return true;
+    return false;
+  };
   const list = [];
   for (const id in state.unitsIndex) {
     const u = state.unitsIndex[id];
-    if (u.nation === dn && ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u))) {
+    if (matchNation(u.nation, dn) && ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u))) {
       list.push(u);
     }
   }
