@@ -158,6 +158,17 @@
   .replica-platoon-actions { padding:6px 10px; border-top:1px dashed #3a3f4a; display:flex; gap:8px; align-items:center; }
   .group-actions { padding:4px 12px; display:flex; gap:8px; justify-content:flex-start; }
 
+  /* platoon picker */
+  .platoon-picker { background:#23262d; border:1px solid #444; min-width:360px; max-width:440px; max-height:60vh; display:flex; flex-direction:column; border-radius:4px; }
+  .platoon-picker-head { padding:10px 14px; border-bottom:1px solid #333; font-size:13px; font-weight:bold; }
+  .platoon-picker-body { padding:6px 0; overflow-y:auto; flex:1; }
+  .platoon-picker-section { padding:4px 14px; font-size:10px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; }
+  .platoon-picker-opt { padding:6px 14px; cursor:pointer; font-size:12px; display:flex; gap:8px; align-items:center; }
+  .platoon-picker-opt:hover { background:#2d3340; color:#2d4; }
+  .platoon-picker-opt .hint { font-size:10px; }
+  .platoon-picker-foot { padding:10px 14px; border-top:1px solid #333; display:flex; gap:8px; align-items:center; }
+  .platoon-picker-foot input { flex:1; font-size:12px; padding:4px 8px; }
+
   /* modal */
   .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:10; }
   .modal { background:#23262d; border:1px solid #444; min-width:640px; max-width:80vw; max-height:80vh; display:flex; flex-direction:column; border-radius:4px; }
@@ -241,6 +252,8 @@ const state = {
   modalFilters: { nation: "", role: "all", q: "" },
   modalTarget: null,       // {groupIdx, platoonIdx} — where to add units from modal
   exportOpen: false,
+  platoonPickerOpen: false, // show platoon name picker modal
+  platoonPickerGroupIdx: null,
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   deckQuery: "",
 };
@@ -430,6 +443,7 @@ function render() {
   root.appendChild(state.view === "picker" ? renderPicker() : renderSession());
   if (state.modalOpen) root.appendChild(renderModal());
   if (state.exportOpen) root.appendChild(renderExportDialog());
+  if (state.platoonPickerOpen) root.appendChild(renderPlatoonPicker());
 
   if (activeId) {
     const activeEl = document.getElementById(activeId);
@@ -679,11 +693,115 @@ function addCombatGroup() {
 }
 
 function addPlatoon(gi) {
-  const name = prompt("Platoon/squadron name (e.g. 1ST RECON PLATOON, HQ, SPT):") || "";
-  if (!name.trim()) return;
+  state.platoonPickerOpen = true;
+  state.platoonPickerGroupIdx = gi;
+  render();
+}
+
+function closePlatoonPicker() {
+  state.platoonPickerOpen = false;
+  state.platoonPickerGroupIdx = null;
+  render();
+}
+
+function commitPlatoon(name) {
+  const gi = state.platoonPickerGroupIdx;
+  if (gi === null || gi === undefined) return;
+  if (!name || !name.trim()) return;
   state.replicaGroups[gi].platoons.push({ name: name.trim(), units: [] });
+  closePlatoonPicker();
   markReplicaDirty();
   render();
+}
+
+function getVanillaPlatoonNames() {
+  // Extract unique display names from vanilla smart groups
+  const names = [];
+  const seen = new Set();
+  if (state.vanilla && state.vanilla.combat_groups) {
+    for (const cg of state.vanilla.combat_groups) {
+      for (const sg of cg.smart_groups) {
+        const dn = sg.display_name || sg.name;
+        if (dn && !seen.has(dn)) {
+          seen.add(dn);
+          names.push({ name: dn, cgName: getFriendlyCGName(cg.name), isHq: sg.is_hq });
+        }
+      }
+    }
+  }
+  return names;
+}
+
+function renderPlatoonPicker() {
+  const gi = state.platoonPickerGroupIdx;
+  const groupName = state.replicaGroups[gi]?.name || "?";
+  const existingNames = new Set(
+    (state.replicaGroups[gi]?.platoons || []).map(p => p.name)
+  );
+
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) closePlatoonPicker(); } });
+
+  const picker = el("div", { class: "platoon-picker" });
+  picker.appendChild(el("div", { class: "platoon-picker-head" },
+    `Add platoon to Combat Group "${groupName}"`
+  ));
+
+  const body = el("div", { class: "platoon-picker-body" });
+
+  // Section 1: Vanilla platoon names from the current deck
+  const vanillaNames = getVanillaPlatoonNames();
+  if (vanillaNames.length > 0) {
+    body.appendChild(el("div", { class: "platoon-picker-section" }, "Vanilla deck platoons"));
+    for (const v of vanillaNames) {
+      const already = existingNames.has(v.name);
+      const opt = el("div", {
+        class: "platoon-picker-opt",
+        style: already ? "opacity:0.4; cursor:default;" : "",
+        onclick: already ? null : () => commitPlatoon(v.name),
+      },
+        el("span", {}, v.name),
+        v.isHq ? el("span", { style: "background:#e8a13b; color:#000; padding:0 5px; border-radius:8px; font-size:10px;" }, "HQ") : null,
+        el("span", { class: "hint" }, `from ${v.cgName}`),
+        already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ added") : null,
+      );
+      body.appendChild(opt);
+    }
+  }
+
+  // Section 2: Standard generic names
+  body.appendChild(el("div", { class: "platoon-picker-section", style: "margin-top:8px;" }, "Standard names"));
+  const stdNames = ["HQ", "1", "2", "3", "SPT"];
+  for (const sn of stdNames) {
+    const already = existingNames.has(sn);
+    body.appendChild(el("div", {
+      class: "platoon-picker-opt",
+      style: already ? "opacity:0.4; cursor:default;" : "",
+      onclick: already ? null : () => commitPlatoon(sn),
+    },
+      el("span", {}, sn),
+      already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ added") : null,
+    ));
+  }
+
+  picker.appendChild(body);
+
+  // Footer: custom name input
+  const customInput = el("input", {
+    id: "platoon-custom-input",
+    type: "text",
+    placeholder: "Or type a custom name...",
+  });
+  picker.appendChild(el("div", { class: "platoon-picker-foot" },
+    customInput,
+    el("button", {
+      onclick: () => commitPlatoon(customInput.value),
+    }, "Add"),
+    el("button", { class: "ghost", onclick: closePlatoonPicker }, "Cancel"),
+  ));
+
+  backdrop.appendChild(picker);
+  return backdrop;
 }
 
 function renderReplicaGroup(group, gi) {
@@ -1389,6 +1507,7 @@ document.addEventListener("mouseout", e => {
 
 // ── init ────────────────────────────────────────────────────────────────────
 document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && state.platoonPickerOpen) closePlatoonPicker();
   if (e.key === "Escape" && state.modalOpen) closeModal();
   if (e.key === "Escape" && state.exportOpen) { state.exportOpen = false; render(); }
 });
