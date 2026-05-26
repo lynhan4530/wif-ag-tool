@@ -60,13 +60,24 @@ class Assignment:
     count: int = 1          # units per SmartGroup slot
     attack_override: int | None = None
     defense_override: int | None = None
+    order: int = 0          # position within its deck's replica (drives output ordering)
+    seq: int = 0            # disambiguates same unit added more than once to one deck (suffix _1/_2/_3)
 
     def pack_name(self, xp: int) -> str:
-        """Generated StrategicPack descriptor name for a given XP level."""
-        return f"Descriptor_StrategicPack_{self.unit_id}_{xp}"
+        """Generated StrategicPack descriptor name for a given XP level.
+
+        When seq>0, a sequence suffix is inserted before the XP token so duplicate
+        unit rows in the same deck get distinct descriptor names.
+        """
+        suffix = f"_{self.seq}" if self.seq else ""
+        return f"Descriptor_StrategicPack_{self.unit_id}{suffix}_{xp}"
 
     def combat_group_name(self) -> str:
-        """Generated CombatGroup descriptor name."""
-        # Keep deck identifier portion short to stay readable
+        """Generated CombatGroup descriptor name.
+
+        seq>0 → append `_<seq>` so multiple combat groups for the same unit in one deck
+        don't collide.
+        """
         deck_short = self.deck_name.replace("Descriptor_Deck_pion_", "")
-        return f"Descriptor_CombatGroup_{deck_short}_WIF_{self.unit_id}"
+        suffix = f"_{self.seq}" if self.seq else ""
+        return f"Descriptor_CombatGroup_{deck_short}_WIF_{self.unit_id}{suffix}"

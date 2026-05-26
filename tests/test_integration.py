@@ -8,13 +8,16 @@ from wif_ag_tool.parser.unit_parser import parse_wif_units
 from wif_ag_tool.parser.deck_parser import parse_deck
 from wif_ag_tool.pipeline import (
     run_export,
+    export_from_replicas,
     load_assignments,
     save_assignments,
+    migrate_legacy_assignments,
     PACKS_OUT,
     GROUPS_OUT,
     DECKS_OUT,
     CSV_OUT,
 )
+from wif_ag_tool import replicas as rmod
 
 
 DECK_NAME = "Descriptor_Deck_pion_TEST_Alpha_1"
@@ -84,3 +87,60 @@ def test_export_produces_three_files(tmp_path, fixture_units_path, fixture_deck_
     assert (output_dir / PACKS_OUT).exists()
     assert (output_dir / GROUPS_OUT).exists()
     assert (output_dir / DECKS_OUT).exists()
+
+
+# ── replica-driven pipeline ──────────────────────────────────────────────────
+
+def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_deck_path):
+    units, decks = _build(fixture_units_path, fixture_deck_path, [])
+    replicas_file = tmp_path / "wif_replicas.json"
+    rmod.save_replica(DECK_NAME, [
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1},
+        {"unit_id": "WF_M2A4_Bradley_US", "xp": 2, "count": 1},
+    ], path=replicas_file)
+    store = rmod.load_replicas(replicas_file)
+    paths = export_from_replicas(decks, units, tmp_path / "out", replicas=store)
+    packs_text = paths["packs"].read_text(encoding="utf-8")
+    groups_text = paths["groups"].read_text(encoding="utf-8")
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_2" in packs_text
+    # First WIF pack appended at next_index=5 of sample deck
+    assert "(5,1)" in groups_text
+    assert "(6,1)" in groups_text
+
+
+def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_path, fixture_deck_path):
+    units, decks = _build(fixture_units_path, fixture_deck_path, [])
+    replicas_file = tmp_path / "wif_replicas.json"
+    rmod.save_replica(DECK_NAME, [
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1},
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 3, "count": 1},
+    ], path=replicas_file)
+    store = rmod.load_replicas(replicas_file)
+    paths = export_from_replicas(decks, units, tmp_path / "out", replicas=store)
+    packs_text = paths["packs"].read_text(encoding="utf-8")
+    groups_text = paths["groups"].read_text(encoding="utf-8")
+    # First seq has no suffix; second gets _1
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1_3" in packs_text
+    # Combat groups disambiguate
+    assert "_WIF_WF_M1A2_SEPV2_Abrams_US is" in groups_text
+    assert "_WIF_WF_M1A2_SEPV2_Abrams_US_1 is" in groups_text
+
+
+def test_migrate_legacy_assignments(tmp_path):
+    legacy = tmp_path / "assignments.json"
+    target = tmp_path / "wif_replicas.json"
+    save_assignments(legacy, [
+        Assignment(DECK_NAME, "WF_M1A2_SEPV2_Abrams_US", xp_levels=[1, 2]),
+    ])
+    n = migrate_legacy_assignments(legacy_path=legacy, replicas_path=target)
+    assert n == 1
+    store = rmod.load_replicas(target)
+    entry = store[DECK_NAME]
+    assert len(entry["units"]) == 2          # XP1 + XP2 each become a row
+    assert entry["units"][0]["xp"] == 1
+    assert entry["units"][1]["xp"] == 2
+    # legacy renamed
+    assert not legacy.exists()
+    assert (tmp_path / "assignments.json.migrated").exists()

@@ -41,6 +41,10 @@ SAVES_DIR = Path(os.environ.get(
 ))
 
 # ── Tool working directory ────────────────────────────────────────────────────
-TOOL_ROOT        = Path(__file__).parent.parent.parent   # G:\Warno_mod\wif_ag_tool
-ASSIGNMENTS_FILE = TOOL_ROOT / "assignments.json"
+TOOL_ROOT        = Path(__file__).parent.parent.parent   # G:\Project\wif-ag-tool
+ASSIGNMENTS_FILE = TOOL_ROOT / "assignments.json"        # legacy; one-shot migrated on first run
 CACHE_FILE       = TOOL_ROOT / ".deck_cache.json"        # refreshed after every patch
+
+SESSIONS_DIR     = TOOL_ROOT / "sessions"                # one file per campaign
+REPLICAS_FILE    = TOOL_ROOT / "data" / "wif_replicas.json"   # global per-deck WIF replicas
+CAMPAIGN_DECKS_YAML = TOOL_ROOT / "configs" / "campaign_decks.yaml"   # optional, v1 unused

@@ -5,211 +5,730 @@
 <title>WIF AG Tool</title>
 <style>
   :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
   body { font-family: ui-monospace, Consolas, Menlo, monospace; background:#181a1f; color:#dde; margin:0; }
-  header { background:#23262d; padding:8px 12px; border-bottom:1px solid #333; display:flex; gap:16px; align-items:center; }
+  header { background:#23262d; padding:8px 12px; border-bottom:1px solid #333; display:flex; gap:12px; align-items:center; min-height:42px; }
   header h1 { font-size:14px; margin:0; }
-  main { display:grid; grid-template-columns: 320px 1fr; gap:0; height:calc(100vh - 38px); }
-  section { padding:8px 12px; overflow:auto; border-right:1px solid #2a2d34; }
-  h2 { font-size:12px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:8px 0 4px; }
-  select, input { background:#1f2228; color:#dde; border:1px solid #333; padding:3px 6px; font:inherit; }
-  button { background:#2d4; color:#000; border:0; padding:2px 6px; font:inherit; cursor:pointer; }
+  header .chip { background:#2d3340; padding:2px 8px; border-radius:10px; font-size:11px; color:#9be; }
+  header .spacer { flex:1; }
+  button { background:#2d4; color:#000; border:0; padding:4px 10px; font:inherit; cursor:pointer; border-radius:3px; }
+  button:disabled { opacity:.4; cursor:not-allowed; }
+  button.ghost { background:#3a3f4a; color:#dde; }
   button.del { background:#d44; color:#fff; }
-  .row { display:flex; gap:6px; align-items:center; padding:2px 0; }
-  .deck { cursor:pointer; padding:2px 4px; }
-  .deck.active { background:#234; }
-  .unit { display:grid; grid-template-columns: 40px 1fr 60px 60px 30px; gap:6px; padding:2px 4px; border-bottom:1px solid #23262d; align-items:center; }
-  .unit img { width:36px; height:24px; object-fit:contain; background:#0c0e12; border:1px solid #23262d; }
-  .unit img.missing { visibility:hidden; }
-  .assignments { border-top:2px solid #333; padding:8px 12px; }
-  .assignment { display:grid; grid-template-columns: 1fr repeat(3, auto) auto auto auto; gap:8px; align-items:center; padding:2px 0; }
-  .xp label { margin-right:4px; }
-  .num { width:60px; }
+  button.warn { background:#e8a13b; color:#000; }
+  select, input { background:#1f2228; color:#dde; border:1px solid #333; padding:3px 6px; font:inherit; border-radius:2px; }
+  input.num { width:64px; }
+
+  /* picker */
+  .picker { padding:24px; max-width:980px; margin:0 auto; }
+  .picker h2 { font-size:12px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:24px 0 8px; }
+  .picker .card { background:#23262d; border:1px solid #2a2d34; padding:10px 14px; margin-bottom:6px; display:flex; gap:12px; align-items:center; }
+  .picker .card .grow { flex:1; }
+  .picker .card .title { font-size:14px; color:#dde; }
+  .picker .card .meta { font-size:11px; color:#9aa; margin-top:2px; }
+  .picker .new { margin-top:18px; }
+
+  /* session view */
+  .session { display:grid; grid-template-columns: 290px 1fr 1fr; height:calc(100vh - 42px); }
+  .pane { border-right:1px solid #2a2d34; overflow:auto; }
+  .pane:last-child { border-right:0; }
+  .pane h2 { font-size:11px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:0; padding:8px 12px; background:#1c1f25; border-bottom:1px solid #2a2d34; position:sticky; top:0; z-index:1; }
+  .pane .pad { padding:8px 12px; }
+
+  /* left */
+  .nation-list { display:grid; grid-template-columns: 1fr 1fr; gap:2px 8px; margin-bottom:8px; font-size:12px; }
+  .nation-list label { display:flex; gap:4px; align-items:center; cursor:pointer; }
+  .deck-row { padding:4px 12px; cursor:pointer; display:flex; gap:6px; align-items:center; border-bottom:1px solid #21232a; font-size:12px; }
+  .deck-row:hover { background:#23262d; }
+  .deck-row.active { background:#234; }
+  .deck-row .badge { background:#2d4; color:#000; padding:0 5px; border-radius:8px; font-size:10px; }
+  .deck-row .ghost-x { margin-left:auto; opacity:.5; }
+  .deck-row .ghost-x:hover { opacity:1; color:#d44; }
+
+  /* center: vanilla tree */
+  .cg { margin:6px 12px 12px; border-left:2px solid #2a2d34; padding-left:8px; }
+  .cg-head { font-size:12px; color:#aaf; margin-bottom:4px; }
+  .cg-head .hq { background:#e8a13b; color:#000; padding:0 5px; border-radius:8px; font-size:10px; margin-left:6px; }
+  .sg { margin:2px 0 6px 6px; }
+  .sg-head { font-size:11px; color:#bbb; }
+  .pk { font-size:11px; color:#ccc; margin-left:14px; }
+  .pk .x { color:#9bd; }
+
+  /* right: replica */
+  .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
+  .replica-bar .grow { flex:1; }
+  .replica-list { padding:6px 8px; }
+  .replica-row { display:grid; grid-template-columns: 18px 1fr 80px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
+  .replica-row:hover { background:#1f2228; }
+  .replica-row.dragging { opacity:.4; }
+  .drag-handle { cursor:grab; color:#666; user-select:none; }
+  .drag-handle:active { cursor:grabbing; }
+  .x-btn { background:transparent; color:#d44; border:0; cursor:pointer; padding:2px 6px; font-size:14px; }
+  .x-btn:hover { background:#2a2222; }
+  .field-label { font-size:9px; color:#888; text-transform:uppercase; margin-right:2px; }
+  .replica-empty { padding:20px; color:#666; font-size:12px; text-align:center; }
+
+  /* modal */
+  .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:10; }
+  .modal { background:#23262d; border:1px solid #444; min-width:640px; max-width:80vw; max-height:80vh; display:flex; flex-direction:column; border-radius:4px; }
+  .modal-head { padding:10px 14px; border-bottom:1px solid #333; display:flex; gap:8px; align-items:center; }
+  .modal-head h3 { font-size:13px; margin:0; flex:1; }
+  .modal-filters { padding:8px 14px; border-bottom:1px solid #2a2d34; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .modal-body { padding:6px 0; overflow:auto; }
+  .modal-foot { padding:10px 14px; border-top:1px solid #333; display:flex; gap:8px; justify-content:flex-end; }
+  .modal-row { padding:4px 14px; display:grid; grid-template-columns: 36px 1fr 50px 50px 60px 60px; gap:8px; align-items:center; font-size:12px; }
+  .modal-row:hover { background:#1f2228; }
+  .modal-row img { width:32px; height:22px; object-fit:contain; background:#0c0e12; border:1px solid #23262d; }
+  .modal-row img.missing { visibility:hidden; }
+  .modal-row .added { background:#2d4; color:#000; padding:1px 6px; border-radius:8px; font-size:10px; }
+
+  /* misc */
+  .toast { position:fixed; bottom:16px; right:16px; background:#2d4; color:#000; padding:8px 14px; border-radius:4px; z-index:20; font-size:12px; }
+  .toast.err { background:#d44; color:#fff; }
+  a.btn-link { background:#3a3f4a; color:#dde; padding:4px 10px; cursor:pointer; border-radius:3px; text-decoration:none; }
+  .hint { color:#888; font-size:10px; }
 </style>
 </head>
 <body>
-<header>
-  <h1>🎮 WIF AG Tool</h1>
-  <span id="campaign">Campaign: —</span>
-  <span style="flex:1"></span>
-  <button id="refresh">Refresh decks</button>
-  <button id="export">Export NDF</button>
-</header>
-<main>
-  <section id="leftCol">
-    <h2>Decks</h2>
-    <div class="row">
-      <label>Nation</label>
-      <select id="deckNation">
-        <option value="">all</option>
-        <option>US</option><option>SOV</option><option>FR</option>
-        <option>GER</option><option>UK</option><option>BEL</option>
-      </select>
-    </div>
-    <div id="deckList"></div>
-  </section>
-  <section id="rightCol">
-    <h2>WIF Units</h2>
-    <div class="row">
-      <label>Nation</label>
-      <select id="unitNation">
-        <option value="">all</option>
-        <option>US</option><option>RUS</option><option>FR</option>
-        <option>GER</option><option>UK</option><option>BEL</option>
-        <option>NL</option><option>DNR</option>
-      </select>
-      <label>Role</label>
-      <select id="unitRole">
-        <option value="all">all</option>
-        <option>armor</option><option>ifv</option>
-        <option>helicopter</option><option>plane</option>
-        <option>infantry</option><option>artillery</option>
-      </select>
-      <input id="unitSearch" placeholder="search" size="14">
-    </div>
-    <div id="unitList"></div>
-  </section>
-</main>
-<div class="assignments">
-  <h2>Assigned WIF Units — <span id="currentDeck">(no deck selected)</span></h2>
-  <div id="assignList"></div>
-</div>
-<script>
-const $ = (id) => document.getElementById(id);
-let currentDeck = null;
-let allUnits = [];
-let allDecks = [];
+<div id="root"></div>
 
-async function loadDecks() {
-  const nation = $("deckNation").value;
-  const url = "/api/decks" + (nation ? `?nation=${nation}` : "");
-  allDecks = await fetch(url).then(r => r.json());
-  const list = $("deckList");
-  list.innerHTML = "";
-  for (const d of allDecks) {
-    const el = document.createElement("div");
-    el.className = "deck" + (d.name === currentDeck ? " active" : "");
-    el.textContent = `${d.name.replace("Descriptor_Deck_pion_","")}  (${d.pack_count}p)`;
-    el.onclick = () => selectDeck(d.name);
-    list.appendChild(el);
+<script>
+"use strict";
+
+// ── state ────────────────────────────────────────────────────────────────────
+const NATIONS = ["US","RFA","UK","FR","BEL","NL","DNR","SOV","RUS","RDA","POL","TCH","ESP","CAN"];
+const ROLES = ["all","armor","ifv","helicopter","plane","infantry","artillery","aa","recon","supply","engineer"];
+
+const state = {
+  view: "picker",          // "picker" | "session"
+  sessions: [],
+  campaigns: [],
+  activeSlug: null,
+  session: null,           // current session object
+  decks: [],               // [{name, pack_count, has_replica, ...}]
+  activeDeck: null,
+  vanilla: null,           // {combat_groups: [...]}
+  replicaUnits: [],        // local editable copy [{unit_id, xp, count, ...}]
+  replicaDirty: false,
+  sessionDirty: false,
+  initialReplica: [],      // snapshot to detect dirty
+  initialScope: [],
+  modalOpen: false,
+  modalUnits: [],
+  modalFilters: { nation: "", role: "all", q: "" },
+  exportOpen: false,
+};
+
+const $ = sel => document.querySelector(sel);
+const el = (tag, attrs, ...kids) => {
+  const e = document.createElement(tag);
+  for (const k in attrs || {}) {
+    if (k === "class") e.className = attrs[k];
+    else if (k === "html") e.innerHTML = attrs[k];
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), attrs[k]);
+    else if (attrs[k] === false || attrs[k] == null) {}
+    else if (attrs[k] === true) e.setAttribute(k, "");
+    else e.setAttribute(k, attrs[k]);
   }
+  for (const k of kids.flat()) {
+    if (k == null || k === false) continue;
+    e.appendChild(typeof k === "string" ? document.createTextNode(k) : k);
+  }
+  return e;
+};
+
+let toastTimer;
+const toast = (msg, isError) => {
+  const t = el("div", { class: "toast" + (isError ? " err" : "") }, msg);
+  document.body.appendChild(t);
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.remove(), 2400);
+};
+
+const api = async (method, path, body) => {
+  const opts = { method, headers: {} };
+  if (body !== undefined) {
+    opts.headers["content-type"] = "application/json";
+    opts.body = JSON.stringify(body);
+  }
+  const r = await fetch("/api" + path, opts);
+  if (!r.ok) {
+    let detail = ""; try { detail = (await r.json()).error || ""; } catch {}
+    throw new Error(detail || r.statusText);
+  }
+  if (r.headers.get("content-type")?.includes("zip")) return r.blob();
+  return r.json();
+};
+
+const downloadBlob = (blob, name) => {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+};
+
+const deckShort = name => name.replace("Descriptor_Deck_pion_", "");
+const unitShort = name => (name || "").replace(/^WF_/, "").replace(/_/g, " ");
+
+// ── render ───────────────────────────────────────────────────────────────────
+function render() {
+  const root = $("#root");
+  root.innerHTML = "";
+  root.appendChild(state.view === "picker" ? renderPicker() : renderSession());
+  if (state.modalOpen) root.appendChild(renderModal());
+  if (state.exportOpen) root.appendChild(renderExportDialog());
 }
 
-async function loadUnits() {
-  const nation = $("unitNation").value;
-  const role = $("unitRole").value;
-  const q = $("unitSearch").value;
-  const params = new URLSearchParams();
-  if (nation) params.set("nation", nation);
-  if (role && role !== "all") params.set("role", role);
-  if (q) params.set("q", q);
-  allUnits = await fetch("/api/wif_units?" + params).then(r => r.json());
-  const list = $("unitList");
-  list.innerHTML = "";
-  for (const u of allUnits) {
-    const el = document.createElement("div");
-    el.className = "unit";
-    el.innerHTML = `
-      <img src="/api/unit_icon/${u.name}" loading="lazy" onerror="this.classList.add('missing')">
-      <span>${u.name}</span><span>A:${u.attack}</span><span>D:${u.defense}</span>
-    `;
-    const btn = document.createElement("button");
-    btn.textContent = "+";
-    btn.onclick = () => assignUnit(u);
-    el.appendChild(btn);
-    list.appendChild(el);
+function renderPicker() {
+  const wrap = el("div");
+  wrap.appendChild(el("header", {},
+    el("h1", {}, "🎮 WIF AG Tool"),
+    el("span", { class: "chip" }, "campaign picker"),
+  ));
+
+  const body = el("div", { class: "picker" });
+
+  body.appendChild(el("h2", {}, "Resume session"));
+  if (state.sessions.length === 0) {
+    body.appendChild(el("div", { class: "card" }, el("span", { class: "hint" }, "No sessions yet.")));
+  } else {
+    for (const s of state.sessions) {
+      const card = el("div", { class: "card" },
+        el("div", { class: "grow" },
+          el("div", { class: "title" }, s.campaign),
+          el("div", { class: "meta" },
+            `factions: ${(s.factions_from_save || []).join(", ") || "—"}  ·  scope: ${(s.nation_scope || []).join(", ") || "—"}  ·  updated ${s.updated_at?.slice(0, 16) || "?"}`),
+        ),
+        el("button", { onclick: () => openSession(s.slug) }, "Open"),
+        el("button", { class: "del", onclick: () => deleteSession(s.slug) }, "Delete"),
+      );
+      body.appendChild(card);
+    }
   }
+
+  body.appendChild(el("h2", {}, "Discovered campaigns"));
+  if (state.campaigns.length === 0) {
+    body.appendChild(el("div", { class: "card" }, el("span", { class: "hint" }, "No .sav3 saves found in saves directory.")));
+  } else {
+    for (const c of state.campaigns) {
+      const card = el("div", { class: "card" },
+        el("div", { class: "grow" },
+          el("div", { class: "title" }, c.campaign),
+          el("div", { class: "meta" },
+            `${c.save_count} save(s)  ·  factions: ${c.factions_from_save.join(", ")}  ·  missions: ${(c.missions_seen.join(", ") || "—")}`),
+        ),
+        el("button", { onclick: () => openOrCreateForCampaign(c) }, "Open"),
+      );
+      body.appendChild(card);
+    }
+  }
+
+  body.appendChild(el("div", { class: "new" },
+    el("button", { class: "warn", onclick: promptNewSession }, "+ New session (manual)"),
+  ));
+
+  wrap.appendChild(body);
+  return wrap;
+}
+
+function renderSession() {
+  const s = state.session;
+  const wrap = el("div");
+  wrap.appendChild(el("header", {},
+    el("button", { class: "ghost", onclick: backToPicker }, "← Campaigns"),
+    el("h1", {}, s.campaign),
+    el("span", { class: "chip" }, (s.factions_from_save || []).join(" / ") || "—"),
+    el("span", { class: "spacer" }),
+    el("button", { class: "ghost", onclick: doRefreshDecks, title: "Re-parse vanilla NDF after a game patch" }, "Refresh decks"),
+    el("button", { disabled: !state.sessionDirty, onclick: doSaveSession }, "Save session"),
+    el("button", { class: "ghost", onclick: doExtractSession }, "Extract session"),
+    el("button", { onclick: () => { state.exportOpen = true; render(); } }, "Export NDF"),
+  ));
+
+  const grid = el("div", { class: "session" });
+  grid.appendChild(renderLeftPane());
+  grid.appendChild(renderCenterPane());
+  grid.appendChild(renderRightPane());
+  wrap.appendChild(grid);
+  return wrap;
+}
+
+// ── left pane ───────────────────────────────────────────────────────────────
+function renderLeftPane() {
+  const scope = new Set(state.session.nation_scope || []);
+  const pane = el("section", { class: "pane" });
+  pane.appendChild(el("h2", {}, "Nations in scope"));
+  const grid = el("div", { class: "nation-list pad" });
+  for (const n of NATIONS) {
+    const lbl = el("label", {},
+      el("input", { type: "checkbox", checked: scope.has(n) || false,
+        onchange: e => toggleNation(n, e.target.checked) }),
+      n,
+    );
+    grid.appendChild(lbl);
+  }
+  pane.appendChild(grid);
+
+  pane.appendChild(el("h2", {}, `Decks (${state.decks.length})`));
+  const list = el("div");
+  for (const d of state.decks) {
+    const row = el("div", { class: "deck-row" + (d.name === state.activeDeck ? " active" : ""),
+      onclick: () => selectDeck(d.name) },
+      el("span", {}, deckShort(d.name)),
+      el("span", { class: "hint" }, `(${d.pack_count}p)`),
+      d.has_replica ? el("span", { class: "badge" }, `WIF·${d.replica_unit_count}`) : null,
+      d.has_replica ? el("span", { class: "ghost-x", title: "delete WIF replica",
+        onclick: e => { e.stopPropagation(); deleteReplica(d.name); } }, "✕") : null,
+    );
+    list.appendChild(row);
+  }
+  if (state.decks.length === 0) {
+    list.appendChild(el("div", { class: "pad hint" }, "Tick nations to populate this list."));
+  }
+  pane.appendChild(list);
+  return pane;
+}
+
+// ── center pane ─────────────────────────────────────────────────────────────
+function renderCenterPane() {
+  const pane = el("section", { class: "pane" });
+  pane.appendChild(el("h2", {}, state.activeDeck ? `Vanilla — ${deckShort(state.activeDeck)}` : "Vanilla deck (select a deck)"));
+  if (!state.vanilla) {
+    pane.appendChild(el("div", { class: "pad hint" }, state.activeDeck ? "Loading…" : "Pick a deck on the left."));
+    return pane;
+  }
+  for (const cg of state.vanilla.combat_groups) {
+    const block = el("div", { class: "cg" });
+    block.appendChild(el("div", { class: "cg-head" },
+      deckShort(cg.name).replace(/^[A-Za-z]+_[A-Za-z0-9]+_\d+_/, ""),
+      cg.smart_groups.some(s => s.is_hq) ? el("span", { class: "hq" }, "HQ") : null,
+    ));
+    for (const sg of cg.smart_groups) {
+      const sgEl = el("div", { class: "sg" });
+      sgEl.appendChild(el("div", { class: "sg-head" }, sg.is_hq ? "▸ HQ slot" : "▸ slot"));
+      for (const p of sg.packs) {
+        const label = p.unit
+          ? `[${p.index}] ${unitShort(p.unit)}${p.transport ? " ← " + unitShort(p.transport) : ""}`
+          : `[${p.index}] (pack missing)`;
+        sgEl.appendChild(el("div", { class: "pk" },
+          label,
+          el("span", { class: "x" }, ` ×${p.count}`),
+          p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
+        ));
+      }
+      block.appendChild(sgEl);
+    }
+    pane.appendChild(block);
+  }
+  return pane;
+}
+
+// ── right pane ──────────────────────────────────────────────────────────────
+function renderRightPane() {
+  const pane = el("section", { class: "pane" });
+  pane.appendChild(el("h2", {}, state.activeDeck ? `WIF replica — ${deckShort(state.activeDeck)}` : "WIF replica"));
+  if (!state.activeDeck) {
+    pane.appendChild(el("div", { class: "pad hint" }, "Pick a deck on the left."));
+    return pane;
+  }
+  pane.appendChild(el("div", { class: "replica-bar" },
+    el("button", { onclick: openAddModal }, "+ Add unit"),
+    el("span", { class: "grow" }),
+    el("button", {
+      disabled: !state.replicaDirty || state.replicaUnits.length === 0,
+      onclick: saveDeckReplica,
+    }, "Save deck"),
+  ));
+
+  const list = el("div", { class: "replica-list" });
+  if (state.replicaUnits.length === 0) {
+    list.appendChild(el("div", { class: "replica-empty" }, "Empty replica. Click + Add unit to start."));
+  }
+  state.replicaUnits.forEach((row, i) => list.appendChild(renderReplicaRow(row, i)));
+  pane.appendChild(list);
+  return pane;
+}
+
+function renderReplicaRow(row, i) {
+  const node = el("div", {
+    class: "replica-row",
+    draggable: "true",
+    ondragstart: e => { e.dataTransfer.setData("text/plain", i); node.classList.add("dragging"); },
+    ondragend: () => node.classList.remove("dragging"),
+    ondragover: e => { e.preventDefault(); },
+    ondrop: e => {
+      e.preventDefault();
+      const from = parseInt(e.dataTransfer.getData("text/plain"), 10);
+      if (Number.isFinite(from) && from !== i) {
+        const moved = state.replicaUnits.splice(from, 1)[0];
+        state.replicaUnits.splice(i, 0, moved);
+        markReplicaDirty();
+        render();
+      }
+    },
+  },
+    el("span", { class: "drag-handle" }, "⋮⋮"),
+    el("span", {}, unitShort(row.unit_id)),
+    el("span", {},
+      el("span", { class: "field-label" }, "XP"),
+      mkSelect(["1","2","3"], String(row.xp ?? 1), v => { row.xp = parseInt(v, 10); markReplicaDirty(); }),
+    ),
+    el("span", {},
+      el("span", { class: "field-label" }, "n"),
+      mkInput(row.count ?? 1, 1, v => { row.count = parseInt(v, 10) || 1; markReplicaDirty(); }),
+    ),
+    el("span", {},
+      el("span", { class: "field-label" }, "ATK"),
+      mkInput(row.attack_override ?? "", null, v => { row.attack_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto"),
+    ),
+    el("span", {},
+      el("span", { class: "field-label" }, "DEF"),
+      mkInput(row.defense_override ?? "", null, v => { row.defense_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto"),
+    ),
+    el("button", { class: "x-btn", title: "Remove",
+      onclick: () => { state.replicaUnits.splice(i, 1); markReplicaDirty(); render(); } }, "✕"),
+  );
+  return node;
+}
+
+const mkSelect = (opts, val, onchange) => {
+  const s = el("select", { onchange: e => onchange(e.target.value) });
+  for (const o of opts) {
+    const opt = el("option", { value: o }, o);
+    if (o === val) opt.selected = true;
+    s.appendChild(opt);
+  }
+  return s;
+};
+const mkInput = (val, min, oninput, placeholder) => el("input", {
+  class: "num", type: "number",
+  value: val === null || val === undefined ? "" : val,
+  min: min === null ? false : min,
+  placeholder: placeholder || "",
+  oninput: e => oninput(e.target.value),
+});
+
+// ── modal: add unit ─────────────────────────────────────────────────────────
+function renderModal() {
+  const dn = state.activeDeck ? state.activeDeck.split("_")[3] : "";
+  const added = new Set(state.replicaUnits.map(r => r.unit_id));
+
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) closeModal(); } });
+
+  const modal = el("div", { class: "modal" });
+  modal.appendChild(el("div", { class: "modal-head" },
+    el("h3", {}, `Add WIF unit → ${deckShort(state.activeDeck || "")}`),
+    el("button", { class: "ghost", onclick: closeModal }, "Done"),
+  ));
+
+  const filters = el("div", { class: "modal-filters" });
+  const f = state.modalFilters;
+  filters.appendChild(el("span", { class: "field-label" }, "Nation"));
+  filters.appendChild(mkSelect(["", ...NATIONS], f.nation, v => { f.nation = v; reloadModalUnits(); }));
+  filters.appendChild(el("span", { class: "field-label" }, "Role"));
+  filters.appendChild(mkSelect(ROLES, f.role, v => { f.role = v; reloadModalUnits(); }));
+  const search = el("input", { type: "text", placeholder: "search (e.g. Abrams)", value: f.q,
+    oninput: e => { f.q = e.target.value; debounceReload(); } });
+  filters.appendChild(search);
+  if (dn && f.nation === "") {
+    filters.appendChild(el("button", { class: "ghost",
+      onclick: () => { f.nation = dn; reloadModalUnits(); } }, `quick: ${dn}`));
+  }
+  modal.appendChild(filters);
+
+  const body = el("div", { class: "modal-body" });
+  if (state.modalUnits.length === 0) {
+    body.appendChild(el("div", { class: "pad hint" }, "No matches. Loosen the filters."));
+  }
+  for (const u of state.modalUnits) {
+    const row = el("div", { class: "modal-row" },
+      el("img", { src: `/api/unit_icon/${u.name}`, loading: "lazy", onerror: e => e.target.classList.add("missing") }),
+      el("span", {}, u.name),
+      el("span", { class: "hint" }, `A:${u.attack}`),
+      el("span", { class: "hint" }, `D:${u.defense}`),
+      el("span", { class: "hint" }, u.role || ""),
+      added.has(u.name)
+        ? el("span", { class: "added" }, "in deck")
+        : el("button", { onclick: () => addUnitToReplica(u) }, "Add"),
+    );
+    body.appendChild(row);
+  }
+  modal.appendChild(body);
+
+  modal.appendChild(el("div", { class: "modal-foot" },
+    el("span", { class: "hint" }, `${state.replicaUnits.length} unit(s) in this replica`),
+    el("span", { class: "spacer" }, ""),
+    el("button", { class: "ghost", onclick: closeModal }, "Done"),
+  ));
+
+  backdrop.appendChild(modal);
+  return backdrop;
+}
+
+function renderExportDialog() {
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) { state.exportOpen = false; render(); } } });
+  const modal = el("div", { class: "modal" });
+  modal.appendChild(el("div", { class: "modal-head" },
+    el("h3", {}, "Export NDF — choose scope"),
+  ));
+  const body = el("div", { class: "modal-body pad" });
+  let scope = "session";
+  body.appendChild(el("div", {},
+    el("label", {},
+      el("input", { type: "radio", name: "scope", value: "session", checked: true,
+        onchange: e => { if (e.target.checked) scope = "session"; } }),
+      " This session's decks only",
+    ),
+    el("div", { class: "hint" }, "Use for testing this campaign's slice."),
+  ));
+  body.appendChild(el("div", { style: "margin-top:10px" },
+    el("label", {},
+      el("input", { type: "radio", name: "scope", value: "all",
+        onchange: e => { if (e.target.checked) scope = "all"; } }),
+      " All saved replicas (entire mod)",
+    ),
+    el("div", { class: "hint" }, "Use for the final build that ships."),
+  ));
+  modal.appendChild(body);
+  modal.appendChild(el("div", { class: "modal-foot" },
+    el("button", { class: "ghost", onclick: () => { state.exportOpen = false; render(); } }, "Cancel"),
+    el("button", { onclick: () => { state.exportOpen = false; render(); doExport(scope); } }, "Export"),
+  ));
+  backdrop.appendChild(modal);
+  return backdrop;
+}
+
+// ── actions ─────────────────────────────────────────────────────────────────
+
+async function bootstrapPicker() {
+  try {
+    const [sessions, campaigns] = await Promise.all([
+      api("GET", "/sessions"),
+      api("GET", "/campaigns"),
+    ]);
+    state.sessions = sessions;
+    state.campaigns = campaigns;
+  } catch (e) { toast("Failed to load picker: " + e.message, true); }
+  render();
+}
+
+async function openSession(slug) {
+  try {
+    const session = await api("GET", `/sessions/${slug}`);
+    state.session = session;
+    state.activeSlug = slug;
+    state.activeDeck = null;
+    state.vanilla = null;
+    state.replicaUnits = [];
+    state.initialReplica = [];
+    state.initialScope = [...(session.nation_scope || [])];
+    state.replicaDirty = false;
+    state.sessionDirty = false;
+    state.view = "session";
+    await reloadScopedDecks();
+    render();
+  } catch (e) { toast("Open failed: " + e.message, true); }
+}
+
+async function openOrCreateForCampaign(c) {
+  // If a session for this slug already exists, open it; else create new.
+  const existing = state.sessions.find(s => s.slug === c.slug);
+  if (existing) return openSession(existing.slug);
+  try {
+    const created = await api("POST", "/sessions", {
+      campaign: c.campaign,
+      factions: c.factions_from_save,
+      missions: c.missions_seen,
+      slug: c.slug,
+    });
+    state.sessions.unshift(created);
+    return openSession(created.slug);
+  } catch (e) { toast("Create failed: " + e.message, true); }
+}
+
+async function promptNewSession() {
+  const name = prompt("Campaign name?");
+  if (!name) return;
+  const factionStr = prompt("Factions (comma-separated, e.g. US,SOV)") || "";
+  const factions = factionStr.split(",").map(s => s.trim()).filter(Boolean);
+  try {
+    const created = await api("POST", "/sessions", { campaign: name, factions });
+    state.sessions.unshift(created);
+    openSession(created.slug);
+  } catch (e) { toast("Create failed: " + e.message, true); }
+}
+
+async function deleteSession(slug) {
+  if (!confirm("Delete this session? Replicas are kept (they're global).")) return;
+  try {
+    await api("DELETE", `/sessions/${slug}`);
+    state.sessions = state.sessions.filter(s => s.slug !== slug);
+    render();
+  } catch (e) { toast("Delete failed: " + e.message, true); }
+}
+
+function backToPicker() {
+  if (state.replicaDirty && !confirm("Unsaved deck edits will be lost. Continue?")) return;
+  if (state.sessionDirty && !confirm("Unsaved session changes will be lost. Continue?")) return;
+  state.view = "picker";
+  state.session = null;
+  state.activeSlug = null;
+  bootstrapPicker();
+}
+
+function toggleNation(n, on) {
+  const scope = new Set(state.session.nation_scope || []);
+  if (on) scope.add(n); else scope.delete(n);
+  state.session.nation_scope = Array.from(scope);
+  state.sessionDirty = !arraysEq(state.session.nation_scope, state.initialScope);
+  reloadScopedDecks();
+}
+
+const arraysEq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+
+async function reloadScopedDecks() {
+  try {
+    state.decks = await api("GET", `/sessions/${state.activeSlug}/decks`);
+  } catch (e) { toast("Failed to load decks: " + e.message, true); state.decks = []; }
+  render();
 }
 
 async function selectDeck(name) {
-  currentDeck = name;
-  $("currentDeck").textContent = name;
-  await loadDecks();
-  await loadAssignments();
+  if (state.replicaDirty && !confirm("Switch deck and lose unsaved WIF edits?")) return;
+  state.activeDeck = name;
+  state.vanilla = null;
+  state.replicaUnits = [];
+  state.initialReplica = [];
+  state.replicaDirty = false;
+  render();
+  try {
+    const [v, r] = await Promise.all([
+      api("GET", `/decks/${name}/vanilla`),
+      api("GET", `/decks/${name}/replica`),
+    ]);
+    state.vanilla = v;
+    state.replicaUnits = (r.units || []).map(u => ({...u}));
+    state.initialReplica = JSON.parse(JSON.stringify(state.replicaUnits));
+    state.replicaDirty = false;
+  } catch (e) { toast("Failed: " + e.message, true); }
+  render();
 }
 
-async function loadAssignments() {
-  if (!currentDeck) return;
-  const d = await fetch(`/api/deck/${currentDeck}`).then(r => r.json());
-  const list = $("assignList");
-  list.innerHTML = "";
-  for (const a of (d.assignments || [])) {
-    const el = document.createElement("div");
-    el.className = "assignment";
-    el.innerHTML = `
-      <span>${a.unit_id}</span>
-      <span class="xp">
-        <label><input type="checkbox" ${a.xp_levels.includes(1)?"checked":""} data-xp="1"> XP1</label>
-        <label><input type="checkbox" ${a.xp_levels.includes(2)?"checked":""} data-xp="2"> XP2</label>
-        <label><input type="checkbox" ${a.xp_levels.includes(3)?"checked":""} data-xp="3"> XP3</label>
-      </span>
-      <span>ATK<input class="num atk" type="number" value="${a.attack_override ?? ""}" placeholder="auto"></span>
-      <span>DEF<input class="num def" type="number" value="${a.defense_override ?? ""}" placeholder="auto"></span>
-      <span>n<input class="num cnt" type="number" value="${a.count}" min="1"></span>
-      <button>save</button>
-      <button class="del">x</button>
-    `;
-    el.querySelector("button:not(.del)").onclick = () => saveAssignmentRow(el, a);
-    el.querySelector("button.del").onclick = () => removeAssignment(a);
-    list.appendChild(el);
-  }
+function markReplicaDirty() {
+  state.replicaDirty = JSON.stringify(state.replicaUnits) !== JSON.stringify(state.initialReplica);
+  render();
 }
 
-async function assignUnit(u) {
-  if (!currentDeck) { alert("select a deck first"); return; }
-  await fetch("/api/assign", {
-    method:"POST", headers:{"content-type":"application/json"},
-    body: JSON.stringify({deck_name: currentDeck, unit_id: u.name, xp_levels:[1], count:1}),
+async function saveDeckReplica() {
+  if (state.replicaUnits.length === 0) { toast("Use the ✕ on the left to delete the replica instead.", true); return; }
+  try {
+    await api("PUT", `/decks/${state.activeDeck}/replica`, { units: state.replicaUnits });
+    state.initialReplica = JSON.parse(JSON.stringify(state.replicaUnits));
+    state.replicaDirty = false;
+    toast("Replica saved.");
+    await reloadScopedDecks();
+  } catch (e) { toast("Save failed: " + e.message, true); }
+}
+
+async function deleteReplica(deck) {
+  if (!confirm("Delete the WIF replica for this deck? Affects every session that references it.")) return;
+  try {
+    await api("DELETE", `/decks/${deck}/replica`);
+    if (state.activeDeck === deck) {
+      state.replicaUnits = [];
+      state.initialReplica = [];
+      state.replicaDirty = false;
+    }
+    await reloadScopedDecks();
+    toast("Replica deleted.");
+  } catch (e) { toast("Delete failed: " + e.message, true); }
+}
+
+async function doSaveSession() {
+  try {
+    const saved = await api("PATCH", `/sessions/${state.activeSlug}`, {
+      nation_scope: state.session.nation_scope,
+    });
+    state.session = saved;
+    state.initialScope = [...(saved.nation_scope || [])];
+    state.sessionDirty = false;
+    toast("Session saved.");
+    render();
+  } catch (e) { toast("Save session failed: " + e.message, true); }
+}
+
+async function doExtractSession() {
+  try {
+    const blob = await api("POST", `/sessions/${state.activeSlug}/extract`);
+    downloadBlob(blob, `wif_session_${state.activeSlug}.zip`);
+  } catch (e) { toast("Extract failed: " + e.message, true); }
+}
+
+async function doRefreshDecks() {
+  try {
+    await api("POST", "/refresh");
+    await reloadScopedDecks();
+    toast("Deck cache refreshed.");
+  } catch (e) { toast("Refresh failed: " + e.message, true); }
+}
+
+async function doExport(scope) {
+  try {
+    const body = scope === "session"
+      ? { scope: "session", session_slug: state.activeSlug }
+      : { scope: "all" };
+    const blob = await api("POST", "/export", body);
+    downloadBlob(blob, "wif_ag_export.zip");
+  } catch (e) { toast("Export failed: " + e.message, true); }
+}
+
+// ── modal helpers ───────────────────────────────────────────────────────────
+
+let reloadTimer;
+function debounceReload() { clearTimeout(reloadTimer); reloadTimer = setTimeout(reloadModalUnits, 220); }
+
+async function openAddModal() {
+  if (!state.activeDeck) return;
+  state.modalOpen = true;
+  const dn = state.activeDeck.split("_")[3];
+  state.modalFilters = { nation: dn || "", role: "all", q: "" };
+  render();
+  await reloadModalUnits();
+}
+
+async function reloadModalUnits() {
+  try {
+    const p = new URLSearchParams();
+    const f = state.modalFilters;
+    if (f.nation) p.set("nation", f.nation);
+    if (f.role && f.role !== "all") p.set("role", f.role);
+    if (f.q) p.set("q", f.q);
+    state.modalUnits = await api("GET", "/wif_units?" + p);
+  } catch (e) { state.modalUnits = []; toast("Load units failed: " + e.message, true); }
+  render();
+}
+
+function closeModal() { state.modalOpen = false; render(); }
+
+function addUnitToReplica(u) {
+  state.replicaUnits.push({
+    unit_id: u.name, xp: 1, count: 1, attack_override: null, defense_override: null,
   });
-  await loadAssignments();
+  markReplicaDirty();
 }
 
-async function saveAssignmentRow(el, a) {
-  const xps = [...el.querySelectorAll(".xp input:checked")].map(i => Number(i.dataset.xp));
-  const body = {
-    deck_name: a.deck_name,
-    unit_id: a.unit_id,
-    xp_levels: xps.length ? xps : [1],
-    count: Number(el.querySelector(".cnt").value) || 1,
-    attack_override: el.querySelector(".atk").value ? Number(el.querySelector(".atk").value) : null,
-    defense_override: el.querySelector(".def").value ? Number(el.querySelector(".def").value) : null,
-  };
-  await fetch("/api/assign", {
-    method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify(body),
-  });
-  await loadAssignments();
-}
+// ── init ────────────────────────────────────────────────────────────────────
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && state.modalOpen) closeModal();
+  if (e.key === "Escape" && state.exportOpen) { state.exportOpen = false; render(); }
+});
+window.addEventListener("beforeunload", e => {
+  if (state.replicaDirty || state.sessionDirty) { e.preventDefault(); e.returnValue = ""; }
+});
 
-async function removeAssignment(a) {
-  await fetch(`/api/assign/${a.deck_name}/${a.unit_id}`, { method:"DELETE" });
-  await loadAssignments();
-}
-
-$("deckNation").onchange = loadDecks;
-$("unitNation").onchange = loadUnits;
-$("unitRole").onchange = loadUnits;
-$("unitSearch").oninput = loadUnits;
-$("refresh").onclick = async () => {
-  await fetch("/api/refresh", {method:"POST"});
-  await loadDecks();
-};
-$("export").onclick = async () => {
-  const resp = await fetch("/api/export", {method:"POST"});
-  if (!resp.ok) { alert("export failed: " + await resp.text()); return; }
-  const blob = await resp.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = "wif_ag_export.zip"; a.click();
-};
-
-(async () => {
-  const camps = await fetch("/api/campaigns").then(r => r.json()).catch(() => []);
-  if (camps.length) {
-    const c = camps[0];
-    $("campaign").textContent = `Campaign: ${c.campaign || "?"} — ${(c.factions || []).join(" vs ")}`;
-  }
-  await loadDecks();
-  await loadUnits();
-})();
+bootstrapPicker();
 </script>
 </body>
 </html>

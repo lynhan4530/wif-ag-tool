@@ -7,11 +7,12 @@ from wif_ag_tool import config
 from wif_ag_tool.parser.deck_parser import list_decks
 from wif_ag_tool.parser.unit_parser import parse_wif_units
 from wif_ag_tool.pipeline import (
-    load_assignments,
     refresh_deck_cache,
     load_deck_cache,
-    run_export,
+    export_from_replicas,
+    migrate_legacy_assignments,
 )
+from wif_ag_tool import replicas as replicas_mod
 
 USAGE = """\
 usage: py -m wif_ag_tool <command>
@@ -48,9 +49,10 @@ def cmd_refresh() -> int:
 
 
 def cmd_export() -> int:
-    assignments = load_assignments(config.ASSIGNMENTS_FILE)
-    if not assignments:
-        print("no assignments to export — assignments.json is empty")
+    migrate_legacy_assignments()
+    store = replicas_mod.load_replicas()
+    if not any(e.get("saved") for e in store.values()):
+        print("no saved replicas to export")
         return 0
     decks = load_deck_cache(config.CACHE_FILE)
     if not decks:
@@ -58,7 +60,7 @@ def cmd_export() -> int:
         return 2
     units = parse_wif_units(config.WIF_UNITE_DESCRIPTOR)
     output_dir = config.TOOL_ROOT / "output"
-    paths = run_export(assignments, decks, units, output_dir)
+    paths = export_from_replicas(decks, units, output_dir, replicas=store)
     for label, path in paths.items():
         print(f"wrote {label:8s} -> {path}")
     return 0

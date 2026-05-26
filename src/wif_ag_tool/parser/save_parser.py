@@ -8,12 +8,17 @@ _RE_CAMPAIGN = re.compile(r'\{([^}]+)\}')
 
 
 def list_campaigns(saves_dir: Path) -> list[dict]:
-    """Return [{factions, campaign, mission, path}] for every .sav3 in *saves_dir*."""
+    """Return [{factions, campaign, mission, path}] for every .sav3 with a campaign tag.
+
+    Saves without a ``{Campaign}`` brace (quicksaves, etc.) are skipped.
+    """
     if not saves_dir.exists():
         return []
     out: list[dict] = []
     for sav in sorted(saves_dir.glob("*.sav3")):
         info = _parse_filename(sav.stem)
+        if not info["campaign"]:
+            continue
         info["path"] = sav
         out.append(info)
     return out

@@ -6,5 +6,8 @@ build/
 .coverage
 .pytest_cache/
 assignments.json
+assignments.json.migrated
 .deck_cache.json
 output/
+sessions/
+data/

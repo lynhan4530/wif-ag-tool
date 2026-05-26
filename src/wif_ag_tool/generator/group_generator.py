@@ -2,7 +2,11 @@
 from __future__ import annotations
 
 from wif_ag_tool.models import Assignment, DeckState
-from wif_ag_tool.generator.token_gen import make_unique_token
+from wif_ag_tool.generator.token_gen import (
+    make_unique_token,
+    group_token_key,
+    smart_token_key,
+)
 
 
 def generate_combat_group(
@@ -16,7 +20,11 @@ def generate_combat_group(
     Tokens are added to *existing_tokens* in-place so callers can keep accumulating.
     """
     group_name = assignment.combat_group_name()
-    group_token = make_unique_token(assignment.unit_id, assignment.deck_name, existing_tokens)
+    group_token = make_unique_token(
+        group_token_key(assignment.unit_id, assignment.seq),
+        assignment.deck_name,
+        existing_tokens,
+    )
     existing_tokens.add(group_token)
 
     base_index = deck_state.next_index
@@ -29,7 +37,9 @@ def generate_combat_group(
     ]
     for offset, xp in enumerate(assignment.xp_levels):
         smart_token = make_unique_token(
-            f"{assignment.unit_id}_xp{xp}", assignment.deck_name, existing_tokens
+            smart_token_key(assignment.unit_id, xp, assignment.seq),
+            assignment.deck_name,
+            existing_tokens,
         )
         existing_tokens.add(smart_token)
         index = base_index + offset
