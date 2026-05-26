@@ -329,19 +329,22 @@ function getAvailableGroups() {
   return groups;
 }
 
-function getAvailableTransports() {
-  if (!state.activeDeck) return [];
-  const dn = state.activeDeck.split("_")[3];
-  if (!dn) return [];
-  const matchNation = (unation, dnation) => {
-    if (unation === dnation) return true;
-    if (unation === "DDR" && dnation === "RDA") return true;
+function getAvailableTransports(unit_id) {
+  if (!unit_id) return [];
+  const mainUnit = state.unitsIndex[unit_id];
+  if (!mainUnit) return [];
+  const un = mainUnit.nation;
+  if (!un) return [];
+  const matchNation = (unation, targetNation) => {
+    if (unation === targetNation) return true;
+    if (unation === "DDR" && targetNation === "RDA") return true;
+    if (unation === "RDA" && targetNation === "DDR") return true;
     return false;
   };
   const list = [];
   for (const id in state.unitsIndex) {
     const u = state.unitsIndex[id];
-    if (matchNation(u.nation, dn) && ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u))) {
+    if (matchNation(u.nation, un) && ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u))) {
       list.push(u);
     }
   }
@@ -599,7 +602,7 @@ function renderReplicaRow(row, i) {
         getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
           el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
           mkSelect(
-            ["(None)", ...getAvailableTransports().map(t => t.name)],
+            ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
             row.transport_id || "(None)",
             v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
             name => name === "(None)" ? "(None)" : unitDisplay(name)
