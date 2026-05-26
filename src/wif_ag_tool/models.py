@@ -67,6 +67,7 @@ class Assignment:
     seq: int = 0            # disambiguates same unit added more than once to one deck (suffix _1/_2/_3)
     group_name: str = "A"   # combat group within the deck (e.g. "A", "B", "C", "HQ")
     transport_id: str | None = None
+    sub_group: str | None = None
 
     def pack_name(self, xp: int) -> str:
         """Generated StrategicPack descriptor name for a given XP level.

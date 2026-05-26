@@ -138,7 +138,7 @@
   .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
   .replica-list { padding:6px 8px; }
-  .replica-row { display:grid; grid-template-columns: 18px 1fr 90px 80px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
+  .replica-row { display:grid; grid-template-columns: 18px 1fr 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
   .replica-row:hover { background:#1f2228; }
   .replica-row.dragging { opacity:.4; }
   .drag-handle { cursor:grab; color:#666; user-select:none; }
@@ -147,6 +147,16 @@
   .x-btn:hover { background:#2a2222; }
   .field-label { font-size:9px; color:#888; text-transform:uppercase; margin-right:2px; }
   .replica-empty { padding:20px; color:#666; font-size:12px; text-align:center; }
+
+  /* hierarchical replica styles */
+  .replica-group { background:#1c1f25; border:1px solid #2a2d34; margin-bottom:12px; border-radius:4px; overflow:hidden; }
+  .replica-group-head { background:#23262d; padding:8px 12px; font-size:12px; font-weight:bold; color:#9be; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #2a2d34; }
+  .replica-group-body { padding:10px; display:flex; flex-direction:column; gap:10px; }
+  .replica-platoon-card { background:#1f2228; border:1px solid #3a3f4a; border-radius:4px; display:flex; flex-direction:column; }
+  .replica-platoon-head { background:#282d37; padding:6px 10px; font-size:11px; font-weight:bold; color:#ddd; border-bottom:1px solid #3a3f4a; display:flex; justify-content:space-between; align-items:center; }
+  .replica-platoon-units { display:flex; flex-direction:column; padding:4px 0; }
+  .replica-platoon-actions { padding:6px 10px; border-top:1px dashed #3a3f4a; display:flex; gap:8px; align-items:center; }
+  .group-actions { padding:4px 12px; display:flex; gap:8px; justify-content:flex-start; }
 
   /* modal */
   .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:10; }
@@ -221,14 +231,15 @@ const state = {
   decks: [],               // [{name, pack_count, has_replica, ...}]
   activeDeck: null,
   vanilla: null,           // {combat_groups: [...]}
-  replicaUnits: [],        // local editable copy [{unit_id, xp, count, ...}]
+  replicaGroups: [],       // hierarchical: [{name, platoons: [{name, units: [{unit_id, xp, count, ...}]}]}]
   replicaDirty: false,
   sessionDirty: false,
-  initialReplica: [],      // snapshot to detect dirty
+  initialReplica: "",      // JSON snapshot to detect dirty
   initialScope: [],
   modalOpen: false,
   modalUnits: [],
   modalFilters: { nation: "", role: "all", q: "" },
+  modalTarget: null,       // {groupIdx, platoonIdx} — where to add units from modal
   exportOpen: false,
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   deckQuery: "",
@@ -589,7 +600,10 @@ function renderCenterPane() {
     ));
     for (const sg of cg.smart_groups) {
       const sgEl = el("div", { class: "sg" });
-      sgEl.appendChild(el("div", { class: "sg-head" }, sg.is_hq ? "▸ HQ slot" : "▸ slot"));
+      const sgLabel = sg.display_name && sg.display_name !== sg.name
+        ? `▸ ${sg.display_name}`
+        : (sg.is_hq ? "▸ HQ slot" : "▸ slot");
+      sgEl.appendChild(el("div", { class: "sg-head" }, sgLabel));
       for (const p of sg.packs) {
         const row = el("div", { class: "pk" });
         row.appendChild(el("span", { class: "hint" }, `[${p.index}] `));
@@ -615,6 +629,16 @@ function renderCenterPane() {
 }
 
 // ── right pane ──────────────────────────────────────────────────────────────
+function countTotalUnits() {
+  let n = 0;
+  for (const g of state.replicaGroups) {
+    for (const p of g.platoons) {
+      n += p.units.length;
+    }
+  }
+  return n;
+}
+
 function renderRightPane() {
   const pane = el("section", { class: "pane" });
   pane.appendChild(el("h2", {}, state.activeDeck ? `WIF replica — ${deckShort(state.activeDeck)}` : "WIF replica"));
@@ -622,38 +646,142 @@ function renderRightPane() {
     pane.appendChild(el("div", { class: "pad hint" }, "Pick a deck on the left."));
     return pane;
   }
+
+  const totalUnits = countTotalUnits();
   pane.appendChild(el("div", { class: "replica-bar" },
-    el("button", { onclick: openAddModal }, "+ Add unit"),
+    el("button", { onclick: addCombatGroup }, "+ Add Group"),
     el("span", { class: "grow" }),
+    el("span", { class: "hint" }, `${totalUnits} unit(s)`),
     el("button", {
-      disabled: !state.replicaDirty || state.replicaUnits.length === 0,
+      disabled: !state.replicaDirty || totalUnits === 0,
       onclick: saveDeckReplica,
     }, "Save deck"),
   ));
 
   const list = el("div", { class: "replica-list" });
-  if (state.replicaUnits.length === 0) {
-    list.appendChild(el("div", { class: "replica-empty" }, "Empty replica. Click + Add unit to start."));
+  if (state.replicaGroups.length === 0) {
+    list.appendChild(el("div", { class: "replica-empty" }, "Empty replica. Click + Add Group to start building your deck."));
   }
-  state.replicaUnits.forEach((row, i) => list.appendChild(renderReplicaRow(row, i)));
+  state.replicaGroups.forEach((group, gi) => list.appendChild(renderReplicaGroup(group, gi)));
   pane.appendChild(list);
   return pane;
 }
 
-function renderReplicaRow(row, i) {
+function addCombatGroup() {
+  const groups = getAvailableGroups();
+  const used = new Set(state.replicaGroups.map(g => g.name));
+  const available = groups.filter(g => !used.has(g));
+  const name = available.length > 0 ? available[0] : prompt("Group name (e.g. A, B, HQ):");
+  if (!name) return;
+  state.replicaGroups.push({ name, platoons: [] });
+  markReplicaDirty();
+  render();
+}
+
+function addPlatoon(gi) {
+  const name = prompt("Platoon/squadron name (e.g. 1ST RECON PLATOON, HQ, SPT):") || "";
+  if (!name.trim()) return;
+  state.replicaGroups[gi].platoons.push({ name: name.trim(), units: [] });
+  markReplicaDirty();
+  render();
+}
+
+function renderReplicaGroup(group, gi) {
+  const section = el("div", { class: "replica-group" });
+
+  // Group header
+  const groupHead = el("div", { class: "replica-group-head" },
+    el("span", {},
+      `⬥ Combat Group: `,
+      mkSelect(getAvailableGroups(), group.name, v => { group.name = v; markReplicaDirty(); render(); }),
+    ),
+    el("span", { style: "display:flex; gap:6px; align-items:center;" },
+      el("span", { class: "hint" }, `${group.platoons.reduce((s,p) => s + p.units.length, 0)} units`),
+      el("button", { class: "x-btn", title: "Remove group",
+        onclick: () => {
+          if (group.platoons.some(p => p.units.length > 0) && !confirm(`Delete group "${group.name}" and all its units?`)) return;
+          state.replicaGroups.splice(gi, 1);
+          markReplicaDirty();
+          render();
+        } }, "✕"),
+    ),
+  );
+  section.appendChild(groupHead);
+
+  // Group body — platoons
+  const body = el("div", { class: "replica-group-body" });
+  group.platoons.forEach((platoon, pi) => {
+    body.appendChild(renderReplicaPlatoon(platoon, gi, pi));
+  });
+
+  // Add platoon button
+  body.appendChild(el("div", { class: "group-actions" },
+    el("button", { class: "ghost", style: "font-size:11px; padding:3px 8px;",
+      onclick: () => addPlatoon(gi) }, "+ Add Platoon"),
+  ));
+
+  section.appendChild(body);
+  return section;
+}
+
+function renderReplicaPlatoon(platoon, gi, pi) {
+  const card = el("div", { class: "replica-platoon-card" });
+
+  // Platoon header
+  card.appendChild(el("div", { class: "replica-platoon-head" },
+    el("span", {}, `▸ ${platoon.name}`),
+    el("span", { style: "display:flex; gap:6px; align-items:center;" },
+      el("span", { class: "hint" }, `${platoon.units.length} unit(s)`),
+      el("button", { class: "x-btn", style: "font-size:12px;", title: "Remove platoon",
+        onclick: () => {
+          if (platoon.units.length > 0 && !confirm(`Delete platoon "${platoon.name}" and its ${platoon.units.length} unit(s)?`)) return;
+          state.replicaGroups[gi].platoons.splice(pi, 1);
+          markReplicaDirty();
+          render();
+        } }, "✕"),
+    ),
+  ));
+
+  // Unit rows
+  const unitsList = el("div", { class: "replica-platoon-units" });
+  platoon.units.forEach((row, ui) => {
+    unitsList.appendChild(renderReplicaRow(row, gi, pi, ui));
+  });
+  card.appendChild(unitsList);
+
+  // Add unit button
+  card.appendChild(el("div", { class: "replica-platoon-actions" },
+    el("button", { class: "ghost", style: "font-size:11px; padding:2px 8px;",
+      onclick: () => openAddModal(gi, pi) }, "+ Add Unit"),
+  ));
+
+  return card;
+}
+
+function renderReplicaRow(row, gi, pi, ui) {
+  const units = state.replicaGroups[gi].platoons[pi].units;
   const node = el("div", {
     class: "replica-row",
     draggable: "true",
     "data-unit-id": row.unit_id,
-    ondragstart: e => { e.dataTransfer.setData("text/plain", i); node.classList.add("dragging"); },
+    ondragstart: e => { e.dataTransfer.setData("text/plain", `${gi}:${pi}:${ui}`); node.classList.add("dragging"); },
     ondragend: () => node.classList.remove("dragging"),
     ondragover: e => { e.preventDefault(); },
     ondrop: e => {
       e.preventDefault();
-      const from = parseInt(e.dataTransfer.getData("text/plain"), 10);
-      if (Number.isFinite(from) && from !== i) {
-        const moved = state.replicaUnits.splice(from, 1)[0];
-        state.replicaUnits.splice(i, 0, moved);
+      const parts = e.dataTransfer.getData("text/plain").split(":");
+      if (parts.length === 3) {
+        const [fgi, fpi, fui] = parts.map(Number);
+        if (fgi === gi && fpi === pi && fui !== ui) {
+          // Reorder within same platoon
+          const moved = units.splice(fui, 1)[0];
+          units.splice(ui > fui ? ui - 1 : ui, 0, moved);
+        } else if (fgi !== gi || fpi !== pi) {
+          // Move between platoons
+          const srcUnits = state.replicaGroups[fgi].platoons[fpi].units;
+          const moved = srcUnits.splice(fui, 1)[0];
+          units.splice(ui, 0, moved);
+        }
         markReplicaDirty();
         render();
       }
@@ -681,10 +809,6 @@ function renderReplicaRow(row, i) {
         ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
     ),
     el("span", {},
-      el("span", { class: "field-label" }, "GP"),
-      mkSelect(getAvailableGroups(), row.group_name || getAvailableGroups()[0], v => { row.group_name = v; markReplicaDirty(); }),
-    ),
-    el("span", {},
       el("span", { class: "field-label" }, "XP"),
       mkSelect(["1","2","3"], String(row.xp ?? 1), v => { row.xp = parseInt(v, 10); markReplicaDirty(); }),
     ),
@@ -701,7 +825,7 @@ function renderReplicaRow(row, i) {
       mkInput(row.defense_override ?? "", null, v => { row.defense_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto"),
     ),
     el("button", { class: "x-btn", title: "Remove",
-      onclick: () => { state.replicaUnits.splice(i, 1); markReplicaDirty(); render(); } }, "✕"),
+      onclick: () => { units.splice(ui, 1); markReplicaDirty(); render(); } }, "✕"),
   );
   return node;
 }
@@ -795,7 +919,13 @@ const mkInput = (val, min, oninput, placeholder) => el("input", {
 // ── modal: add unit ─────────────────────────────────────────────────────────
 function renderModal() {
   const dn = state.activeDeck ? state.activeDeck.split("_")[3] : "";
-  const added = new Set(state.replicaUnits.map(r => r.unit_id));
+  const allUnitIds = new Set();
+  for (const g of state.replicaGroups) {
+    for (const p of g.platoons) {
+      for (const u of p.units) allUnitIds.add(u.unit_id);
+    }
+  }
+  const added = allUnitIds;
 
   const backdrop = el("div", { class: "backdrop",
     onclick: e => { if (e.target === backdrop) closeModal(); } });
@@ -846,7 +976,8 @@ function renderModal() {
   modal.appendChild(body);
 
   modal.appendChild(el("div", { class: "modal-foot" },
-    el("span", { class: "hint" }, `${state.replicaUnits.length} unit(s) in this replica`),
+    el("span", { class: "hint" }, `${countTotalUnits()} unit(s) in this replica`),
+    state.modalTarget ? el("span", { class: "hint" }, `→ adding to: ${state.replicaGroups[state.modalTarget.groupIdx]?.name || "?"} / ${state.replicaGroups[state.modalTarget.groupIdx]?.platoons[state.modalTarget.platoonIdx]?.name || "?"}`) : null,
     el("span", { class: "spacer" }, ""),
     el("button", { class: "ghost", onclick: closeModal }, "Done"),
   ));
@@ -910,8 +1041,8 @@ async function openSession(slug) {
     state.activeSlug = slug;
     state.activeDeck = null;
     state.vanilla = null;
-    state.replicaUnits = [];
-    state.initialReplica = [];
+    state.replicaGroups = [];
+    state.initialReplica = "[]";
     state.initialScope = [...(session.nation_scope || [])];
     state.replicaDirty = false;
     state.sessionDirty = false;
@@ -961,6 +1092,8 @@ async function deleteSession(slug) {
 function backToPicker() {
   if (state.replicaDirty && !confirm("Unsaved deck edits will be lost. Continue?")) return;
   if (state.sessionDirty && !confirm("Unsaved session changes will be lost. Continue?")) return;
+  state.replicaGroups = [];
+  state.initialReplica = "[]";
   state.view = "picker";
   state.session = null;
   state.activeSlug = null;
@@ -989,8 +1122,8 @@ async function selectDeck(name) {
   if (state.replicaDirty && !confirm("Switch deck and lose unsaved WIF edits?")) return;
   state.activeDeck = name;
   state.vanilla = null;
-  state.replicaUnits = [];
-  state.initialReplica = [];
+  state.replicaGroups = [];
+  state.initialReplica = "[]";
   state.replicaDirty = false;
   render();
   try {
@@ -999,23 +1132,44 @@ async function selectDeck(name) {
       api("GET", `/decks/${name}/replica`),
     ]);
     state.vanilla = v;
-    state.replicaUnits = (r.units || []).map(u => ({...u}));
-    state.initialReplica = JSON.parse(JSON.stringify(state.replicaUnits));
+    // Load hierarchical groups, falling back to empty
+    if (r.groups && r.groups.length > 0) {
+      state.replicaGroups = JSON.parse(JSON.stringify(r.groups));
+    } else if (r.units && r.units.length > 0) {
+      // Legacy flat format — convert on the fly
+      const gmap = {};
+      for (const u of r.units) {
+        const gn = u.group_name || "A";
+        const pn = u.sub_group || "Default";
+        if (!gmap[gn]) gmap[gn] = {};
+        if (!gmap[gn][pn]) gmap[gn][pn] = [];
+        gmap[gn][pn].push({ unit_id: u.unit_id, xp: u.xp || 1, count: u.count || 1,
+          attack_override: u.attack_override || null, defense_override: u.defense_override || null,
+          transport_id: u.transport_id || null });
+      }
+      state.replicaGroups = Object.keys(gmap).sort().map(gn => ({
+        name: gn,
+        platoons: Object.keys(gmap[gn]).sort().map(pn => ({ name: pn, units: gmap[gn][pn] }))
+      }));
+    } else {
+      state.replicaGroups = [];
+    }
+    state.initialReplica = JSON.stringify(state.replicaGroups);
     state.replicaDirty = false;
   } catch (e) { toast("Failed: " + e.message, true); }
   render();
 }
 
 function markReplicaDirty() {
-  state.replicaDirty = JSON.stringify(state.replicaUnits) !== JSON.stringify(state.initialReplica);
+  state.replicaDirty = JSON.stringify(state.replicaGroups) !== state.initialReplica;
   render();
 }
 
 async function saveDeckReplica() {
-  if (state.replicaUnits.length === 0) { toast("Use the ✕ on the left to delete the replica instead.", true); return; }
+  if (countTotalUnits() === 0) { toast("Use the ✕ on the left to delete the replica instead.", true); return; }
   try {
-    await api("PUT", `/decks/${state.activeDeck}/replica`, { units: state.replicaUnits });
-    state.initialReplica = JSON.parse(JSON.stringify(state.replicaUnits));
+    await api("PUT", `/decks/${state.activeDeck}/replica`, { groups: state.replicaGroups });
+    state.initialReplica = JSON.stringify(state.replicaGroups);
     state.replicaDirty = false;
     toast("Replica saved.");
     await reloadScopedDecks();
@@ -1027,8 +1181,8 @@ async function deleteReplica(deck) {
   try {
     await api("DELETE", `/decks/${deck}/replica`);
     if (state.activeDeck === deck) {
-      state.replicaUnits = [];
-      state.initialReplica = [];
+      state.replicaGroups = [];
+      state.initialReplica = "[]";
       state.replicaDirty = false;
     }
     await reloadScopedDecks();
@@ -1079,9 +1233,10 @@ async function doExport(scope) {
 let reloadTimer;
 function debounceReload() { clearTimeout(reloadTimer); reloadTimer = setTimeout(reloadModalUnits, 220); }
 
-async function openAddModal() {
+async function openAddModal(gi, pi) {
   if (!state.activeDeck) return;
   state.modalOpen = true;
+  state.modalTarget = (gi !== undefined && pi !== undefined) ? { groupIdx: gi, platoonIdx: pi } : null;
   const dn = state.activeDeck.split("_")[3];
   state.modalFilters = { nation: dn || "", role: "all", q: "" };
   render();
@@ -1103,10 +1258,14 @@ async function reloadModalUnits() {
 function closeModal() { state.modalOpen = false; render(); }
 
 function addUnitToReplica(u) {
-  const groups = getAvailableGroups();
-  state.replicaUnits.push({
+  const target = state.modalTarget;
+  if (!target || !state.replicaGroups[target.groupIdx] || !state.replicaGroups[target.groupIdx].platoons[target.platoonIdx]) {
+    toast("No platoon selected — add a group and platoon first.", true);
+    return;
+  }
+  state.replicaGroups[target.groupIdx].platoons[target.platoonIdx].units.push({
     unit_id: u.name, xp: 1, count: 1, attack_override: null, defense_override: null,
-    group_name: groups[0] || "A", transport_id: null,
+    transport_id: null,
   });
   markReplicaDirty();
 }
@@ -1235,6 +1394,11 @@ document.addEventListener("keydown", e => {
 });
 window.addEventListener("beforeunload", e => {
   if (state.replicaDirty || state.sessionDirty) { e.preventDefault(); e.returnValue = ""; }
+});
+window.addEventListener("unload", () => {
+  // Clear state to prevent memory leaks
+  state.replicaGroups = [];
+  state.unitsIndex = {};
 });
 
 bootstrapPicker();

@@ -38,6 +38,7 @@ _state: dict[str, Any] = {
     "vanilla_units": {},   # name → WifUnit (vanilla parse)
     "divisions": {},       # cfg_name → Division
     "units_csv": {},       # TOKEN → REFTEXT
+    "platoons_csv": {},    # TOKEN → REFTEXT
 }
 
 
@@ -51,6 +52,7 @@ def set_state(
     vanilla_units: dict[str, WifUnit] | None = None,
     divisions: dict | None = None,
     units_csv: dict[str, str] | None = None,
+    platoons_csv: dict[str, str] | None = None,
 ) -> None:
     if units is not None:        _state["units"] = units
     if decks is not None:        _state["decks"] = decks
@@ -60,6 +62,7 @@ def set_state(
     if vanilla_units is not None: _state["vanilla_units"] = vanilla_units
     if divisions is not None:    _state["divisions"] = divisions
     if units_csv is not None:    _state["units_csv"] = units_csv
+    if platoons_csv is not None: _state["platoons_csv"] = platoons_csv
 
 
 def _deck_label(deck_name: str) -> dict:
@@ -205,13 +208,25 @@ def sessions_decks(slug: str):
         nations = s.get("nation_scope") or []
     scoped = session_mod.scope_decks(nations, decks_map.keys())
     store = replicas_mod.load_replicas()
+    def _count_replica_units(entry: dict) -> int:
+        """Count total units across all groups/platoons in a hierarchical replica."""
+        total = 0
+        # Handle hierarchical format
+        for g in entry.get("groups", []):
+            for p in g.get("platoons", []):
+                total += len(p.get("units", []))
+        # Fallback: old flat format
+        if total == 0:
+            total = len(entry.get("units", []))
+        return total
+
     return jsonify([
         {
             "name": name,
             "pack_count": len(decks_map[name].pack_list),
             "next_index": decks_map[name].next_index,
             "has_replica": bool(store.get(name, {}).get("saved")),
-            "replica_unit_count": len(store.get(name, {}).get("units", [])),
+            "replica_unit_count": _count_replica_units(store.get(name, {})),
             **_deck_label(name),
         }
         for name in scoped
@@ -275,6 +290,7 @@ def decks_vanilla(deck_name: str):
             "smart_groups": [
                 {
                     "name": sg.name,
+                    "display_name": _state.get("platoons_csv", {}).get(sg.name, sg.name),
                     "is_hq": sg.is_hq,
                     "packs": [
                         {**resolve(idx), "count": count}
@@ -308,12 +324,25 @@ def decks_replica_save(deck_name: str):
     if deck_name not in decks_map:
         return jsonify({"error": "deck not found"}), 404
     body = request.get_json(force=True) or {}
-    raw_units = body.get("units") or []
-    if not raw_units:
-        return jsonify({"error": "units list must be non-empty"}), 400
-    # Validate every unit_id exists in the WIF catalogue
+    raw_groups = body.get("groups")
+    raw_units = body.get("units")
+
+    if not raw_groups and not raw_units:
+        return jsonify({"error": "payload must contain non-empty groups or units list"}), 400
+
+    # Gather flat units for validation
+    units_to_validate = []
+    if raw_groups:
+        for g in raw_groups:
+            for p in g.get("platoons", []):
+                for u in p.get("units", []):
+                    units_to_validate.append(u)
+    else:
+        units_to_validate = raw_units
+
+    # Validate unit_id exists in the WIF catalogue
     units = _state["units"]
-    for row in raw_units:
+    for row in units_to_validate:
         try:
             validate_unit_exists(row.get("unit_id", ""), units)
         except UnitNotFoundError as e:
@@ -322,8 +351,12 @@ def decks_replica_save(deck_name: str):
         if tid:
             if tid not in _state["units"] and tid not in _state["vanilla_units"]:
                 return jsonify({"error": f"Transport unit not found: {tid}"}), 400
+
     try:
-        entry = replicas_mod.save_replica(deck_name, raw_units)
+        if raw_groups:
+            entry = replicas_mod.save_replica(deck_name, raw_groups)
+        else:
+            entry = replicas_mod.save_replica(deck_name, raw_units)
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     return jsonify({"deck_name": deck_name, **entry})

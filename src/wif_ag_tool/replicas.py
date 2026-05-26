@@ -39,21 +39,56 @@ def _write(payload: dict, path: Path | None = None) -> None:
 
 def save_replica(
     deck_name: str,
-    units: list[dict],
+    payload: list[dict],
     path: Path | None = None,
 ) -> dict:
-    """Replace the replica for *deck_name* with *units* (ordered list).
+    """Replace the replica for *deck_name* with hierarchical groups.
 
-    Raises ValueError when *units* is empty — empty saves are blocked by design;
-    use ``delete_replica`` to clear instead.
+    Supports both new hierarchical payloads (groups containing platoons containing units)
+    and old flat payloads (list of unit rows), automatically converting the latter.
+    Raises ValueError when payload is empty.
     """
-    if not units:
+    if not payload:
         raise ValueError("cannot save replica with empty units list — use delete_replica")
+
+    # Detect if flat units payload or hierarchical groups payload
+    is_hierarchical = any("platoons" in item for item in payload)
+
+    if is_hierarchical:
+        groups = [_normalize_group(g) for g in payload]
+    else:
+        # Convert flat list to hierarchical groups
+        flat_units = [_normalize_row(u) for u in payload]
+        groups_dict: dict[str, dict[str, list[dict]]] = {}
+        for row in flat_units:
+            gname = row.get("group_name", "A")
+            pl_name = row.get("sub_group") or "none"
+            groups_dict.setdefault(gname, {}).setdefault(pl_name, []).append({
+                "unit_id": row["unit_id"],
+                "xp": row["xp"],
+                "count": row["count"],
+                "attack_override": row.get("attack_override"),
+                "defense_override": row.get("defense_override"),
+                "transport_id": row.get("transport_id"),
+            })
+        groups = []
+        for gname in sorted(groups_dict.keys()):
+            platoons = []
+            for pl_name in sorted(groups_dict[gname].keys()):
+                platoons.append({
+                    "name": pl_name,
+                    "units": groups_dict[gname][pl_name]
+                })
+            groups.append({
+                "name": gname,
+                "platoons": platoons
+            })
+
     store = load_replicas(path)
     store[deck_name] = {
         "saved": True,
         "updated_at": _now(),
-        "units": [_normalize_row(u) for u in units],
+        "groups": groups,
     }
     _write(store, path)
     return store[deck_name]
@@ -68,8 +103,36 @@ def delete_replica(deck_name: str, path: Path | None = None) -> bool:
     return True
 
 
+def _normalize_group(group: dict) -> dict:
+    return {
+        "name": str(group["name"]),
+        "platoons": [_normalize_platoon(p) for p in group.get("platoons", [])],
+    }
+
+
+def _normalize_platoon(platoon: dict) -> dict:
+    return {
+        "name": str(platoon["name"]),
+        "units": [_normalize_unit(u) for u in platoon.get("units", [])],
+    }
+
+
+def _normalize_unit(unit: dict) -> dict:
+    xp = int(unit.get("xp", 1))
+    if xp not in (0, 1, 2, 3):
+        raise ValueError(f"xp must be in 0/1/2/3, got {xp}")
+    return {
+        "unit_id": str(unit["unit_id"]),
+        "xp": xp,
+        "count": int(unit.get("count", 1)),
+        "attack_override": unit.get("attack_override"),
+        "defense_override": unit.get("defense_override"),
+        "transport_id": unit.get("transport_id"),
+    }
+
+
 def _normalize_row(row: dict) -> dict:
-    """Coerce a row dict into canonical shape (defensive against API input)."""
+    """Coerce a flat row dict into canonical shape (for backward compatibility)."""
     xp = int(row.get("xp", 1))
     if xp not in (0, 1, 2, 3):
         raise ValueError(f"xp must be in 0/1/2/3, got {xp}")
@@ -81,7 +144,40 @@ def _normalize_row(row: dict) -> dict:
         "defense_override": row.get("defense_override"),
         "group_name": str(row.get("group_name", "A")),
         "transport_id": row.get("transport_id"),
+        "sub_group": row.get("sub_group"),
     }
+
+
+def migrate_flat_to_hierarchical(entry: dict) -> dict:
+    """If the deck entry has legacy flat 'units', convert it on-the-fly to nested 'groups'."""
+    if "units" in entry and "groups" not in entry:
+        groups_dict: dict[str, dict[str, list[dict]]] = {}
+        for row in entry["units"]:
+            gname = row.get("group_name", "A")
+            pl_name = row.get("sub_group") or "none"
+            groups_dict.setdefault(gname, {}).setdefault(pl_name, []).append({
+                "unit_id": row["unit_id"],
+                "xp": row.get("xp", 1),
+                "count": row.get("count", 1),
+                "attack_override": row.get("attack_override"),
+                "defense_override": row.get("defense_override"),
+                "transport_id": row.get("transport_id"),
+            })
+        groups = []
+        for gname in sorted(groups_dict.keys()):
+            platoons = []
+            for pl_name in sorted(groups_dict[gname].keys()):
+                platoons.append({
+                    "name": pl_name,
+                    "units": groups_dict[gname][pl_name]
+                })
+            groups.append({
+                "name": gname,
+                "platoons": platoons
+            })
+        entry["groups"] = groups
+        del entry["units"]
+    return entry
 
 
 def replicas_to_assignments(
@@ -89,10 +185,6 @@ def replicas_to_assignments(
     scope_decks: Iterable[str] | None = None,
 ) -> list[Assignment]:
     """Flatten replicas into Assignment list for the export pipeline.
-
-    Each row → one Assignment with ``xp_levels=[xp]``. Duplicate (unit_id, xp) pairs
-    in the same deck get an incrementing ``seq`` so their descriptor names disambiguate
-    via the ``_1``/``_2`` suffix on combat-group + pack names.
 
     *scope_decks* — if provided, only replicas for these decks are included.
     """
@@ -105,26 +197,35 @@ def replicas_to_assignments(
             continue
         if scope is not None and deck_name not in scope:
             continue
-        # seq counts occurrences of *unit_id* within this deck so combat-group names
-        # disambiguate when the same unit appears more than once (regardless of XP).
+
+        # Ensure migrated to hierarchical
+        entry = migrate_flat_to_hierarchical(entry)
+
+        idx = 0
         seen: dict[str, int] = {}
-        for idx, row in enumerate(entry.get("units", [])):
-            unit_id = row["unit_id"]
-            xp = int(row["xp"])
-            seq = seen.get(unit_id, 0)
-            seen[unit_id] = seq + 1
-            out.append(Assignment(
-                deck_name=deck_name,
-                unit_id=unit_id,
-                xp_levels=[xp],
-                count=int(row.get("count", 1)),
-                attack_override=row.get("attack_override"),
-                defense_override=row.get("defense_override"),
-                order=idx,
-                seq=seq,
-                group_name=str(row.get("group_name", "A")),
-                transport_id=row.get("transport_id"),
-            ))
+        for g_data in entry.get("groups", []):
+            gname = g_data["name"]
+            for pl_data in g_data.get("platoons", []):
+                pl_name = pl_data["name"]
+                for u_data in pl_data.get("units", []):
+                    unit_id = u_data["unit_id"]
+                    xp = int(u_data.get("xp", 1))
+                    seq = seen.get(unit_id, 0)
+                    seen[unit_id] = seq + 1
+                    out.append(Assignment(
+                        deck_name=deck_name,
+                        unit_id=unit_id,
+                        xp_levels=[xp],
+                        count=int(u_data.get("count", 1)),
+                        attack_override=u_data.get("attack_override"),
+                        defense_override=u_data.get("defense_override"),
+                        order=idx,
+                        seq=seq,
+                        group_name=gname,
+                        transport_id=u_data.get("transport_id"),
+                        sub_group=None if pl_name == "none" else pl_name,
+                    ))
+                    idx += 1
     return out
 
 

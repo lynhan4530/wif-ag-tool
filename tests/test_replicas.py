@@ -14,8 +14,10 @@ def test_save_and_load_replica(tmp_path):
     assert "Descriptor_Deck_pion_US_X_1" in store
     entry = store["Descriptor_Deck_pion_US_X_1"]
     assert entry["saved"] is True
-    assert entry["units"][0]["unit_id"] == "WF_M1A2_SEPV2_Abrams_US"
-    assert entry["units"][0]["xp"] == 1
+    assert entry["groups"][0]["name"] == "A"
+    assert entry["groups"][0]["platoons"][0]["name"] == "none"
+    assert entry["groups"][0]["platoons"][0]["units"][0]["unit_id"] == "WF_M1A2_SEPV2_Abrams_US"
+    assert entry["groups"][0]["platoons"][0]["units"][0]["xp"] == 1
 
 
 def test_empty_units_rejected(tmp_path):

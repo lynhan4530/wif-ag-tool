@@ -42,6 +42,20 @@ def create_app(load_data: bool = True) -> Flask:
                 units_csv.update(load_units_csv(config.WIF_UNITS_CSV))
             except Exception as e:
                 print(f"warn: failed to load WIF units csv: {e}")
+
+        platoons_csv = {}
+        vanilla_platoons_path = config.WARNO_MODS_DIR / "ExampleAssets" / "Localisation" / "PLATOONS.csv"
+        if vanilla_platoons_path.exists():
+            try:
+                platoons_csv.update(load_units_csv(vanilla_platoons_path))
+            except Exception as e:
+                print(f"warn: failed to load vanilla platoons csv: {e}")
+        wif_platoons_path = config.WIF_ROOT / "Localisation" / "A World in Flames" / "PLATOONS.csv"
+        if wif_platoons_path.exists():
+            try:
+                platoons_csv.update(load_units_csv(wif_platoons_path))
+            except Exception as e:
+                print(f"warn: failed to load WIF platoons csv: {e}")
         units = (
             parse_wif_units(config.WIF_UNITE_DESCRIPTOR, units_csv=units_csv)
             if config.WIF_UNITE_DESCRIPTOR.exists()
@@ -99,6 +113,7 @@ def create_app(load_data: bool = True) -> Flask:
     else:
         units, decks, icons, packs, combat_groups = {}, {}, {}, {}, {}
         units_csv, vanilla_units, divisions = {}, {}, {}
+        platoons_csv = {}
 
     # Ensure sessions/data dirs exist so the API can write immediately
     config.SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
@@ -108,6 +123,7 @@ def create_app(load_data: bool = True) -> Flask:
         units=units, decks=decks, icons=icons,
         packs=packs, combat_groups=combat_groups,
         vanilla_units=vanilla_units, divisions=divisions, units_csv=units_csv,
+        platoons_csv=platoons_csv,
     )
 
     app.register_blueprint(api_bp, url_prefix="/api")

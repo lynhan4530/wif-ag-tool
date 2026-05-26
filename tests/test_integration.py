@@ -139,9 +139,11 @@ def test_migrate_legacy_assignments(tmp_path):
     assert n == 1
     store = rmod.load_replicas(target)
     entry = store[DECK_NAME]
-    assert len(entry["units"]) == 2          # XP1 + XP2 each become a row
-    assert entry["units"][0]["xp"] == 1
-    assert entry["units"][1]["xp"] == 2
+    # Now hierarchical
+    units = entry["groups"][0]["platoons"][0]["units"]
+    assert len(units) == 2          # XP1 + XP2 each become a row
+    assert units[0]["xp"] == 1
+    assert units[1]["xp"] == 2
     # legacy renamed
     assert not legacy.exists()
     assert (tmp_path / "assignments.json.migrated").exists()
