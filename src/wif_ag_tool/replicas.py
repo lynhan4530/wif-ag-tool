@@ -80,6 +80,7 @@ def _normalize_row(row: dict) -> dict:
         "attack_override": row.get("attack_override"),
         "defense_override": row.get("defense_override"),
         "group_name": str(row.get("group_name", "A")),
+        "transport_id": row.get("transport_id"),
     }
 
 
@@ -122,6 +123,7 @@ def replicas_to_assignments(
                 order=idx,
                 seq=seq,
                 group_name=str(row.get("group_name", "A")),
+                transport_id=row.get("transport_id"),
             ))
     return out
 

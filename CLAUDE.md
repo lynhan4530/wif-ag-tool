@@ -927,5 +927,10 @@ The generator always uses this fresh value — index drift is impossible.
   - Implemented automatic sorting and grouping in [pipeline.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/pipeline.py) and [localisation.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/generator/localisation.py) to prevent NDF/CSV sequence mismatch.
   - Added UI grid support for the group dropdown and dynamically populated valid group choices in [ui.html](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/static/ui.html).
   - Prettified raw NDF combat group descriptors in the UI to display clean, user-friendly names (e.g. `Descriptor_CombatGroup_pion_US_22TFS_A_22nd_TFS` -> `A-22ND TFS` and `US_22TFS_WIF_A` -> `WIF — A`).
+- **Infantry Transport Vehicle Support**:
+  - Added `transport_id` to the `Assignment` model in [models.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/models.py) and updated the replica serialization/normalization logic in [replicas.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/replicas.py).
+  - Modified [pipeline.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/pipeline.py) and [api.py](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/api.py) to pass and validate transport identifiers, ensuring they exist in the WIF or vanilla unit databases before saving.
+  - Implemented `getAvailableTransports()` in [ui.html](file:///g:/Project/wif-ag-tool/src/wif_ag_tool/web/static/ui.html) to filter candidate transport vehicles (IFVs, APCs, supply vehicles, helicopters) of the same nation.
+  - Added a transport select dropdown (`TRSP`) underneath infantry unit names in the replica row grid.
 
 *Credits: Designed & developed with ❤️ by **Antigravity**, your agentic AI coding companion from Google DeepMind's Advanced Agentic Coding team.*

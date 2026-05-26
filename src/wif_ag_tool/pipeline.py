@@ -96,7 +96,7 @@ def run_export(
             
             # Generate packs for all assignments in this group
             for a in group_assignments:
-                packs_blocks.append(generate_packs_for_assignment(a))
+                packs_blocks.append(generate_packs_for_assignment(a, transport_id=a.transport_id))
                 
             # Generate the single combat group for this group
             combat_group_block = generate_grouped_combat_group(

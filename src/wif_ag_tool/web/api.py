@@ -313,6 +313,10 @@ def decks_replica_save(deck_name: str):
             validate_unit_exists(row.get("unit_id", ""), units)
         except UnitNotFoundError as e:
             return jsonify({"error": str(e)}), 400
+        tid = row.get("transport_id")
+        if tid:
+            if tid not in _state["units"] and tid not in _state["vanilla_units"]:
+                return jsonify({"error": f"Transport unit not found: {tid}"}), 400
     try:
         entry = replicas_mod.save_replica(deck_name, raw_units)
     except ValueError as e:

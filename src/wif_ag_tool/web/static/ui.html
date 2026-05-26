@@ -329,6 +329,21 @@ function getAvailableGroups() {
   return groups;
 }
 
+function getAvailableTransports() {
+  if (!state.activeDeck) return [];
+  const dn = state.activeDeck.split("_")[3];
+  if (!dn) return [];
+  const list = [];
+  for (const id in state.unitsIndex) {
+    const u = state.unitsIndex[id];
+    if (u.nation === dn && ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u))) {
+      list.push(u);
+    }
+  }
+  list.sort((a, b) => (a.display_name || a.name).localeCompare(b.display_name || b.name));
+  return list;
+}
+
 // Render a unit-bearing line with thumbnail + display name. Adds data-unit-id so the
 // global tooltip handler can find it. Extra is appended after the name (e.g. count, xp).
 function unitLine(unit_id, extras) {
@@ -574,7 +589,18 @@ function renderReplicaRow(row, i) {
         el("img", { class: "unit-thumb", src: `/api/unit_icon/${row.unit_id}`,
           loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
       ),
-      el("span", { class: "name" }, unitDisplay(row.unit_id)),
+      el("span", { style: "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;" },
+        el("span", { class: "name" }, unitDisplay(row.unit_id)),
+        getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
+          el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
+          mkSelect(
+            ["(None)", ...getAvailableTransports().map(t => t.name)],
+            row.transport_id || "(None)",
+            v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
+            name => name === "(None)" ? "(None)" : unitDisplay(name)
+          )
+        ) : null
+      ),
       !unitResolved(row.unit_id)
         ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
     ),
@@ -604,10 +630,11 @@ function renderReplicaRow(row, i) {
   return node;
 }
 
-const mkSelect = (opts, val, onchange) => {
+const mkSelect = (opts, val, onchange, labelFn) => {
   const s = el("select", { onchange: e => onchange(e.target.value) });
   for (const o of opts) {
-    const opt = el("option", { value: o }, o);
+    const label = labelFn ? labelFn(o) : o;
+    const opt = el("option", { value: o }, label);
     if (o === val) opt.selected = true;
     s.appendChild(opt);
   }
@@ -934,7 +961,7 @@ function addUnitToReplica(u) {
   const groups = getAvailableGroups();
   state.replicaUnits.push({
     unit_id: u.name, xp: 1, count: 1, attack_override: null, defense_override: null,
-    group_name: groups[0] || "A",
+    group_name: groups[0] || "A", transport_id: null,
   });
   markReplicaDirty();
 }

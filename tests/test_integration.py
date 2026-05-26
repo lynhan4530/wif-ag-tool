@@ -95,7 +95,7 @@ def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_d
     units, decks = _build(fixture_units_path, fixture_deck_path, [])
     replicas_file = tmp_path / "wif_replicas.json"
     rmod.save_replica(DECK_NAME, [
-        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1},
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 1, "transport_id": "WF_M2A4_Bradley_US"},
         {"unit_id": "WF_M2A4_Bradley_US", "xp": 2, "count": 1},
     ], path=replicas_file)
     store = rmod.load_replicas(replicas_file)
@@ -103,6 +103,7 @@ def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_d
     packs_text = paths["packs"].read_text(encoding="utf-8")
     groups_text = paths["groups"].read_text(encoding="utf-8")
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
+    assert "Transport = $/GFX/Unit/Descriptor_Unit_WF_M2A4_Bradley_US" in packs_text
     assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_2" in packs_text
     # First WIF pack appended at next_index=5 of sample deck
     assert "(5,1)" in groups_text
