@@ -721,7 +721,12 @@ function getVanillaPlatoonNames() {
   if (state.vanilla && state.vanilla.combat_groups) {
     for (const cg of state.vanilla.combat_groups) {
       for (const sg of cg.smart_groups) {
-        const dn = sg.display_name || sg.name;
+        // If display_name is missing or is a raw NDF hash (10 uppercase chars), use a friendly fallback label
+        const isRawToken = sg.name && /^[A-Z]{10}$/.test(sg.name);
+        const dn = (sg.display_name && sg.display_name !== sg.name && !isRawToken)
+          ? sg.display_name
+          : (sg.is_hq ? "HQ slot" : "Platoon slot");
+
         if (dn && !seen.has(dn)) {
           seen.add(dn);
           names.push({ name: dn, cgName: getFriendlyCGName(cg.name), isHq: sg.is_hq });
