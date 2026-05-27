@@ -416,6 +416,58 @@ function getAvailableTransports(unit_id) {
   return list;
 }
 
+function renderSpecialtyBadges(specialties) {
+  if (!specialties || !specialties.length) return null;
+  const container = el("span", { style: "display: inline-flex; gap: 4px; margin-left: 6px; align-items: center; vertical-align: middle;" });
+  for (const s of specialties) {
+    let bg = "#444";
+    let color = "#fff";
+    let label = s;
+
+    if (s.toLowerCase() === "recon") {
+      bg = "#1e4620";
+      color = "#4ade80";
+      label = "RECON";
+    } else if (s.toLowerCase() === "infiltration") {
+      bg = "#5c3d2e";
+      color = "#fcd34d";
+      label = "FWD";
+    } else if (s.toLowerCase() === "leader" || s.toLowerCase() === "command") {
+      bg = "#1e3a8a";
+      color = "#60a5fa";
+      label = "CMD";
+    } else if (s.toLowerCase() === "paratrooper" || s.toLowerCase() === "airborne") {
+      bg = "#4c1d95";
+      color = "#c084fc";
+      label = "ABN";
+    } else if (s.toLowerCase() === "amphibious") {
+      bg = "#134e5e";
+      color = "#2dd4bf";
+      label = "AMPH";
+    } else if (s.toLowerCase() === "resolute") {
+      bg = "#7c2d12";
+      color = "#fb923c";
+      label = "RES";
+    } else if (s.toLowerCase() === "shock") {
+      bg = "#7f1d1d";
+      color = "#f87171";
+      label = "SHK";
+    } else if (s.toLowerCase() === "mp") {
+      bg = "#27272a";
+      color = "#a1a1aa";
+      label = "MP";
+    } else {
+      label = s.toUpperCase();
+    }
+
+    container.appendChild(el("span", {
+      title: s,
+      style: `background: ${bg}; color: ${color}; font-size: 8px; font-weight: bold; padding: 1px 4px; border-radius: 3px; letter-spacing: 0.05em; line-height: 1; display: inline-block;`
+    }, label));
+  }
+  return container;
+}
+
 // Render a unit-bearing line with thumbnail + display name. Adds data-unit-id so the
 // global tooltip handler can find it. Extra is appended after the name (e.g. count, xp).
 function unitLine(unit_id, extras) {
@@ -433,6 +485,7 @@ function unitLine(unit_id, extras) {
     el("span", { class: "name" }, unitDisplay(unit_id)),
     unit_id && !unitResolved(unit_id)
       ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+    u ? renderSpecialtyBadges(u.specialties) : null,
     ...(extras || []),
   );
   return node;
@@ -967,7 +1020,10 @@ function renderReplicaRow(row, gi, pi, ui) {
           loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
       ),
       el("span", { style: "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;" },
-        el("span", { class: "name" }, unitDisplay(row.unit_id)),
+        el("span", { class: "name", style: "display: flex; align-items: center; flex-wrap: wrap;" },
+          unitDisplay(row.unit_id),
+          renderSpecialtyBadges(state.unitsIndex[row.unit_id]?.specialties)
+        ),
         getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
           el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
           mkSearchableSelect(
@@ -1136,6 +1192,7 @@ function renderModal() {
       el("span", {},
         u.display_name || u.name,
         u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+        renderSpecialtyBadges(u.specialties),
       ),
       el("span", { class: "hint" }, `A:${u.attack}`),
       el("span", { class: "hint" }, `D:${u.defense}`),
