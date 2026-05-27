@@ -142,6 +142,14 @@
   .pk { font-size:11px; color:#ccc; margin-left:14px; }
   .pk .x { color:#9bd; }
 
+  /* tree toggle pill (collapse-all / expand-all) */
+  .tree-toggle { display:inline-flex; border:1px solid #2f3540; border-radius:6px; overflow:hidden; background:#181b20; margin-left:4px; }
+  .tree-toggle button { background:transparent; border:0; color:#8ea; padding:3px 9px; font-size:12px; line-height:1; cursor:pointer; display:inline-flex; align-items:center; gap:5px; }
+  .tree-toggle button + button { border-left:1px solid #2f3540; }
+  .tree-toggle button:hover { background:#222831; color:#cfd; }
+  .tree-toggle .tt-icon { font-size:10px; opacity:.8; }
+  .tree-toggle .tt-label { font-size:11px; color:#bcd; }
+
   /* right: replica */
   .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
@@ -823,8 +831,12 @@ function renderCenterPane() {
     return pane;
   }
   pane.appendChild(el("div", { class: "replica-bar" },
-    el("button", { class: "ghost", title: "Collapse all", onclick: vanillaCollapseAll }, "⊟ all"),
-    el("button", { class: "ghost", title: "Expand all", onclick: vanillaExpandAll }, "⊞ all"),
+    el("span", { class: "tree-toggle" },
+      el("button", { title: "Collapse all", onclick: vanillaCollapseAll },
+        el("span", { class: "tt-icon" }, "▸"), el("span", { class: "tt-label" }, "Collapse")),
+      el("button", { title: "Expand all", onclick: vanillaExpandAll },
+        el("span", { class: "tt-icon" }, "▾"), el("span", { class: "tt-label" }, "Expand")),
+    ),
   ));
   for (const cg of v.combat_groups) {
     const cgKey = `${state.activeSlug}::${cg.name}`;
@@ -927,8 +939,12 @@ function renderRightPane() {
   const totalUnits = countTotalUnits();
   pane.appendChild(el("div", { class: "replica-bar" },
     el("button", { onclick: addCombatGroup }, "+ Add Group"),
-    el("button", { class: "ghost", title: "Collapse all", onclick: replicaCollapseAll }, "⊟ all"),
-    el("button", { class: "ghost", title: "Expand all", onclick: replicaExpandAll }, "⊞ all"),
+    el("span", { class: "tree-toggle" },
+      el("button", { title: "Collapse all", onclick: replicaCollapseAll },
+        el("span", { class: "tt-icon" }, "▸"), el("span", { class: "tt-label" }, "Collapse")),
+      el("button", { title: "Expand all", onclick: replicaExpandAll },
+        el("span", { class: "tt-icon" }, "▾"), el("span", { class: "tt-label" }, "Expand")),
+    ),
     el("span", { class: "grow" }),
     el("span", { class: "hint" }, `${totalUnits} unit(s)`),
     el("button", {
