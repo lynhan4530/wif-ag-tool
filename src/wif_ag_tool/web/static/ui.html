@@ -260,6 +260,8 @@ const state = {
   buildStatus: "",
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   deckQuery: "",
+  vanillaCollapsedGroups: new Set(),
+  vanillaCollapsedSmartGroups: new Set(),
 };
 
 const $ = sel => document.querySelector(sel);
@@ -616,35 +618,74 @@ function renderCenterPane() {
     return pane;
   }
   for (const cg of v.combat_groups) {
+    const cgKey = `${state.activeSlug}::${cg.name}`;
+    const cgCollapsed = state.vanillaCollapsedGroups.has(cgKey);
+
     const block = el("div", { class: "cg" });
-    block.appendChild(el("div", { class: "cg-head" },
-      getFriendlyCGName(cg.name),
-      cg.smart_groups.some(s => s.is_hq) ? el("span", { class: "hq" }, "HQ") : null,
-    ));
-    for (const sg of cg.smart_groups) {
-      const sgEl = el("div", { class: "sg" });
-      const sgLabel = sg.display_name && sg.display_name !== sg.name
-        ? `▸ ${sg.display_name}`
-        : (sg.is_hq ? "▸ HQ slot" : "▸ slot");
-      sgEl.appendChild(el("div", { class: "sg-head" }, sgLabel));
-      for (const p of sg.packs) {
-        const row = el("div", { class: "pk" });
-        row.appendChild(el("span", { class: "hint" }, `[${p.index}] `));
-        if (p.unit) {
-          row.appendChild(unitLine(p.unit, [
-            el("span", { class: "x" }, ` ×${p.count}`),
-            p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
-          ]));
-          if (p.transport) {
-            row.appendChild(el("span", { class: "hint" }, " ← "));
-            row.appendChild(unitLine(p.transport, []));
-          }
+    const cgHead = el("div", {
+      class: "cg-head",
+      style: "cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px;",
+      onclick: () => {
+        if (cgCollapsed) {
+          state.vanillaCollapsedGroups.delete(cgKey);
         } else {
-          row.appendChild(el("span", {}, "(pack missing)"));
+          state.vanillaCollapsedGroups.add(cgKey);
         }
-        sgEl.appendChild(row);
+        render();
       }
-      block.appendChild(sgEl);
+    },
+      el("span", { style: "font-size: 8px; color: #778; width: 10px; display: inline-block;" }, cgCollapsed ? "▶" : "▼"),
+      el("span", {}, getFriendlyCGName(cg.name)),
+      cg.smart_groups.some(s => s.is_hq) ? el("span", { class: "hq" }, "HQ") : null,
+    );
+    block.appendChild(cgHead);
+
+    if (!cgCollapsed) {
+      for (const sg of cg.smart_groups) {
+        const sgKey = `${state.activeSlug}::${cg.name}::${sg.name}`;
+        const sgCollapsed = state.vanillaCollapsedSmartGroups.has(sgKey);
+
+        const sgEl = el("div", { class: "sg" });
+        const expandIcon = sgCollapsed ? "▶ " : "▼ ";
+        const sgLabel = sg.display_name && sg.display_name !== sg.name
+          ? `${expandIcon}${sg.display_name}`
+          : (sg.is_hq ? `${expandIcon}HQ slot` : `${expandIcon}slot`);
+
+        const sgHead = el("div", {
+          class: "sg-head",
+          style: "cursor: pointer; user-select: none;",
+          onclick: () => {
+            if (sgCollapsed) {
+              state.vanillaCollapsedSmartGroups.delete(sgKey);
+            } else {
+              state.vanillaCollapsedSmartGroups.add(sgKey);
+            }
+            render();
+          }
+        }, sgLabel);
+        sgEl.appendChild(sgHead);
+
+        if (!sgCollapsed) {
+          for (const p of sg.packs) {
+            const row = el("div", { class: "pk" });
+            row.appendChild(el("span", { class: "hint" }, `[${p.index}] `));
+            if (p.unit) {
+              row.appendChild(unitLine(p.unit, [
+                el("span", { class: "x" }, ` ×${p.count}`),
+                p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
+              ]));
+              if (p.transport) {
+                row.appendChild(el("span", { class: "hint" }, " ← "));
+                row.appendChild(unitLine(p.transport, []));
+              }
+            } else {
+              row.appendChild(el("span", {}, "(pack missing)"));
+            }
+            sgEl.appendChild(row);
+          }
+        }
+        block.appendChild(sgEl);
+      }
     }
     pane.appendChild(block);
   }
@@ -1284,6 +1325,8 @@ async function openSession(slug) {
     state.replicaDirty = false;
     state.sessionDirty = false;
     state.view = "session";
+    state.vanillaCollapsedGroups.clear();
+    state.vanillaCollapsedSmartGroups.clear();
     await reloadScopedDecks();
     render();
   } catch (e) { toast("Open failed: " + e.message, true); }
@@ -1334,6 +1377,8 @@ function backToPicker() {
   state.view = "picker";
   state.session = null;
   state.activeSlug = null;
+  state.vanillaCollapsedGroups.clear();
+  state.vanillaCollapsedSmartGroups.clear();
   bootstrapPicker();
 }
 
