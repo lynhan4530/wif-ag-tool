@@ -90,7 +90,7 @@
     left:0;
     z-index:1;
   }
-  .unit-line { display:flex; gap:6px; align-items:center; }
+  .unit-line { display:inline-flex; gap:6px; align-items:center; }
   .unit-line .name { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 
   /* fallback role SVGs */
@@ -138,7 +138,7 @@
   .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
   .replica-list { padding:6px 8px; }
-  .replica-row { display:grid; grid-template-columns: 18px 1fr 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
+  .replica-row { display:grid; grid-template-columns: 18px 1fr 70px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
   .replica-row:hover { background:#1f2228; }
   .replica-row.dragging { opacity:.4; }
   .drag-handle { cursor:grab; color:#666; user-select:none; }
@@ -764,8 +764,12 @@ function renderCenterPane() {
                 p.xp ? el("span", { class: "hint" }, ` XP${p.xp}`) : null,
               ]));
               if (p.transport) {
-                row.appendChild(el("span", { class: "hint" }, " ← "));
-                row.appendChild(unitLine(p.transport, []));
+                const trspRow = el("div", {
+                  style: "margin-left: 20px; margin-top: 2.5px; font-size: 10px; color: #8aa; display: flex; align-items: center; gap: 4px;"
+                });
+                trspRow.appendChild(el("span", { style: "color: #555; font-family: monospace;" }, "└─ carried in:"));
+                trspRow.appendChild(unitLine(p.transport, []));
+                row.appendChild(trspRow);
               }
             } else {
               row.appendChild(el("span", {}, "(pack missing)"));
