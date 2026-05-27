@@ -568,6 +568,30 @@ function unitLine(unit_id, extras) {
   return node;
 }
 
+// ── collapse-state persistence ──────────────────────────────────────────────
+const COLLAPSE_KEY = "wif_ag_collapse_v1";
+function loadCollapseState() {
+  try {
+    const raw = localStorage.getItem(COLLAPSE_KEY);
+    if (!raw) return;
+    const d = JSON.parse(raw);
+    if (Array.isArray(d.vg)) state.vanillaCollapsedGroups = new Set(d.vg);
+    if (Array.isArray(d.vsg)) state.vanillaCollapsedSmartGroups = new Set(d.vsg);
+    if (Array.isArray(d.rg)) state.replicaCollapsedGroups = new Set(d.rg);
+    if (Array.isArray(d.rp)) state.replicaCollapsedPlatoons = new Set(d.rp);
+  } catch (e) { /* ignore */ }
+}
+function saveCollapseState() {
+  try {
+    localStorage.setItem(COLLAPSE_KEY, JSON.stringify({
+      vg: [...state.vanillaCollapsedGroups],
+      vsg: [...state.vanillaCollapsedSmartGroups],
+      rg: [...state.replicaCollapsedGroups],
+      rp: [...state.replicaCollapsedPlatoons],
+    }));
+  } catch (e) { /* ignore */ }
+}
+
 // ── render ───────────────────────────────────────────────────────────────────
 function render() {
   const root = $("#root");
@@ -593,6 +617,7 @@ function render() {
       }
     }
   }
+  saveCollapseState();
 }
 
 function renderPicker() {
@@ -2276,6 +2301,7 @@ window.addEventListener("unload", () => {
   state.unitsIndex = {};
 });
 
+loadCollapseState();
 bootstrapPicker();
 loadUnitsIndex();
 </script>
