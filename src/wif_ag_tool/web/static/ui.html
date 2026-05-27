@@ -406,6 +406,16 @@ function getAvailableGroups() {
   return groups;
 }
 
+function needsTransport(u) {
+  if (!u) return false;
+  const norm = getNormalizedRole(u);
+  if (norm === "infantry" || norm === "engineer") return true;
+  const raw = (u.role || "").toLowerCase();
+  // Foot AT/AA/support teams that don't normalize to infantry — Javelin, MANPADS, ATGM teams, mortar/HMG/sniper teams, etc.
+  if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|sniper|mortar_inf|mortar_team|spotter|commandos|sapper|rifles|squad|team/.test(raw)) return true;
+  return false;
+}
+
 function getAvailableTransports(unit_id) {
   if (!unit_id) return [];
   const mainUnit = state.unitsIndex[unit_id];
@@ -1287,7 +1297,7 @@ function renderReplicaRow(row, gi, pi, ui) {
       mkControlGroup("n", mkInput(row.count ?? 1, 1, v => { row.count = parseInt(v, 10) || 1; markReplicaDirty(); })),
       mkControlGroup("ATK", mkInput(row.attack_override ?? "", null, v => { row.attack_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto")),
       mkControlGroup("DEF", mkInput(row.defense_override ?? "", null, v => { row.defense_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto")),
-      role === "infantry" ? mkControlGroup("Transport", mkSearchableSelect(
+      needsTransport(uInfo) ? mkControlGroup("Transport", mkSearchableSelect(
         ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
         row.transport_id || "(None)",
         v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
