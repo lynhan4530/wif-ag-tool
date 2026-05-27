@@ -278,27 +278,97 @@ def decks_vanilla(deck_name: str):
             "xp": getattr(pk, "xp", None) if pk else None,
         }
 
+    def _ordinal(n: int) -> str:
+        if 11 <= (n % 100) <= 13:
+            return f"{n}TH"
+        return f"{n}" + {1: 'ST', 2: 'ND', 3: 'RD'}.get(n % 10, 'TH')
+
     cg_tree: list[dict] = []
     for cg_ref in deck.combat_group_list:
         cg = combat_groups.get(cg_ref)
         if cg is None:
             cg_tree.append({"name": cg_ref, "token": "", "smart_groups": [], "missing": True})
             continue
+
+        resolved_sgs = []
+        for sg in cg.smart_groups:
+            resolved_sgs.append({
+                "name": sg.name,
+                "is_hq": sg.is_hq,
+                "packs": [
+                    {**resolve(idx), "count": count}
+                    for (idx, count) in sg.pack_indices
+                ],
+            })
+
+        role_counters: dict[str, int] = {}
+        for sg_res in resolved_sgs:
+            sg_name = sg_res["name"]
+            csv_dn = _state.get("platoons_csv", {}).get(sg_name)
+
+            # If csv_dn is not empty and is not the raw token name, use it!
+            # Raw tokens are exactly 10 uppercase characters.
+            is_raw_token = sg_name and len(sg_name) == 10 and sg_name.isupper() and sg_name.isalpha()
+            if csv_dn and csv_dn != sg_name and not is_raw_token:
+                sg_res["display_name"] = csv_dn
+                continue
+
+            # Otherwise, use the heuristic!
+            if sg_res["is_hq"]:
+                if any(x in cg.name for x in ["ACR", "Cav", "Cavalry"]):
+                    sg_res["display_name"] = "TROOP HQ"
+                elif any(x in cg.name for x in ["Art", "Artillerie", "Bty", "Bataillon_Artillerie"]):
+                    sg_res["display_name"] = "BATTERY HQ"
+                else:
+                    sg_res["display_name"] = "COMPANY HQ"
+            else:
+                roles = []
+                for p in sg_res["packs"]:
+                    unit_short = p.get("unit")
+                    if unit_short:
+                        unit_obj = _lookup_unit(unit_short)
+                        if unit_obj:
+                            r = unit_obj.role
+                            roles.append(r)
+                            if r == "unknown" or not r:
+                                u_lower = unit_short.lower()
+                                if "mortar" in u_lower or "supply" in u_lower or "fob" in u_lower or "hemtt" in u_lower or "ural" in u_lower or "man" in u_lower:
+                                    roles.append("support")
+
+                # Determine primary role
+                if "recon" in roles:
+                    primary = "RECON"
+                elif "tank" in roles or any("abrams" in p.get("unit", "").lower() or "t80" in p.get("unit", "").lower() or "leopard" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "TANK"
+                elif "support" in roles or any("mortar" in p.get("unit", "").lower() or "supply" in p.get("unit", "").lower() or "fob" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "SUPPORT"
+                elif "infantry" in roles or any("inf" in p.get("unit", "").lower() or "rifle" in p.get("unit", "").lower() or "chasseur" in p.get("unit", "").lower() or "dismount" in p.get("unit", "").lower() or "airborne" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "RIFLE"
+                elif "heli" in roles:
+                    primary = "HELI"
+                else:
+                    primary = "PLATOON"
+
+                role_counters[primary] = role_counters.get(primary, 0) + 1
+                count = role_counters[primary]
+
+                if primary == "RECON":
+                    sg_res["display_name"] = f"{_ordinal(count)} RECON PLATOON"
+                elif primary == "TANK":
+                    sg_res["display_name"] = f"{_ordinal(count)} TANK PLATOON"
+                elif primary == "RIFLE":
+                    sg_res["display_name"] = f"{_ordinal(count)} RIFLE PLATOON"
+                elif primary == "SUPPORT":
+                    sg_res["display_name"] = "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
+                elif primary == "HELI":
+                    sg_res["display_name"] = f"{_ordinal(count)} HELI PLATOON"
+                else:
+                    sg_res["display_name"] = f"{_ordinal(count)} PLATOON"
+
         cg_tree.append({
             "name": cg.name,
             "token": cg.token,
-            "smart_groups": [
-                {
-                    "name": sg.name,
-                    "display_name": _state.get("platoons_csv", {}).get(sg.name, sg.name),
-                    "is_hq": sg.is_hq,
-                    "packs": [
-                        {**resolve(idx), "count": count}
-                        for (idx, count) in sg.pack_indices
-                    ],
-                }
-                for sg in cg.smart_groups
-            ],
+            "smart_groups": resolved_sgs,
         })
     return jsonify({
         "name": deck.name,
