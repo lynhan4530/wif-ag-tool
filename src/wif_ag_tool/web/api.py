@@ -240,34 +240,43 @@ def sessions_export_direct(slug: str):
         return jsonify({"error": "No saved replicas in scope to export. Create a replica deck first."}), 400
 
     decks_dir = export_path / "Generated" / "Gameplay" / "Decks"
-    base_decks_ndf = decks_dir / "StrategicDecks.ndf"
+    base_decks_ndf  = decks_dir / "StrategicDecks.ndf"
+    base_packs_ndf  = decks_dir / "StrategicPacks.ndf"
+    base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
     direct_paths = {
-        "packs": decks_dir / "StrategicPacks_additions.ndf",
-        "groups": decks_dir / "StrategicCombatGroups_additions.ndf",
-        "decks": base_decks_ndf,
         "summary": decks_dir / "StrategicDecks_patch_summary.txt",
         "csv": export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
     }
 
     for p in direct_paths.values():
         p.parent.mkdir(parents=True, exist_ok=True)
+    decks_dir.mkdir(parents=True, exist_ok=True)
 
-    # Stale sidecar from older versions — used to ship as StrategicDecks_patch.ndf
-    # but it was plain-text instructions, not NDF, and the compiler choked on it.
-    stale_patch = decks_dir / "StrategicDecks_patch.ndf"
-    if stale_patch.exists():
-        try:
-            stale_patch.unlink()
-        except Exception:
-            pass
+    # Older versions shipped sidecar files (StrategicPacks_additions.ndf,
+    # StrategicCombatGroups_additions.ndf, StrategicDecks_patch.ndf). The
+    # WARNO compiler only ingests the canonical base files, so the sidecars
+    # were silently ignored — leaving deck refs dangling. Clean them out.
+    for stale_name in (
+        "StrategicPacks_additions.ndf",
+        "StrategicCombatGroups_additions.ndf",
+        "StrategicDecks_patch.ndf",
+    ):
+        stale = decks_dir / stale_name
+        if stale.exists():
+            try:
+                stale.unlink()
+            except Exception:
+                pass
 
-    # Snapshot the base StrategicDecks.ndf so repeated exports apply on a clean canvas
-    # instead of accumulating duplicate refs.
-    pristine_decks_ndf = decks_dir / "StrategicDecks.ndf.orig"
-    if base_decks_ndf.exists() and not pristine_decks_ndf.exists():
-        pristine_decks_ndf.write_bytes(base_decks_ndf.read_bytes())
-    elif pristine_decks_ndf.exists():
-        base_decks_ndf.write_bytes(pristine_decks_ndf.read_bytes())
+    # Snapshot each base file to .orig on first export, then restore from .orig on
+    # every subsequent export so repeated runs apply on a clean canvas instead of
+    # accumulating duplicate definitions.
+    for base in (base_decks_ndf, base_packs_ndf, base_groups_ndf):
+        pristine = base.with_suffix(base.suffix + ".orig")
+        if base.exists() and not pristine.exists():
+            pristine.write_bytes(base.read_bytes())
+        elif pristine.exists():
+            base.write_bytes(pristine.read_bytes())
 
     packs_blocks = []
     groups_blocks = []
@@ -343,8 +352,18 @@ def sessions_export_direct(slug: str):
     csv_text = generate_platoons_rows(assignments, units)
 
     try:
-        direct_paths["packs"].write_text("\n\n".join(packs_blocks) + "\n", encoding="utf-8")
-        direct_paths["groups"].write_text("\n\n".join(groups_blocks) + "\n", encoding="utf-8")
+        # Append new pack defs to the base StrategicPacks.ndf so the compiler picks
+        # them up (sidecar _additions.ndf files are ignored by the WARNO compiler).
+        if packs_blocks:
+            with base_packs_ndf.open("a", encoding="utf-8") as f:
+                f.write("\n\n// === WIF AG additions ===\n\n")
+                f.write("\n\n".join(packs_blocks))
+                f.write("\n")
+        if groups_blocks:
+            with base_groups_ndf.open("a", encoding="utf-8") as f:
+                f.write("\n\n// === WIF AG additions ===\n\n")
+                f.write("\n\n".join(groups_blocks))
+                f.write("\n")
         direct_paths["summary"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
         direct_paths["csv"].write_text(csv_text, encoding="utf-8")
     except Exception as e:
@@ -384,8 +403,8 @@ def sessions_build(slug: str):
 
     mod_name = mod_path.name
     required_files = [
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups.ndf",
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf",
         export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
     ]
