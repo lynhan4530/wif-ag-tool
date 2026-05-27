@@ -1898,10 +1898,7 @@ async function openSession(slug) {
     state.replicaDirty = false;
     state.sessionDirty = false;
     state.view = "session";
-    state.vanillaCollapsedGroups.clear();
-    state.vanillaCollapsedSmartGroups.clear();
-    state.replicaCollapsedGroups.clear();
-    state.replicaCollapsedPlatoons.clear();
+    loadCollapseState();
     await reloadScopedDecks();
     render();
   } catch (e) { toast("Open failed: " + e.message, true); }
