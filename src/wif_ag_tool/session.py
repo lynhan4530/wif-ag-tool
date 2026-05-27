@@ -134,6 +134,9 @@ def create_session(
         "factions_from_save": factions_seed,
         "missions_seen": list(missions),
         "nation_scope": nation_scope,
+        "target_mod_dir": "",
+        "game_dir": "",
+        "export_dir": "",
         "created_at": _now(),
         "updated_at": _now(),
     }

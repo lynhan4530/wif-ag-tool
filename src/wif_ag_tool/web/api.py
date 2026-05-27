@@ -183,6 +183,12 @@ def sessions_patch(slug: str):
         s["missions_seen"] = list(body["missions_seen"])
     if "campaign" in body and body["campaign"]:
         s["campaign"] = body["campaign"]
+    if "target_mod_dir" in body:
+        s["target_mod_dir"] = str(body["target_mod_dir"]).strip()
+    if "game_dir" in body:
+        s["game_dir"] = str(body["game_dir"]).strip()
+    if "export_dir" in body:
+        s["export_dir"] = str(body["export_dir"]).strip()
     saved = session_mod.save_session(s)
     return jsonify(saved)
 
@@ -193,6 +199,198 @@ def sessions_delete(slug: str):
     if not ok:
         return jsonify({"error": "session not found"}), 404
     return jsonify({"ok": True})
+
+
+@api_bp.post("/sessions/<slug>/export_direct")
+def sessions_export_direct(slug: str):
+    s = session_mod.load_session(slug)
+    if s is None:
+        return jsonify({"error": "session not found"}), 404
+
+    target_mod_dir = s.get("target_mod_dir", "").strip()
+    custom_export_dir = s.get("export_dir", "").strip()
+
+    if custom_export_dir:
+        export_path = Path(custom_export_dir)
+    elif target_mod_dir:
+        export_path = Path(target_mod_dir) / "GameData"
+    else:
+        export_path = config.TOOL_ROOT / "output"
+
+    try:
+        export_path.mkdir(parents=True, exist_ok=True)
+    except Exception as e:
+        return jsonify({"error": f"Failed to create export directory {export_path}: {str(e)}"}), 500
+
+    if target_mod_dir:
+        mod_name = Path(target_mod_dir).name
+    else:
+        mod_name = "CRM_ArmyGeneral"
+
+    decks_map = _state["decks"]
+    units = _state["units"]
+    if not decks_map:
+        return jsonify({"error": "No deck cache loaded — run refresh first"}), 400
+
+    scoped = session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys())
+    store = replicas_mod.load_replicas()
+    assignments = replicas_mod.replicas_to_assignments(store, scope_decks=scoped)
+
+    if not assignments:
+        return jsonify({"error": "No saved replicas in scope to export. Create a replica deck first."}), 400
+
+    direct_paths = {
+        "packs": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
+        "groups": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
+        "decks": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf",
+        "csv": export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
+    }
+
+    for p in direct_paths.values():
+        p.parent.mkdir(parents=True, exist_ok=True)
+
+    packs_blocks = []
+    groups_blocks = []
+    deck_patches = []
+    existing_tokens = set()
+
+    by_deck = {}
+    for a in assignments:
+        by_deck.setdefault(a.deck_name, []).append(a)
+    for lst in by_deck.values():
+        lst.sort(key=lambda a: (a.order, a.seq))
+
+    for deck_name, deck_assignments in by_deck.items():
+        deck = decks_map[deck_name]
+        running = DeckState(
+            name=deck.name,
+            pack_list=list(deck.pack_list),
+            combat_group_list=list(deck.combat_group_list),
+        )
+
+        groups_map = {}
+        group_order = []
+        for a in deck_assignments:
+            gname = a.group_name or "A"
+            if gname not in groups_map:
+                groups_map[gname] = []
+                group_order.append(gname)
+            groups_map[gname].append(a)
+
+        new_packs = []
+        new_groups = []
+
+        for gname in group_order:
+            group_assignments = groups_map[gname]
+            for a in group_assignments:
+                from wif_ag_tool.generator.pack_generator import generate_packs_for_assignment
+                packs_blocks.append(generate_packs_for_assignment(a, transport_id=a.transport_id))
+
+            from wif_ag_tool.generator.group_generator import generate_grouped_combat_group
+            combat_group_block = generate_grouped_combat_group(
+                gname=gname,
+                deck_name=deck_name,
+                assignments=group_assignments,
+                deck_state=running,
+                existing_tokens=existing_tokens
+            )
+            groups_blocks.append(combat_group_block)
+
+            for a in group_assignments:
+                for xp in a.xp_levels:
+                    pack_ref = a.pack_name(xp)
+                    new_packs.append(pack_ref)
+                    running.pack_list.append(pack_ref)
+
+            cg_name = group_assignments[0].combat_group_name()
+            new_groups.append(cg_name)
+            running.combat_group_list.append(cg_name)
+
+        from wif_ag_tool.generator.deck_patcher import generate_deck_patch
+        deck_patches.append(generate_deck_patch(deck_name, new_packs, new_groups))
+
+    from wif_ag_tool.generator.localisation import generate_platoons_rows
+    csv_text = generate_platoons_rows(assignments, units)
+
+    try:
+        direct_paths["packs"].write_text("\n\n".join(packs_blocks) + "\n", encoding="utf-8")
+        direct_paths["groups"].write_text("\n\n".join(groups_blocks) + "\n", encoding="utf-8")
+        direct_paths["decks"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
+        direct_paths["csv"].write_text(csv_text, encoding="utf-8")
+    except Exception as e:
+        return jsonify({"error": f"Failed to write export files: {str(e)}"}), 500
+
+    return jsonify({
+        "ok": True,
+        "message": f"Successfully exported files directly to {export_path.resolve()}",
+        "paths": {k: str(v.resolve()) for k, v in direct_paths.items()}
+    })
+
+
+@api_bp.post("/sessions/<slug>/build")
+def sessions_build(slug: str):
+    s = session_mod.load_session(slug)
+    if s is None:
+        return jsonify({"error": "session not found"}), 404
+
+    target_mod_dir = s.get("target_mod_dir", "").strip()
+    if not target_mod_dir:
+        return jsonify({"error": "No target mod directory configured in settings. Go to settings and configure it."}), 400
+
+    mod_path = Path(target_mod_dir)
+    if not mod_path.exists():
+        return jsonify({"error": f"Target mod directory does not exist: {target_mod_dir}"}), 400
+
+    gen_bat = mod_path / "GenerateMod.bat"
+    if not gen_bat.exists():
+        return jsonify({"error": f"GenerateMod.bat not found inside mod directory: {target_mod_dir}"}), 400
+
+    # Pre-build Verification Check
+    custom_export_dir = s.get("export_dir", "").strip()
+    if custom_export_dir:
+        export_path = Path(custom_export_dir)
+    else:
+        export_path = mod_path / "GameData"
+
+    mod_name = mod_path.name
+    required_files = [
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf",
+        export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
+    ]
+
+    missing_files = [str(f.resolve()) for f in required_files if not f.exists()]
+    if missing_files:
+        return jsonify({
+            "error": "Pre-build check failed: Export files are missing. Click 'Export Mod' first to generate them.",
+            "missing_files": missing_files
+        }), 400
+
+    import subprocess
+    try:
+        res = subprocess.run(
+            [str(gen_bat)],
+            cwd=str(mod_path),
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=90,
+        )
+        return jsonify({
+            "ok": res.returncode == 0,
+            "returncode": res.returncode,
+            "stdout": res.stdout,
+            "stderr": res.stderr,
+        })
+    except subprocess.TimeoutExpired as e:
+        return jsonify({
+            "error": "Mod compilation timed out after 90 seconds.",
+            "stdout": e.stdout or "",
+            "stderr": e.stderr or "",
+        }), 500
+    except Exception as e:
+        return jsonify({"error": f"Failed to execute mod builder: {str(e)}"}), 500
 
 
 @api_bp.get("/sessions/<slug>/decks")

@@ -254,6 +254,10 @@ const state = {
   exportOpen: false,
   platoonPickerOpen: false, // show platoon name picker modal
   platoonPickerGroupIdx: null,
+  settingsOpen: false,     // show settings modal
+  buildOpen: false,        // show build log modal
+  buildLog: "",
+  buildStatus: "",
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   deckQuery: "",
 };
@@ -444,6 +448,8 @@ function render() {
   if (state.modalOpen) root.appendChild(renderModal());
   if (state.exportOpen) root.appendChild(renderExportDialog());
   if (state.platoonPickerOpen) root.appendChild(renderPlatoonPicker());
+  if (state.settingsOpen) root.appendChild(renderSettingsModal());
+  if (state.buildOpen) root.appendChild(renderBuildModal());
 
   if (activeId) {
     const activeEl = document.getElementById(activeId);
@@ -516,6 +522,9 @@ function renderSession() {
     el("h1", {}, s.campaign),
     el("span", { class: "chip" }, (s.factions_from_save || []).join(" / ") || "—"),
     el("span", { class: "spacer" }),
+    el("button", { class: "ghost", onclick: () => { state.settingsOpen = true; render(); }, title: "Configure mod and game folders" }, "⚙ Settings"),
+    el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : "Please configure WIF Mod Folder in Settings" }, "📥 Export Mod"),
+    el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : "Please configure WIF Mod Folder in Settings" }, "⚡ Build Mod"),
     el("button", { class: "ghost", onclick: doRefreshDecks, title: "Re-parse vanilla NDF after a game patch" }, "Refresh decks"),
     el("button", { disabled: !state.sessionDirty, onclick: doSaveSession }, "Save session"),
     el("button", { class: "ghost", onclick: doExtractSession }, "Extract session"),
@@ -1143,6 +1152,111 @@ function renderExportDialog() {
   return backdrop;
 }
 
+function renderSettingsModal() {
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) { state.settingsOpen = false; render(); } } });
+
+  const modal = el("div", { class: "modal" });
+  modal.appendChild(el("div", { class: "modal-head" },
+    el("h3", {}, "⚙ Mod & Workspace Settings"),
+  ));
+
+  const body = el("div", { class: "modal-body pad", style: "display:flex; flex-direction:column; gap:12px; padding:14px;" });
+
+  // WIF Mod Folder Input
+  const targetModInput = el("input", {
+    id: "settings-target-mod-dir",
+    type: "text",
+    value: state.session.target_mod_dir || "",
+    placeholder: "e.g. G:\\Program Files (x86)\\Steam\\steamapps\\common\\WARNO\\Mods\\CRM_ArmyGeneral",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "WIF Mod Folder:"),
+    targetModInput,
+    el("div", { class: "hint" }, "Path to your mod development workspace folder containing the GenerateMod.bat script."),
+  ));
+
+  // Game Folder Input
+  const gameDirInput = el("input", {
+    id: "settings-game-dir",
+    type: "text",
+    value: state.session.game_dir || "",
+    placeholder: "e.g. G:\\Program Files (x86)\\Steam\\steamapps\\common\\WARNO",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Game Folder:"),
+    gameDirInput,
+    el("div", { class: "hint" }, "Path to the base WARNO installation directory."),
+  ));
+
+  // Export Folder Input
+  const exportDirInput = el("input", {
+    id: "settings-export-dir",
+    type: "text",
+    value: state.session.export_dir || "",
+    placeholder: "If blank, defaults to GameData folder inside Mod Folder",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Export Folder (Optional Override):"),
+    exportDirInput,
+    el("div", { class: "hint" }, "Where NDF/CSV additions will be written. If blank, compiles directly to the mod's GameData subfolders."),
+  ));
+
+  modal.appendChild(body);
+
+  modal.appendChild(el("div", { class: "modal-foot" },
+    el("button", { class: "ghost", onclick: () => { state.settingsOpen = false; render(); } }, "Cancel"),
+    el("button", { onclick: () => doSaveSettings(targetModInput.value, gameDirInput.value, exportDirInput.value) }, "Save"),
+  ));
+
+  backdrop.appendChild(modal);
+  return backdrop;
+}
+
+function renderBuildModal() {
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop && state.buildStatus !== "building") { state.buildOpen = false; render(); } } });
+
+  const modal = el("div", { class: "modal", style: "min-width:600px; max-width:800px;" });
+
+  let statusText = "🛠 Building Mod...";
+  if (state.buildStatus === "success") {
+    statusText = "✅ Mod Compiled Successfully!";
+  } else if (state.buildStatus === "fail") {
+    statusText = "❌ Mod Compilation Failed";
+  }
+
+  modal.appendChild(el("div", { class: "modal-head", style: "display:flex; justify-content:space-between; align-items:center;" },
+    el("h3", {}, "Mod Compiler Console Log"),
+    el("span", { class: "chip", style: "font-weight:bold; text-transform:uppercase;" }, statusText)
+  ));
+
+  const consoleLog = el("pre", {
+    id: "build-log-console",
+    style: "background:#1e1e24; color:#d4d4d4; padding:12px; border-radius:4px; font-family:monospace; font-size:11px; max-height:400px; overflow-y:auto; white-space:pre-wrap; margin:12px; border:1px solid #333;"
+  }, state.buildLog);
+
+  // Auto-scroll console log to bottom
+  setTimeout(() => {
+    consoleLog.scrollTop = consoleLog.scrollHeight;
+  }, 50);
+
+  modal.appendChild(consoleLog);
+
+  modal.appendChild(el("div", { class: "modal-foot" },
+    el("button", {
+      disabled: state.buildStatus === "building",
+      onclick: () => { state.buildOpen = false; render(); }
+    }, "Close")
+  ));
+
+  backdrop.appendChild(modal);
+  return backdrop;
+}
+
 // ── actions ─────────────────────────────────────────────────────────────────
 
 async function bootstrapPicker() {
@@ -1349,6 +1463,77 @@ async function doExport(scope) {
     const blob = await api("POST", "/export", body);
     downloadBlob(blob, "wif_ag_export.zip");
   } catch (e) { toast("Export failed: " + e.message, true); }
+}
+
+async function doSaveSettings(targetModDir, gameDir, exportDir) {
+  const pathsChanged = (targetModDir !== (state.session.target_mod_dir || "")) ||
+                       (gameDir !== (state.session.game_dir || "")) ||
+                       (exportDir !== (state.session.export_dir || ""));
+  try {
+    const saved = await api("PATCH", `/sessions/${state.activeSlug}`, {
+      target_mod_dir: targetModDir,
+      game_dir: gameDir,
+      export_dir: exportDir,
+    });
+    state.session = saved;
+    state.settingsOpen = false;
+    toast("Settings saved successfully.");
+    if (pathsChanged) {
+      toast("Paths changed, refreshing catalog...");
+      await doRefreshDecks();
+    } else {
+      render();
+    }
+  } catch (e) {
+    toast("Save settings failed: " + e.message, true);
+  }
+}
+
+async function doDirectExport() {
+  try {
+    const res = await api("POST", `/sessions/${state.activeSlug}/export_direct`);
+    toast(res.message || "Direct export complete.");
+  } catch (e) {
+    toast("Export failed: " + e.message, true);
+  }
+}
+
+async function doBuildMod() {
+  state.buildOpen = true;
+  state.buildStatus = "building";
+  state.buildLog = "Triggering GenerateMod.bat...\n";
+  render();
+
+  try {
+    const r = await fetch(`/api/sessions/${state.activeSlug}/build`, {
+      method: "POST"
+    });
+    let res;
+    try {
+      res = await r.json();
+    } catch (e) {
+      res = { error: "Failed to parse API response: " + r.statusText };
+    }
+
+    if (r.ok && res.ok) {
+      state.buildStatus = "success";
+      let log = "GenerateMod.bat completed successfully.\n\n";
+      if (res.stdout) log += "STDOUT:\n" + res.stdout + "\n";
+      if (res.stderr) log += "STDERR:\n" + res.stderr + "\n";
+      state.buildLog = log;
+    } else {
+      state.buildStatus = "fail";
+      let log = "GenerateMod.bat failed.\n\n";
+      if (res.error) log += "ERROR: " + res.error + "\n\n";
+      if (res.stdout) log += "STDOUT:\n" + res.stdout + "\n";
+      if (res.stderr) log += "STDERR:\n" + res.stderr + "\n";
+      state.buildLog = log;
+    }
+  } catch (err) {
+    state.buildStatus = "fail";
+    state.buildLog = "Failed to run build: " + err.message;
+  }
+  render();
 }
 
 // ── modal helpers ───────────────────────────────────────────────────────────
