@@ -170,7 +170,7 @@
 
   /* platoon picker */
   .platoon-picker { background:#23262d; border:1px solid #444; min-width:360px; max-width:440px; max-height:60vh; display:flex; flex-direction:column; border-radius:4px; }
-  .platoon-picker-head { padding:10px 14px; border-bottom:1px solid #333; font-size:13px; font-weight:bold; }
+  .platoon-picker-head { padding:10px 14px; border-bottom:1px solid #333; font-size:13px; font-weight:bold; cursor:move; user-select:none; }
   .platoon-picker-body { padding:6px 0; overflow-y:auto; flex:1; }
   .platoon-picker-section { padding:4px 14px; font-size:10px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; }
   .platoon-picker-opt { padding:6px 14px; cursor:pointer; font-size:12px; display:flex; gap:8px; align-items:center; }
@@ -182,7 +182,7 @@
   /* modal */
   .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:10; }
   .modal { background:#23262d; border:1px solid #444; min-width:640px; max-width:80vw; max-height:80vh; display:flex; flex-direction:column; border-radius:4px; }
-  .modal-head { padding:10px 14px; border-bottom:1px solid #333; display:flex; gap:8px; align-items:center; }
+  .modal-head { padding:10px 14px; border-bottom:1px solid #333; display:flex; gap:8px; align-items:center; cursor:move; user-select:none; }
   .modal-head h3 { font-size:13px; margin:0; flex:1; }
   .modal-filters { padding:8px 14px; border-bottom:1px solid #2a2d34; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .modal-body { padding:6px 0; overflow:auto; }
@@ -629,7 +629,12 @@ function renderSession() {
     el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : "Please configure WIF Mod Folder in Settings" }, "📥 Export Mod"),
     el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : "Please configure WIF Mod Folder in Settings" }, "⚡ Build Mod"),
     el("button", { class: "ghost", onclick: doRefreshDecks, title: "Re-parse vanilla NDF after a game patch" }, "Refresh decks"),
-    el("button", { disabled: !state.sessionDirty, onclick: doSaveSession }, "Save session"),
+    el("button", {
+      class: (state.sessionDirty || state.replicaDirty) ? "" : "ghost",
+      disabled: !(state.sessionDirty || state.replicaDirty),
+      onclick: doSaveSession,
+      title: "Save campaign settings and active deck replica changes"
+    }, "Save session"),
     el("button", { class: "ghost", onclick: doExtractSession }, "Extract session"),
     el("button", { onclick: () => { state.exportOpen = true; render(); } }, "Export NDF"),
   ));
@@ -903,9 +908,11 @@ function renderPlatoonPicker() {
     onclick: e => { if (e.target === backdrop) closePlatoonPicker(); } });
 
   const picker = el("div", { class: "platoon-picker" });
-  picker.appendChild(el("div", { class: "platoon-picker-head" },
+  const pickerHead = el("div", { class: "platoon-picker-head" },
     `Add platoon to Combat Group "${groupName}"`
-  ));
+  );
+  picker.appendChild(pickerHead);
+  makeDraggable(picker, pickerHead);
 
   const body = el("div", { class: "platoon-picker-body" });
 
@@ -965,7 +972,7 @@ function renderPlatoonPicker() {
 }
 
 function renderReplicaGroup(group, gi) {
-  const rgKey = `${state.activeSlug}::${group.name}`;
+  const rgKey = `${state.activeSlug}::group::${gi}`;
   const rgCollapsed = state.replicaCollapsedGroups.has(rgKey);
 
   const section = el("div", { class: "replica-group" });
@@ -1006,7 +1013,7 @@ function renderReplicaGroup(group, gi) {
     // Group body — platoons
     const body = el("div", { class: "replica-group-body" });
     group.platoons.forEach((platoon, pi) => {
-      body.appendChild(renderReplicaPlatoon(platoon, gi, pi, group.name));
+      body.appendChild(renderReplicaPlatoon(platoon, gi, pi));
     });
 
     // Add platoon button
@@ -1020,8 +1027,8 @@ function renderReplicaGroup(group, gi) {
   return section;
 }
 
-function renderReplicaPlatoon(platoon, gi, pi, groupName) {
-  const rpKey = `${state.activeSlug}::${groupName}::${platoon.name}`;
+function renderReplicaPlatoon(platoon, gi, pi) {
+  const rpKey = `${state.activeSlug}::group::${gi}::platoon::${pi}`;
   const rpCollapsed = state.replicaCollapsedPlatoons.has(rpKey);
 
   const card = el("div", { class: "replica-platoon-card" });
@@ -1234,25 +1241,49 @@ const mkInput = (val, min, oninput, placeholder) => el("input", {
   oninput: e => oninput(e.target.value),
 });
 
+// ── draggable modals (in-memory remembered offset) ─────────────────────────
+const lastModalOffset = { x: 0, y: 0 };
+function makeDraggable(panel, handle) {
+  if (!panel || !handle) return;
+  const apply = () => { panel.style.transform = `translate(${lastModalOffset.x}px, ${lastModalOffset.y}px)`; };
+  apply();
+  handle.addEventListener("mousedown", e => {
+    if (e.button !== 0) return;
+    if (e.target.closest("button, input, select, textarea, a")) return;
+    e.preventDefault();
+    const startX = e.clientX, startY = e.clientY;
+    const baseX = lastModalOffset.x, baseY = lastModalOffset.y;
+    const onMove = ev => {
+      lastModalOffset.x = baseX + (ev.clientX - startX);
+      lastModalOffset.y = baseY + (ev.clientY - startY);
+      apply();
+    };
+    const onUp = () => {
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    };
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  });
+}
+
 // ── modal: add unit ─────────────────────────────────────────────────────────
 function renderModal() {
   const dn = state.activeDeck ? state.activeDeck.split("_")[3] : "";
-  const allUnitIds = new Set();
-  for (const g of state.replicaGroups) {
-    for (const p of g.platoons) {
-      for (const u of p.units) allUnitIds.add(u.unit_id);
-    }
-  }
-  const added = allUnitIds;
+  const tgt = state.modalTarget;
+  const targetPlatoon = tgt ? state.replicaGroups[tgt.groupIdx]?.platoons[tgt.platoonIdx] : null;
+  const added = new Set((targetPlatoon?.units || []).map(u => u.unit_id));
 
   const backdrop = el("div", { class: "backdrop",
     onclick: e => { if (e.target === backdrop) closeModal(); } });
 
   const modal = el("div", { class: "modal" });
-  modal.appendChild(el("div", { class: "modal-head" },
+  const modalHead = el("div", { class: "modal-head" },
     el("h3", {}, `Add WIF unit → ${deckShort(state.activeDeck || "")}`),
     el("button", { class: "ghost", onclick: closeModal }, "Done"),
-  ));
+  );
+  modal.appendChild(modalHead);
+  makeDraggable(modal, modalHead);
 
   const filters = el("div", { class: "modal-filters" });
   const f = state.modalFilters;
@@ -1287,7 +1318,7 @@ function renderModal() {
       el("span", { class: "hint" }, `D:${u.defense}`),
       el("span", { class: "hint" }, u.role || ""),
       added.has(u.name)
-        ? el("span", { class: "added" }, "in deck")
+        ? el("span", { class: "added" }, "in platoon")
         : el("button", { onclick: () => addUnitToReplica(u) }, "Add"),
     );
     body.appendChild(row);
@@ -1624,15 +1655,42 @@ async function deleteReplica(deck) {
 
 async function doSaveSession() {
   try {
-    const saved = await api("PATCH", `/sessions/${state.activeSlug}`, {
-      nation_scope: state.session.nation_scope,
-    });
-    state.session = saved;
-    state.initialScope = [...(saved.nation_scope || [])];
-    state.sessionDirty = false;
-    toast("Session saved.");
-    render();
-  } catch (e) { toast("Save session failed: " + e.message, true); }
+    let savedSession = false;
+    let savedReplica = false;
+
+    if (state.replicaDirty) {
+      if (countTotalUnits() === 0) {
+        toast("Cannot save empty replica via Save Session. Use the ✕ on the left to delete it instead.", true);
+        return;
+      }
+      await api("PUT", `/decks/${state.activeDeck}/replica`, { groups: state.replicaGroups });
+      state.initialReplica = JSON.stringify(state.replicaGroups);
+      state.replicaDirty = false;
+      savedReplica = true;
+    }
+
+    if (state.sessionDirty) {
+      const saved = await api("PATCH", `/sessions/${state.activeSlug}`, {
+        nation_scope: state.session.nation_scope,
+      });
+      state.session = saved;
+      state.initialScope = [...(saved.nation_scope || [])];
+      state.sessionDirty = false;
+      savedSession = true;
+    }
+
+    if (savedSession && savedReplica) {
+      toast("Session and active deck replica saved.");
+    } else if (savedSession) {
+      toast("Session saved.");
+    } else if (savedReplica) {
+      toast("Active deck replica saved.");
+    }
+
+    await reloadScopedDecks();
+  } catch (e) {
+    toast("Save failed: " + e.message, true);
+  }
 }
 
 async function doExtractSession() {
@@ -1842,7 +1900,12 @@ function fillTooltip(unit_id) {
     el("span", { class: "tt-stat" }, "DEF ", el("b", {}, String(u.defense ?? "?"))),
   ));
   if (u.specialties && u.specialties.length) {
-    t.appendChild(el("div", { class: "tt-specs" }, u.specialties.join(" · ")));
+    const badges = renderSpecialtyBadges(u.specialties, u.role);
+    if (badges) {
+      const wrap = el("div", { class: "tt-specs" });
+      wrap.appendChild(badges);
+      t.appendChild(wrap);
+    }
   }
 }
 
