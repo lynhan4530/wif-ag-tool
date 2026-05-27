@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # WIF AG Tool — Developer Reference Guide
 
 A Python web tool that lets you interactively assign World in Flames (WIF) modern units to WARNO Army General campaign decks, then exports the NDF patch files needed to build the mod.
@@ -6,10 +10,13 @@ A Python web tool that lets you interactively assign World in Flames (WIF) moder
 
 - **Run Dev Server**: `python -m wif_ag_tool serve` (Starts Flask server on `http://localhost:5000`)
 - **Run Tests**: `pytest tests/ -v`
+- **Run a Single Test**: `pytest tests/test_web_api.py::test_name -v` (or `pytest -k "substring" -v` to filter by name)
 - **Re-parse Decks**: `python -m wif_ag_tool refresh` (Updates `.deck_cache.json` from vanilla NDF files)
 - **Export NDF Mod Files**: `python -m wif_ag_tool export` (Applies assignments and writes NDF/CSV files to `./output/`)
 - **Direct Export Endpoint**: POST `/api/sessions/<slug>/export_direct` (Writes additions directly to the mod's GameData or a custom export folder)
 - **Build Mod Endpoint**: POST `/api/sessions/<slug>/build` (Compiles the mod in-browser by executing `GenerateMod.bat` in the active mod folder)
+
+CLI entry point is `src/wif_ag_tool/__main__.py`, which dispatches to subcommands defined in `src/wif_ag_tool/cli.py`.
 
 ## Update-Resilience Workflow (After a WARNO Game Patch)
 
@@ -21,7 +28,7 @@ Whenever a game patch updates WARNO's vanilla assets:
 
 ## Key Technical Decisions & Constraints
 
-- **Mod Settings & Workspace Paths**: Sessions support persistent settings for `target_mod_dir`, `game_dir`, and `export_dir` (stored in the session's JSON file).
+- **Mod Settings & Workspace Paths**: Sessions support persistent settings for `target_mod_dir`, `game_dir`, and `export_dir` (stored in the session's JSON file under `sessions/`).
 - **Direct Export Directory Structure**:
   - Strategic additions are exported directly to `{export_dir}/Generated/Gameplay/Decks/...`
   - Platoons localisation CSV is exported to `{export_dir}/Localisation/{mod_name}/PLATOONS_additions.csv`
@@ -37,7 +44,7 @@ Whenever a game patch updates WARNO's vanilla assets:
 ## Project Layout
 
 ```
-G:\Warno_mod\wif_ag_tool\
+G:\Project\wif-ag-tool\
 ├── src/wif_ag_tool/
 │   ├── models.py          # Core dataclasses (WifUnit, DeckState, StrategicPack, Assignment)
 │   ├── config.py          # Path constants and environment overrides
@@ -47,17 +54,22 @@ G:\Warno_mod\wif_ag_tool\
 │   │   ├── pack_parser.py # Parses StrategicPacks.ndf
 │   │   └── save_parser.py # Parses save game .sav3 files
 │   ├── generator/
-│   │   ├── token_gen.py   # Generates unique, deterministic 10-character NDF name hashes
-│   │   ├── pack_generator.py  # Generates DeckPackDescriptor NDF blocks
-│   │   ├── group_generator.py # Generates TDeckCombatGroupDescriptor NDF blocks
-│   │   ├── deck_patcher.py    # Modifies DeckPackList / DeckCombatGroupList
-│   │   └── localisation.py   # Generates PLATOONS.csv name tables
+│   │   ├── token_gen.py        # Generates unique, deterministic 10-character NDF name hashes
+│   │   ├── pack_generator.py   # Generates DeckPackDescriptor NDF blocks
+│   │   ├── group_generator.py  # Generates TDeckCombatGroupDescriptor NDF blocks
+│   │   ├── deck_patcher.py     # Modifies DeckPackList / DeckCombatGroupList
+│   │   └── localisation.py     # Generates PLATOONS.csv name tables
 │   ├── validator/         # Validates units, index bounds, and token rules
-│   ├── cli.py             # CLI command orchestrator
+│   ├── cli.py             # CLI command orchestrator (dispatched from __main__.py)
 │   └── web/
 │       ├── app.py         # Flask app setup
 │       ├── api.py         # REST endpoint implementation
 │       └── static/
 │           └── ui.html    # Single-page front-end SPA
-└── tests/                 # Full unit/integration testing suite using mock fixtures
+├── sessions/              # Per-session JSON state (settings + assignments)
+├── data/                  # Cached parsed catalogs (.deck_cache.json etc.)
+├── output/                # Default export target when no export_dir is set
+└── tests/                 # Unit/integration suite using tests/fixtures/ mock data
 ```
+
+See `NDF_REFERENCE.md` for notes on the NDF file formats this tool reads and patches.
