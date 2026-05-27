@@ -265,6 +265,9 @@ const state = {
   platoonPickerOpen: false, // show platoon name picker modal
   platoonPickerGroupIdx: null,
   platoonPickerRenamePi: null,
+  cloneReplicaOpen: false,
+  cloneReplicaSource: null,
+  cloneReplicaTargets: new Set(),
   settingsOpen: false,     // show settings modal
   buildOpen: false,        // show build log modal
   buildLog: "",
@@ -571,6 +574,7 @@ function render() {
   if (state.modalOpen) root.appendChild(renderModal());
   if (state.exportOpen) root.appendChild(renderExportDialog());
   if (state.platoonPickerOpen) root.appendChild(renderPlatoonPicker());
+  if (state.cloneReplicaOpen) root.appendChild(renderCloneReplicaModal());
   if (state.settingsOpen) root.appendChild(renderSettingsModal());
   if (state.buildOpen) root.appendChild(renderBuildModal());
 
@@ -719,6 +723,8 @@ function renderLeftPane() {
         el("span", { class: "deck-sub" }, subtitle),
       ),
       d.has_replica ? el("span", { class: "badge" }, `WIF·${d.replica_unit_count}`) : null,
+      d.has_replica ? el("span", { class: "ghost-x", title: "Clone WIF replica to other deck(s)",
+        onclick: e => { e.stopPropagation(); openCloneReplicaModal(d.name); } }, "⎘") : null,
       d.has_replica ? el("span", { class: "ghost-x", title: "delete WIF replica",
         onclick: e => { e.stopPropagation(); deleteReplica(d.name); } }, "✕") : null,
     );
@@ -925,6 +931,139 @@ function closePlatoonPicker() {
   state.platoonPickerGroupIdx = null;
   state.platoonPickerRenamePi = null;
   render();
+}
+
+function openCloneReplicaModal(sourceDeckName) {
+  state.cloneReplicaOpen = true;
+  state.cloneReplicaSource = sourceDeckName;
+  state.cloneReplicaTargets = new Set();
+  render();
+}
+
+function closeCloneReplicaModal() {
+  state.cloneReplicaOpen = false;
+  state.cloneReplicaSource = null;
+  state.cloneReplicaTargets = new Set();
+  render();
+}
+
+async function cloneReplicaTo(targets) {
+  if (!targets || !targets.length) return;
+  const source = state.cloneReplicaSource;
+  if (!source) return;
+
+  // Pull source groups: in-memory if it's the active deck (carries unsaved edits), else fetch.
+  let sourceGroups;
+  if (source === state.activeDeck) {
+    sourceGroups = JSON.parse(JSON.stringify(state.replicaGroups || []));
+  } else {
+    try {
+      const r = await api("GET", `/decks/${source}/replica`);
+      sourceGroups = r.groups || [];
+    } catch (err) {
+      toast(`Failed to load source replica: ${err.message || err}`, true);
+      return;
+    }
+  }
+
+  // Overwrite warning if any target already has a replica.
+  const targetsWithReplica = targets.filter(name => {
+    const d = state.decks.find(x => x.name === name);
+    return d && d.has_replica;
+  });
+  if (targetsWithReplica.length && !confirm(`Overwrite existing replica in ${targetsWithReplica.length} deck(s)?`)) {
+    return;
+  }
+
+  let ok = 0, fail = 0;
+  for (const target of targets) {
+    try {
+      await api("PUT", `/decks/${target}/replica`, { groups: JSON.parse(JSON.stringify(sourceGroups)) });
+      ok++;
+    } catch (err) {
+      fail++;
+      console.error(`Clone to ${target} failed:`, err);
+    }
+  }
+
+  toast(fail ? `Cloned to ${ok} deck(s). ${fail} failed.` : `Cloned to ${ok} deck(s).`, fail > 0);
+  closeCloneReplicaModal();
+  await reloadScopedDecks();
+  if (targets.includes(state.activeDeck)) {
+    await selectDeck(state.activeDeck);
+  }
+}
+
+function renderCloneReplicaModal() {
+  const source = state.cloneReplicaSource;
+  const sourceDeck = state.decks.find(d => d.name === source);
+  const sourceLabel = sourceDeck?.display_name || deckShort(source || "");
+
+  // Family = name minus trailing _<digits>; matches "US_11ACR_1" → "US_11ACR".
+  const family = (source || "").replace(/_\d+$/, "");
+  const candidates = state.decks.filter(d => d.name !== source);
+  const sameFamily = candidates.filter(d => family && d.name.startsWith(family + "_"));
+  const others     = candidates.filter(d => !family || !d.name.startsWith(family + "_"));
+
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) closeCloneReplicaModal(); } });
+
+  const modal = el("div", { class: "modal" });
+  const modalHead = el("div", { class: "modal-head" },
+    el("h3", {}, `Clone replica from "${sourceLabel}" to:`),
+    el("button", { class: "ghost", onclick: closeCloneReplicaModal }, "Cancel"),
+  );
+  modal.appendChild(modalHead);
+  makeDraggable(modal, modalHead);
+
+  const body = el("div", { class: "modal-body", style: "max-height:60vh;" });
+
+  const renderRow = d => {
+    const checked = state.cloneReplicaTargets.has(d.name);
+    const cb = el("input", { type: "checkbox" });
+    cb.checked = checked;
+    cb.onchange = () => {
+      if (cb.checked) state.cloneReplicaTargets.add(d.name);
+      else state.cloneReplicaTargets.delete(d.name);
+      render();
+    };
+    const label = d.display_name || deckShort(d.name);
+    return el("label", { class: "platoon-picker-opt", style: "display:flex; gap:8px; align-items:center; cursor:pointer;" },
+      cb,
+      el("span", { style: "flex:1;" }, label),
+      el("span", { class: "hint" }, d.short || ""),
+      d.has_replica ? el("span", { class: "badge", style: "background:#7a3b1a; color:#ffd9a8;" }, `WIF·${d.replica_unit_count} (will overwrite)`) : null,
+    );
+  };
+
+  if (sameFamily.length) {
+    body.appendChild(el("div", { class: "platoon-picker-section" }, "Same family"));
+    for (const d of sameFamily) body.appendChild(renderRow(d));
+  }
+  if (others.length) {
+    body.appendChild(el("div", { class: "platoon-picker-section", style: "margin-top:8px;" }, "Other decks"));
+    for (const d of others) body.appendChild(renderRow(d));
+  }
+  if (!candidates.length) {
+    body.appendChild(el("div", { class: "pad hint" }, "No other decks available in this scope."));
+  }
+  modal.appendChild(body);
+
+  const n = state.cloneReplicaTargets.size;
+  const cloneBtn = el("button", {
+    onclick: () => cloneReplicaTo(Array.from(state.cloneReplicaTargets)),
+  }, `Clone to ${n} deck(s)`);
+  if (n === 0) cloneBtn.disabled = true;
+
+  modal.appendChild(el("div", { class: "modal-foot" },
+    el("span", { class: "hint" }, `${n} target(s) selected`),
+    el("span", { class: "spacer" }, ""),
+    el("button", { class: "ghost", onclick: closeCloneReplicaModal }, "Cancel"),
+    cloneBtn,
+  ));
+
+  backdrop.appendChild(modal);
+  return backdrop;
 }
 
 function commitPlatoon(name) {
@@ -2118,6 +2257,7 @@ document.addEventListener("mouseout", e => {
 // ── init ────────────────────────────────────────────────────────────────────
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && state.platoonPickerOpen) closePlatoonPicker();
+  if (e.key === "Escape" && state.cloneReplicaOpen) closeCloneReplicaModal();
   if (e.key === "Escape" && state.modalOpen) closeModal();
   if (e.key === "Escape" && state.exportOpen) { state.exportOpen = false; render(); }
 });
