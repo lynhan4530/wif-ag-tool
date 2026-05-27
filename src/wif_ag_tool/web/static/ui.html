@@ -7,7 +7,7 @@
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
   body { font-family: ui-monospace, Consolas, Menlo, monospace; background:#181a1f; color:#dde; margin:0; }
-  header { background:#23262d; padding:8px 12px; border-bottom:1px solid #333; display:flex; gap:12px; align-items:center; min-height:42px; }
+  header { background:#23262d; padding:8px 12px; border-bottom:1px solid #333; display:flex; gap:8px 12px; align-items:center; flex-wrap:wrap; min-height:42px; }
   header h1 { font-size:14px; margin:0; }
   header .chip { background:#2d3340; padding:2px 8px; border-radius:10px; font-size:11px; color:#9be; }
   header .spacer { flex:1; }
@@ -29,11 +29,19 @@
   .picker .new { margin-top:18px; }
 
   /* session view */
-  .session { display:grid; grid-template-columns: 290px 1fr 1fr; height:calc(100vh - 42px); }
+  .session { display:grid; grid-template-columns: 240px 1fr 1fr; height:calc(100vh - 42px); }
   .pane { border-right:1px solid #2a2d34; overflow:auto; }
   .pane:last-child { border-right:0; }
   .pane h2 { font-size:11px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:0; padding:8px 12px; background:#1c1f25; border-bottom:1px solid #2a2d34; position:sticky; top:0; z-index:1; }
   .pane .pad { padding:8px 12px; }
+
+  @media (max-width: 1100px) {
+    .session { grid-template-columns: 210px 1fr 1fr; }
+  }
+  @media (max-width: 860px) {
+    .session { grid-template-columns: 1fr; height: auto; overflow: visible; }
+    .pane { border-right: none; border-bottom: 1px solid #2a2d34; height: auto; max-height: 480px; }
+  }
 
   /* left */
   .nation-list { display:grid; grid-template-columns: 1fr 1fr; gap:2px 8px; margin-bottom:8px; font-size:12px; }
@@ -138,9 +146,11 @@
   .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
   .replica-list { padding:6px 8px; }
-  .replica-row { display:grid; grid-template-columns: 18px 1fr 70px 70px 70px 70px 26px; gap:6px; align-items:center; padding:4px 6px; border-bottom:1px solid #23262d; font-size:12px; }
+  .replica-row { display:flex; flex-direction:column; gap:4px; padding:6px 8px; border-bottom:1px solid #23262d; font-size:12px; }
   .replica-row:hover { background:#1f2228; }
   .replica-row.dragging { opacity:.4; }
+  .replica-row-head { display:flex; align-items:center; gap:8px; width:100%; }
+  .replica-row-controls { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-left:26px; margin-top:2px; font-size:11px; color:#8aa; }
   .drag-handle { cursor:grab; color:#666; user-select:none; }
   .drag-handle:active { cursor:grabbing; }
   .x-btn { background:transparent; color:#d44; border:0; cursor:pointer; padding:2px 6px; font-size:14px; }
@@ -1026,6 +1036,17 @@ function renderReplicaPlatoon(platoon, gi, pi) {
 
 function renderReplicaRow(row, gi, pi, ui) {
   const units = state.replicaGroups[gi].platoons[pi].units;
+  const uInfo = state.unitsIndex[row.unit_id];
+  const role = getNormalizedRole(uInfo);
+
+  // Helper to make a vertically aligned label + control block
+  const mkControlGroup = (label, control) => el("div", {
+    style: "display: flex; flex-direction: column; gap: 2px; align-items: flex-start;"
+  },
+    el("span", { class: "field-label", style: "font-size: 8px; color: #8aa; text-transform: uppercase;" }, label),
+    control
+  );
+
   const node = el("div", {
     class: "replica-row",
     draggable: "true",
@@ -1053,48 +1074,37 @@ function renderReplicaRow(row, gi, pi, ui) {
       }
     },
   },
-    el("span", { class: "drag-handle" }, "⋮⋮"),
-    el("span", { class: "unit-line" },
-      el("span", { class: `unit-thumb-container role-${getNormalizedRole(state.unitsIndex[row.unit_id])}` },
-        el("img", { class: "unit-thumb", src: `/api/unit_icon/${row.unit_id}`,
-          loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
-      ),
-      el("span", { style: "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;" },
+    // Head: drag handle + unit thumbnail/name + delete button
+    el("div", { class: "replica-row-head" },
+      el("span", { class: "drag-handle" }, "⋮⋮"),
+      el("span", { class: "unit-line", style: "flex: 1; min-width: 0;" },
+        el("span", { class: `unit-thumb-container role-${role}` },
+          el("img", { class: "unit-thumb", src: `/api/unit_icon/${row.unit_id}`,
+            loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
+        ),
         el("span", { class: "name", style: "display: flex; align-items: center; flex-wrap: wrap;" },
           unitDisplay(row.unit_id),
-          renderSpecialtyBadges(state.unitsIndex[row.unit_id]?.specialties, state.unitsIndex[row.unit_id]?.role)
+          renderSpecialtyBadges(uInfo?.specialties, uInfo?.role)
         ),
-        getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
-          el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
-          mkSearchableSelect(
-            ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
-            row.transport_id || "(None)",
-            v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
-            name => name === "(None)" ? "(None)" : unitDisplay(name)
-          )
-        ) : null
+        !unitResolved(row.unit_id)
+          ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
       ),
-      !unitResolved(row.unit_id)
-        ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+      el("button", { class: "x-btn", style: "margin-left: auto;", title: "Remove",
+        onclick: () => { units.splice(ui, 1); markReplicaDirty(); render(); } }, "✕")
     ),
-    el("span", {},
-      el("span", { class: "field-label" }, "XP"),
-      mkSelect(["1","2","3"], String(row.xp ?? 1), v => { row.xp = parseInt(v, 10); markReplicaDirty(); }),
-    ),
-    el("span", {},
-      el("span", { class: "field-label" }, "n"),
-      mkInput(row.count ?? 1, 1, v => { row.count = parseInt(v, 10) || 1; markReplicaDirty(); }),
-    ),
-    el("span", {},
-      el("span", { class: "field-label" }, "ATK"),
-      mkInput(row.attack_override ?? "", null, v => { row.attack_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto"),
-    ),
-    el("span", {},
-      el("span", { class: "field-label" }, "DEF"),
-      mkInput(row.defense_override ?? "", null, v => { row.defense_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto"),
-    ),
-    el("button", { class: "x-btn", title: "Remove",
-      onclick: () => { units.splice(ui, 1); markReplicaDirty(); render(); } }, "✕"),
+    // Controls: XP, Count, ATK override, DEF override, Transport (if infantry)
+    el("div", { class: "replica-row-controls" },
+      mkControlGroup("XP", mkSelect(["1","2","3"], String(row.xp ?? 1), v => { row.xp = parseInt(v, 10); markReplicaDirty(); })),
+      mkControlGroup("n", mkInput(row.count ?? 1, 1, v => { row.count = parseInt(v, 10) || 1; markReplicaDirty(); })),
+      mkControlGroup("ATK", mkInput(row.attack_override ?? "", null, v => { row.attack_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto")),
+      mkControlGroup("DEF", mkInput(row.defense_override ?? "", null, v => { row.defense_override = v === "" ? null : parseInt(v, 10); markReplicaDirty(); }, "auto")),
+      role === "infantry" ? mkControlGroup("Transport", mkSearchableSelect(
+        ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
+        row.transport_id || "(None)",
+        v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
+        name => name === "(None)" ? "(None)" : unitDisplay(name)
+      )) : null
+    )
   );
   return node;
 }
