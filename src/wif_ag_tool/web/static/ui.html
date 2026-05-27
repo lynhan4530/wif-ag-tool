@@ -981,13 +981,12 @@ function renderPlatoonPicker() {
       const already = existingNames.has(v.name);
       const opt = el("div", {
         class: "platoon-picker-opt",
-        style: already ? "opacity:0.4; cursor:default;" : "",
-        onclick: already ? null : () => commitPlatoon(v.name),
+        onclick: () => commitPlatoon(v.name),
       },
         el("span", {}, v.name),
         v.isHq ? el("span", { style: "background:#e8a13b; color:#000; padding:0 5px; border-radius:8px; font-size:10px;" }, "HQ") : null,
         el("span", { class: "hint" }, `from ${v.cgName}`),
-        already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ added") : null,
+        already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ already in group") : null,
       );
       body.appendChild(opt);
     }
@@ -1000,11 +999,10 @@ function renderPlatoonPicker() {
     const already = existingNames.has(sn);
     body.appendChild(el("div", {
       class: "platoon-picker-opt",
-      style: already ? "opacity:0.4; cursor:default;" : "",
-      onclick: already ? null : () => commitPlatoon(sn),
+      onclick: () => commitPlatoon(sn),
     },
       el("span", {}, sn),
-      already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ added") : null,
+      already ? el("span", { class: "hint", style: "color:#2d4;" }, "✓ already in group") : null,
     ));
   }
 
