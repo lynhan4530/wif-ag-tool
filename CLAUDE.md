@@ -23,6 +23,7 @@ Whenever a game patch updates WARNO's vanilla assets:
 - **DDR/RDA Mismatch**: East German decks are labeled `RDA` in deck names, but their units have MotherCountry `DDR` in the unit database. The tool maps them interchangeably.
 - **Focus Preservation**: SPA view updates in `ui.html` must capture active element IDs and selection ranges before wiping `innerHTML` to avoid losing cursor focus during search/input typing.
 - **WIF Combat Groups**: Combat groups are grouped under custom sub-categories (like `A`, `B`, `C`, `HQ`) and display cleanly formatted names in-game (e.g., `WIF — A`).
+- **Hierarchical Platoon Structure**: The tool uses a 4-tier hierarchy: Deck → Combat Group → Platoon/Smart Group → Unit. Platoon names are resolved via `PLATOONS.csv` localisations or resolved using a heuristic based on unit contents if no translation is found.
 - **Vanilla Localisation**: Vanilla unit name/deck tokens are loaded from the game files and merged with custom WIF units so that names resolve properly in the UI.
 - **Test Integrity**: Unit tests must use mock paths in `tests/fixtures/` and never reference live game folders, ensuring they pass on CI.
 
