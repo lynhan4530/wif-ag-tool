@@ -239,15 +239,35 @@ def sessions_export_direct(slug: str):
     if not assignments:
         return jsonify({"error": "No saved replicas in scope to export. Create a replica deck first."}), 400
 
+    decks_dir = export_path / "Generated" / "Gameplay" / "Decks"
+    base_decks_ndf = decks_dir / "StrategicDecks.ndf"
     direct_paths = {
-        "packs": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
-        "groups": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
-        "decks": export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf",
+        "packs": decks_dir / "StrategicPacks_additions.ndf",
+        "groups": decks_dir / "StrategicCombatGroups_additions.ndf",
+        "decks": base_decks_ndf,
+        "summary": decks_dir / "StrategicDecks_patch_summary.txt",
         "csv": export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
     }
 
     for p in direct_paths.values():
         p.parent.mkdir(parents=True, exist_ok=True)
+
+    # Stale sidecar from older versions — used to ship as StrategicDecks_patch.ndf
+    # but it was plain-text instructions, not NDF, and the compiler choked on it.
+    stale_patch = decks_dir / "StrategicDecks_patch.ndf"
+    if stale_patch.exists():
+        try:
+            stale_patch.unlink()
+        except Exception:
+            pass
+
+    # Snapshot the base StrategicDecks.ndf so repeated exports apply on a clean canvas
+    # instead of accumulating duplicate refs.
+    pristine_decks_ndf = decks_dir / "StrategicDecks.ndf.orig"
+    if base_decks_ndf.exists() and not pristine_decks_ndf.exists():
+        pristine_decks_ndf.write_bytes(base_decks_ndf.read_bytes())
+    elif pristine_decks_ndf.exists():
+        base_decks_ndf.write_bytes(pristine_decks_ndf.read_bytes())
 
     packs_blocks = []
     groups_blocks = []
@@ -306,7 +326,17 @@ def sessions_export_direct(slug: str):
             new_groups.append(cg_name)
             running.combat_group_list.append(cg_name)
 
-        from wif_ag_tool.generator.deck_patcher import generate_deck_patch
+        from wif_ag_tool.generator.deck_patcher import generate_deck_patch, apply_deck_patch
+        # Mutate the live StrategicDecks.ndf in place so the existing deck's
+        # DeckPackList / DeckCombatGroupList actually reference the new packs/groups.
+        try:
+            apply_deck_patch(base_decks_ndf, deck_name, new_packs, new_groups)
+        except KeyError:
+            # Deck not present in the base file (e.g. exporting against vanilla rather
+            # than WIF source) — fall back to a summary entry so the modder sees what
+            # would have been patched.
+            pass
+        # Human-readable summary of every patch — useful for diffing / debugging.
         deck_patches.append(generate_deck_patch(deck_name, new_packs, new_groups))
 
     from wif_ag_tool.generator.localisation import generate_platoons_rows
@@ -315,7 +345,7 @@ def sessions_export_direct(slug: str):
     try:
         direct_paths["packs"].write_text("\n\n".join(packs_blocks) + "\n", encoding="utf-8")
         direct_paths["groups"].write_text("\n\n".join(groups_blocks) + "\n", encoding="utf-8")
-        direct_paths["decks"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
+        direct_paths["summary"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
         direct_paths["csv"].write_text(csv_text, encoding="utf-8")
     except Exception as e:
         return jsonify({"error": f"Failed to write export files: {str(e)}"}), 500
@@ -356,7 +386,7 @@ def sessions_build(slug: str):
     required_files = [
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf",
         export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
     ]
 
