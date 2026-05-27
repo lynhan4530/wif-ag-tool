@@ -406,13 +406,22 @@ function getAvailableGroups() {
   return groups;
 }
 
+const FOOT_TEAM_ROLES = new Set([
+  "at", "atgm", "manpads", "sam_inf", "aa_inf",
+  "mortar", "mortar_inf", "mortar_team",
+  "hmg", "mmg", "mg_team", "sniper",
+  "spotter", "fo", "forward_observer",
+  "support_inf", "supp_inf", "sapper",
+]);
+
 function needsTransport(u) {
   if (!u) return false;
   const norm = getNormalizedRole(u);
   if (norm === "infantry" || norm === "engineer") return true;
   const raw = (u.role || "").toLowerCase();
-  // Foot AT/AA/support teams that don't normalize to infantry — Javelin, MANPADS, ATGM teams, mortar/HMG/sniper teams, etc.
-  if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|sniper|mortar_inf|mortar_team|spotter|commandos|sapper|rifles|squad|team/.test(raw)) return true;
+  if (FOOT_TEAM_ROLES.has(raw)) return true;
+  // Compound names — Javelin / MANPADS / mortar teams that include descriptive suffixes
+  if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|mortar_inf|mortar_team|sniper_team|spotter|commandos|sapper/.test(raw)) return true;
   return false;
 }
 
