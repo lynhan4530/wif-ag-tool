@@ -328,6 +328,7 @@ const unitResolved = id => !!(state.unitsIndex[id] && state.unitsIndex[id].displ
 const getNormalizedRole = u => {
   if (!u) return "unknown";
   const r = (u.role || "").toLowerCase();
+  if (r.includes("recon") || r.includes("reco")) return "recon";
   if (r.includes("armor") || r.includes("tank")) return "armor";
   if (r.includes("ifv") || r.includes("apc") || r.includes("veh") || r.includes("carrier") || r.includes("transport")) return "ifv";
   if (r.includes("heli")) return "helicopter";
@@ -335,7 +336,6 @@ const getNormalizedRole = u => {
   if (r.includes("infantry") || r.includes("inf") || r.includes("commandos") || r.includes("chasseur") || r.includes("scout") || r.includes("sapper") || r.includes("rifles")) return "infantry";
   if (r.includes("artillery") || r.includes("howz") || r.includes("mortar") || r.includes("gun")) return "artillery";
   if (r.includes("aa") || r.includes("sam") || r.includes("spaag") || r.includes("missile") || r.includes("defence")) return "aa";
-  if (r.includes("recon")) return "recon";
   if (r.includes("supply") || r.includes("truck") || r.includes("ammo")) return "supply";
   if (r.includes("engineer")) return "engineer";
   return "unknown";
@@ -416,48 +416,84 @@ function getAvailableTransports(unit_id) {
   return list;
 }
 
-function renderSpecialtyBadges(specialties) {
-  if (!specialties || !specialties.length) return null;
-  const container = el("span", { style: "display: inline-flex; gap: 4px; margin-left: 6px; align-items: center; vertical-align: middle;" });
-  for (const s of specialties) {
+function renderSpecialtyBadges(specialties, role) {
+  const list = [...(specialties || [])];
+  const hasReconSpec = list.some(s => {
+    const clean = s.startsWith('_') ? s.slice(1).toLowerCase() : s.toLowerCase();
+    return clean === "recon" || clean === "scout";
+  });
+  if (role && (role.toLowerCase() === "reco" || role.toLowerCase() === "recon") && !hasReconSpec) {
+    list.unshift("Recon");
+  }
+
+  if (!list.length) return null;
+  const container = el("span", { style: "display: inline-flex; gap: 4px; margin-left: 6px; align-items: center; vertical-align: middle; flex-wrap: wrap;" });
+  for (const s of list) {
+    const clean = s.startsWith('_') ? s.slice(1) : s;
+    const lower = clean.toLowerCase();
+
     let bg = "#444";
     let color = "#fff";
-    let label = s;
+    let label = clean;
 
-    if (s.toLowerCase() === "recon") {
+    if (lower === "recon" || lower === "scout") {
       bg = "#1e4620";
       color = "#4ade80";
       label = "RECON";
-    } else if (s.toLowerCase() === "infiltration") {
-      bg = "#5c3d2e";
+    } else if (lower === "infiltration") {
+      bg = "#78350f";
       color = "#fcd34d";
       label = "FWD";
-    } else if (s.toLowerCase() === "leader" || s.toLowerCase() === "command") {
+    } else if (lower === "leader" || lower === "command") {
       bg = "#1e3a8a";
       color = "#60a5fa";
       label = "CMD";
-    } else if (s.toLowerCase() === "paratrooper" || s.toLowerCase() === "airborne") {
+    } else if (lower === "paratrooper" || lower === "airborne") {
       bg = "#4c1d95";
       color = "#c084fc";
       label = "ABN";
-    } else if (s.toLowerCase() === "amphibious") {
+    } else if (lower === "amphibious") {
       bg = "#134e5e";
       color = "#2dd4bf";
       label = "AMPH";
-    } else if (s.toLowerCase() === "resolute") {
+    } else if (lower === "resolute") {
       bg = "#7c2d12";
       color = "#fb923c";
       label = "RES";
-    } else if (s.toLowerCase() === "shock") {
+    } else if (lower === "shock") {
       bg = "#7f1d1d";
       color = "#f87171";
       label = "SHK";
-    } else if (s.toLowerCase() === "mp") {
+    } else if (lower === "security") {
+      bg = "#1e3a8a";
+      color = "#93c5fd";
+      label = "SEC";
+    } else if (lower === "reservist") {
       bg = "#27272a";
       color = "#a1a1aa";
-      label = "MP";
+      label = "RSRV";
+    } else if (lower === "smoke_launcher") {
+      bg = "#3f3f46";
+      color = "#d4d4d8";
+      label = "SMOKE";
+    } else if (lower === "eo_dazzler") {
+      bg = "#3f3f46";
+      color = "#d4d4d8";
+      label = "DAZZLER";
+    } else if (lower === "thermals" || lower === "thermals2") {
+      bg = "#3f3f46";
+      color = "#d4d4d8";
+      label = "THERMALS";
+    } else if (lower === "era") {
+      bg = "#3f3f46";
+      color = "#d4d4d8";
+      label = "ERA";
+    } else if (lower === "transport" || lower === "transport2") {
+      bg = "#27272a";
+      color = "#a1a1aa";
+      label = "TRSP";
     } else {
-      label = s.toUpperCase();
+      label = clean.toUpperCase();
     }
 
     container.appendChild(el("span", {
@@ -485,7 +521,7 @@ function unitLine(unit_id, extras) {
     el("span", { class: "name" }, unitDisplay(unit_id)),
     unit_id && !unitResolved(unit_id)
       ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
-    u ? renderSpecialtyBadges(u.specialties) : null,
+    u ? renderSpecialtyBadges(u.specialties, u.role) : null,
     ...(extras || []),
   );
   return node;
@@ -1022,7 +1058,7 @@ function renderReplicaRow(row, gi, pi, ui) {
       el("span", { style: "display:flex; flex-direction:column; gap:2px; min-width:0; flex:1;" },
         el("span", { class: "name", style: "display: flex; align-items: center; flex-wrap: wrap;" },
           unitDisplay(row.unit_id),
-          renderSpecialtyBadges(state.unitsIndex[row.unit_id]?.specialties)
+          renderSpecialtyBadges(state.unitsIndex[row.unit_id]?.specialties, state.unitsIndex[row.unit_id]?.role)
         ),
         getNormalizedRole(state.unitsIndex[row.unit_id]) === "infantry" ? el("div", { style: "margin-top:2px; display:flex; gap:4px; align-items:center;" },
           el("span", { class: "field-label", style: "font-size:8px; color:#8aa;" }, "← TRSP:"),
@@ -1192,7 +1228,7 @@ function renderModal() {
       el("span", {},
         u.display_name || u.name,
         u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
-        renderSpecialtyBadges(u.specialties),
+        renderSpecialtyBadges(u.specialties, u.role),
       ),
       el("span", { class: "hint" }, `A:${u.attack}`),
       el("span", { class: "hint" }, `D:${u.defense}`),
