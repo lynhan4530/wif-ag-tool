@@ -1032,7 +1032,31 @@ function renderReplicaGroup(group, gi) {
   const rgKey = `${state.activeSlug}::group::${gi}`;
   const rgCollapsed = state.replicaCollapsedGroups.has(rgKey);
 
-  const section = el("div", { class: "replica-group" });
+  const section = el("div", {
+    class: "replica-group",
+    ondragover: e => { e.preventDefault(); },
+    ondrop: e => {
+      const raw = e.dataTransfer.getData("text/plain");
+      if (raw.startsWith("g:")) {
+        e.preventDefault();
+        const fgi = Number(raw.slice(2));
+        if (fgi === gi) return;
+        const moved = state.replicaGroups.splice(fgi, 1)[0];
+        state.replicaGroups.splice(gi > fgi ? gi - 1 : gi, 0, moved);
+        markReplicaDirty();
+        render();
+      } else if (raw.startsWith("p:")) {
+        e.preventDefault();
+        const [, fgiStr, fpiStr] = raw.split(":");
+        const fgi = Number(fgiStr), fpi = Number(fpiStr);
+        if (fgi === gi) return; // same-group reorder handled by inner platoon-card handler
+        const moved = state.replicaGroups[fgi].platoons.splice(fpi, 1)[0];
+        state.replicaGroups[gi].platoons.push(moved);
+        markReplicaDirty();
+        render();
+      }
+    },
+  });
 
   // Group header
   const groupHead = el("div", {
@@ -1106,7 +1130,24 @@ function renderReplicaPlatoon(platoon, gi, pi) {
   const rpKey = `${state.activeSlug}::group::${gi}::platoon::${pi}`;
   const rpCollapsed = state.replicaCollapsedPlatoons.has(rpKey);
 
-  const card = el("div", { class: "replica-platoon-card" });
+  const card = el("div", {
+    class: "replica-platoon-card",
+    ondragover: e => { e.preventDefault(); },
+    ondrop: e => {
+      const raw = e.dataTransfer.getData("text/plain");
+      if (!raw.startsWith("p:")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const [, fgiStr, fpiStr] = raw.split(":");
+      const fgi = Number(fgiStr), fpi = Number(fpiStr);
+      if (fgi === gi && fpi === pi) return;
+      const moved = state.replicaGroups[fgi].platoons.splice(fpi, 1)[0];
+      const insertAt = (fgi === gi && pi > fpi) ? pi - 1 : pi;
+      state.replicaGroups[gi].platoons.splice(insertAt, 0, moved);
+      markReplicaDirty();
+      render();
+    },
+  });
 
   const expandIcon = rpCollapsed ? "▶ " : "▼ ";
 
