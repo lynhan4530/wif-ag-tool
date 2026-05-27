@@ -272,6 +272,8 @@ const state = {
   deckQuery: "",
   vanillaCollapsedGroups: new Set(),
   vanillaCollapsedSmartGroups: new Set(),
+  replicaCollapsedGroups: new Set(),
+  replicaCollapsedPlatoons: new Set(),
 };
 
 const $ = sel => document.querySelector(sel);
@@ -963,12 +965,28 @@ function renderPlatoonPicker() {
 }
 
 function renderReplicaGroup(group, gi) {
+  const rgKey = `${state.activeSlug}::${group.name}`;
+  const rgCollapsed = state.replicaCollapsedGroups.has(rgKey);
+
   const section = el("div", { class: "replica-group" });
 
   // Group header
-  const groupHead = el("div", { class: "replica-group-head" },
-    el("span", {},
-      `⬥ Combat Group: `,
+  const groupHead = el("div", {
+    class: "replica-group-head",
+    style: "cursor: pointer; user-select: none;",
+    onclick: e => {
+      if (e.target.closest("select") || e.target.closest("button")) return;
+      if (rgCollapsed) {
+        state.replicaCollapsedGroups.delete(rgKey);
+      } else {
+        state.replicaCollapsedGroups.add(rgKey);
+      }
+      render();
+    }
+  },
+    el("span", { style: "display: flex; align-items: center; gap: 6px;" },
+      el("span", { style: "font-size: 8px; color: #778; width: 10px; display: inline-block;" }, rgCollapsed ? "▶" : "▼"),
+      el("span", {}, `⬥ Combat Group: `),
       mkSelect(getAvailableGroups(), group.name, v => { group.name = v; markReplicaDirty(); render(); }),
     ),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
@@ -984,28 +1002,47 @@ function renderReplicaGroup(group, gi) {
   );
   section.appendChild(groupHead);
 
-  // Group body — platoons
-  const body = el("div", { class: "replica-group-body" });
-  group.platoons.forEach((platoon, pi) => {
-    body.appendChild(renderReplicaPlatoon(platoon, gi, pi));
-  });
+  if (!rgCollapsed) {
+    // Group body — platoons
+    const body = el("div", { class: "replica-group-body" });
+    group.platoons.forEach((platoon, pi) => {
+      body.appendChild(renderReplicaPlatoon(platoon, gi, pi, group.name));
+    });
 
-  // Add platoon button
-  body.appendChild(el("div", { class: "group-actions" },
-    el("button", { class: "ghost", style: "font-size:11px; padding:3px 8px;",
-      onclick: () => addPlatoon(gi) }, "+ Add Platoon"),
-  ));
+    // Add platoon button
+    body.appendChild(el("div", { class: "group-actions" },
+      el("button", { class: "ghost", style: "font-size:11px; padding:3px 8px;",
+        onclick: () => addPlatoon(gi) }, "+ Add Platoon"),
+    ));
+    section.appendChild(body);
+  }
 
-  section.appendChild(body);
   return section;
 }
 
-function renderReplicaPlatoon(platoon, gi, pi) {
+function renderReplicaPlatoon(platoon, gi, pi, groupName) {
+  const rpKey = `${state.activeSlug}::${groupName}::${platoon.name}`;
+  const rpCollapsed = state.replicaCollapsedPlatoons.has(rpKey);
+
   const card = el("div", { class: "replica-platoon-card" });
 
+  const expandIcon = rpCollapsed ? "▶ " : "▼ ";
+
   // Platoon header
-  card.appendChild(el("div", { class: "replica-platoon-head" },
-    el("span", {}, `▸ ${platoon.name}`),
+  card.appendChild(el("div", {
+    class: "replica-platoon-head",
+    style: "cursor: pointer; user-select: none;",
+    onclick: e => {
+      if (e.target.closest("button")) return;
+      if (rpCollapsed) {
+        state.replicaCollapsedPlatoons.delete(rpKey);
+      } else {
+        state.replicaCollapsedPlatoons.add(rpKey);
+      }
+      render();
+    }
+  },
+    el("span", {}, `${expandIcon}${platoon.name}`),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
       el("span", { class: "hint" }, `${platoon.units.length} unit(s)`),
       el("button", { class: "x-btn", style: "font-size:12px;", title: "Remove platoon",
@@ -1018,18 +1055,20 @@ function renderReplicaPlatoon(platoon, gi, pi) {
     ),
   ));
 
-  // Unit rows
-  const unitsList = el("div", { class: "replica-platoon-units" });
-  platoon.units.forEach((row, ui) => {
-    unitsList.appendChild(renderReplicaRow(row, gi, pi, ui));
-  });
-  card.appendChild(unitsList);
+  if (!rpCollapsed) {
+    // Unit rows
+    const unitsList = el("div", { class: "replica-platoon-units" });
+    platoon.units.forEach((row, ui) => {
+      unitsList.appendChild(renderReplicaRow(row, gi, pi, ui));
+    });
+    card.appendChild(unitsList);
 
-  // Add unit button
-  card.appendChild(el("div", { class: "replica-platoon-actions" },
-    el("button", { class: "ghost", style: "font-size:11px; padding:2px 8px;",
-      onclick: () => openAddModal(gi, pi) }, "+ Add Unit"),
-  ));
+    // Add unit button
+    card.appendChild(el("div", { class: "replica-platoon-actions" },
+      el("button", { class: "ghost", style: "font-size:11px; padding:2px 8px;",
+        onclick: () => openAddModal(gi, pi) }, "+ Add Unit"),
+    ));
+  }
 
   return card;
 }
@@ -1434,6 +1473,8 @@ async function openSession(slug) {
     state.view = "session";
     state.vanillaCollapsedGroups.clear();
     state.vanillaCollapsedSmartGroups.clear();
+    state.replicaCollapsedGroups.clear();
+    state.replicaCollapsedPlatoons.clear();
     await reloadScopedDecks();
     render();
   } catch (e) { toast("Open failed: " + e.message, true); }
@@ -1486,6 +1527,8 @@ function backToPicker() {
   state.activeSlug = null;
   state.vanillaCollapsedGroups.clear();
   state.vanillaCollapsedSmartGroups.clear();
+  state.replicaCollapsedGroups.clear();
+  state.replicaCollapsedPlatoons.clear();
   bootstrapPicker();
 }
 
