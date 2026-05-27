@@ -1064,6 +1064,7 @@ function renderReplicaGroup(group, gi) {
     }
   },
     el("span", { style: "display: flex; align-items: center; gap: 6px;" },
+      el("span", { class: "drag-handle", title: "Drag to reorder group", style: "font-size:13px;" }, "⋮⋮"),
       el("span", { style: "font-size: 8px; color: #778; width: 10px; display: inline-block;" }, rgCollapsed ? "▶" : "▼"),
       el("span", {}, `⬥ Combat Group: `),
       mkSelect(getAvailableGroups(), group.name, v => { group.name = v; markReplicaDirty(); render(); }),
@@ -1140,7 +1141,10 @@ function renderReplicaPlatoon(platoon, gi, pi) {
       render();
     }
   },
-    el("span", {}, `${expandIcon}${platoon.name}`),
+    el("span", { style: "display: flex; align-items: center; gap: 6px;" },
+      el("span", { class: "drag-handle", title: "Drag to reorder platoon", style: "font-size:12px;" }, "⋮⋮"),
+      el("span", {}, `${expandIcon}${platoon.name}`),
+    ),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
       el("span", { class: "hint" }, `${platoon.units.length} unit(s)`),
       el("button", { class: "x-btn", style: "font-size:12px;", title: "Duplicate platoon",
