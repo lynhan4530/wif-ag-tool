@@ -264,6 +264,7 @@ const state = {
   exportOpen: false,
   platoonPickerOpen: false, // show platoon name picker modal
   platoonPickerGroupIdx: null,
+  platoonPickerRenamePi: null,
   settingsOpen: false,     // show settings modal
   buildOpen: false,        // show build log modal
   buildLog: "",
@@ -852,15 +853,58 @@ function addCombatGroup() {
   render();
 }
 
+function copyCombatGroup(gi) {
+  const src = state.replicaGroups[gi];
+  if (!src) return;
+  const clone = JSON.parse(JSON.stringify(src));
+  const used = new Set(state.replicaGroups.map(g => g.name));
+  const vanilla = getAvailableGroups().filter(n => !used.has(n));
+  if (vanilla.length) {
+    clone.name = vanilla[0];
+  } else {
+    let n = 1, candidate;
+    do { candidate = n === 1 ? `${src.name} (copy)` : `${src.name} (copy ${n})`; n++; }
+    while (used.has(candidate));
+    clone.name = candidate;
+  }
+  state.replicaGroups.splice(gi + 1, 0, clone);
+  markReplicaDirty();
+  render();
+}
+
+function copyPlatoon(gi, pi) {
+  const group = state.replicaGroups[gi];
+  const src = group?.platoons[pi];
+  if (!src) return;
+  const clone = JSON.parse(JSON.stringify(src));
+  const used = new Set(group.platoons.map(p => p.name));
+  let n = 1, candidate;
+  do { candidate = n === 1 ? `${src.name} (copy)` : `${src.name} (copy ${n})`; n++; }
+  while (used.has(candidate));
+  clone.name = candidate;
+  group.platoons.splice(pi + 1, 0, clone);
+  markReplicaDirty();
+  render();
+}
+
 function addPlatoon(gi) {
   state.platoonPickerOpen = true;
   state.platoonPickerGroupIdx = gi;
+  state.platoonPickerRenamePi = null;
+  render();
+}
+
+function renamePlatoon(gi, pi) {
+  state.platoonPickerOpen = true;
+  state.platoonPickerGroupIdx = gi;
+  state.platoonPickerRenamePi = pi;
   render();
 }
 
 function closePlatoonPicker() {
   state.platoonPickerOpen = false;
   state.platoonPickerGroupIdx = null;
+  state.platoonPickerRenamePi = null;
   render();
 }
 
@@ -868,7 +912,13 @@ function commitPlatoon(name) {
   const gi = state.platoonPickerGroupIdx;
   if (gi === null || gi === undefined) return;
   if (!name || !name.trim()) return;
-  state.replicaGroups[gi].platoons.push({ name: name.trim(), units: [] });
+  const pi = state.platoonPickerRenamePi;
+  if (pi !== null && pi !== undefined) {
+    const platoon = state.replicaGroups[gi]?.platoons[pi];
+    if (platoon) platoon.name = name.trim();
+  } else {
+    state.replicaGroups[gi].platoons.push({ name: name.trim(), units: [] });
+  }
   closePlatoonPicker();
   markReplicaDirty();
   render();
@@ -899,9 +949,14 @@ function getVanillaPlatoonNames() {
 
 function renderPlatoonPicker() {
   const gi = state.platoonPickerGroupIdx;
+  const renamePi = state.platoonPickerRenamePi;
+  const isRename = renamePi !== null && renamePi !== undefined;
   const groupName = state.replicaGroups[gi]?.name || "?";
+  const currentName = isRename ? state.replicaGroups[gi]?.platoons[renamePi]?.name : null;
   const existingNames = new Set(
-    (state.replicaGroups[gi]?.platoons || []).map(p => p.name)
+    (state.replicaGroups[gi]?.platoons || [])
+      .filter((p, i) => !isRename || i !== renamePi)
+      .map(p => p.name)
   );
 
   const backdrop = el("div", { class: "backdrop",
@@ -909,7 +964,9 @@ function renderPlatoonPicker() {
 
   const picker = el("div", { class: "platoon-picker" });
   const pickerHead = el("div", { class: "platoon-picker-head" },
-    `Add platoon to Combat Group "${groupName}"`
+    isRename
+      ? `Rename platoon "${currentName}"`
+      : `Add platoon to Combat Group "${groupName}"`
   );
   picker.appendChild(pickerHead);
   makeDraggable(picker, pickerHead);
@@ -998,6 +1055,8 @@ function renderReplicaGroup(group, gi) {
     ),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
       el("span", { class: "hint" }, `${group.platoons.reduce((s,p) => s + p.units.length, 0)} units`),
+      el("button", { class: "x-btn", title: "Duplicate group",
+        onclick: e => { e.stopPropagation(); copyCombatGroup(gi); } }, "⎘"),
       el("button", { class: "x-btn", title: "Remove group",
         onclick: () => {
           if (group.platoons.some(p => p.units.length > 0) && !confirm(`Delete group "${group.name}" and all its units?`)) return;
@@ -1052,6 +1111,10 @@ function renderReplicaPlatoon(platoon, gi, pi) {
     el("span", {}, `${expandIcon}${platoon.name}`),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
       el("span", { class: "hint" }, `${platoon.units.length} unit(s)`),
+      el("button", { class: "x-btn", style: "font-size:12px;", title: "Duplicate platoon",
+        onclick: e => { e.stopPropagation(); copyPlatoon(gi, pi); } }, "⎘"),
+      el("button", { class: "x-btn", style: "font-size:12px;", title: "Rename platoon",
+        onclick: e => { e.stopPropagation(); renamePlatoon(gi, pi); } }, "✎"),
       el("button", { class: "x-btn", style: "font-size:12px;", title: "Remove platoon",
         onclick: () => {
           if (platoon.units.length > 0 && !confirm(`Delete platoon "${platoon.name}" and its ${platoon.units.length} unit(s)?`)) return;
