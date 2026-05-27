@@ -768,6 +768,48 @@ function renderLeftPane() {
   return pane;
 }
 
+// ── collapse/expand-all helpers ─────────────────────────────────────────────
+function vanillaCollapseAll() {
+  const v = state.vanilla;
+  if (!v || !v.combat_groups) return;
+  for (const cg of v.combat_groups) {
+    state.vanillaCollapsedGroups.add(`${state.activeSlug}::${cg.name}`);
+    for (const sg of cg.smart_groups) {
+      state.vanillaCollapsedSmartGroups.add(`${state.activeSlug}::${cg.name}::${sg.name}`);
+    }
+  }
+  render();
+}
+function vanillaExpandAll() {
+  const v = state.vanilla;
+  if (!v || !v.combat_groups) return;
+  for (const cg of v.combat_groups) {
+    state.vanillaCollapsedGroups.delete(`${state.activeSlug}::${cg.name}`);
+    for (const sg of cg.smart_groups) {
+      state.vanillaCollapsedSmartGroups.delete(`${state.activeSlug}::${cg.name}::${sg.name}`);
+    }
+  }
+  render();
+}
+function replicaCollapseAll() {
+  state.replicaGroups.forEach((g, gi) => {
+    state.replicaCollapsedGroups.add(`${state.activeSlug}::group::${gi}`);
+    g.platoons.forEach((p, pi) => {
+      state.replicaCollapsedPlatoons.add(`${state.activeSlug}::group::${gi}::platoon::${pi}`);
+    });
+  });
+  render();
+}
+function replicaExpandAll() {
+  state.replicaGroups.forEach((g, gi) => {
+    state.replicaCollapsedGroups.delete(`${state.activeSlug}::group::${gi}`);
+    g.platoons.forEach((p, pi) => {
+      state.replicaCollapsedPlatoons.delete(`${state.activeSlug}::group::${gi}::platoon::${pi}`);
+    });
+  });
+  render();
+}
+
 // ── center pane ─────────────────────────────────────────────────────────────
 function renderCenterPane() {
   const pane = el("section", { class: "pane" });
@@ -780,6 +822,10 @@ function renderCenterPane() {
     pane.appendChild(el("div", { class: "pad hint" }, state.activeDeck ? "Loading…" : "Pick a deck on the left."));
     return pane;
   }
+  pane.appendChild(el("div", { class: "replica-bar" },
+    el("button", { class: "ghost", title: "Collapse all", onclick: vanillaCollapseAll }, "⊟ all"),
+    el("button", { class: "ghost", title: "Expand all", onclick: vanillaExpandAll }, "⊞ all"),
+  ));
   for (const cg of v.combat_groups) {
     const cgKey = `${state.activeSlug}::${cg.name}`;
     const cgCollapsed = state.vanillaCollapsedGroups.has(cgKey);
@@ -881,6 +927,8 @@ function renderRightPane() {
   const totalUnits = countTotalUnits();
   pane.appendChild(el("div", { class: "replica-bar" },
     el("button", { onclick: addCombatGroup }, "+ Add Group"),
+    el("button", { class: "ghost", title: "Collapse all", onclick: replicaCollapseAll }, "⊟ all"),
+    el("button", { class: "ghost", title: "Expand all", onclick: replicaExpandAll }, "⊞ all"),
     el("span", { class: "grow" }),
     el("span", { class: "hint" }, `${totalUnits} unit(s)`),
     el("button", {
