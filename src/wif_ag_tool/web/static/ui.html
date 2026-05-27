@@ -1038,6 +1038,21 @@ function renderReplicaGroup(group, gi) {
   const groupHead = el("div", {
     class: "replica-group-head",
     style: "cursor: pointer; user-select: none;",
+    draggable: "true",
+    ondragstart: e => { e.dataTransfer.setData("text/plain", `g:${gi}`); e.stopPropagation(); },
+    ondragover: e => { e.preventDefault(); },
+    ondrop: e => {
+      const raw = e.dataTransfer.getData("text/plain");
+      if (!raw.startsWith("g:")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const fgi = Number(raw.slice(2));
+      if (fgi === gi) return;
+      const moved = state.replicaGroups.splice(fgi, 1)[0];
+      state.replicaGroups.splice(gi > fgi ? gi - 1 : gi, 0, moved);
+      markReplicaDirty();
+      render();
+    },
     onclick: e => {
       if (e.target.closest("select") || e.target.closest("button")) return;
       if (rgCollapsed) {
@@ -1098,6 +1113,23 @@ function renderReplicaPlatoon(platoon, gi, pi) {
   card.appendChild(el("div", {
     class: "replica-platoon-head",
     style: "cursor: pointer; user-select: none;",
+    draggable: "true",
+    ondragstart: e => { e.dataTransfer.setData("text/plain", `p:${gi}:${pi}`); e.stopPropagation(); },
+    ondragover: e => { e.preventDefault(); },
+    ondrop: e => {
+      const raw = e.dataTransfer.getData("text/plain");
+      if (!raw.startsWith("p:")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const [, fgiStr, fpiStr] = raw.split(":");
+      const fgi = Number(fgiStr), fpi = Number(fpiStr);
+      if (fgi === gi && fpi === pi) return;
+      const moved = state.replicaGroups[fgi].platoons.splice(fpi, 1)[0];
+      const insertAt = (fgi === gi && pi > fpi) ? pi - 1 : pi;
+      state.replicaGroups[gi].platoons.splice(insertAt, 0, moved);
+      markReplicaDirty();
+      render();
+    },
     onclick: e => {
       if (e.target.closest("button")) return;
       if (rpCollapsed) {
@@ -1160,12 +1192,15 @@ function renderReplicaRow(row, gi, pi, ui) {
     class: "replica-row",
     draggable: "true",
     "data-unit-id": row.unit_id,
-    ondragstart: e => { e.dataTransfer.setData("text/plain", `${gi}:${pi}:${ui}`); node.classList.add("dragging"); },
+    ondragstart: e => { e.dataTransfer.setData("text/plain", `u:${gi}:${pi}:${ui}`); node.classList.add("dragging"); e.stopPropagation(); },
     ondragend: () => node.classList.remove("dragging"),
     ondragover: e => { e.preventDefault(); },
     ondrop: e => {
+      const raw = e.dataTransfer.getData("text/plain");
+      if (!raw.startsWith("u:")) return;
       e.preventDefault();
-      const parts = e.dataTransfer.getData("text/plain").split(":");
+      e.stopPropagation();
+      const parts = raw.slice(2).split(":");
       if (parts.length === 3) {
         const [fgi, fpi, fui] = parts.map(Number);
         if (fgi === gi && fpi === pi && fui !== ui) {
@@ -1173,10 +1208,12 @@ function renderReplicaRow(row, gi, pi, ui) {
           const moved = units.splice(fui, 1)[0];
           units.splice(ui > fui ? ui - 1 : ui, 0, moved);
         } else if (fgi !== gi || fpi !== pi) {
-          // Move between platoons
+          // Move between platoons — but only if no existing unit with same id in target platoon
           const srcUnits = state.replicaGroups[fgi].platoons[fpi].units;
-          const moved = srcUnits.splice(fui, 1)[0];
-          units.splice(ui, 0, moved);
+          const moving = srcUnits[fui];
+          if (units.some(u => u.unit_id === moving.unit_id)) return;
+          srcUnits.splice(fui, 1);
+          units.splice(ui, 0, moving);
         }
         markReplicaDirty();
         render();
