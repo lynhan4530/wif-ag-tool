@@ -180,6 +180,19 @@ def test_build_mod_missing_files(client, tmp_path):
     assert resp.status_code == 400
     assert "Pre-build check failed: Export files are missing" in resp.get_json()["error"]
 
+def test_howto_returns_markdown(client):
+    """GET /api/howto streams the HOWTO.md repo doc as text/markdown so the SPA
+    can render it without needing a second source of truth."""
+    resp = client.get("/api/howto")
+    assert resp.status_code == 200
+    assert "markdown" in resp.headers.get("Content-Type", "")
+    text = resp.get_data(as_text=True)
+    # Guard the most load-bearing sections so the doc can't silently lose them.
+    assert "How To" in text
+    assert "Scaffold a new mod" in text
+    assert "Export the patches" in text
+
+
 def test_build_mod_success(client, tmp_path, monkeypatch):
     resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
     slug = resp.get_json()["slug"]

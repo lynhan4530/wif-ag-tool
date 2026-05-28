@@ -771,6 +771,21 @@ def unit_icon(unit_id: str):
     return resp
 
 
+# ── docs ─────────────────────────────────────────────────────────────────────
+
+@api_bp.get("/howto")
+def howto():
+    """Serve HOWTO.md as raw markdown.
+
+    The same file is rendered on GitHub at https://github.com/lynhan4530/wif-ag-tool/blob/main/HOWTO.md
+    so there is one source of truth and the in-app guide cannot drift from the repo doc.
+    """
+    path = config.TOOL_ROOT / "HOWTO.md"
+    if not path.exists():
+        return jsonify({"error": "HOWTO.md missing — please pull latest from main"}), 404
+    return path.read_text(encoding="utf-8"), 200, {"Content-Type": "text/markdown; charset=utf-8"}
+
+
 # ── refresh ──────────────────────────────────────────────────────────────────
 
 @api_bp.post("/refresh")

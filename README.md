@@ -2,6 +2,8 @@
 
 An interactive, web-based modding companion tool for **WARNO**'s Army General campaigns. It allows modders to seamlessly assign custom units—like the modern units from **A World in Flames (WIF)**—into Army General campaign decks, and outputs/compiles the necessary NDF and CSV patch files to build the mod.
 
+> **New here?** Read **[HOWTO.md](HOWTO.md)** for the full end-to-end walkthrough — scaffold a mod, copy WIF units in, build a replica deck, export, compile, and run. The same guide is available inside the tool via the **❓ How to** button in the header.
+
 The tool features a high-performance Single Page Application (SPA) UI that mirrors WARNO's 4-tier battle order hierarchy (**Deck → Combat Group → Platoon/Smart Group → Unit**).
 
 > [!NOTE]
