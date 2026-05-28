@@ -179,6 +179,13 @@ Descriptor_StrategicPack_M113A1B_BEL_Rifles_AT_BEL_0 is DeckPackDescriptor
 - MP packs (DeckPacks.ndf) DO have a `Number` field — don't confuse them.
 - Pack naming: `Descriptor_StrategicPack_<UnitName>_<XP>`
 
+### How AG encodes "recruitable count" (no `Number` field)
+Because AG packs lack a `Number` field, the multi-copy semantics live in the **deck**, not the
+pack. A pack provides *one* recruitable instance per `DeckPackList` slot it occupies. To make a
+pack recruitable N times, the `~/Descriptor_StrategicPack_*` reference is duplicated N times
+**consecutively** in `DeckPackList`, and the combat group's `(start_index, count)` tuple reads
+that N-slot run. See Section 4 for the tuple invariant and Section 5 for the deck-side proof.
+
 ---
 
 ## 4. StrategicCombatGroups.ndf — TDeckCombatGroupDescriptor
@@ -273,9 +280,28 @@ Descriptor_CombatGroup_pion_US_11ACR_4_WIF_WF_M1A2_SEPV2_Abrams_US is TDeckComba
 
 ### Rules
 - `Name` = exactly 10 uppercase chars, maps to PLATOONS.csv token
-- `PackIndexUnitNumberList` tuples = `(index, count)` where index is 0-based in parent DeckPackList
+- `PackIndexUnitNumberList` tuples = `(start_index, count)` where `start_index` is 0-based in parent DeckPackList
+- **`count` is the number of CONSECUTIVE `DeckPackList` slots to consume**, NOT a squad-size
+  multiplier on a single pack ref. The engine reads exactly `count` entries starting at
+  `start_index`. If `DeckPackList` doesn't have that many slots in range, the engine reads
+  out-of-bounds garbage and the game crashes on first pawn click in that deck.
 - **NEVER insert mid-list** — always append packs and use `next_index` for new packs
 - `IsHQ = True` is optional, marks command unit
+
+### Invariant: tuple-sum equals list-growth
+For any new combat group your generator emits into a deck:
+```
+sum(count for (start_index, count) in all SmartGroups in this CombatGroup)
+  == number of new ~/Descriptor_StrategicPack_* refs appended to DeckPackList for this group
+```
+Vanilla proof (`Descriptor_CombatGroup_pion_US_11ACR_1_A_*`):
+`(0,6)+(6,2)+(8,4)+(12,6)+(18,2)+(20,4)+(24,2)+(26,1)+(27,1)+(28,2) = 30` matches the
+30 slots that group A's contiguous run occupies in `DeckPackList`. Each subsequent group
+(B, C, D, HQ) starts at the slot immediately after the previous group's last slot.
+
+The export pipeline asserts this invariant per-deck (`pipeline._assert_pack_index_invariant`)
+and refuses to write the export if it ever fails — defense in depth against future generator
+regressions.
 
 ---
 
@@ -478,6 +504,14 @@ Any mod touching StrategicDecks.ndf compiles into `GFX/Deck` — same package CR
 1. **PackIndexUnitNumberList uses 0-based index in DeckPackList** — not the pack name.
    Reorder or insert mid-list → all combat groups silently break.
    **Always append. Never insert.**
+
+1b. **`(start_index, count)` is a CONSECUTIVE RUN, not a multiplier on one pack ref.**
+   `count=6` means the engine reads 6 DeckPackList entries starting at `start_index`.
+   So a SmartGroup with `(start, 6)` requires 6 consecutive `~/Descriptor_StrategicPack_*`
+   entries in DeckPackList — usually the same ref duplicated 6×. Emitting `(start, 6)` next
+   to a single pack ref makes the engine read 5 unrelated entries; at the deck's end this
+   reads out-of-bounds and crashes the pawn-click UI. (Bug fixed 2026-05-28; regression
+   guarded by `tests/test_generator.py::test_gen_combat_group_count_emits_consecutive_run_tuple`.)
 
 2. **`_solo` vs `_multi`** — AG uses `_solo` divisions; MP uses `_multi`.
    Wrong suffix = broken deck with no error message.

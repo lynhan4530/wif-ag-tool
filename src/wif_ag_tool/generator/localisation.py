@@ -1,6 +1,7 @@
 """Emit PLATOONS.csv rows for combat-group and smart-group tokens."""
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
 from wif_ag_tool.models import Assignment, WifUnit
 from wif_ag_tool.generator.token_gen import (
     make_unique_token,
@@ -8,10 +9,16 @@ from wif_ag_tool.generator.token_gen import (
     smart_token_key,
 )
 
+if TYPE_CHECKING:
+    from wif_ag_tool.models import DeckState
+    from wif_ag_tool.parser.combatgroup_parser import CombatGroup
+
 
 def generate_platoons_rows(
     assignments: list[Assignment],
     units: dict[str, WifUnit],
+    decks: dict[str, DeckState] | None = None,
+    combat_groups: dict[str, CombatGroup] | None = None,
 ) -> str:
     """Return PLATOONS.csv content: semicolon-separated, double-quoted, no BOM.
 
@@ -25,6 +32,7 @@ def generate_platoons_rows(
         lst.sort(key=lambda a: (a.order, a.seq))
 
     existing: set[str] = set()
+    written_tokens: set[str] = set()
     rows: list[str] = ['"TOKEN";"REFTEXT"']
 
     for deck_name, deck_assignments in by_deck.items():
@@ -40,13 +48,29 @@ def generate_platoons_rows(
         for gname in group_order:
             group_assignments = groups_map[gname]
 
-            group_token = make_unique_token(
-                f"cg_WIF_{gname}",
-                deck_name,
-                existing,
-            )
+            # Resolve vanilla combat group name and token if possible
+            vanilla_token = None
+            vanilla_smart_groups = None
+            if decks and deck_name in decks:
+                deck = decks[deck_name]
+                from wif_ag_tool.generator.group_generator import resolve_cg_name
+                cg_name = resolve_cg_name(deck_name, gname, deck.combat_group_list)
+                if combat_groups and cg_name in combat_groups:
+                    vanilla_token = combat_groups[cg_name].token
+                    vanilla_smart_groups = combat_groups[cg_name].smart_groups
+
+            if vanilla_token:
+                group_token = vanilla_token
+            else:
+                group_token = make_unique_token(
+                    f"cg_WIF_{gname}",
+                    deck_name,
+                    existing,
+                )
             existing.add(group_token)
-            rows.append(f'"{group_token}";"WIF {gname}"')
+            if group_token not in written_tokens:
+                written_tokens.add(group_token)
+                rows.append(f'"{group_token}";"WIF {gname}"')
 
             # Group assignments by sub_group
             grouped: dict[str, list[Assignment]] = {}
@@ -80,16 +104,20 @@ def generate_platoons_rows(
 
             smart_group_items.sort(key=smart_group_sort_key)
 
-            for sg_name, sg_assignments in smart_group_items:
-                if sg_name:
-                    token_key = f"sg_WIF_{gname}_{sg_name}"
-                else:
-                    a = sg_assignments[0]
-                    xp = a.xp_levels[0] if a.xp_levels else 1
-                    token_key = smart_token_key(a.unit_id, xp, a.seq)
+            from wif_ag_tool.generator.group_generator import align_and_order_smart_groups
+            aligned_groups = align_and_order_smart_groups(
+                smart_group_items=smart_group_items,
+                vanilla_smart_groups=vanilla_smart_groups,
+                deck_name=deck_name,
+                gname=gname,
+                existing_tokens=existing,
+            )
 
-                smart_token = make_unique_token(token_key, deck_name, existing)
-                existing.add(smart_token)
+            for smart_token, sg_is_hq, sg_assignments in aligned_groups:
+                if not sg_assignments:
+                    continue  # Unmatched empty placeholder slot, no CSV translation needed
+
+                sg_name = sg_assignments[0].sub_group
 
                 # Determine display name
                 if sg_name:
@@ -110,7 +138,9 @@ def generate_platoons_rows(
                     xp = a.xp_levels[0] if a.xp_levels else 1
                     display_name = f"WIF {display_base}{seq_label} XP{xp}"
 
-                rows.append(f'"{smart_token}";"{display_name}"')
+                if smart_token not in written_tokens:
+                    written_tokens.add(smart_token)
+                    rows.append(f'"{smart_token}";"{display_name}"')
 
     return "\n".join(rows) + "\n"
 

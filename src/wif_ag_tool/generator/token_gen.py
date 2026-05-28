@@ -4,9 +4,16 @@ import hashlib
 
 
 def make_token(unit_id: str, deck_name: str, suffix: str = "") -> str:
-    """Return MD5 prefix of f'{unit_id}:{deck_name}{suffix}' — 10 hex chars, uppercase."""
+    """Return deterministic 10-char uppercase token from f'{unit_id}:{deck_name}{suffix}' using only letters A-Z."""
     key = f"{unit_id}:{deck_name}{suffix}"
-    return hashlib.md5(key.encode()).hexdigest()[:10].upper()
+    h = hashlib.md5(key.encode()).digest()
+    val = int.from_bytes(h[:8], byteorder="big")
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    token_chars = []
+    for _ in range(10):
+        val, remainder = divmod(val, 26)
+        token_chars.append(alphabet[remainder])
+    return "".join(token_chars)
 
 
 def make_unique_token(unit_id: str, deck_name: str, existing: set[str]) -> str:

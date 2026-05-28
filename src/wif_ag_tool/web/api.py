@@ -23,6 +23,7 @@ from wif_ag_tool.parser.save_parser import list_campaigns
 from wif_ag_tool.pipeline import (
     export_from_replicas,
     refresh_deck_cache,
+    _assert_pack_index_invariant,
 )
 from wif_ag_tool.validator.unit_validator import validate_unit_exists, UnitNotFoundError
 
@@ -229,6 +230,7 @@ def sessions_export_direct(slug: str):
 
     decks_map = _state["decks"]
     units = _state["units"]
+    combat_groups = _state.get("combat_groups") or {}
     if not decks_map:
         return jsonify({"error": "No deck cache loaded — run refresh first"}), 400
 
@@ -243,9 +245,10 @@ def sessions_export_direct(slug: str):
     base_decks_ndf  = decks_dir / "StrategicDecks.ndf"
     base_packs_ndf  = decks_dir / "StrategicPacks.ndf"
     base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
+    base_csv        = export_path / "Localisation" / mod_name / "PLATOONS.csv"
     direct_paths = {
         "summary": decks_dir / "StrategicDecks_patch_summary.txt",
-        "csv": export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
+        "csv": base_csv
     }
 
     for p in direct_paths.values():
@@ -269,9 +272,9 @@ def sessions_export_direct(slug: str):
                 pass
 
     # Snapshot each base file to .orig on first export, then restore from .orig on
-    # every subsequent export so repeated runs apply on a clean canvas instead of
+    # every subsequent export so repeated runs apply on a canvas instead of
     # accumulating duplicate definitions.
-    for base in (base_decks_ndf, base_packs_ndf, base_groups_ndf):
+    for base in (base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv):
         pristine = base.with_suffix(base.suffix + ".orig")
         if base.exists() and not pristine.exists():
             pristine.write_bytes(base.read_bytes())
@@ -315,41 +318,64 @@ def sessions_export_direct(slug: str):
                 from wif_ag_tool.generator.pack_generator import generate_packs_for_assignment
                 packs_blocks.append(generate_packs_for_assignment(a, transport_id=a.transport_id))
 
+            from wif_ag_tool.generator.group_generator import resolve_cg_name
+            cg_name = resolve_cg_name(deck_name, gname, deck.combat_group_list)
+            vanilla_token = None
+            is_hq = (gname == "HQ")
+            vanilla_smart_groups = None
+            if cg_name in combat_groups:
+                vanilla_token = combat_groups[cg_name].token
+                is_hq = combat_groups[cg_name].is_hq
+                vanilla_smart_groups = combat_groups[cg_name].smart_groups
+
             from wif_ag_tool.generator.group_generator import generate_grouped_combat_group
             combat_group_block = generate_grouped_combat_group(
                 gname=gname,
                 deck_name=deck_name,
                 assignments=group_assignments,
                 deck_state=running,
-                existing_tokens=existing_tokens
+                existing_tokens=existing_tokens,
+                vanilla_token=vanilla_token,
+                is_hq=is_hq,
+                vanilla_smart_groups=vanilla_smart_groups,
             )
             groups_blocks.append(combat_group_block)
 
+            # Engine reads `count` consecutive DeckPackList slots per SmartGroup
+            # tuple, so duplicate each pack ref `a.count` times.
             for a in group_assignments:
                 for xp in a.xp_levels:
                     pack_ref = a.pack_name(xp)
-                    new_packs.append(pack_ref)
-                    running.pack_list.append(pack_ref)
+                    for _ in range(a.count):
+                        new_packs.append(pack_ref)
+                        running.pack_list.append(pack_ref)
 
-            cg_name = group_assignments[0].combat_group_name()
             new_groups.append(cg_name)
             running.combat_group_list.append(cg_name)
 
         from wif_ag_tool.generator.deck_patcher import generate_deck_patch, apply_deck_patch
-        # Mutate the live StrategicDecks.ndf in place so the existing deck's
-        # DeckPackList / DeckCombatGroupList actually reference the new packs/groups.
+        # Defense in depth: refuse to write the export if SmartGroup tuples and
+        # DeckPackList growth disagree (would crash on pawn click). See NDF_REFERENCE.md §4.
         try:
-            apply_deck_patch(base_decks_ndf, deck_name, new_packs, new_groups)
+            _assert_pack_index_invariant(deck_name, deck_assignments, len(new_packs))
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 500
+        # Mutate the live StrategicDecks.ndf in place so the existing deck's
+        # DeckPackList actually references the new packs. Do NOT duplicate combat groups that are already vanilla.
+        vanilla_groups = set(deck.combat_group_list)
+        groups_to_append = [g for g in new_groups if g not in vanilla_groups]
+        try:
+            apply_deck_patch(base_decks_ndf, deck_name, new_packs, groups_to_append)
         except KeyError:
             # Deck not present in the base file (e.g. exporting against vanilla rather
             # than WIF source) — fall back to a summary entry so the modder sees what
             # would have been patched.
             pass
         # Human-readable summary of every patch — useful for diffing / debugging.
-        deck_patches.append(generate_deck_patch(deck_name, new_packs, new_groups))
+        deck_patches.append(generate_deck_patch(deck_name, new_packs, groups_to_append))
 
     from wif_ag_tool.generator.localisation import generate_platoons_rows
-    csv_text = generate_platoons_rows(assignments, units)
+    csv_text = generate_platoons_rows(assignments, units, decks=decks_map, combat_groups=combat_groups)
 
     try:
         # Append new pack defs to the base StrategicPacks.ndf so the compiler picks
@@ -360,10 +386,8 @@ def sessions_export_direct(slug: str):
                 f.write("\n\n".join(packs_blocks))
                 f.write("\n")
         if groups_blocks:
-            with base_groups_ndf.open("a", encoding="utf-8") as f:
-                f.write("\n\n// === WIF AG additions ===\n\n")
-                f.write("\n\n".join(groups_blocks))
-                f.write("\n")
+            from wif_ag_tool.generator.deck_patcher import apply_combat_group_patches
+            apply_combat_group_patches(base_groups_ndf, groups_blocks)
         direct_paths["summary"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
         direct_paths["csv"].write_text(csv_text, encoding="utf-8")
     except Exception as e:
@@ -406,7 +430,7 @@ def sessions_build(slug: str):
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks.ndf",
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups.ndf",
         export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf",
-        export_path / "Localisation" / mod_name / "PLATOONS_additions.csv"
+        export_path / "Localisation" / mod_name / "PLATOONS.csv"
     ]
 
     missing_files = [str(f.resolve()) for f in required_files if not f.exists()]
@@ -424,7 +448,8 @@ def sessions_build(slug: str):
             shell=True,
             capture_output=True,
             text=True,
-            timeout=90,
+            input="\n",
+            timeout=300,
         )
         return jsonify({
             "ok": res.returncode == 0,
@@ -434,7 +459,7 @@ def sessions_build(slug: str):
         })
     except subprocess.TimeoutExpired as e:
         return jsonify({
-            "error": "Mod compilation timed out after 90 seconds.",
+            "error": "Mod compilation timed out after 300 seconds.",
             "stdout": e.stdout or "",
             "stderr": e.stderr or "",
         }), 500

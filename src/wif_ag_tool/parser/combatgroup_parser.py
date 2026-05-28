@@ -20,6 +20,7 @@ class CombatGroup:
     name: str                              # full descriptor name
     token: str = ""                        # 10-char Name field
     smart_groups: list[SmartGroup] = field(default_factory=list)
+    is_hq: bool = False
 
 
 # Each block starts with: ``<DescriptorName> is TDeckCombatGroupDescriptor``
@@ -89,15 +90,16 @@ def _parse_block(name: str, block: str) -> CombatGroup:
     head_region = block if smart_pos < 0 else block[:smart_pos]
     head_match = _RE_TOP_NAME.search(head_region)
     token = head_match.group(1) if head_match else ""
+    is_hq = bool(_RE_IS_HQ.search(head_region))
 
-    cg = CombatGroup(name=name, token=token)
+    cg = CombatGroup(name=name, token=token, is_hq=is_hq)
     for smart in _slice_smart_groups(block):
         sg_name = _RE_SMART_NAME.search(smart)
-        is_hq = bool(_RE_IS_HQ.search(smart))
+        sg_is_hq = bool(_RE_IS_HQ.search(smart))
         tuples = [(int(a), int(b)) for a, b in _RE_PACK_TUPLE.findall(smart)]
         cg.smart_groups.append(SmartGroup(
             name=sg_name.group(1) if sg_name else "",
-            is_hq=is_hq,
+            is_hq=sg_is_hq,
             pack_indices=tuples,
         ))
     return cg

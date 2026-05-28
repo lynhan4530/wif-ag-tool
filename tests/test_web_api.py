@@ -73,6 +73,20 @@ def test_export_direct_success(client, tmp_path, monkeypatch):
     mod_dir.mkdir()
     export_dir = tmp_path / "export_output"
     
+    # Create required initial base files in export_dir
+    decks_dir = export_dir / "Generated" / "Gameplay" / "Decks"
+    decks_dir.mkdir(parents=True, exist_ok=True)
+    (decks_dir / "StrategicDecks.ndf").write_text(
+        "export Descriptor_Deck_pion_US_11ACR_4 is TDeckDescriptor\n(\n    DeckPackList = [\n    ]\n    DeckCombatGroupList = [\n    ]\n)\n",
+        encoding="utf-8"
+    )
+    (decks_dir / "StrategicPacks.ndf").write_text("// packs\n", encoding="utf-8")
+    (decks_dir / "StrategicCombatGroups.ndf").write_text("// groups\n", encoding="utf-8")
+    
+    csv_dir = export_dir / "Localisation" / "CRM_ArmyGeneral"
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    (csv_dir / "PLATOONS.csv").write_text('"TOKEN";"REFTEXT"\n', encoding="utf-8")
+
     # Create session and patch settings
     resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
     slug = resp.get_json()["slug"]
@@ -119,10 +133,10 @@ def test_export_direct_success(client, tmp_path, monkeypatch):
     assert resp.get_json()["ok"] is True
     
     # Verify files created in export_dir
-    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf").exists()
-    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf").exists()
-    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf").exists()
-    assert (export_dir / "Localisation" / "CRM_ArmyGeneral" / "PLATOONS_additions.csv").exists()
+    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicPacks.ndf").exists()
+    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups.ndf").exists()
+    assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf").exists()
+    assert (export_dir / "Localisation" / "CRM_ArmyGeneral" / "PLATOONS.csv").exists()
 
 def test_build_mod_not_configured(client):
     resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
@@ -178,10 +192,10 @@ def test_build_mod_success(client, tmp_path, monkeypatch):
     # Create required files
     export_path = mod_dir / "GameData"
     required_files = [
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks_additions.ndf",
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups_additions.ndf",
-        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks_patch.ndf",
-        export_path / "Localisation" / "mock_mod" / "PLATOONS_additions.csv"
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicPacks.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicCombatGroups.ndf",
+        export_path / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf",
+        export_path / "Localisation" / "mock_mod" / "PLATOONS.csv"
     ]
     for rf in required_files:
         rf.parent.mkdir(parents=True, exist_ok=True)

@@ -111,3 +111,49 @@ def _insert_into_list(
 
     insertion = [f"        ~/{ref}," for ref in refs]
     return lines[:close_idx] + insertion + lines[close_idx:]
+
+
+def apply_combat_group_patches(
+    strategic_groups_path: Path,
+    group_blocks: list[str],
+) -> None:
+    """Find and replace existing combat group blocks in StrategicCombatGroups.ndf, or append them."""
+    if not group_blocks:
+        return
+
+    import re
+    text = strategic_groups_path.read_text(encoding="utf-8")
+    lines = text.splitlines(keepends=False)
+
+    append_blocks = []
+
+    for block in group_blocks:
+        if not block.strip():
+            continue
+        first_line = block.splitlines()[0]
+        # Match e.g. "Descriptor_CombatGroup_pion_US_11ACR_1_A_1_11th_ACR is TDeckCombatGroupDescriptor"
+        m = re.match(r'^(\S+)\s+is\s+', first_line)
+        if not m:
+            append_blocks.append(block)
+            continue
+
+        cg_name = m.group(1)
+        header = f"{cg_name} is TDeckCombatGroupDescriptor"
+        
+        start = None
+        for i, line in enumerate(lines):
+            if line.startswith(header):
+                start = i
+                break
+
+        if start is not None:
+            end = _find_block_end(lines, start)
+            lines = lines[:start] + block.splitlines() + lines[end:]
+        else:
+            append_blocks.append(block)
+
+    new_text = "\n".join(lines) + "\n"
+    if append_blocks:
+        new_text += "\n\n// === WIF AG additions ===\n\n" + "\n\n".join(append_blocks) + "\n"
+
+    strategic_groups_path.write_text(new_text, encoding="utf-8")

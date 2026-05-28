@@ -37,6 +37,67 @@ def test_gen_combat_group_multi_xp_sequential_indices():
     assert "(7,1)" in out
 
 
+def test_gen_combat_group_count_emits_consecutive_run_tuple():
+    """count>1 → single SmartGroup tuple (start, count) covering count consecutive slots."""
+    deck = DeckState("Descriptor_Deck_pion_TEST_Alpha_1", ["p"] * 5, [])
+    a = Assignment(
+        "Descriptor_Deck_pion_TEST_Alpha_1",
+        "WF_M1A2_SEPV2_Abrams_US",
+        xp_levels=[1],
+        count=6,
+    )
+    out = generate_combat_group(a, deck, set())
+    # Engine reads 6 consecutive packs starting at index 5
+    assert "(5,6)" in out
+    # A second tuple at (5,1) or (6,1) would mean overlap → none must be present
+    assert "(6,6)" not in out
+
+
+def test_gen_combat_group_multi_xp_count_offsets_by_count():
+    """Two XP levels with count=6 → tuples (s, 6) and (s+6, 6), NOT (s, 6) (s+1, 6)."""
+    deck = DeckState("Descriptor_Deck_pion_TEST_Alpha_1", ["p"] * 5, [])
+    a = Assignment(
+        "Descriptor_Deck_pion_TEST_Alpha_1",
+        "WF_M1A2_SEPV2_Abrams_US",
+        xp_levels=[1, 2],
+        count=6,
+    )
+    out = generate_combat_group(a, deck, set())
+    assert "(5,6)" in out
+    assert "(11,6)" in out
+    # No overlapping window like (6,6)/(7,6)
+    assert "(6,6)" not in out
+    assert "(7,6)" not in out
+
+
+def test_grouped_smart_group_count_accumulates_across_assignments():
+    """Two count>1 assignments in one combat group: second starts past first's full run."""
+    deck = DeckState("Descriptor_Deck_pion_TEST_Alpha_1", [], [])
+    a1 = Assignment(
+        "Descriptor_Deck_pion_TEST_Alpha_1",
+        "WF_M1A2_SEPV2_Abrams_US",
+        xp_levels=[1],
+        count=6,
+        group_name="A",
+        sub_group="1",
+        order=0,
+    )
+    a2 = Assignment(
+        "Descriptor_Deck_pion_TEST_Alpha_1",
+        "WF_M2A4_Bradley_US",
+        xp_levels=[1],
+        count=4,
+        group_name="A",
+        sub_group="2",
+        order=1,
+    )
+    out = generate_grouped_combat_group("A", deck.name, [a1, a2], deck, set())
+    # First assignment occupies indices 0..5 → tuple (0,6)
+    assert "(0,6)" in out
+    # Second assignment must start at 6 (not 1) → tuple (6,4)
+    assert "(6,4)" in out
+
+
 def test_gen_deck_patch_appends_correct_count():
     patch = generate_deck_patch("TestDeck", ["Pack_A", "Pack_B"], ["Group_A"])
     assert patch.count("~/Pack_") == 2
@@ -204,3 +265,56 @@ def test_replicas_hierarchical_save_and_flatten(tmp_path):
     assert all(a.sub_group == "TROOP HQ" for a in hq_asn)
     a_asn = [a for a in asn if a.group_name == "A"]
     assert all(a.sub_group == "1ST RECON PLATOON" for a in a_asn)
+
+
+def test_smart_group_token_matching():
+    from wif_ag_tool.generator.group_generator import align_and_order_smart_groups, generate_grouped_combat_group
+    from wif_ag_tool.parser.combatgroup_parser import SmartGroup, CombatGroup
+    
+    v_sg1 = SmartGroup(name="VANILLA_HQ_TOKEN", is_hq=True)
+    v_sg2 = SmartGroup(name="VANILLA_PLT_TOKEN", is_hq=False)
+    
+    a1 = Assignment("d", "WF_Unit_HQ", xp_levels=[1], group_name="A", sub_group="HQ")
+    a2 = Assignment("d", "WF_Unit_Plt", xp_levels=[1], group_name="A", sub_group="1")
+    
+    smart_group_items = [
+        ("HQ", [a1]),
+        ("1", [a2]),
+    ]
+    
+    aligned = align_and_order_smart_groups(
+        smart_group_items=smart_group_items,
+        vanilla_smart_groups=[v_sg1, v_sg2],
+        deck_name="d",
+        gname="A",
+        existing_tokens=set()
+    )
+    assert aligned[0] == ("VANILLA_HQ_TOKEN", True, [a1])
+    assert aligned[1] == ("VANILLA_PLT_TOKEN", False, [a2])
+
+    deck = DeckState("d", ["p"]*5, [])
+    out = generate_grouped_combat_group(
+        gname="A",
+        deck_name="d",
+        assignments=[a1, a2],
+        deck_state=deck,
+        existing_tokens=set(),
+        vanilla_smart_groups=[v_sg1, v_sg2]
+    )
+    assert "VANILLA_HQ_TOKEN" in out
+    assert "VANILLA_PLT_TOKEN" in out
+    assert "IsHQ = True" in out
+
+    cg = CombatGroup(name="Descriptor_CombatGroup_d_WIF_A", token="CG_TOKEN", smart_groups=[v_sg1, v_sg2])
+    decks = {"d": deck}
+    combat_groups = {"Descriptor_CombatGroup_d_WIF_A": cg}
+    
+    csv_text = generate_platoons_rows(
+        assignments=[a1, a2],
+        units={},
+        decks=decks,
+        combat_groups=combat_groups
+    )
+    assert "VANILLA_HQ_TOKEN" in csv_text
+    assert "VANILLA_PLT_TOKEN" in csv_text
+

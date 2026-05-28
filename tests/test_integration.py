@@ -110,6 +110,44 @@ def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_d
     assert "(6,1)" in groups_text
 
 
+def test_pack_index_invariant_raises_on_mismatch():
+    """The defense-in-depth assertion must trip if a future generator regression
+    causes SmartGroup tuple sum to drift from DeckPackList growth."""
+    import pytest
+    from wif_ag_tool.pipeline import _assert_pack_index_invariant
+
+    # 1 assignment with count=6 → expects 6 pack refs appended. Pretend only 1 was.
+    a = Assignment(DECK_NAME, "WF_M1A2_SEPV2_Abrams_US", xp_levels=[1], count=6)
+    with pytest.raises(ValueError, match="Pack-index invariant violated"):
+        _assert_pack_index_invariant(DECK_NAME, [a], new_pack_refs_added=1)
+
+    # Matching case must NOT raise.
+    _assert_pack_index_invariant(DECK_NAME, [a], new_pack_refs_added=6)
+
+
+def test_export_from_replicas_count_duplicates_pack_refs(tmp_path, fixture_units_path, fixture_deck_path):
+    """count>1: DeckPackList must contain `count` consecutive refs per pack, and the
+    SmartGroup tuple must read `count` slots starting at the assignment's start index."""
+    units, decks = _build(fixture_units_path, fixture_deck_path, [])
+    replicas_file = tmp_path / "wif_replicas.json"
+    rmod.save_replica(DECK_NAME, [
+        {"unit_id": "WF_M1A2_SEPV2_Abrams_US", "xp": 1, "count": 6},
+        {"unit_id": "WF_M2A4_Bradley_US", "xp": 1, "count": 4},
+    ], path=replicas_file)
+    store = rmod.load_replicas(replicas_file)
+    paths = export_from_replicas(decks, units, tmp_path / "out", replicas=store)
+    decks_text = paths["decks"].read_text(encoding="utf-8")
+    groups_text = paths["groups"].read_text(encoding="utf-8")
+
+    # DeckPackList patch must contain 6 Abrams + 4 Bradley refs
+    assert decks_text.count("~/Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1") == 6
+    assert decks_text.count("~/Descriptor_StrategicPack_WF_M2A4_Bradley_US_1") == 4
+
+    # Sample deck has 5 vanilla packs → Abrams runs [5..10] = (5,6); Bradley starts at 11 = (11,4)
+    assert "(5,6)" in groups_text
+    assert "(11,4)" in groups_text
+
+
 def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_path, fixture_deck_path):
     units, decks = _build(fixture_units_path, fixture_deck_path, [])
     replicas_file = tmp_path / "wif_replicas.json"
@@ -125,7 +163,7 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1_3" in packs_text
     # Combat groups disambiguate by group_name
-    assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_A is" in groups_text
+    assert "Descriptor_CombatGroup_pion_TEST_Alpha_1_A is" in groups_text
     assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_B is" in groups_text
 
 
