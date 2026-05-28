@@ -21,6 +21,37 @@ def test_gen_pack_no_transport_field():
     assert "Transport" not in out
 
 
+def test_gen_pack_wif_unit_name_format():
+    """WIF units keep the historical pack name format — no _v marker."""
+    out = generate_pack("WF_M1A2_SEPV2_Abrams_US", xp=2, seq=0)
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_2 is DeckPackDescriptor" in out
+    out_seq = generate_pack("WF_M1A2_SEPV2_Abrams_US", xp=2, seq=3)
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_3_2 is DeckPackDescriptor" in out_seq
+
+
+def test_gen_pack_vanilla_unit_gets_v_marker():
+    """Vanilla units must get a _v marker so the generated descriptor name doesn't
+    collide with the pack Eugen already ships in StrategicPacks.ndf for the same
+    unit+xp combo. Without this, the NDF compiler refuses duplicate definitions."""
+    out = generate_pack("M1A1_Abrams_US", xp=2, seq=0)
+    assert "Descriptor_StrategicPack_M1A1_Abrams_US_v_2 is DeckPackDescriptor" in out
+    # seq>0 still works and stays unique
+    out_seq = generate_pack("M1A1_Abrams_US", xp=2, seq=1)
+    assert "Descriptor_StrategicPack_M1A1_Abrams_US_v_1_2 is DeckPackDescriptor" in out_seq
+    # Unit ref points at the actual vanilla descriptor — only the pack name changes
+    assert "$/GFX/Unit/Descriptor_Unit_M1A1_Abrams_US" in out
+
+
+def test_assignment_pack_name_matches_generator_for_vanilla():
+    """Assignment.pack_name and generate_pack must produce the same descriptor name
+    or DeckPackList refs and pack definitions won't line up."""
+    a = Assignment("Descriptor_Deck_pion_US_11ACR_1", "M1A1_Abrams_US", xp_levels=[2], count=4)
+    generator_out = generate_pack(a.unit_id, xp=2, seq=a.seq)
+    expected_name = a.pack_name(2)
+    assert expected_name == "Descriptor_StrategicPack_M1A1_Abrams_US_v_2"
+    assert f"{expected_name} is DeckPackDescriptor" in generator_out
+
+
 def test_gen_combat_group_indices_start_at_next():
     deck = DeckState("Descriptor_Deck_pion_TEST_Alpha_1", ["p"] * 5, [])
     a = Assignment("Descriptor_Deck_pion_TEST_Alpha_1", "WF_M1A2_SEPV2_Abrams_US", xp_levels=[1])

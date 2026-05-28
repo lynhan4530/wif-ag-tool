@@ -180,6 +180,74 @@ def test_build_mod_missing_files(client, tmp_path):
     assert resp.status_code == 400
     assert "Pre-build check failed: Export files are missing" in resp.get_json()["error"]
 
+def test_replica_save_accepts_vanilla_unit(client):
+    """Both WIF and vanilla unit IDs should be accepted by PUT /decks/<n>/replica
+    so the user can build replicas that mix custom + stock WARNO units."""
+    from wif_ag_tool.models import DeckState, WifUnit
+
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    set_state(
+        decks={deck_name: DeckState(name=deck_name, pack_list=[], combat_group_list=[])},
+        units={"WF_M1A2_Abrams": WifUnit(
+            name="WF_M1A2_Abrams", guid="g1", nation="US",
+            attack=600, defense=450, xp_bonus=1, role="armor", name_token="t1",
+        )},
+        vanilla_units={"M1A1_Abrams_US": WifUnit(
+            name="M1A1_Abrams_US", guid="g2", nation="US",
+            attack=400, defense=290, xp_bonus=1, role="armor", name_token="t2",
+        )},
+    )
+
+    # Pure vanilla replica
+    resp = client.put(f"/api/decks/{deck_name}/replica", json={
+        "groups": [{"name": "A", "platoons": [
+            {"name": "1ST TANK PLATOON", "units": [
+                {"unit_id": "M1A1_Abrams_US", "xp": 2, "count": 4},
+            ]},
+        ]}],
+    })
+    assert resp.status_code == 200, resp.get_json()
+
+    # Mixed WIF + vanilla in the same platoon
+    resp = client.put(f"/api/decks/{deck_name}/replica", json={
+        "groups": [{"name": "A", "platoons": [
+            {"name": "MIXED", "units": [
+                {"unit_id": "WF_M1A2_Abrams", "xp": 1, "count": 2},
+                {"unit_id": "M1A1_Abrams_US", "xp": 2, "count": 4},
+            ]},
+        ]}],
+    })
+    assert resp.status_code == 200, resp.get_json()
+
+    # Unknown id still gets rejected
+    resp = client.put(f"/api/decks/{deck_name}/replica", json={
+        "groups": [{"name": "A", "platoons": [
+            {"name": "X", "units": [{"unit_id": "Totally_Fake_Unit", "xp": 1, "count": 1}]},
+        ]}],
+    })
+    assert resp.status_code == 400
+
+
+def test_wif_units_endpoint_tags_source(client):
+    """Both unit endpoints must include a `source` field so the SPA can
+    filter and badge units client-side."""
+    from wif_ag_tool.models import WifUnit
+    set_state(
+        units={"WF_M1A2_Abrams": WifUnit(
+            name="WF_M1A2_Abrams", guid="g1", nation="US",
+            attack=600, defense=450, xp_bonus=1, role="armor", name_token="t1",
+        )},
+        vanilla_units={"M1A1_Abrams_US": WifUnit(
+            name="M1A1_Abrams_US", guid="g2", nation="US",
+            attack=400, defense=290, xp_bonus=1, role="armor", name_token="t2",
+        )},
+    )
+    resp = client.get("/api/wif_units")
+    assert all(u["source"] == "wif" for u in resp.get_json())
+    resp = client.get("/api/vanilla_units")
+    assert all(u["source"] == "vanilla" for u in resp.get_json())
+
+
 def test_wif_units_role_filter_matches_canonical_buckets(client):
     """Picking 'plane' in the dropdown should return units with raw role
     'sead' / 'uav' (which used to silently return nothing because the API

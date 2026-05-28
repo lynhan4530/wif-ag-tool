@@ -114,6 +114,9 @@
   .role-ifv::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M19 15v-4H5v4h14zm2-6h-3V7c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v2H3c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2zm-12.5 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
   .role-command::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E"); }
   .hq-pill { background:#e8a13b; color:#000; padding:0 5px; border-radius:8px; font-size:9px; font-weight:bold; margin-left:6px; vertical-align:middle; }
+  .src-pill { padding:0 5px; border-radius:8px; font-size:9px; font-weight:bold; margin-left:6px; vertical-align:middle; }
+  .src-wif { background:#3a6; color:#000; }
+  .src-vanilla { background:#586; color:#dde; }
   .role-unknown::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E"); }
 
   /* tooltip */
@@ -288,7 +291,7 @@ const state = {
   initialScope: [],
   modalOpen: false,
   modalUnits: [],
-  modalFilters: { nation: "", role: "all", q: "" },
+  modalFilters: { nation: "", role: "all", q: "", source: "all" },
   modalTarget: null,       // {groupIdx, platoonIdx} — where to add units from modal
   exportOpen: false,
   platoonPickerOpen: false, // show platoon name picker modal
@@ -1725,12 +1728,15 @@ function renderModal() {
 
   const filters = el("div", { class: "modal-filters" });
   const f = state.modalFilters;
+  filters.appendChild(el("span", { class: "field-label" }, "Source"));
+  filters.appendChild(mkSelect(["all", "wif", "vanilla"], f.source || "all",
+    v => { f.source = v; reloadModalUnits(); }));
   filters.appendChild(el("span", { class: "field-label" }, "Nation"));
   filters.appendChild(mkSelect(["", ...NATIONS], f.nation, v => { f.nation = v; reloadModalUnits(); }));
   filters.appendChild(el("span", { class: "field-label" }, "Role"));
   filters.appendChild(mkSelect(ROLES, f.role, v => { f.role = v; reloadModalUnits(); }));
   const search = el("input", { id: "modal-search-input", type: "text", placeholder: "search (e.g. Abrams)", value: f.q,
-    oninput: e => { f.q = e.target.value; debounceReload(); } });
+    oninput: e => { f.q = e.target.value; reloadModalUnits(); } });
   filters.appendChild(search);
   if (dn && f.nation === "") {
     filters.appendChild(el("button", { class: "ghost",
@@ -1750,6 +1756,10 @@ function renderModal() {
       el("span", {},
         u.display_name || u.name,
         u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+        el("span", {
+          class: `src-pill src-${u.source || "wif"}`,
+          title: (u.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
+        }, (u.source === "vanilla") ? "V" : "WIF"),
         isCommandRole(u) ? el("span", { class: "hq-pill", title: "Command / HQ variant" }, "HQ") : null,
         renderSpecialtyBadges(u.specialties, u.role),
       ),
@@ -2416,28 +2426,60 @@ async function doBuildMod() {
 
 // ── modal helpers ───────────────────────────────────────────────────────────
 
-let reloadTimer;
-function debounceReload() { clearTimeout(reloadTimer); reloadTimer = setTimeout(reloadModalUnits, 220); }
+// Kept for backwards compatibility — every filter change now re-filters the
+// in-memory catalogue, so there's no async work and no debounce needed.
+function debounceReload() { reloadModalUnits(); }
 
 async function openAddModal(gi, pi) {
   if (!state.activeDeck) return;
   state.modalOpen = true;
   state.modalTarget = (gi !== undefined && pi !== undefined) ? { groupIdx: gi, platoonIdx: pi } : null;
   const dn = state.activeDeck.split("_")[3];
-  state.modalFilters = { nation: dn || "", role: "all", q: "" };
+  // Preserve a previously typed search across modal opens by keeping `q` if it's there.
+  const prevQ = state.modalFilters?.q || "";
+  state.modalFilters = { nation: dn || "", role: "all", q: prevQ, source: "all" };
+  // The catalogue is loaded once at page boot; if it isn't ready yet, fall back to
+  // an async load so the first modal open isn't empty.
+  if (Object.keys(state.unitsIndex).length === 0) {
+    await loadUnitsIndex();
+  }
+  reloadModalUnits();
   render();
-  await reloadModalUnits();
 }
 
-async function reloadModalUnits() {
-  try {
-    const p = new URLSearchParams();
-    const f = state.modalFilters;
-    if (f.nation) p.set("nation", f.nation);
-    if (f.role && f.role !== "all") p.set("role", f.role);
-    if (f.q) p.set("q", f.q);
-    state.modalUnits = await api("GET", "/wif_units?" + p);
-  } catch (e) { state.modalUnits = []; toast("Load units failed: " + e.message, true); }
+// Pure client-side filter against state.unitsIndex. Since the catalogue is fully
+// in memory, switching Source (WIF ↔ Vanilla) doesn't reload the unit list — it
+// only re-filters the same data — which is why the search box keeps its value
+// when you flip the source.
+function reloadModalUnits() {
+  const f = state.modalFilters;
+  const q = (f.q || "").toLowerCase().trim();
+  const wantSource = (f.source || "all");
+  const wantNation = (f.nation === "RDA") ? "DDR" : f.nation;
+  const wantRole = (f.role || "all");
+  const matches = [];
+  for (const id in state.unitsIndex) {
+    const u = state.unitsIndex[id];
+    if (wantSource !== "all" && (u.source || "wif") !== wantSource) continue;
+    if (wantNation && u.nation !== wantNation) continue;
+    if (wantRole !== "all") {
+      // "command" is a cross-cutting bucket: any hq_* role qualifies.
+      if (wantRole === "command") {
+        if (!isCommandRole(u)) continue;
+      } else if (getNormalizedRole(u) !== wantRole) {
+        continue;
+      }
+    }
+    if (q) {
+      const hay = (u.name + " " + (u.display_name || "")).toLowerCase();
+      if (!hay.includes(q)) continue;
+    }
+    matches.push(u);
+  }
+  matches.sort((a, b) =>
+    (a.display_name || a.name).localeCompare(b.display_name || b.name)
+  );
+  state.modalUnits = matches;
   render();
 }
 
@@ -2459,6 +2501,8 @@ function addUnitToReplica(u) {
 // ── units index (WIF + vanilla) ─────────────────────────────────────────────
 async function loadUnitsIndex() {
   // Idempotent: only fetch once per page load. Both endpoints return the same shape.
+  // The backend tags each unit with `source` ("wif" or "vanilla") so the modal can
+  // filter, badge, and search without ever re-hitting the API.
   if (Object.keys(state.unitsIndex).length > 0) return;
   try {
     const [wif, vanilla] = await Promise.all([
@@ -2466,10 +2510,9 @@ async function loadUnitsIndex() {
       api("GET", "/vanilla_units"),
     ]);
     const ix = {};
-    for (const u of [...vanilla, ...wif]) {
-      // WIF overrides vanilla on collision (shouldn't happen — name spaces differ).
-      ix[u.name] = u;
-    }
+    // Vanilla first, WIF second — WIF wins on the (unlikely) name collision.
+    for (const u of vanilla) ix[u.name] = u;
+    for (const u of wif) ix[u.name] = u;
     state.unitsIndex = ix;
     render();
   } catch (e) {

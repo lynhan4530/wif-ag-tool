@@ -4,6 +4,24 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 
+def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0) -> str:
+    """Canonical name for a generated `DeckPackDescriptor` block.
+
+    WIF units (unit_id starts with ``WF_``) follow the historical format:
+        Descriptor_StrategicPack_<unit_id>[_<seq>]_<xp>
+    Vanilla units (no ``WF_`` prefix) get an additional ``_v`` marker so the
+    generated descriptor name can never collide with the pack Eugen already
+    ships in StrategicPacks.ndf for the same unit+xp combo:
+        Descriptor_StrategicPack_<unit_id>_v[_<seq>]_<xp>
+
+    Both ``Assignment.pack_name`` and ``generate_pack`` use this so the
+    pack-list refs and the actual definition blocks always agree.
+    """
+    seq_suffix = f"_{seq}" if seq else ""
+    vanilla_marker = "" if unit_id.startswith("WF_") else "_v"
+    return f"Descriptor_StrategicPack_{unit_id}{vanilla_marker}{seq_suffix}_{xp}"
+
+
 @dataclass
 class WifUnit:
     """A WIF-added unit extracted from UniteDescriptor.ndf."""
@@ -73,10 +91,10 @@ class Assignment:
         """Generated StrategicPack descriptor name for a given XP level.
 
         When seq>0, a sequence suffix is inserted before the XP token so duplicate
-        unit rows in the same deck get distinct descriptor names.
+        unit rows in the same deck get distinct descriptor names. Vanilla units
+        get a ``_v`` marker so generated names never collide with Eugen's packs.
         """
-        suffix = f"_{self.seq}" if self.seq else ""
-        return f"Descriptor_StrategicPack_{self.unit_id}{suffix}_{xp}"
+        return make_pack_descriptor_name(self.unit_id, xp, self.seq)
 
     def combat_group_name(self) -> str:
         """Generated CombatGroup descriptor name based on group_name."""

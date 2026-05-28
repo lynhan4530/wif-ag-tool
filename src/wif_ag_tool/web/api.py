@@ -103,14 +103,16 @@ def _deck_tail(short: str, division_ref: str) -> str:
     return short.replace("_", " ")
 
 
-def _serialize_unit(u: WifUnit) -> dict:
-    """Unit payload for API responses. Adds a pretty-id fallback for display_name."""
+def _serialize_unit(u: WifUnit, source: str = "wif") -> dict:
+    """Unit payload for API responses. Adds a pretty-id fallback for display_name
+    and tags the unit's source so the SPA can show WIF vs vanilla."""
     d = asdict(u)
     if not d.get("display_name"):
         d["display_name"] = u.name.removeprefix("WF_").replace("_", " ")
         d["display_resolved"] = False
     else:
         d["display_resolved"] = True
+    d["source"] = source
     return d
 
 
@@ -683,11 +685,12 @@ def decks_replica_save(deck_name: str):
     else:
         units_to_validate = raw_units
 
-    # Validate unit_id exists in the WIF catalogue
+    # unit_id may reference either a WIF or a vanilla unit — accept either.
     units = _state["units"]
+    vanilla_units = _state["vanilla_units"]
     for row in units_to_validate:
         try:
-            validate_unit_exists(row.get("unit_id", ""), units)
+            validate_unit_exists(row.get("unit_id", ""), units, vanilla_units)
         except UnitNotFoundError as e:
             return jsonify({"error": str(e)}), 400
         tid = row.get("transport_id")
@@ -731,13 +734,14 @@ def wif_units():
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue
-        out.append(_serialize_unit(u))
+        out.append(_serialize_unit(u, source="wif"))
     return jsonify(out)
 
 
 @api_bp.get("/vanilla_units")
 def vanilla_units():
-    """Mirror of /wif_units for vanilla. The SPA loads this once for tooltip lookups."""
+    """Mirror of /wif_units for vanilla. The SPA loads this once for tooltip lookups
+    and for the cross-source picker in the Add Unit modal."""
     nation = request.args.get("nation")
     if nation == "RDA":
         nation = "DDR"
@@ -752,7 +756,7 @@ def vanilla_units():
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue
-        out.append(_serialize_unit(u))
+        out.append(_serialize_unit(u, source="vanilla"))
     return jsonify(out)
 
 

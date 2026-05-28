@@ -1,7 +1,7 @@
 """Emit DeckPackDescriptor NDF blocks."""
 from __future__ import annotations
 
-from wif_ag_tool.models import Assignment
+from wif_ag_tool.models import Assignment, make_pack_descriptor_name
 
 
 def generate_pack(
@@ -13,10 +13,11 @@ def generate_pack(
     """Emit a single DeckPackDescriptor block as a string.
 
     seq>0 inserts a sequence suffix between unit_id and xp so duplicate unit rows
-    in the same deck get distinct pack descriptor names.
+    in the same deck get distinct pack descriptor names. Vanilla units (no WF_
+    prefix) get a ``_v`` marker to avoid colliding with the packs already in
+    vanilla StrategicPacks.ndf.
     """
-    seq_suffix = f"_{seq}" if seq else ""
-    pack_name = f"Descriptor_StrategicPack_{unit_id}{seq_suffix}_{xp}"
+    pack_name = make_pack_descriptor_name(unit_id, xp, seq)
     unit_ref = f"$/GFX/Unit/Descriptor_Unit_{unit_id}"
     lines = [f"{pack_name} is DeckPackDescriptor", "("]
     if transport_id:
