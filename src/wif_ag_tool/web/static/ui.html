@@ -112,6 +112,8 @@
   .role-supply::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M20 8h-3V4H1v13h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
   .role-engineer::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.3C.5 6.7.9 9.8 2.9 11.8c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.6z'/%3E%3C/svg%3E"); }
   .role-ifv::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M19 15v-4H5v4h14zm2-6h-3V7c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v2H3c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2zm-12.5 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z'/%3E%3C/svg%3E"); }
+  .role-command::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E"); }
+  .hq-pill { background:#e8a13b; color:#000; padding:0 5px; border-radius:8px; font-size:9px; font-weight:bold; margin-left:6px; vertical-align:middle; }
   .role-unknown::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239be'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z'/%3E%3C/svg%3E"); }
 
   /* tooltip */
@@ -268,7 +270,7 @@
 
 // ── state ────────────────────────────────────────────────────────────────────
 const NATIONS = ["US","RFA","UK","FR","BEL","NL","DNR","SOV","RUS","RDA","POL","TCH","ESP","CAN"];
-const ROLES = ["all","armor","ifv","helicopter","plane","infantry","artillery","aa","recon","supply","engineer"];
+const ROLES = ["all","armor","ifv","helicopter","plane","infantry","artillery","aa","recon","supply","engineer","command"];
 
 const state = {
   view: "picker",          // "picker" | "session"
@@ -371,20 +373,32 @@ const unitDisplay = id => {
 };
 const unitResolved = id => !!(state.unitsIndex[id] && state.unitsIndex[id].display_resolved);
 
+// Mirror of src/wif_ag_tool/role_normalize.py::normalize_role — both must agree
+// so the badge/icon a row paints matches the bucket the filter dropdown selects.
 const getNormalizedRole = u => {
   if (!u) return "unknown";
-  const r = (u.role || "").toLowerCase();
-  if (r.includes("recon") || r.includes("reco")) return "recon";
-  if (r.includes("armor") || r.includes("tank")) return "armor";
-  if (r.includes("ifv") || r.includes("apc") || r.includes("veh") || r.includes("carrier") || r.includes("transport")) return "ifv";
-  if (r.includes("heli")) return "helicopter";
-  if (r.includes("plane") || r.includes("jet") || r.includes("fighter") || r.includes("bomber") || r.includes("aircraft")) return "plane";
-  if (r.includes("infantry") || r.includes("inf") || r.includes("commandos") || r.includes("chasseur") || r.includes("scout") || r.includes("sapper") || r.includes("rifles")) return "infantry";
-  if (r.includes("artillery") || r.includes("howz") || r.includes("mortar") || r.includes("gun")) return "artillery";
-  if (r.includes("aa") || r.includes("sam") || r.includes("spaag") || r.includes("missile") || r.includes("defence")) return "aa";
-  if (r.includes("supply") || r.includes("truck") || r.includes("ammo")) return "supply";
-  if (r.includes("engineer")) return "engineer";
+  const r = (u.role || "").toLowerCase().trim();
+  if (!r) return "unknown";
+  if (r.includes("helo") || r.includes("heli")) return "helicopter";
+  if (r === "hq_tank" || r === "armor" || r.includes("tank")) return "armor";
+  if (["howitzer","mlrs","mortar"].includes(r) || r.startsWith("art")) return "artillery";
+  if (r === "aa" || r.startsWith("sam") || r.includes("spaag") || r.includes("missile") || r.includes("manpads")) return "aa";
+  if (["plane","jet","fighter","bomber","aircraft","sead","uav"].includes(r)) return "plane";
+  if (r === "reco" || r.includes("recon")) return "recon";
+  if (r === "ifv" || r.startsWith("transport") || ["apc","carrier","hq_veh"].includes(r)) return "ifv";
+  if (r.includes("engineer") || r.includes("sapper")) return "engineer";
+  if (r === "infantry" || r === "at" || r.startsWith("hq_inf")
+      || r.includes("rifles") || r.includes("chasseur") || r.includes("commando")
+      || r.includes("scout") || r.startsWith("inf")) return "infantry";
+  if (r === "supply" || r === "appui" || r.includes("truck") || r.includes("ammo")) return "supply";
   return "unknown";
+};
+
+// `command` is a cross-cutting bucket: any hq_* raw role qualifies, regardless
+// of its primary bucket (hq_tank is both armor AND command).
+const isCommandRole = u => {
+  const r = (u && (u.role || "")).toLowerCase().trim();
+  return r.startsWith("hq_") || r === "hq";
 };
 
 function getFriendlyCGName(name) {
@@ -1736,6 +1750,7 @@ function renderModal() {
       el("span", {},
         u.display_name || u.name,
         u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
+        isCommandRole(u) ? el("span", { class: "hq-pill", title: "Command / HQ variant" }, "HQ") : null,
         renderSpecialtyBadges(u.specialties, u.role),
       ),
       el("span", { class: "hint" }, `A:${u.attack}`),

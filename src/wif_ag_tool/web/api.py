@@ -25,6 +25,7 @@ from wif_ag_tool.pipeline import (
     refresh_deck_cache,
     _assert_pack_index_invariant,
 )
+from wif_ag_tool.role_normalize import bucket_matches
 from wif_ag_tool.validator.unit_validator import validate_unit_exists, UnitNotFoundError
 
 api_bp = Blueprint("api", __name__)
@@ -726,7 +727,7 @@ def wif_units():
     for u in units.values():
         if nation and u.nation != nation:
             continue
-        if role and role != "all" and u.role != role:
+        if role and role != "all" and not bucket_matches(u.role, role):
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue
@@ -747,7 +748,7 @@ def vanilla_units():
     for u in units.values():
         if nation and u.nation != nation:
             continue
-        if role and role != "all" and u.role != role:
+        if role and role != "all" and not bucket_matches(u.role, role):
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue

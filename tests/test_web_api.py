@@ -180,6 +180,58 @@ def test_build_mod_missing_files(client, tmp_path):
     assert resp.status_code == 400
     assert "Pre-build check failed: Export files are missing" in resp.get_json()["error"]
 
+def test_wif_units_role_filter_matches_canonical_buckets(client):
+    """Picking 'plane' in the dropdown should return units with raw role
+    'sead' / 'uav' (which used to silently return nothing because the API
+    did exact-match on the raw role string)."""
+    from wif_ag_tool.models import WifUnit
+    mock_units = {
+        "WF_F15_StrikeEagle_US": WifUnit(
+            name="WF_F15_StrikeEagle_US", guid="g1", nation="US",
+            attack=300, defense=180, xp_bonus=1, role="sead", name_token="t1",
+        ),
+        "WF_Reaper_US": WifUnit(
+            name="WF_Reaper_US", guid="g2", nation="US",
+            attack=120, defense=40, xp_bonus=1, role="uav", name_token="t2",
+        ),
+        "WF_M1A1_Abrams_US": WifUnit(
+            name="WF_M1A1_Abrams_US", guid="g3", nation="US",
+            attack=400, defense=290, xp_bonus=1, role="armor", name_token="t3",
+        ),
+        "WF_M1A1_CMD_US": WifUnit(
+            name="WF_M1A1_CMD_US", guid="g4", nation="US",
+            attack=400, defense=290, xp_bonus=1, role="hq_tank", name_token="t4",
+        ),
+        "WF_M109A6_US": WifUnit(
+            name="WF_M109A6_US", guid="g5", nation="US",
+            attack=89, defense=42, xp_bonus=1, role="howitzer", name_token="t5",
+        ),
+    }
+    set_state(units=mock_units)
+
+    # plane → both sead and uav
+    resp = client.get("/api/wif_units?role=plane")
+    assert resp.status_code == 200
+    names = {u["name"] for u in resp.get_json()}
+    assert names == {"WF_F15_StrikeEagle_US", "WF_Reaper_US"}
+
+    # artillery → howitzer (would have returned nothing before the fix)
+    resp = client.get("/api/wif_units?role=artillery")
+    assert {u["name"] for u in resp.get_json()} == {"WF_M109A6_US"}
+
+    # armor → both armor and hq_tank (hq_tank's primary bucket is armor)
+    resp = client.get("/api/wif_units?role=armor")
+    assert {u["name"] for u in resp.get_json()} == {"WF_M1A1_Abrams_US", "WF_M1A1_CMD_US"}
+
+    # command → only the hq_tank, not the regular Abrams
+    resp = client.get("/api/wif_units?role=command")
+    assert {u["name"] for u in resp.get_json()} == {"WF_M1A1_CMD_US"}
+
+    # all → everything
+    resp = client.get("/api/wif_units?role=all")
+    assert len(resp.get_json()) == 5
+
+
 def test_howto_returns_markdown(client):
     """GET /api/howto streams the HOWTO.md repo doc as text/markdown so the SPA
     can render it without needing a second source of truth."""
