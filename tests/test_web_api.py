@@ -187,10 +187,14 @@ def test_howto_returns_markdown(client):
     assert resp.status_code == 200
     assert "markdown" in resp.headers.get("Content-Type", "")
     text = resp.get_data(as_text=True)
-    # Guard the most load-bearing sections so the doc can't silently lose them.
+    # Guard the load-bearing sections so the doc can't silently lose them.
     assert "How To" in text
-    assert "Scaffold a new mod" in text
+    assert "Make a new mod" in text
+    assert "Drop WIF into the mod" in text
+    assert "Build a replica deck" in text
     assert "Export the patches" in text
+    assert "Compile" in text
+    assert "After a WARNO patch" in text
 
 
 def test_build_mod_success(client, tmp_path, monkeypatch):
