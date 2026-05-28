@@ -28,7 +28,7 @@ The tool features a high-performance Single Page Application (SPA) UI that mirro
 ## Requirements
 
 - **Python 3.10+** (Python 3.11/3.12+ recommended)
-- **WARNO** (with the official WARNO modding tools installed)
+- **WARNO** — the modding scripts (`CreateNewMod.bat`, `UpdateMod.bat`, `GenerateMod.bat`) and the NDF compiler ship inside the WARNO install at `<WARNO>\Mods\` and `<WARNO>\Tools\`. There is no separate "Mod Editor" download.
 - **A World in Flames (WIF)** mod development folder (or custom mod workspace containing the `GenerateMod.bat` compile script)
 
 ---

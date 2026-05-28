@@ -2,7 +2,7 @@
 
 This is the full walkthrough: scaffold a fresh WARNO mod, merge the WIF source into it, build a replica deck in the tool, export the patches, compile, and run the mod in-game. Follow it top-to-bottom the first time; later runs only need steps 5 onward.
 
-> **Prerequisite check.** You need WARNO installed, the official WARNO Mod Editor installed alongside it, the WIF source tree at `G:\Project\A-World-In-Flames\` (or your own path — adjust as you go), and Python 3.10+ with this tool's dependencies (`pip install -r requirements.txt`). If you skipped these, the rest of this guide will fail.
+> **Prerequisite check.** You need WARNO installed (the modding scripts and the NDF compiler ship inside the WARNO install at `<WARNO>\Mods\` and `<WARNO>\Tools\` — there is no separate "Mod Editor" download), the WIF source tree at `G:\Project\A-World-In-Flames\` (or your own path — adjust as you go), and Python 3.10+ with this tool's dependencies (`pip install -r requirements.txt`). If you skipped these, the rest of this guide will fail.
 
 ---
 
@@ -10,10 +10,11 @@ This is the full walkthrough: scaffold a fresh WARNO mod, merge the WIF source i
 
 The mod has to be a **full-content** mod, not a thin patch — WIF's `WF_*` unit descriptors must live inside the mod folder itself or the campaign engine will silently fall back to vanilla.
 
-1. Open a Command Prompt in `<WARNO Mod Editor>\Mods\` — the path is typically:
+1. Open a Command Prompt in `<WARNO>\Mods\` — the path is typically:
    ```
-   G:\Program Files (x86)\Steam\steamapps\common\WARNO Mod Editor\Mods\
+   G:\Program Files (x86)\Steam\steamapps\common\WARNO\Mods\
    ```
+   (This folder ships with WARNO — no separate "Mod Editor" install is needed. You'll also find `modding_manual.pdf` and `ndf_reference_manual.pdf` there for reference, and the NDF compiler binaries live next door in `<WARNO>\Tools\`.)
 2. Run:
    ```
    CreateNewMod.bat CRM_ArmyGeneral
@@ -133,7 +134,7 @@ If anything goes wrong, the response surfaces the failing deck name and reason.
 
 ## Step 9 — Run the mod in WARNO
 
-1. Launch WARNO. (Optionally use `LaunchModDevMode.bat` from `<WARNO Mod Editor>\Mods\` to start with F1 spawn-menu debug.)
+1. Launch WARNO. (Optionally use `LaunchModDevMode.bat` from `<WARNO>\Mods\` to start with F1 spawn-menu debug.)
 2. Enable your mod under `Game → Mods`.
 3. Start or load an Army General campaign that includes one of the decks you modified.
 4. Click the pawn that uses your modified deck. The composition UI should open and show your WIF units in the groups / platoons / counts you configured.
@@ -146,8 +147,10 @@ If the pawn click crashes the game: it means the export wrote a `(start_index, c
 
 When WARNO ships a new patch:
 
-1. Run `UpdateMod.bat` from `<Mods>\CRM_ArmyGeneral\` (or wherever your mod lives). The Mod Editor resolves vanilla NDF conflicts in a 3-way merge.
+1. Run `UpdateMod.bat` from `<WARNO>\Mods\CRM_ArmyGeneral\` (or wherever your mod lives). It runs a 3-way merge against the new vanilla baseline.
 2. In the tool, click **Refresh decks** (or run `python -m wif_ag_tool refresh`). This re-parses `StrategicDecks.ndf` so the pack indices line up with the new vanilla baseline.
+
+   `UpdateMod.bat` is one of the scripts in `<WARNO>\Mods\` — same folder as `CreateNewMod.bat`. It runs a 3-way merge between your mod's files, the old vanilla baseline, and the new patched vanilla. Most conflicts auto-resolve; the ones that don't surface in the console for you to fix by hand.
 3. **📥 Export Mod** → **⚡ Build Mod** as in Steps 7-8.
 4. Re-check the pawn click in WARNO as in Step 9.
 

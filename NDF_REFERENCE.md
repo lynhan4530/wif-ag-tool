@@ -453,11 +453,13 @@ Semicolon-separated, double-quoted fields. No BOM. UTF-8.
 
 ---
 
-## 9. WME toolchain commands (run from WARNO Mods directory)
+## 9. Modding toolchain commands (bundled with WARNO)
 
+The scripts below ship inside the WARNO install — there is no separate "Mod Editor" download. Run them from:
 ```
 G:\Program Files (x86)\Steam\steamapps\common\WARNO\Mods\
 ```
+(Compiler binaries — `AssetCooker.exe`, `DataPacker.exe`, etc. — live next door in `<WARNO>\Tools\`. Eugen's own `modding_manual.pdf` and `ndf_reference_manual.pdf` also ship in `<WARNO>\Mods\`.)
 
 | Command | What it does |
 |---------|-------------|
