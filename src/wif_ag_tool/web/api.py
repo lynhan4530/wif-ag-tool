@@ -24,7 +24,7 @@ from wif_ag_tool.pipeline import (
     export_from_replicas,
     refresh_deck_cache,
 )
-from wif_ag_tool.role_normalize import bucket_matches
+from wif_ag_tool.role_normalize import bucket_matches, normalize_role
 from wif_ag_tool.validator.unit_validator import validate_unit_exists, UnitNotFoundError
 
 api_bp = Blueprint("api", __name__)
@@ -544,23 +544,29 @@ def decks_vanilla(deck_name: str):
                     if unit_short:
                         unit_obj = _lookup_unit(unit_short)
                         if unit_obj:
-                            r = unit_obj.role
+                            r = normalize_role(unit_obj.role)
                             roles.append(r)
-                            if r == "unknown" or not r:
+                            if r == "unknown":
                                 u_lower = unit_short.lower()
                                 if "mortar" in u_lower or "supply" in u_lower or "fob" in u_lower or "hemtt" in u_lower or "ural" in u_lower or "man" in u_lower:
-                                    roles.append("support")
+                                    roles.append("supply")
 
                 # Determine primary role
                 if "recon" in roles:
                     primary = "RECON"
-                elif "tank" in roles or any("abrams" in p.get("unit", "").lower() or "t80" in p.get("unit", "").lower() or "leopard" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                elif "armor" in roles or any("abrams" in p.get("unit", "").lower() or "t80" in p.get("unit", "").lower() or "leopard" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
                     primary = "TANK"
-                elif "support" in roles or any("mortar" in p.get("unit", "").lower() or "supply" in p.get("unit", "").lower() or "fob" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                elif "engineer" in roles or any("engineer" in p.get("unit", "").lower() or "pionier" in p.get("unit", "").lower() or "sapper" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "ENGINEER"
+                elif "aa" in roles or any("stinger" in p.get("unit", "").lower() or "shorad" in p.get("unit", "").lower() or "flak" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "AA"
+                elif "supply" in roles or any("supply" in p.get("unit", "").lower() or "fob" in p.get("unit", "").lower() or "hemtt" in p.get("unit", "").lower() or "lmtv" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
+                    primary = "LOGISTICS"
+                elif "artillery" in roles or "support" in roles or any("mortar" in p.get("unit", "").lower() or "ural" in p.get("unit", "").lower() or "man" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
                     primary = "SUPPORT"
                 elif "infantry" in roles or any("inf" in p.get("unit", "").lower() or "rifle" in p.get("unit", "").lower() or "chasseur" in p.get("unit", "").lower() or "dismount" in p.get("unit", "").lower() or "airborne" in p.get("unit", "").lower() for p in sg_res["packs"] if p.get("unit")):
                     primary = "RIFLE"
-                elif "heli" in roles:
+                elif "helicopter" in roles or "heli" in roles:
                     primary = "HELI"
                 else:
                     primary = "PLATOON"
@@ -807,6 +813,12 @@ def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name:
                 return f"{count}. AUFKLÄRUNGSZUG"
             elif primary == "TANK":
                 return f"{count}. PANZERZUG"
+            elif primary == "ENGINEER":
+                return f"{count}. PIONIERZUG"
+            elif primary == "AA":
+                return f"{count}. FLUGABWEHRZUG"
+            elif primary == "LOGISTICS":
+                return "NACHSCHUBGRUPPE" if count == 1 else f"NACHSCHUBGRUPPE {count}"
             elif primary == "RIFLE":
                 return f"{count}. INFANTERIEZUG"
             elif primary == "SUPPORT":
@@ -829,6 +841,12 @@ def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name:
                 return f"{_fr_ord(count)} PELOTON RECON"
             elif primary == "TANK":
                 return f"{_fr_ord(count)} PELOTON DE CHARS"
+            elif primary == "ENGINEER":
+                return f"{_fr_ord(count)} SECTION DU GENIE"
+            elif primary == "AA":
+                return f"{_fr_ord(count)} SECTION SOL-AIR"
+            elif primary == "LOGISTICS":
+                return "GROUPE LOGISTIQUE" if count == 1 else f"GROUPE LOGISTIQUE {count}"
             elif primary == "RIFLE":
                 return f"{_fr_ord(count)} SECTION D'INFANTERIE"
             elif primary == "SUPPORT":
@@ -848,6 +866,12 @@ def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name:
                 return f"{count}-Y VZVOD RAZVEDKI"
             elif primary == "TANK":
                 return f"{count}-Y TANKOVYY VZVOD"
+            elif primary == "ENGINEER":
+                return f"{count}-Y SAPERNYY VZVOD"
+            elif primary == "AA":
+                return f"{count}-Y ZENITNYY VZVOD"
+            elif primary == "LOGISTICS":
+                return "VZVOD OBESPECHENIYA" if count == 1 else f"VZVOD OBESPECHENIYA {count}"
             elif primary == "RIFLE":
                 return f"{count}-Y MOTOSTRELKOVYY VZVOD"
             elif primary == "SUPPORT":
@@ -864,26 +888,54 @@ def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name:
                 return f"{n}TH"
             return f"{n}" + {1: 'ST', 2: 'ND', 3: 'RD'}.get(n % 10, 'TH')
 
+        is_cavalry = any(x in cg_lower or x in deck_lower for x in ["acr", "cav", "cavalry"])
+
         if is_hq:
-            if any(x in cg_lower for x in ["acr", "cav", "cavalry"]):
+            if is_cavalry:
                 return "TROOP HQ"
             elif is_artillery:
                 return "BATTERY HQ"
             else:
                 return "COMPANY HQ"
         else:
-            if primary == "RECON":
-                return f"{_ordinal(count)} RECON PLATOON"
-            elif primary == "TANK":
-                return f"{_ordinal(count)} TANK PLATOON"
-            elif primary == "RIFLE":
-                return f"{_ordinal(count)} RIFLE PLATOON"
-            elif primary == "SUPPORT":
-                return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
-            elif primary == "HELI":
-                return f"{_ordinal(count)} HELI PLATOON"
+            if is_cavalry:
+                if primary == "ENGINEER":
+                    return f"{count}/58ENG"
+                elif primary == "AA":
+                    return "AIR DEFENSE PLATO"
+                elif primary == "LOGISTICS":
+                    return "LOGISTICS GROUP" if count == 1 else f"LOGISTICS GROUP {count}"
+                elif primary == "RECON":
+                    return "RECON GROUP" if count == 1 else f"RECON GROUP {count}"
+                elif primary == "SUPPORT":
+                    return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
+                elif primary == "TANK":
+                    return f"{_ordinal(count)} TANK PLATOON"
+                elif primary == "RIFLE":
+                    return f"{_ordinal(count)} RIFLE PLATOON"
+                elif primary == "HELI":
+                    return f"{_ordinal(count)} HELI PLATOON"
+                else:
+                    return f"{_ordinal(count)} PLATOON"
             else:
-                return f"{_ordinal(count)} PLATOON"
+                if primary == "RECON":
+                    return f"{_ordinal(count)} RECON PLATOON"
+                elif primary == "TANK":
+                    return f"{_ordinal(count)} TANK PLATOON"
+                elif primary == "ENGINEER":
+                    return f"{_ordinal(count)} ENGINEER PLATOON"
+                elif primary == "AA":
+                    return f"{_ordinal(count)} AIR DEFENSE PLATOON"
+                elif primary == "LOGISTICS":
+                    return f"{_ordinal(count)} SUPPLY PLATOON"
+                elif primary == "RIFLE":
+                    return f"{_ordinal(count)} RIFLE PLATOON"
+                elif primary == "SUPPORT":
+                    return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
+                elif primary == "HELI":
+                    return f"{_ordinal(count)} HELI PLATOON"
+                else:
+                    return f"{_ordinal(count)} PLATOON"
 
 
 # Legacy /api/assign, /api/decks, /api/deck/<name> endpoints are gone.

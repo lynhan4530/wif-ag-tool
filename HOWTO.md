@@ -115,6 +115,11 @@ Work top-down:
 
 Repeat for every deck you want to mod. The tool's left pane shows a badge on decks that already have a saved replica so you can tell what's done.
 
+> [!NOTE]
+> **Platoon Name Fallback / Limitation**:
+> Because the vanilla `PLATOONS.csv` localisation table is not shipped in the game's `ExampleAssets` folder, the tool cannot extract the exact official localized names for vanilla slots directly from the game files. 
+> Instead, it uses a composition-based heuristic (analyzing the assigned units' roles) to guess fallback names (e.g., `1/58ENG`, `AIR DEFENSE PLATO`, `LOGISTICS GROUP`, or `RECON GROUP`). Because of this, names displayed in the tool UI (or cloned from vanilla) may differ slightly from the official in-game translation.
+
 ---
 
 ## Step 7 — Export the patches

@@ -95,6 +95,15 @@ python -m wif_ag_tool refresh
 
 ---
 
+## Known Limitations
+
+- **Platoon Name Extraction (EUGEN Modding Limitation)**:
+  Because the vanilla game's `PLATOONS.csv` localisation table is not shipped in the game's `ExampleAssets` mod template, the tool cannot extract the exact official localized names for vanilla slots directly from the game files. 
+  
+  To address this, the tool uses a composition-based heuristic (analyzing the assigned units' roles) to automatically resolve names like `1/58ENG`, `AIR DEFENSE PLATO`, or `RECON GROUP`. However, because of this limitation, the platoon names displayed in the tool UI (or cloned from vanilla) may differ slightly from what is officially translated in the vanilla base game.
+
+---
+
 ## Future Roadmap
 
 While this tool is currently heavily optimized for **A World in Flames (WIF)** modern units and configuration paths:

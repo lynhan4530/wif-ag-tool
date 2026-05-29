@@ -521,3 +521,38 @@ def test_get_localized_fallback_name():
     # Default English cases
     assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="A_Tank", deck_name="pion_US_11") == "COMPANY HQ"
     assert _get_localized_fallback_name("TANK", is_hq=False, count=2, cg_name="A_Tank", deck_name="pion_US_11") == "2ND TANK PLATOON"
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=1, cg_name="A_Eng", deck_name="pion_US_11") == "1ST ENGINEER PLATOON"
+    assert _get_localized_fallback_name("AA", is_hq=False, count=1, cg_name="A_AA", deck_name="pion_US_11") == "1ST AIR DEFENSE PLATOON"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="A_Spt", deck_name="pion_US_11") == "1ST SUPPLY PLATOON"
+
+    # US Cavalry / ACR cases
+    assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="HQ-1 11TH ACR", deck_name="pion_US_11ACR_1") == "TROOP HQ"
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=1, cg_name="1_58ENG", deck_name="pion_US_11ACR_1") == "1/58ENG"
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=2, cg_name="1_58ENG", deck_name="pion_US_11ACR_1") == "2/58ENG"
+    assert _get_localized_fallback_name("AA", is_hq=False, count=1, cg_name="AIR DEFENSE PLATO", deck_name="pion_US_11ACR_1") == "AIR DEFENSE PLATO"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="LOGISTICS GROUP", deck_name="pion_US_11ACR_1") == "LOGISTICS GROUP"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=2, cg_name="LOGISTICS GROUP", deck_name="pion_US_11ACR_1") == "LOGISTICS GROUP 2"
+    assert _get_localized_fallback_name("RECON", is_hq=False, count=1, cg_name="RECON GROUP", deck_name="pion_US_11ACR_1") == "RECON GROUP"
+    assert _get_localized_fallback_name("RECON", is_hq=False, count=2, cg_name="RECON GROUP", deck_name="pion_US_11ACR_1") == "RECON GROUP 2"
+    assert _get_localized_fallback_name("SUPPORT", is_hq=False, count=1, cg_name="SUPPORT GROUP", deck_name="pion_US_11ACR_1") == "SUPPORT GROUP"
+    assert _get_localized_fallback_name("SUPPORT", is_hq=False, count=2, cg_name="SUPPORT GROUP", deck_name="pion_US_11ACR_1") == "SUPPORT GROUP 2"
+
+    # Extra localization coverage for new roles
+    # German:
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=1, cg_name="1_Eng", deck_name="pion_RFA_12PzD") == "1. PIONIERZUG"
+    assert _get_localized_fallback_name("AA", is_hq=False, count=1, cg_name="1_AA", deck_name="pion_RFA_12PzD") == "1. FLUGABWEHRZUG"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="1_Log", deck_name="pion_RFA_12PzD") == "NACHSCHUBGRUPPE"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=2, cg_name="1_Log", deck_name="pion_RFA_12PzD") == "NACHSCHUBGRUPPE 2"
+
+    # French:
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=1, cg_name="1_Eng", deck_name="pion_FR_107") == "1ère SECTION DU GENIE"
+    assert _get_localized_fallback_name("AA", is_hq=False, count=1, cg_name="1_AA", deck_name="pion_FR_107") == "1ère SECTION SOL-AIR"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="1_Log", deck_name="pion_FR_107") == "GROUPE LOGISTIQUE"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=2, cg_name="1_Log", deck_name="pion_FR_107") == "GROUPE LOGISTIQUE 2"
+
+    # Russian:
+    assert _get_localized_fallback_name("ENGINEER", is_hq=False, count=1, cg_name="1_Eng", deck_name="pion_SOV_11") == "1-Y SAPERNYY VZVOD"
+    assert _get_localized_fallback_name("AA", is_hq=False, count=1, cg_name="1_AA", deck_name="pion_SOV_11") == "1-Y ZENITNYY VZVOD"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="1_Log", deck_name="pion_SOV_11") == "VZVOD OBESPECHENIYA"
+    assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=2, cg_name="1_Log", deck_name="pion_SOV_11") == "VZVOD OBESPECHENIYA 2"
+
