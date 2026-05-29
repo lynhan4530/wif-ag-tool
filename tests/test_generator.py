@@ -135,6 +135,68 @@ def test_gen_deck_patch_appends_correct_count():
     assert patch.count("~/Group_") == 1
 
 
+def test_replace_deck_lists_overwrites_only_target_deck(tmp_path):
+    """replace_deck_lists rewrites the target deck's two lists wholesale and leaves
+    every other deck (and the rest of the target block) untouched."""
+    from wif_ag_tool.generator.deck_patcher import replace_deck_lists
+
+    ndf = tmp_path / "StrategicDecks.ndf"
+    ndf.write_text(
+        "export Descriptor_Deck_pion_US_A is TDeckDescriptor\n"
+        "(\n"
+        "    DeckIdentifier = 'pion_US_A'\n"
+        "    DeckPackList =\n"
+        "    [\n"
+        "        ~/Descriptor_StrategicPack_VANILLA_1,\n"
+        "        ~/Descriptor_StrategicPack_VANILLA_2,\n"
+        "    ]\n"
+        "    DeckCombatGroupList =\n"
+        "    [\n"
+        "        ~/Descriptor_CombatGroup_VANILLA_A,\n"
+        "    ]\n"
+        ")\n"
+        "\n"
+        "export Descriptor_Deck_pion_US_B is TDeckDescriptor\n"
+        "(\n"
+        "    DeckPackList =\n"
+        "    [\n"
+        "        ~/Descriptor_StrategicPack_KEEPME,\n"
+        "    ]\n"
+        "    DeckCombatGroupList =\n"
+        "    [\n"
+        "        ~/Descriptor_CombatGroup_KEEPME,\n"
+        "    ]\n"
+        ")\n",
+        encoding="utf-8",
+    )
+
+    replace_deck_lists(
+        ndf, "Descriptor_Deck_pion_US_A",
+        ["Descriptor_StrategicPack_WF_NEW_1", "Descriptor_StrategicPack_WF_NEW_1"],
+        ["Descriptor_CombatGroup_US_A_WIF_A"],
+    )
+    out = ndf.read_text(encoding="utf-8")
+
+    # Target deck: vanilla refs gone, exactly the new refs present (2 dup pack refs).
+    assert "VANILLA_1" not in out and "VANILLA_2" not in out
+    assert "Descriptor_CombatGroup_VANILLA_A" not in out
+    assert out.count("~/Descriptor_StrategicPack_WF_NEW_1,") == 2
+    assert out.count("~/Descriptor_CombatGroup_US_A_WIF_A,") == 1
+    # Non-list content of the target block is preserved.
+    assert "DeckIdentifier = 'pion_US_A'" in out
+    # The other deck is completely untouched.
+    assert "~/Descriptor_StrategicPack_KEEPME," in out
+    assert "~/Descriptor_CombatGroup_KEEPME," in out
+
+    # Re-parsing confirms the structure is still valid and reflects the replacement.
+    from wif_ag_tool.parser.deck_parser import parse_deck
+    d = parse_deck(ndf, "Descriptor_Deck_pion_US_A")
+    assert d.pack_list == ["Descriptor_StrategicPack_WF_NEW_1", "Descriptor_StrategicPack_WF_NEW_1"]
+    assert d.combat_group_list == ["Descriptor_CombatGroup_US_A_WIF_A"]
+    d_b = parse_deck(ndf, "Descriptor_Deck_pion_US_B")
+    assert d_b.pack_list == ["Descriptor_StrategicPack_KEEPME"]
+
+
 def test_gen_token_length():
     t = make_token("WF_M1A2_SEPV2_Abrams_US", "Descriptor_Deck_pion_US_11ACR_4")
     assert len(t) == 10
@@ -215,17 +277,16 @@ def test_grouped_smart_group_tactical_sort_order():
     out = generate_grouped_combat_group(
         "A", deck.name, [a_spt, a_recon, a_hq, a_ungrouped, a_num], deck, set()
     )
-    # Verify sort order by checking pack index positions:
-    # HQ → index 2, NUM → index 4, RECON → index 1, SPT → index 0, UNGROUPED → index 3
-    # In output: HQ(2,1), NUM(4,1), RECON(1,1), SPT(0,1), UNGROUPED(3,1)
+    # Emission order is HQ → numbered → named → SPT → ungrouped, AND pack indices are
+    # assigned in that same emission order, so the tuples ascend contiguously 0,1,2,3,4
+    # (vanilla shape). A scrambled, non-monotonic layout hangs the AG campaign loader.
     lines = out.split("\n")
     pack_lines = [l.strip() for l in lines if l.strip().startswith("(") and l.strip().endswith(",")]
-    # HQ should be first, then numbered ("2"), then named ("1ST RECON PLATOON"), then SPT, then ungrouped
-    assert pack_lines[0] == "(2,1),"   # HQ
-    assert pack_lines[1] == "(4,1),"   # "2" (numbered)
-    assert pack_lines[2] == "(1,1),"   # "1ST RECON PLATOON" (named)
-    assert pack_lines[3] == "(0,1),"   # SPT
-    assert pack_lines[4] == "(3,1),"   # ungrouped
+    assert pack_lines[0] == "(0,1),"   # HQ (emitted first → first index)
+    assert pack_lines[1] == "(1,1),"   # "2" (numbered)
+    assert pack_lines[2] == "(2,1),"   # "1ST RECON PLATOON" (named)
+    assert pack_lines[3] == "(3,1),"   # SPT
+    assert pack_lines[4] == "(4,1),"   # ungrouped
 
 
 def test_localisation_sub_group_display_names():
@@ -298,54 +359,124 @@ def test_replicas_hierarchical_save_and_flatten(tmp_path):
     assert all(a.sub_group == "1ST RECON PLATOON" for a in a_asn)
 
 
-def test_smart_group_token_matching():
-    from wif_ag_tool.generator.group_generator import align_and_order_smart_groups, generate_grouped_combat_group
-    from wif_ag_tool.parser.combatgroup_parser import SmartGroup, CombatGroup
-    
-    v_sg1 = SmartGroup(name="VANILLA_HQ_TOKEN", is_hq=True)
-    v_sg2 = SmartGroup(name="VANILLA_PLT_TOKEN", is_hq=False)
-    
-    a1 = Assignment("d", "WF_Unit_HQ", xp_levels=[1], group_name="A", sub_group="HQ")
-    a2 = Assignment("d", "WF_Unit_Plt", xp_levels=[1], group_name="A", sub_group="1")
-    
-    smart_group_items = [
-        ("HQ", [a1]),
-        ("1", [a2]),
-    ]
-    
-    aligned = align_and_order_smart_groups(
-        smart_group_items=smart_group_items,
-        vanilla_smart_groups=[v_sg1, v_sg2],
-        deck_name="d",
-        gname="A",
-        existing_tokens=set()
-    )
-    assert aligned[0] == ("VANILLA_HQ_TOKEN", True, [a1])
-    assert aligned[1] == ("VANILLA_PLT_TOKEN", False, [a2])
+def test_combat_group_uses_wif_name_not_vanilla():
+    """Full-replacement model: generated combat groups always use the WIF descriptor
+    name; they never reuse / merge into a vanilla combat group."""
+    from wif_ag_tool.generator.group_generator import generate_grouped_combat_group, wif_cg_name
 
-    deck = DeckState("d", ["p"]*5, [])
-    out = generate_grouped_combat_group(
-        gname="A",
-        deck_name="d",
-        assignments=[a1, a2],
-        deck_state=deck,
-        existing_tokens=set(),
-        vanilla_smart_groups=[v_sg1, v_sg2]
-    )
-    assert "VANILLA_HQ_TOKEN" in out
-    assert "VANILLA_PLT_TOKEN" in out
+    a = Assignment("Descriptor_Deck_pion_US_11ACR_4", "WF_M1A2_Abrams",
+                   xp_levels=[1], group_name="A", sub_group="HQ")
+    deck = DeckState("Descriptor_Deck_pion_US_11ACR_4", [], [])
+    out = generate_grouped_combat_group("A", deck.name, [a], deck, set(), is_hq=True)
+
+    assert wif_cg_name(deck.name, "A") == "Descriptor_CombatGroup_US_11ACR_4_WIF_A"
+    assert "Descriptor_CombatGroup_US_11ACR_4_WIF_A is TDeckCombatGroupDescriptor" in out
     assert "IsHQ = True" in out
 
-    cg = CombatGroup(name="Descriptor_CombatGroup_d_WIF_A", token="CG_TOKEN", smart_groups=[v_sg1, v_sg2])
-    decks = {"d": deck}
-    combat_groups = {"Descriptor_CombatGroup_d_WIF_A": cg}
-    
-    csv_text = generate_platoons_rows(
-        assignments=[a1, a2],
-        units={},
-        decks=decks,
-        combat_groups=combat_groups
-    )
-    assert "VANILLA_HQ_TOKEN" in csv_text
-    assert "VANILLA_PLT_TOKEN" in csv_text
+
+def test_build_export_blocks_replaces_from_index_zero():
+    """build_export_blocks treats each deck as a clean slate: pack indices start at 0
+    regardless of the vanilla deck's existing pack count, and deck_lists holds exactly
+    the replica-derived refs (full replacement)."""
+    from wif_ag_tool.pipeline import build_export_blocks
+
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    # Vanilla deck already has 92 packs / 7 groups — none of which should leak through.
+    decks = {deck_name: DeckState(deck_name, ["vanilla_pack"] * 92,
+                                  ["vanilla_cg"] * 7)}
+    assignments = [
+        Assignment(deck_name, "WF_M1A2_Abrams", xp_levels=[1], count=2,
+                   group_name="A", sub_group="1", order=0),
+        Assignment(deck_name, "WF_T90M_RUS", xp_levels=[1], count=1,
+                   group_name="A", sub_group="2", order=1, seq=1),
+    ]
+    packs_blocks, groups_blocks, deck_lists = build_export_blocks(assignments, decks, {}, {})
+
+    pack_refs, group_refs = deck_lists[deck_name]
+    # Exactly the replica's packs: 2 copies of the first unit + 1 of the second.
+    assert len(pack_refs) == 3
+    assert not any(r == "vanilla_pack" for r in pack_refs)
+    # Exactly one WIF combat group, named for the replica group — no vanilla groups.
+    assert group_refs == ["Descriptor_CombatGroup_US_11ACR_4_WIF_A"]
+    # Indices start at 0 (clean slate), not at the vanilla pack count (92).
+    one_group = groups_blocks[0]
+    assert "(0,2)," in one_group   # first unit, count 2, at index 0
+    assert "(2,1)," in one_group   # second unit, count 1, at index 2
+
+
+def test_combat_group_tuples_monotonic_and_refs_aligned():
+    """Regression for the AG campaign-loader hang: when platoon names reorder under the
+    tactical sort, the combat group's (start,count) tuples must still ascend contiguously
+    (vanilla shape) AND the DeckPackList refs must line up with the tuples slot-for-slot."""
+    import re
+    from wif_ag_tool.pipeline import build_export_blocks
+
+    deck_name = "Descriptor_Deck_pion_US_X"
+    decks = {deck_name: DeckState(deck_name, ["v"] * 50, ["cg"] * 3)}
+    # Replica order (Zulu, Alpha, Mike) differs from the tactical/alphabetical emission
+    # order (Alpha, Mike, Zulu) — exactly the situation that scrambled indices before.
+    assignments = [
+        Assignment(deck_name, "WF_ZZZ", xp_levels=[1], count=2, group_name="A", sub_group="Zulu Plt", order=0),
+        Assignment(deck_name, "WF_AAA", xp_levels=[1], count=3, group_name="A", sub_group="Alpha Plt", order=1, seq=1),
+        Assignment(deck_name, "WF_MMM", xp_levels=[1], count=1, group_name="A", sub_group="Mike Plt", order=2, seq=2),
+    ]
+    _packs, groups_blocks, deck_lists = build_export_blocks(assignments, decks, {}, {})
+    pack_refs, _groups = deck_lists[deck_name]
+    block = groups_blocks[0]
+    tuples = [(int(a), int(b)) for a, b in re.findall(r"\((\d+),(\d+)\)", block)]
+
+    # Tuples ascend contiguously and cover the whole DeckPackList with no gap/overlap.
+    pos = 0
+    for start, count in tuples:
+        assert start == pos, f"non-monotonic/gap at {pos}: {tuples}"
+        pos += count
+    assert pos == len(pack_refs), "tuples don't cover the whole DeckPackList"
+
+    # Refs are laid out in emission order (Alpha×3, Mike×1, Zulu×2) so each tuple's start
+    # slot holds that platoon's unit.
+    assert pack_refs[0].startswith("Descriptor_StrategicPack_WF_AAA")
+    assert pack_refs[3].startswith("Descriptor_StrategicPack_WF_MMM")
+    assert pack_refs[4].startswith("Descriptor_StrategicPack_WF_ZZZ")
+
+
+def test_build_export_blocks_reuses_vanilla_combat_group_name_and_token():
+    """A replica group that maps to a deck's vanilla combat group must reuse that vanilla
+    NAME + TOKEN — the AG campaign binds pre-placed battalions to vanilla combat-group names,
+    so renaming hangs the loader. Content is still fully replaced with the replica's units."""
+    from wif_ag_tool.pipeline import build_export_blocks
+    from wif_ag_tool.parser.combatgroup_parser import CombatGroup
+
+    deck_name = "Descriptor_Deck_pion_US_11ACR_1"
+    vanilla_cg = "Descriptor_CombatGroup_pion_US_11ACR_1_A_1_11th_ACR"
+    decks = {deck_name: DeckState(deck_name, ["v"] * 30, [vanilla_cg])}
+    combat_groups = {vanilla_cg: CombatGroup(name=vanilla_cg, token="VANILLATOK", smart_groups=[])}
+    assignments = [
+        Assignment(deck_name, "WF_M1A2_Abrams", xp_levels=[1], count=2,
+                   group_name="A", sub_group="1"),
+    ]
+    _packs, groups_blocks, deck_lists = build_export_blocks(assignments, decks, {}, combat_groups)
+    _pack_refs, group_refs = deck_lists[deck_name]
+
+    # Deck references the VANILLA combat-group name (not _WIF_A).
+    assert group_refs == [vanilla_cg]
+    # The emitted block reuses the vanilla name + vanilla token, with WIF content.
+    block = groups_blocks[0]
+    assert f"{vanilla_cg} is TDeckCombatGroupDescriptor" in block
+    assert 'Name = "VANILLATOK"' in block
+    assert "(0,2)," in block  # the WIF unit's content, ascending from index 0
+
+
+def test_build_export_blocks_enforces_pack_index_invariant():
+    """A drifted (start,count) sum must raise before anything is written."""
+    import pytest
+    from wif_ag_tool.pipeline import build_export_blocks, _assert_pack_index_invariant
+
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    # Sanity: the invariant helper raises when the numbers disagree.
+    with pytest.raises(ValueError):
+        _assert_pack_index_invariant(
+            deck_name,
+            [Assignment(deck_name, "WF_X", xp_levels=[1], count=6)],
+            1,  # pretend only 1 ref was built for a 6-slot tuple
+        )
 

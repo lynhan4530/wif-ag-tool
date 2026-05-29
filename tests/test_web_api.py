@@ -138,6 +138,140 @@ def test_export_direct_success(client, tmp_path, monkeypatch):
     assert (export_dir / "Generated" / "Gameplay" / "Decks" / "StrategicDecks.ndf").exists()
     assert (export_dir / "Localisation" / "CRM_ArmyGeneral" / "PLATOONS.csv").exists()
 
+def test_export_direct_preserves_existing_platoons_csv(client, tmp_path, monkeypatch):
+    """export_direct must APPEND to PLATOONS.csv, never clobber the mod's existing
+    localisation rows (regression: the full table was being overwritten with only
+    the few WIF AG tokens, breaking every other platoon name in-game)."""
+    mod_dir = tmp_path / "CRM_ArmyGeneral"
+    mod_dir.mkdir()
+    export_dir = tmp_path / "export_output"
+
+    decks_dir = export_dir / "Generated" / "Gameplay" / "Decks"
+    decks_dir.mkdir(parents=True, exist_ok=True)
+    (decks_dir / "StrategicDecks.ndf").write_text(
+        "export Descriptor_Deck_pion_US_11ACR_4 is TDeckDescriptor\n(\n    DeckPackList = [\n    ]\n    DeckCombatGroupList = [\n    ]\n)\n",
+        encoding="utf-8",
+    )
+    (decks_dir / "StrategicPacks.ndf").write_text("// packs\n", encoding="utf-8")
+    (decks_dir / "StrategicCombatGroups.ndf").write_text("// groups\n", encoding="utf-8")
+
+    csv_dir = export_dir / "Localisation" / "CRM_ArmyGeneral"
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    csv_path = csv_dir / "PLATOONS.csv"
+    # Pre-existing localisation rows that must survive the export.
+    csv_path.write_text(
+        '"TOKEN";"REFTEXT"\n"ADHGKXYYNT";"11th ACR Alpha"\n"HGXGZRSJDO";"Tank Platoon"\n',
+        encoding="utf-8",
+    )
+
+    resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
+    slug = resp.get_json()["slug"]
+    client.patch(f"/api/sessions/{slug}", json={
+        "target_mod_dir": str(mod_dir),
+        "export_dir": str(export_dir),
+    })
+
+    from wif_ag_tool import replicas as rmod
+    monkeypatch.setattr(rmod.config, "REPLICAS_FILE", tmp_path / "data" / "wif_replicas.json")
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    rmod.save_replica(deck_name, [
+        {"unit_id": "WF_M1A2_Abrams", "xp": 1, "count": 1, "transport_id": None}
+    ], path=tmp_path / "data" / "wif_replicas.json")
+
+    set_state(
+        decks={deck_name: DeckState(name=deck_name, division_ref="US_11ACR", pack_list=[], combat_group_list=[])},
+        units={"WF_M1A2_Abrams": WifUnit(
+            name="WF_M1A2_Abrams", guid="g", nation="US", attack=10, defense=10,
+            xp_bonus=1, role="armor", name_token="t", display_name="M1A2 Abrams")},
+    )
+
+    resp = client.post(f"/api/sessions/{slug}/export_direct")
+    assert resp.status_code == 200, resp.get_json()
+
+    text = csv_path.read_text(encoding="utf-8")
+    # Pre-existing rows survive …
+    assert '"ADHGKXYYNT";"11th ACR Alpha"' in text
+    assert '"HGXGZRSJDO";"Tank Platoon"' in text
+    # … exactly one header (we dropped the generated duplicate) …
+    assert text.count('"TOKEN";"REFTEXT"') == 1
+    # … and the export added new WIF rows on top.
+    assert text.count("\n") > 3
+
+    # Idempotent: a second export must not duplicate or drop the stock rows.
+    resp = client.post(f"/api/sessions/{slug}/export_direct")
+    assert resp.status_code == 200
+    text2 = csv_path.read_text(encoding="utf-8")
+    assert text2.count('"ADHGKXYYNT";"11th ACR Alpha"') == 1
+    assert text2.count('"TOKEN";"REFTEXT"') == 1
+
+def test_export_direct_replaces_deck_contents(client, tmp_path, monkeypatch):
+    """Full-replacement model: export_direct rewrites the deck's DeckPackList /
+    DeckCombatGroupList to exactly the replica — the vanilla refs must be gone, and the
+    new WIF pack def must land in StrategicPacks.ndf."""
+    mod_dir = tmp_path / "CRM_ArmyGeneral"
+    mod_dir.mkdir()
+    export_dir = tmp_path / "export_output"
+    decks_dir = export_dir / "Generated" / "Gameplay" / "Decks"
+    decks_dir.mkdir(parents=True, exist_ok=True)
+
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    # A deck that already carries vanilla packs + combat groups.
+    (decks_dir / "StrategicDecks.ndf").write_text(
+        f"export {deck_name} is TDeckDescriptor\n"
+        "(\n"
+        "    DeckIdentifier = 'pion_US_11ACR_4'\n"
+        "    DeckPackList =\n"
+        "    [\n"
+        "        ~/Descriptor_StrategicPack_VANILLA_TANK_1,\n"
+        "        ~/Descriptor_StrategicPack_VANILLA_TANK_1,\n"
+        "    ]\n"
+        "    DeckCombatGroupList =\n"
+        "    [\n"
+        "        ~/Descriptor_CombatGroup_VANILLA_HQ,\n"
+        "    ]\n"
+        ")\n",
+        encoding="utf-8",
+    )
+    (decks_dir / "StrategicPacks.ndf").write_text("// packs\n", encoding="utf-8")
+    (decks_dir / "StrategicCombatGroups.ndf").write_text("// groups\n", encoding="utf-8")
+    csv_dir = export_dir / "Localisation" / "CRM_ArmyGeneral"
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    (csv_dir / "PLATOONS.csv").write_text('"TOKEN";"REFTEXT"\n', encoding="utf-8")
+
+    resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
+    slug = resp.get_json()["slug"]
+    client.patch(f"/api/sessions/{slug}", json={
+        "target_mod_dir": str(mod_dir), "export_dir": str(export_dir)})
+
+    from wif_ag_tool import replicas as rmod
+    monkeypatch.setattr(rmod.config, "REPLICAS_FILE", tmp_path / "data" / "wif_replicas.json")
+    rmod.save_replica(deck_name, [
+        {"unit_id": "WF_M1A2_Abrams", "xp": 1, "count": 1, "transport_id": None}
+    ], path=tmp_path / "data" / "wif_replicas.json")
+
+    set_state(
+        decks={deck_name: DeckState(name=deck_name, division_ref="US_11ACR",
+                                    pack_list=["x", "x"], combat_group_list=["VANILLA"])},
+        units={"WF_M1A2_Abrams": WifUnit(
+            name="WF_M1A2_Abrams", guid="g", nation="US", attack=10, defense=10,
+            xp_bonus=1, role="armor", name_token="t", display_name="M1A2 Abrams")},
+    )
+
+    resp = client.post(f"/api/sessions/{slug}/export_direct")
+    assert resp.status_code == 200, resp.get_json()
+
+    decks_text = (decks_dir / "StrategicDecks.ndf").read_text(encoding="utf-8")
+    packs_text = (decks_dir / "StrategicPacks.ndf").read_text(encoding="utf-8")
+    # Vanilla contents replaced, not appended.
+    assert "VANILLA_TANK" not in decks_text
+    assert "Descriptor_CombatGroup_VANILLA_HQ" not in decks_text
+    # The replica's WIF pack + combat group now define the deck.
+    assert "~/Descriptor_StrategicPack_WF_M1A2_Abrams_1," in decks_text
+    assert "~/Descriptor_CombatGroup_US_11ACR_4_WIF_A," in decks_text
+    # And the pack definition was appended to StrategicPacks.ndf.
+    assert "Descriptor_StrategicPack_WF_M1A2_Abrams_1 is DeckPackDescriptor" in packs_text
+
+
 def test_build_mod_not_configured(client):
     resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
     slug = resp.get_json()["slug"]

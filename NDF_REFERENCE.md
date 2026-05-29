@@ -515,6 +515,16 @@ Any mod touching StrategicDecks.ndf compiles into `GFX/Deck` — same package CR
    reads out-of-bounds and crashes the pawn-click UI. (Bug fixed 2026-05-28; regression
    guarded by `tests/test_generator.py::test_gen_combat_group_count_emits_consecutive_run_tuple`.)
 
+1c. **Smart-group tuples must be ASCENDING and CONTIGUOUS within a combat group.**
+   Vanilla always emits a combat group's SmartGroups so their `(start,count)` tuples run
+   `0..a`, `a..b`, … with no gaps, overlaps, or backward jumps. A *complete but scrambled*
+   layout — same slots, same units, just emitted out of order (e.g. `(24,2)` before `(0,6)`)
+   — **compiles fine, resolves every ref, and then HANGS the AG campaign at the loading
+   screen** (infinite load, not a crash). The export must assign pack indices in the same
+   order it emits SmartGroups. (Bug fixed 2026-05-29; root cause: smart groups sorted
+   tactically/alphabetically while indices were assigned in replica order. Guarded by
+   `tests/test_generator.py::test_combat_group_tuples_monotonic_and_refs_aligned`.)
+
 2. **`_solo` vs `_multi`** — AG uses `_solo` divisions; MP uses `_multi`.
    Wrong suffix = broken deck with no error message.
 

@@ -1,6 +1,9 @@
 """Pure export pipeline: assignments + deck state → 3 NDF files + 1 CSV.
 
-Decoupled from the CLI and the Flask layer so integration tests can call it directly.
+Full-replacement model: a deck with a replica is defined *entirely* by that replica —
+its DeckPackList and DeckCombatGroupList are rewritten to exactly what the replica says,
+with pack indices counted from 0. A deck with no replica produces no assignments and is
+left untouched. Decoupled from the CLI and Flask layers so tests can call it directly.
 """
 from __future__ import annotations
 import json
@@ -9,10 +12,13 @@ from pathlib import Path
 from typing import Iterable
 
 from wif_ag_tool.models import Assignment, DeckState, WifUnit
-from wif_ag_tool.parser.unit_parser import parse_wif_units
 from wif_ag_tool.parser.deck_parser import parse_deck
 from wif_ag_tool.generator.pack_generator import generate_packs_for_assignment
-from wif_ag_tool.generator.group_generator import generate_combat_group, generate_grouped_combat_group
+from wif_ag_tool.generator.group_generator import (
+    generate_grouped_combat_group,
+    resolve_cg_name,
+    emission_ordered_assignments,
+)
 from wif_ag_tool.generator.deck_patcher import generate_deck_patch
 from wif_ag_tool.generator.localisation import generate_platoons_rows
 from wif_ag_tool import replicas as _replicas
@@ -64,33 +70,41 @@ def _assert_pack_index_invariant(
         raise ValueError(
             f"Pack-index invariant violated for {deck_name}: "
             f"SmartGroup tuples sum to {expected} consecutive slots "
-            f"but {new_pack_refs_added} pack refs were appended to DeckPackList. "
+            f"but {new_pack_refs_added} pack refs were built for DeckPackList. "
             "This would crash the game on pawn click. "
             "See NDF_REFERENCE.md §4 for the invariant."
         )
 
 
-def run_export(
+def build_export_blocks(
     assignments: list[Assignment],
     decks: dict[str, DeckState],
     units: dict[str, WifUnit],
-    output_dir: Path,
-) -> dict[str, Path]:
-    """Generate all 4 artifacts. Returns mapping of artifact-name → written path."""
-    output_dir.mkdir(parents=True, exist_ok=True)
+    combat_groups: dict | None = None,
+) -> tuple[list[str], list[str], dict[str, tuple[list[str], list[str]]]]:
+    """Turn assignments into the export building blocks (full-replacement model).
 
-    from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
-    from wif_ag_tool import config
-    combat_groups = {}
-    if config.VANILLA_COMBAT_GROUPS.exists():
-        try:
-            combat_groups = parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
-        except Exception:
-            pass
+    Returns ``(packs_blocks, groups_blocks, deck_lists)`` where:
+      * *packs_blocks* — DeckPackDescriptor NDF blocks to append to StrategicPacks.ndf.
+      * *groups_blocks* — TDeckCombatGroupDescriptor blocks for StrategicCombatGroups.ndf.
+      * *deck_lists* — ``{deck_name: (pack_refs, group_refs)}``, the EXACT new contents of
+        each replica'd deck's DeckPackList / DeckCombatGroupList (pack indices start at 0).
 
-    # Group assignments by deck so indices accumulate correctly per deck.
-    # Within a deck, sort by the explicit `order` field (drag-reorder persistence)
-    # then by sequence so duplicates stay grouped.
+    Each replica group is mapped to its VANILLA combat-group name + token via
+    ``resolve_cg_name`` (the campaign binds pre-placed battalions to vanilla combat-group
+    names — renaming hangs the loader). *combat_groups* is the parsed vanilla
+    StrategicCombatGroups map; pass ``{}`` in tests to avoid touching live game files.
+
+    Raises ValueError if the pack-index invariant is ever violated.
+    """
+    if combat_groups is None:
+        from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
+        from wif_ag_tool import config
+        combat_groups = (
+            parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
+            if config.VANILLA_COMBAT_GROUPS.exists() else {}
+        )
+
     by_deck: dict[str, list[Assignment]] = {}
     for a in assignments:
         by_deck.setdefault(a.deck_name, []).append(a)
@@ -99,19 +113,14 @@ def run_export(
 
     packs_blocks: list[str] = []
     groups_blocks: list[str] = []
-    deck_patches: list[str] = []
+    deck_lists: dict[str, tuple[list[str], list[str]]] = {}
     existing_tokens: set[str] = set()
 
     for deck_name, deck_assignments in by_deck.items():
         deck = decks[deck_name]
-        # Track an evolving DeckState so each new assignment's indices come after the previous'
-        running = DeckState(
-            name=deck.name,
-            pack_list=list(deck.pack_list),
-            combat_group_list=list(deck.combat_group_list),
-        )
-        
-        # Group deck assignments by group_name while keeping order
+        # Replacement: start from an EMPTY deck so pack indices count from 0.
+        running = DeckState(name=deck.name, pack_list=[], combat_group_list=[])
+
         groups_map: dict[str, list[Assignment]] = {}
         group_order: list[str] = []
         for a in deck_assignments:
@@ -126,52 +135,70 @@ def run_export(
 
         for gname in group_order:
             group_assignments = groups_map[gname]
-            
-            # Generate packs for all assignments in this group
+
             for a in group_assignments:
                 packs_blocks.append(generate_packs_for_assignment(a, transport_id=a.transport_id))
-                
-            from wif_ag_tool.generator.group_generator import resolve_cg_name
-            cg_name = resolve_cg_name(deck_name, gname, deck.combat_group_list)
-            vanilla_token = None
-            is_hq = (gname == "HQ")
-            vanilla_smart_groups = None
-            if cg_name in combat_groups:
-                vanilla_token = combat_groups[cg_name].token
-                is_hq = combat_groups[cg_name].is_hq
-                vanilla_smart_groups = combat_groups[cg_name].smart_groups
 
-            # Generate the single combat group for this group
-            combat_group_block = generate_grouped_combat_group(
+            # Reuse the vanilla combat-group name + token so the campaign keeps binding to
+            # it; replace its content with this group's units.
+            cg_name = resolve_cg_name(deck_name, gname, deck.combat_group_list)
+            vanilla = combat_groups.get(cg_name)
+            cg_token = vanilla.token if vanilla else None
+            is_hq = (gname == "HQ") or bool(vanilla and vanilla.is_hq)
+
+            groups_blocks.append(generate_grouped_combat_group(
                 gname=gname,
                 deck_name=deck_name,
                 assignments=group_assignments,
                 deck_state=running,
                 existing_tokens=existing_tokens,
-                vanilla_token=vanilla_token,
                 is_hq=is_hq,
-                vanilla_smart_groups=vanilla_smart_groups,
-            )
-            groups_blocks.append(combat_group_block)
-            
-            # Append packs to running deck and new_packs list.
-            # The campaign engine reads `count` consecutive entries per SmartGroup
-            # tuple, so each pack ref must appear `a.count` times in DeckPackList.
-            for a in group_assignments:
+                cg_name=cg_name,
+                cg_token=cg_token,
+            ))
+
+            # Append DeckPackList refs in the SAME order generate_grouped_combat_group
+            # assigns indices (emission order), so the (start,count) tuples and the refs
+            # stay aligned slot-for-slot and the combat group is ascending/contiguous.
+            # Engine reads `count` consecutive slots per tuple, so each ref appears
+            # `a.count` times consecutively.
+            for a in emission_ordered_assignments(group_assignments):
                 for xp in a.xp_levels:
                     pack_ref = a.pack_name(xp)
                     for _ in range(a.count):
                         new_packs.append(pack_ref)
                         running.pack_list.append(pack_ref)
-                    
+
             new_groups.append(cg_name)
             running.combat_group_list.append(cg_name)
 
-        vanilla_groups = set(deck.combat_group_list)
-        groups_to_append = [g for g in new_groups if g not in vanilla_groups]
         _assert_pack_index_invariant(deck_name, deck_assignments, len(new_packs))
-        deck_patches.append(generate_deck_patch(deck_name, new_packs, groups_to_append))
+        deck_lists[deck_name] = (new_packs, new_groups)
 
+    return packs_blocks, groups_blocks, deck_lists
+
+
+def run_export(
+    assignments: list[Assignment],
+    decks: dict[str, DeckState],
+    units: dict[str, WifUnit],
+    output_dir: Path,
+) -> dict[str, Path]:
+    """Generate all 4 artifacts as sidecar files (zip-export path). Returns name → path."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
+    from wif_ag_tool import config
+    combat_groups = (
+        parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
+        if config.VANILLA_COMBAT_GROUPS.exists() else {}
+    )
+
+    packs_blocks, groups_blocks, deck_lists = build_export_blocks(assignments, decks, units, combat_groups)
+    deck_patches = [
+        generate_deck_patch(deck_name, pack_refs, group_refs)
+        for deck_name, (pack_refs, group_refs) in deck_lists.items()
+    ]
     csv_text = generate_platoons_rows(assignments, units, decks=decks, combat_groups=combat_groups)
 
     paths = {
@@ -286,6 +313,7 @@ def migrate_legacy_assignments(
 __all__ = [
     "load_assignments",
     "save_assignments",
+    "build_export_blocks",
     "run_export",
     "export_from_replicas",
     "migrate_legacy_assignments",

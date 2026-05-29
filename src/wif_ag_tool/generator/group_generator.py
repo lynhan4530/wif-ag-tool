@@ -1,38 +1,32 @@
-"""Emit TDeckCombatGroupDescriptor NDF blocks."""
+"""Emit TDeckCombatGroupDescriptor NDF blocks.
+
+Full-replacement model: a deck's replica defines the deck outright, so combat groups
+are generated purely from the replica's groups/platoons/units. There is no merging with
+vanilla combat groups — the export rewrites the deck's lists wholesale, and decks without
+a replica are left untouched. (The old vanilla-alignment/merge path was removed once we
+verified in-game that AG accepts a fully-replaced deck.)
+"""
 from __future__ import annotations
-from typing import Any
 
 from wif_ag_tool.models import Assignment, DeckState
-from wif_ag_tool.generator.token_gen import (
-    make_unique_token,
-    group_token_key,
-    smart_token_key,
-)
+from wif_ag_tool.generator.token_gen import make_unique_token, smart_token_key
 
 
-def generate_combat_group(
-    assignment: Assignment,
-    deck_state: DeckState,
-    existing_tokens: set[str],
-    vanilla_token: str | None = None,
-) -> str:
-    """Emit one TDeckCombatGroupDescriptor for *assignment*.
-
-    The SmartGroup at position i references pack index (deck.next_index + i).
-    Tokens are added to *existing_tokens* in-place so callers can keep accumulating.
-    """
-    return generate_grouped_combat_group(
-        gname=assignment.group_name,
-        deck_name=assignment.deck_name,
-        assignments=[assignment],
-        deck_state=deck_state,
-        existing_tokens=existing_tokens,
-        vanilla_token=vanilla_token,
-    )
+def wif_cg_name(deck_name: str, gname: str) -> str:
+    """Descriptor name for a WIF combat group: ``Descriptor_CombatGroup_<deck>_WIF_<gname>``."""
+    deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
+    return f"Descriptor_CombatGroup_{deck_short}_WIF_{gname}"
 
 
 def resolve_cg_name(deck_name: str, gname: str, vanilla_cg_list: list[str]) -> str:
-    """Find a matching combat group in the deck's vanilla combat group list, or fall back to WIF name."""
+    """Map a replica group to the deck's matching VANILLA combat-group descriptor name,
+    or fall back to a WIF name if none matches.
+
+    REQUIRED for the campaign to load: the AG campaign binds a pre-placed battalion to its
+    vanilla combat-group *names*. Renaming a kept group (e.g. to ``_WIF_A``) hangs the
+    campaign loader (verified in-game 2026-05-29). Removing a group is graceful; renaming is
+    fatal — so we reuse the vanilla name for any group that maps to one.
+    """
     target = f"_{gname}_"
     for cg in vanilla_cg_list:
         if target in cg:
@@ -41,97 +35,98 @@ def resolve_cg_name(deck_name: str, gname: str, vanilla_cg_list: list[str]) -> s
     for cg in vanilla_cg_list:
         if cg.endswith(target_suffix):
             return cg
-    deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
-    return f"Descriptor_CombatGroup_{deck_short}_WIF_{gname}"
+    return wif_cg_name(deck_name, gname)
 
 
-def align_and_order_smart_groups(
+def generate_combat_group(
+    assignment: Assignment,
+    deck_state: DeckState,
+    existing_tokens: set[str],
+) -> str:
+    """Emit one TDeckCombatGroupDescriptor for a single *assignment*.
+
+    Tokens are added to *existing_tokens* in-place so callers can keep accumulating.
+    """
+    return generate_grouped_combat_group(
+        gname=assignment.group_name,
+        deck_name=assignment.deck_name,
+        assignments=[assignment],
+        deck_state=deck_state,
+        existing_tokens=existing_tokens,
+        is_hq=(assignment.group_name == "HQ"),
+    )
+
+
+def order_smart_groups(
     smart_group_items: list[tuple[str | None, list[Assignment]]],
-    vanilla_smart_groups: list[Any] | None,
     deck_name: str,
     gname: str,
     existing_tokens: set[str],
 ) -> list[tuple[str, bool, list[Assignment]]]:
-    """Align generated smart groups to vanilla smart groups, maintaining vanilla order and tokens."""
-    if not vanilla_smart_groups:
-        # No vanilla reference: just output generated smart groups in their sorted order
-        out = []
-        for sg_name, sg_assignments in smart_group_items:
-            is_sg_hq = bool(sg_name and "HQ" in sg_name.upper())
-            if sg_name:
-                token_key = f"sg_WIF_{gname}_{sg_name}"
-            else:
-                a = sg_assignments[0]
-                xp = a.xp_levels[0] if a.xp_levels else 1
-                token_key = smart_token_key(a.unit_id, xp, a.seq)
-            smart_token = make_unique_token(token_key, deck_name, existing_tokens)
-            existing_tokens.add(smart_token)
-            out.append((smart_token, is_sg_hq, sg_assignments))
-        return out
+    """Assign a token to each smart group and return ``(token, is_hq, assignments)`` items.
 
-    # We have vanilla smart groups: align by role and index
-    vanilla_hq = [sg for sg in vanilla_smart_groups if sg.is_hq]
-    vanilla_non_hq = [sg for sg in vanilla_smart_groups if not sg.is_hq]
-
-    # Separate generated smart groups
-    gen_hq = []
-    gen_non_hq = []
+    *smart_group_items* must already be in the desired emission order.
+    """
+    out: list[tuple[str, bool, list[Assignment]]] = []
     for sg_name, sg_assignments in smart_group_items:
         is_sg_hq = bool(sg_name and "HQ" in sg_name.upper())
-        if is_sg_hq:
-            gen_hq.append(sg_assignments)
+        if sg_name:
+            token_key = f"sg_WIF_{gname}_{sg_name}"
         else:
-            gen_non_hq.append(sg_assignments)
+            a = sg_assignments[0]
+            xp = a.xp_levels[0] if a.xp_levels else 1
+            token_key = smart_token_key(a.unit_id, xp, a.seq)
+        smart_token = make_unique_token(token_key, deck_name, existing_tokens)
+        existing_tokens.add(smart_token)
+        out.append((smart_token, is_sg_hq, sg_assignments))
+    return out
 
-    # Build bidirectional mapping between vanilla SmartGroup and generated assignments
-    vanilla_to_gen = {}
-    gen_matched = set()
 
-    # Map HQ
-    for idx, g_asn in enumerate(gen_hq):
-        if idx < len(vanilla_hq):
-            v_sg = vanilla_hq[idx]
-            vanilla_to_gen[id(v_sg)] = g_asn
-            gen_matched.add(id(g_asn))
-
-    # Map non-HQ
-    for idx, g_asn in enumerate(gen_non_hq):
-        if idx < len(vanilla_non_hq):
-            v_sg = vanilla_non_hq[idx]
-            vanilla_to_gen[id(v_sg)] = g_asn
-            gen_matched.add(id(g_asn))
-
-    # Construct the ordered output list matching vanilla order
-    ordered_out = []
-    for v_sg in vanilla_smart_groups:
-        g_asn = vanilla_to_gen.get(id(v_sg))
-        if g_asn is not None:
-            # Reusing vanilla token
-            existing_tokens.add(v_sg.name)
-            ordered_out.append((v_sg.name, v_sg.is_hq, g_asn))
+def sorted_smart_group_items(
+    assignments: list[Assignment],
+) -> list[tuple[str | None, list[Assignment]]]:
+    """Group *assignments* by sub_group and sort tactically (HQ → numbered → named → SPT → ungrouped)."""
+    grouped: dict[str, list[Assignment]] = {}
+    ungrouped: list[Assignment] = []
+    for a in assignments:
+        if a.sub_group:
+            grouped.setdefault(a.sub_group, []).append(a)
         else:
-            # Unmatched vanilla slot: output an empty placeholder to preserve index
-            existing_tokens.add(v_sg.name)
-            ordered_out.append((v_sg.name, v_sg.is_hq, []))
+            ungrouped.append(a)
 
-    # Append any extra generated HQ groups that didn't fit
-    for idx, g_asn in enumerate(gen_hq):
-        if id(g_asn) not in gen_matched:
-            # Generate a new unique token
-            token_key = f"sg_WIF_{gname}_HQ_extra_{idx}"
-            smart_token = make_unique_token(token_key, deck_name, existing_tokens)
-            existing_tokens.add(smart_token)
-            ordered_out.append((smart_token, True, g_asn))
+    items: list[tuple[str | None, list[Assignment]]] = []
+    for sg_name, sg_assignments in grouped.items():
+        items.append((sg_name, sg_assignments))
+    for a in ungrouped:
+        items.append((None, [a]))
 
-    # Append any extra generated non-HQ groups that didn't fit
-    for idx, g_asn in enumerate(gen_non_hq):
-        if id(g_asn) not in gen_matched:
-            token_key = f"sg_WIF_{gname}_extra_{idx}"
-            smart_token = make_unique_token(token_key, deck_name, existing_tokens)
-            existing_tokens.add(smart_token)
-            ordered_out.append((smart_token, False, g_asn))
+    def sort_key(item):
+        sg_name, sg_assignments = item
+        if sg_name is None:
+            return (4, "", sg_assignments[0].order)
+        if sg_name == "HQ":
+            return (0, "", 0)
+        elif sg_name.isdigit():
+            return (1, "", int(sg_name))
+        elif sg_name == "SPT" or sg_name == "SUPPORT":
+            return (3, "", 0)
+        else:
+            return (2, sg_name, 0)
 
-    return ordered_out
+    items.sort(key=sort_key)
+    return items
+
+
+def emission_ordered_assignments(assignments: list[Assignment]) -> list[Assignment]:
+    """Flatten *assignments* in pack-emission order — grouped by sub_group with smart
+    groups in tactical order, matching how ``generate_grouped_combat_group`` assigns pack
+    indices. The export appends DeckPackList refs in this order so refs line up with the
+    SmartGroup ``(start,count)`` tuples slot-for-slot.
+    """
+    ordered: list[Assignment] = []
+    for _sg_name, sg_assignments in sorted_smart_group_items(assignments):
+        ordered.extend(sg_assignments)
+    return ordered
 
 
 def generate_grouped_combat_group(
@@ -140,26 +135,22 @@ def generate_grouped_combat_group(
     assignments: list[Assignment],
     deck_state: DeckState,
     existing_tokens: set[str],
-    vanilla_token: str | None = None,
     is_hq: bool = False,
-    vanilla_smart_groups: list[Any] | None = None,
+    cg_name: str | None = None,
+    cg_token: str | None = None,
 ) -> str:
     """Emit one TDeckCombatGroupDescriptor containing smart groups for *assignments*.
 
-    Smart groups are grouped by their sub_group property and sorted tactically.
-    Pack indices are correctly mapped from linear deck additions.
-    """
-    deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
-    group_name = resolve_cg_name(deck_name, gname, deck_state.combat_group_list)
+    Smart groups are grouped by sub_group and sorted tactically. Pack indices count
+    forward from ``deck_state.next_index`` (the export seeds an empty DeckState per deck
+    so a replaced deck's indices start at 0).
 
-    if vanilla_token:
-        group_token = vanilla_token
-    else:
-        group_token = make_unique_token(
-            f"cg_WIF_{gname}",
-            deck_name,
-            existing_tokens,
-        )
+    *cg_name* / *cg_token* — when the group maps to a vanilla combat group, the caller
+    passes the vanilla descriptor name and token so the campaign keeps binding to it (see
+    ``resolve_cg_name``). Otherwise a WIF name/token is generated.
+    """
+    group_name = cg_name or wif_cg_name(deck_name, gname)
+    group_token = cg_token or make_unique_token(f"cg_WIF_{gname}", deck_name, existing_tokens)
     existing_tokens.add(group_token)
 
     lines = [
@@ -174,58 +165,25 @@ def generate_grouped_combat_group(
         "    [",
     ])
 
-    # Map each assignment's id to its starting pack index as linear deck additions.
-    # Each (xp_level, count) consumes `count` consecutive DeckPackList slots, so the
-    # next assignment starts at curr + len(xp_levels) * count.
+    smart_group_items = sorted_smart_group_items(assignments)
+    aligned_groups = order_smart_groups(smart_group_items, deck_name, gname, existing_tokens)
+
+    # Assign pack indices in the SAME order the smart groups are emitted, so each combat
+    # group's (start,count) tuples form an ascending, contiguous run — exactly how vanilla
+    # lays out a combat group. A non-monotonic layout (indices assigned in replica order
+    # but smart groups emitted in tactical/alphabetical order) compiles and resolves fine
+    # but HANGS the Army General campaign loader. Each (xp_level, count) consumes `count`
+    # consecutive DeckPackList slots, so the next assignment starts at curr + xp*count.
+    # `build_export_blocks` appends the DeckPackList refs in this same order (via
+    # emission_ordered_assignments) so refs and indices stay in lockstep.
     assignment_indices = {}
     curr = deck_state.next_index
-    for a in assignments:
-        assignment_indices[id(a)] = curr
-        curr += len(a.xp_levels) * a.count
-
-    # Group assignments by sub_group
-    grouped: dict[str, list[Assignment]] = {}
-    ungrouped: list[Assignment] = []
-    for a in assignments:
-        if a.sub_group:
-            grouped.setdefault(a.sub_group, []).append(a)
-        else:
-            ungrouped.append(a)
-
-    # Build smart group items for sorting
-    smart_group_items = []
-    for sg_name, sg_assignments in grouped.items():
-        smart_group_items.append((sg_name, sg_assignments))
-    for a in ungrouped:
-        smart_group_items.append((None, [a]))
-
-    # Tactical sort: HQ first, then numeric, then SPT, then ungrouped
-    def smart_group_sort_key(item):
-        sg_name, sg_assignments = item
-        if sg_name is None:
-            return (4, sg_assignments[0].order)
-        if sg_name == "HQ":
-            return (0, "")
-        elif sg_name.isdigit():
-            return (1, int(sg_name))
-        elif sg_name == "SPT" or sg_name == "SUPPORT":
-            return (3, "")
-        else:
-            return (2, sg_name)
-
-    smart_group_items.sort(key=smart_group_sort_key)
-
-    # Align and order generated smart groups to vanilla smart groups if available
-    aligned_groups = align_and_order_smart_groups(
-        smart_group_items=smart_group_items,
-        vanilla_smart_groups=vanilla_smart_groups,
-        deck_name=deck_name,
-        gname=gname,
-        existing_tokens=existing_tokens,
-    )
+    for _sg_name, sg_assignments in smart_group_items:
+        for a in sg_assignments:
+            assignment_indices[id(a)] = curr
+            curr += len(a.xp_levels) * a.count
 
     for smart_token, sg_is_hq, sg_assignments in aligned_groups:
-        # Smart group descriptor block
         lines.extend([
             "        TDeckSmartGroupDescriptor",
             "        (",

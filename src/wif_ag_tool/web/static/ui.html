@@ -984,6 +984,10 @@ function renderRightPane() {
   const totalUnits = countTotalUnits();
   pane.appendChild(el("div", { class: "replica-bar" },
     el("button", { onclick: addCombatGroup }, "+ Add Group"),
+    el("button", {
+      title: "Seed this replica with a full copy of the vanilla deck, then edit it down for balance. The replica IS the deck — only what's here gets exported.",
+      onclick: copyVanillaToReplica,
+    }, "⧉ Copy vanilla"),
     el("span", { class: "tree-toggle" },
       el("button", { title: "Collapse all", onclick: replicaCollapseAll },
         el("span", { class: "tt-icon" }, "▸"), el("span", { class: "tt-label" }, "Collapse")),
@@ -1016,6 +1020,50 @@ function addCombatGroup() {
   state.replicaGroups.push({ name, platoons: [] });
   markReplicaDirty();
   render();
+}
+
+function copyVanillaToReplica() {
+  const v = state.vanilla;
+  if (!v || !v.combat_groups || v.combat_groups.length === 0) {
+    toast("No vanilla deck data loaded to copy.", true);
+    return;
+  }
+  if (countTotalUnits() > 0 &&
+      !confirm("Replace this replica with a full copy of the vanilla deck? Unsaved edits to this replica will be discarded.")) {
+    return;
+  }
+
+  const letter = (i) => (i < 26 ? String.fromCharCode(65 + i) : `G${i}`);
+  const groups = [];
+  v.combat_groups.forEach((cg, i) => {
+    if (cg.missing) return;
+    const platoons = [];
+    (cg.smart_groups || []).forEach((sg) => {
+      const units = [];
+      (sg.packs || []).forEach((p) => {
+        if (!p.unit) return;  // pack didn't resolve to a unit — skip
+        units.push({
+          unit_id: p.unit,
+          xp: (p.xp == null ? 1 : p.xp),
+          count: (p.count == null ? 1 : p.count),
+          attack_override: null,
+          defense_override: null,
+          transport_id: p.transport || null,
+        });
+      });
+      if (units.length) platoons.push({ name: sg.display_name || sg.name, units });
+    });
+    if (platoons.length) groups.push({ name: letter(i), platoons });
+  });
+
+  if (groups.length === 0) {
+    toast("Vanilla deck had no resolvable units to copy.", true);
+    return;
+  }
+  state.replicaGroups = groups;
+  markReplicaDirty();
+  render();
+  toast(`Copied ${groups.length} combat group(s) from vanilla — edit down, then Save deck.`);
 }
 
 function copyCombatGroup(gi) {

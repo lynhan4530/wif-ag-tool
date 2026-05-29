@@ -37,13 +37,14 @@ def test_full_pipeline_one_unit(tmp_path, fixture_units_path, fixture_deck_path)
         assert paths[key].exists()
 
 
-def test_generated_pack_index_matches_next(tmp_path, fixture_units_path, fixture_deck_path):
+def test_generated_pack_index_starts_at_zero(tmp_path, fixture_units_path, fixture_deck_path):
     units, decks = _build(fixture_units_path, fixture_deck_path, [])
     a = Assignment(DECK_NAME, "WF_M1A2_SEPV2_Abrams_US", xp_levels=[1])
     paths = run_export([a], decks, units, tmp_path / "out")
     groups_text = paths["groups"].read_text(encoding="utf-8")
-    # Sample deck has 5 packs → first new index must be 5
-    assert "(5,1)" in groups_text
+    # Full replacement: the deck is rebuilt from scratch, so the first index is 0
+    # (not the vanilla pack count).
+    assert "(0,1)" in groups_text
 
 
 def test_idempotent_generation(tmp_path, fixture_units_path, fixture_deck_path):
@@ -105,9 +106,9 @@ def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_d
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
     assert "Transport = $/GFX/Unit/Descriptor_Unit_WF_M2A4_Bradley_US" in packs_text
     assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_2" in packs_text
-    # First WIF pack appended at next_index=5 of sample deck
-    assert "(5,1)" in groups_text
-    assert "(6,1)" in groups_text
+    # Full replacement: indices count from 0
+    assert "(0,1)" in groups_text
+    assert "(1,1)" in groups_text
 
 
 def test_pack_index_invariant_raises_on_mismatch():
@@ -143,9 +144,9 @@ def test_export_from_replicas_count_duplicates_pack_refs(tmp_path, fixture_units
     assert decks_text.count("~/Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1") == 6
     assert decks_text.count("~/Descriptor_StrategicPack_WF_M2A4_Bradley_US_1") == 4
 
-    # Sample deck has 5 vanilla packs → Abrams runs [5..10] = (5,6); Bradley starts at 11 = (11,4)
-    assert "(5,6)" in groups_text
-    assert "(11,4)" in groups_text
+    # Full replacement: Abrams runs [0..5] = (0,6); Bradley starts at 6 = (6,4)
+    assert "(0,6)" in groups_text
+    assert "(6,4)" in groups_text
 
 
 def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_path, fixture_deck_path):
@@ -162,7 +163,8 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     # First seq has no suffix; second gets _1
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
     assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1_3" in packs_text
-    # Combat groups disambiguate by group_name
+    # Group A maps to the deck's vanilla combat group → reuses its vanilla name (required so
+    # AG can load the deck). Group B has no vanilla match → WIF name.
     assert "Descriptor_CombatGroup_pion_TEST_Alpha_1_A is" in groups_text
     assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_B is" in groups_text
 
