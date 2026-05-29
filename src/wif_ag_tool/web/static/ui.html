@@ -471,7 +471,8 @@ function needsTransport(u) {
   const raw = (u.role || "").toLowerCase();
   if (FOOT_TEAM_ROLES.has(raw)) return true;
   // Compound names — Javelin / MANPADS / mortar teams that include descriptive suffixes
-  if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|mortar_inf|mortar_team|sniper_team|spotter|commandos|sapper/.test(raw)) return true;
+  const nameLower = (u.name || "").toLowerCase();
+  if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|mortar_inf|mortar_team|sniper_team|spotter|commandos|sapper/.test(nameLower)) return true;
   // Recon role covers BOTH foot recon (CEWI, Scouts, LRRP, Rangers) and vehicle/heli recon (Bradley CFV, etc.).
   // Use button_texture + name signature to flip only the foot variants.
   if (norm === "recon") {
