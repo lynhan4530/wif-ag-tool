@@ -98,6 +98,10 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         return None
 
     specialties = _parse_specialties(block)
+    tag_match = re.search(r'TagSet\s*=\s*\[([^\]]*)\]', block, re.DOTALL)
+    if tag_match and 'Unite_transportable' in tag_match.group(1):
+        if 'transportable' not in specialties:
+            specialties.append('transportable')
     nation = country_m.group(1) if country_m else _infer_nation(name)
 
     return WifUnit(

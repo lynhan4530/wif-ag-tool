@@ -472,6 +472,9 @@ function needsTransport(u) {
   const VEHICLE_KEYWORDS = /m109|m110|2s1|2s3|2s5|2s7|2s19|amx|as90|automoteur|dana|caesar|pzh|archer|bereg|gvozdika|akatsiya|malka|pion|tyulpan|giatsint|vab|bdx|m106|m125|fv432|lav_m|btr|mtlb|stryker|vbmr|hosta|vena|drok|panzermorser|pm_81|pram|vlra|bmr|luchs|fuchs|tuto|m113|humvee|m1025|uaz|jeep|rover|iltis|fuch|m151|bmd|gtmu|ot_62|ot_810|lav|unimog|gaz|truck/i;
   if (VEHICLE_KEYWORDS.test(nameLower)) return false;
 
+  // Explicitly marked as transportable/towed in NDF TagSet
+  if (Array.isArray(u.specialties) && u.specialties.includes("transportable")) return true;
+
   const norm = getNormalizedRole(u);
   if (norm === "infantry" || norm === "engineer") return true;
   const raw = (u.role || "").toLowerCase();
