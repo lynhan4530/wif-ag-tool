@@ -13,7 +13,7 @@ from typing import Iterable
 
 from wif_ag_tool.models import Assignment, DeckState, WifUnit
 from wif_ag_tool.parser.deck_parser import parse_deck
-from wif_ag_tool.generator.pack_generator import generate_packs_for_assignment
+from wif_ag_tool.generator.pack_generator import generate_pack, generate_packs_for_assignment
 from wif_ag_tool.generator.group_generator import (
     generate_grouped_combat_group,
     resolve_cg_name,
@@ -115,6 +115,7 @@ def build_export_blocks(
     groups_blocks: list[str] = []
     deck_lists: dict[str, tuple[list[str], list[str]]] = {}
     existing_tokens: set[str] = set()
+    seen_packs: set[str] = set()
 
     for deck_name, deck_assignments in by_deck.items():
         deck = decks[deck_name]
@@ -137,7 +138,11 @@ def build_export_blocks(
             group_assignments = groups_map[gname]
 
             for a in group_assignments:
-                packs_blocks.append(generate_packs_for_assignment(a, transport_id=a.transport_id))
+                for xp in a.xp_levels:
+                    pname = a.pack_name(xp)
+                    if pname not in seen_packs:
+                        seen_packs.add(pname)
+                        packs_blocks.append(generate_pack(a.unit_id, xp, transport_id=a.transport_id, seq=a.seq))
 
             # Reuse the vanilla combat-group name + token so the campaign keeps binding to
             # it; replace its content with this group's units.
