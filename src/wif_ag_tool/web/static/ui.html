@@ -466,18 +466,35 @@ const FOOT_TEAM_ROLES = new Set([
 
 function needsTransport(u) {
   if (!u) return false;
+  const nameLower = (u.name || "").toLowerCase();
+  
+  // Exclude self-propelled vehicle platforms
+  const VEHICLE_KEYWORDS = /m109|m110|2s1|2s3|2s5|2s7|2s19|amx|as90|automoteur|dana|caesar|pzh|archer|bereg|gvozdika|akatsiya|malka|pion|tyulpan|giatsint|vab|bdx|m106|m125|fv432|lav_m|btr|mtlb|stryker|vbmr|hosta|vena|drok|panzermorser|pm_81|pram|vlra|bmr|luchs|fuchs|tuto|m113|humvee|m1025|uaz|jeep|rover|iltis|fuch|m151|bmd|gtmu|ot_62|ot_810|lav|unimog|gaz|truck/i;
+  if (VEHICLE_KEYWORDS.test(nameLower)) return false;
+
   const norm = getNormalizedRole(u);
   if (norm === "infantry" || norm === "engineer") return true;
   const raw = (u.role || "").toLowerCase();
   if (FOOT_TEAM_ROLES.has(raw)) return true;
   // Compound names — Javelin / MANPADS / mortar teams that include descriptive suffixes
-  const nameLower = (u.name || "").toLowerCase();
   if (/atgm|antitank|at_team|at_inf|manpads|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg_team|mmg_team|mortar_inf|mortar_team|sniper_team|spotter|commandos|sapper/.test(nameLower)) return true;
   // Recon role covers BOTH foot recon (CEWI, Scouts, LRRP, Rangers) and vehicle/heli recon (Bradley CFV, etc.).
   // Use button_texture + name signature to flip only the foot variants.
   if (norm === "recon") {
     const sig = ((u.button_texture || "") + " " + (u.name || "")).toLowerCase();
     if (/scout|lrrp|cewi|ranger|commando|sniper|spotter|spez|reco_inf|recon_inf|spahtrupp|fernspaher/.test(sig)) return true;
+  }
+  // Towed Howitzers / Artillery
+  if (norm === "artillery" || raw === "howitzer") {
+    if (/howz|fh70|obusier|2a36|bs3|zis3|trf1|m777|lg1|mstab|msta_b/.test(nameLower)) return true;
+  }
+  // Towed AA Guns
+  if (norm === "aa" || raw === "aa") {
+    if (/zu_23|fk20/.test(nameLower)) return true;
+  }
+  // Towed AT Guns / Recoilless Rifles
+  if (norm === "at" || raw === "at") {
+    if (/t12_rapira|zis2|vz52|rcl|wombat|spg9|m40a1/.test(nameLower)) return true;
   }
   return false;
 }
