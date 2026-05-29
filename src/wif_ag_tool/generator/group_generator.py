@@ -18,24 +18,74 @@ def wif_cg_name(deck_name: str, gname: str) -> str:
     return f"Descriptor_CombatGroup_{deck_short}_WIF_{gname}"
 
 
-def resolve_cg_name(deck_name: str, gname: str, vanilla_cg_list: list[str]) -> str:
-    """Map a replica group to the deck's matching VANILLA combat-group descriptor name,
-    or fall back to a WIF name if none matches.
+def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list: list[str]) -> dict[str, str]:
+    """Map a deck's replica groups to its vanilla combat-group descriptor names.
 
-    REQUIRED for the campaign to load: the AG campaign binds a pre-placed battalion to its
+    Tries to:
+    1. Match HQ group to vanilla HQ group.
+    2. Match non-HQ groups by letter match (e.g. A matches _A_ or _A).
+    3. Match any remaining unmatched replica groups to unmatched vanilla groups by index order.
+    4. Fall back to a WIF-prefixed name if no vanilla groups remain.
+
+    REQUIRED for the campaign to load: the AG campaign binds pre-placed pawns/battalions to
     vanilla combat-group *names*. Renaming a kept group (e.g. to ``_WIF_A``) hangs the
-    campaign loader (verified in-game 2026-05-29). Removing a group is graceful; renaming is
-    fatal — so we reuse the vanilla name for any group that maps to one.
+    campaign loader.
     """
-    target = f"_{gname}_"
+    mapping: dict[str, str] = {}
+
+    hq_replicas = [g for g in group_order if g == "HQ"]
+    non_hq_replicas = [g for g in group_order if g != "HQ"]
+
+    hq_vanillas = []
+    non_hq_vanillas = []
     for cg in vanilla_cg_list:
-        if target in cg:
-            return cg
-    target_suffix = f"_{gname}"
-    for cg in vanilla_cg_list:
-        if cg.endswith(target_suffix):
-            return cg
-    return wif_cg_name(deck_name, gname)
+        cg_lower = cg.lower()
+        if "_hq_" in cg_lower or cg_lower.endswith("_hq") or "_hq" in cg_lower:
+            hq_vanillas.append(cg)
+        else:
+            non_hq_vanillas.append(cg)
+
+    if hq_replicas and hq_vanillas:
+        mapping[hq_replicas[0]] = hq_vanillas[0]
+
+    unmatched_replicas = []
+    matched_vanillas = set()
+
+    for gname in non_hq_replicas:
+        target_in = f"_{gname}_"
+        target_end = f"_{gname}"
+        matched = False
+        for cg in non_hq_vanillas:
+            if cg in matched_vanillas:
+                continue
+            cg_lower = cg.lower()
+            if target_in.lower() in cg_lower or cg_lower.endswith(target_end.lower()):
+                mapping[gname] = cg
+                matched_vanillas.add(cg)
+                matched = True
+                break
+        if not matched:
+            unmatched_replicas.append(gname)
+
+    unmatched_vanillas = [cg for cg in non_hq_vanillas if cg not in matched_vanillas and cg.startswith("Descriptor_CombatGroup_")]
+    for r_gname, v_cg in zip(unmatched_replicas, unmatched_vanillas):
+        mapping[r_gname] = v_cg
+
+    # Fallback for any replica groups that didn't get mapped
+    for gname in group_order:
+        if gname not in mapping:
+            mapping[gname] = wif_cg_name(deck_name, gname)
+
+    return mapping
+
+
+def resolve_cg_name(deck_name: str, gname: str, vanilla_cg_list: list[str]) -> str:
+    """Map a single replica group name to the deck's matching vanilla combat-group descriptor name.
+
+    Delegates to ``resolve_all_cg_names`` to keep behavior consistent.
+    """
+    mapping = resolve_all_cg_names(deck_name, [gname], vanilla_cg_list)
+    return mapping.get(gname, wif_cg_name(deck_name, gname))
 
 
 def generate_combat_group(

@@ -48,6 +48,11 @@ def generate_platoons_rows(
                 group_order.append(gname)
             groups_map[gname].append(a)
 
+        cg_names_map = {}
+        if decks is not None and combat_groups and deck_name in decks:
+            from wif_ag_tool.generator.group_generator import resolve_all_cg_names
+            cg_names_map = resolve_all_cg_names(deck_name, group_order, decks[deck_name].combat_group_list)
+
         for gname in group_order:
             group_assignments = groups_map[gname]
 
@@ -55,10 +60,9 @@ def generate_platoons_rows(
             # group maps to one. Add it to `existing` either way so the smart-group token
             # sequence stays identical to the generated combat-group blocks.
             vanilla_token = None
-            if decks is not None and combat_groups and deck_name in decks:
-                from wif_ag_tool.generator.group_generator import resolve_cg_name
-                cg_name = resolve_cg_name(deck_name, gname, decks[deck_name].combat_group_list)
-                v = combat_groups.get(cg_name)
+            if cg_names_map and combat_groups:
+                cg_name = cg_names_map.get(gname)
+                v = combat_groups.get(cg_name) if cg_name else None
                 vanilla_token = v.token if v else None
 
             group_token = vanilla_token or make_unique_token(f"cg_WIF_{gname}", deck_name, existing)

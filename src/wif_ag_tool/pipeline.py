@@ -131,6 +131,9 @@ def build_export_blocks(
                 group_order.append(gname)
             groups_map[gname].append(a)
 
+        from wif_ag_tool.generator.group_generator import resolve_all_cg_names
+        cg_names_map = resolve_all_cg_names(deck_name, group_order, deck.combat_group_list)
+
         new_packs: list[str] = []
         new_groups: list[str] = []
 
@@ -146,7 +149,7 @@ def build_export_blocks(
 
             # Reuse the vanilla combat-group name + token so the campaign keeps binding to
             # it; replace its content with this group's units.
-            cg_name = resolve_cg_name(deck_name, gname, deck.combat_group_list)
+            cg_name = cg_names_map[gname]
             vanilla = combat_groups.get(cg_name)
             cg_token = vanilla.token if vanilla else None
             is_hq = (gname == "HQ") or bool(vanilla and vanilla.is_hq)
