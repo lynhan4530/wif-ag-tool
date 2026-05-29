@@ -498,11 +498,6 @@ def decks_vanilla(deck_name: str):
             "xp": getattr(pk, "xp", None) if pk else None,
         }
 
-    def _ordinal(n: int) -> str:
-        if 11 <= (n % 100) <= 13:
-            return f"{n}TH"
-        return f"{n}" + {1: 'ST', 2: 'ND', 3: 'RD'}.get(n % 10, 'TH')
-
     cg_tree: list[dict] = []
     for cg_ref in deck.combat_group_list:
         cg = combat_groups.get(cg_ref)
@@ -535,12 +530,13 @@ def decks_vanilla(deck_name: str):
 
             # Otherwise, use the heuristic!
             if sg_res["is_hq"]:
-                if any(x in cg.name for x in ["ACR", "Cav", "Cavalry"]):
-                    sg_res["display_name"] = "TROOP HQ"
-                elif any(x in cg.name for x in ["Art", "Artillerie", "Bty", "Bataillon_Artillerie"]):
-                    sg_res["display_name"] = "BATTERY HQ"
-                else:
-                    sg_res["display_name"] = "COMPANY HQ"
+                sg_res["display_name"] = _get_localized_fallback_name(
+                    primary="",
+                    is_hq=True,
+                    count=1,
+                    cg_name=cg.name,
+                    deck_name=deck_name,
+                )
             else:
                 roles = []
                 for p in sg_res["packs"]:
@@ -572,18 +568,13 @@ def decks_vanilla(deck_name: str):
                 role_counters[primary] = role_counters.get(primary, 0) + 1
                 count = role_counters[primary]
 
-                if primary == "RECON":
-                    sg_res["display_name"] = f"{_ordinal(count)} RECON PLATOON"
-                elif primary == "TANK":
-                    sg_res["display_name"] = f"{_ordinal(count)} TANK PLATOON"
-                elif primary == "RIFLE":
-                    sg_res["display_name"] = f"{_ordinal(count)} RIFLE PLATOON"
-                elif primary == "SUPPORT":
-                    sg_res["display_name"] = "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
-                elif primary == "HELI":
-                    sg_res["display_name"] = f"{_ordinal(count)} HELI PLATOON"
-                else:
-                    sg_res["display_name"] = f"{_ordinal(count)} PLATOON"
+                sg_res["display_name"] = _get_localized_fallback_name(
+                    primary=primary,
+                    is_hq=False,
+                    count=count,
+                    cg_name=cg.name,
+                    deck_name=deck_name,
+                )
 
         cg_tree.append({
             "name": cg.name,
@@ -793,6 +784,106 @@ def _unit_short(unit_ref: str | None) -> str | None:
     if not unit_ref:
         return None
     return unit_ref.rsplit("Descriptor_Unit_", 1)[-1]
+
+
+def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name: str, deck_name: str) -> str:
+    """Generate localized platoon names when translation is missing from PLATOONS.csv."""
+    deck_lower = deck_name.lower()
+    cg_lower = cg_name.lower()
+
+    is_german = any(x in deck_lower for x in ["_rfa_", "_rda_", "_ddr_", "_ger_"])
+    is_french = "_fr_" in deck_lower
+    is_russian = any(x in deck_lower for x in ["_sov_", "_rus_"])
+
+    is_artillery = any(x in cg_lower for x in ["art", "artillerie", "bty", "bataillon_artillerie"])
+
+    if is_german:
+        if is_hq:
+            return "STAB"
+        else:
+            if is_artillery:
+                return f"{count}. BATTERIE"
+            elif primary == "RECON":
+                return f"{count}. AUFKLÄRUNGSZUG"
+            elif primary == "TANK":
+                return f"{count}. PANZERZUG"
+            elif primary == "RIFLE":
+                return f"{count}. INFANTERIEZUG"
+            elif primary == "SUPPORT":
+                return "UNTERSTÜTZUNGSGRUPPE" if count == 1 else f"UNTERSTÜTZUNGSGRUPPE {count}"
+            elif primary == "HELI":
+                return f"{count}. HUBSCHRAUBERZUG"
+            else:
+                return f"{count}. ZUG"
+
+    elif is_french:
+        def _fr_ord(n: int) -> str:
+            return "1ère" if n == 1 else f"{n}e"
+
+        if is_hq:
+            return "PELOTON DE COMMANDEMENT" if is_artillery else "QG"
+        else:
+            if is_artillery:
+                return f"{_fr_ord(count)} BATTERIE"
+            elif primary == "RECON":
+                return f"{_fr_ord(count)} PELOTON RECON"
+            elif primary == "TANK":
+                return f"{_fr_ord(count)} PELOTON DE CHARS"
+            elif primary == "RIFLE":
+                return f"{_fr_ord(count)} SECTION D'INFANTERIE"
+            elif primary == "SUPPORT":
+                return "GROUPE D'APPUI" if count == 1 else f"GROUPE D'APPUI {count}"
+            elif primary == "HELI":
+                return f"{_fr_ord(count)} ESCADRILLE D'HELICOPTERES"
+            else:
+                return f"{_fr_ord(count)} SECTION"
+
+    elif is_russian:
+        if is_hq:
+            return "SHTAB"
+        else:
+            if is_artillery:
+                return f"{count}-YA BATAREYA"
+            elif primary == "RECON":
+                return f"{count}-Y VZVOD RAZVEDKI"
+            elif primary == "TANK":
+                return f"{count}-Y TANKOVYY VZVOD"
+            elif primary == "RIFLE":
+                return f"{count}-Y MOTOSTRELKOVYY VZVOD"
+            elif primary == "SUPPORT":
+                return "GRUPPA PODDERZHKI" if count == 1 else f"GRUPPA PODDERZHKI {count}"
+            elif primary == "HELI":
+                return f"{count}-Y VZVOD VERTOLETOV"
+            else:
+                return f"{count}-Y VZVOD"
+
+    else:
+        # Default English
+        def _ordinal(n: int) -> str:
+            if 11 <= (n % 100) <= 13:
+                return f"{n}TH"
+            return f"{n}" + {1: 'ST', 2: 'ND', 3: 'RD'}.get(n % 10, 'TH')
+
+        if is_hq:
+            if any(x in cg_lower for x in ["acr", "cav", "cavalry"]):
+                return "TROOP HQ"
+            elif is_artillery:
+                return "BATTERY HQ"
+            else:
+                return "COMPANY HQ"
+        else:
+            if primary == "RECON":
+                return f"{_ordinal(count)} RECON PLATOON"
+            elif primary == "TANK":
+                return f"{_ordinal(count)} TANK PLATOON"
+            elif primary == "RIFLE":
+                return f"{_ordinal(count)} RIFLE PLATOON"
+            elif primary == "SUPPORT":
+                return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
+            elif primary == "HELI":
+                return f"{_ordinal(count)} HELI PLATOON"
+            else:
+                return f"{_ordinal(count)} PLATOON"
 
 
 # Legacy /api/assign, /api/decks, /api/deck/<name> endpoints are gone.

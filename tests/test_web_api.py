@@ -493,3 +493,31 @@ def test_build_mod_success(client, tmp_path, monkeypatch):
     args, kwargs = mock_run.call_args
     assert str(mod_dir / "GenerateMod.bat") in args[0]
     assert kwargs["cwd"] == str(mod_dir)
+
+
+def test_get_localized_fallback_name():
+    from wif_ag_tool.web.api import _get_localized_fallback_name
+
+    # German artillery deck cases
+    assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="1_355__Artillerie", deck_name="pion_RFA_12PzD_3555Art") == "STAB"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=2, cg_name="1_355__Artillerie", deck_name="pion_RFA_12PzD_3555Art") == "2. BATTERIE"
+    
+    # German regular deck cases
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=3, cg_name="A_12th_ACR", deck_name="pion_RFA_12PzD") == "3. PANZERZUG"
+    assert _get_localized_fallback_name("RECON", is_hq=False, count=1, cg_name="A_12th_ACR", deck_name="pion_RFA_12PzD") == "1. AUFKLÄRUNGSZUG"
+    assert _get_localized_fallback_name("RIFLE", is_hq=False, count=2, cg_name="A_12th_ACR", deck_name="pion_DDR_11MSD") == "2. INFANTERIEZUG"
+    
+    # French cases
+    assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="1_Art", deck_name="pion_FR_107Art") == "PELOTON DE COMMANDEMENT"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=1, cg_name="1_Art", deck_name="pion_FR_107Art") == "1ère BATTERIE"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=2, cg_name="1_Art", deck_name="pion_FR_107Art") == "2e BATTERIE"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=2, cg_name="A_Tank", deck_name="pion_FR_107") == "2e PELOTON DE CHARS"
+
+    # Russian cases
+    assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="A_Tank", deck_name="pion_SOV_11") == "SHTAB"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=1, cg_name="A_Tank", deck_name="pion_SOV_11") == "1-Y TANKOVYY VZVOD"
+    assert _get_localized_fallback_name("RIFLE", is_hq=False, count=3, cg_name="A_Rifle", deck_name="pion_SOV_11") == "3-Y MOTOSTRELKOVYY VZVOD"
+
+    # Default English cases
+    assert _get_localized_fallback_name("TANK", is_hq=True, count=1, cg_name="A_Tank", deck_name="pion_US_11") == "COMPANY HQ"
+    assert _get_localized_fallback_name("TANK", is_hq=False, count=2, cg_name="A_Tank", deck_name="pion_US_11") == "2ND TANK PLATOON"
