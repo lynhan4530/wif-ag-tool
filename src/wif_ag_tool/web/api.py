@@ -733,6 +733,14 @@ def howto():
     return path.read_text(encoding="utf-8"), 200, {"Content-Type": "text/markdown; charset=utf-8"}
 
 
+@api_bp.get("/status")
+def status():
+    """Return status of system dependencies/reference files (e.g. offline status)."""
+    return jsonify({
+        "raw_files_available": config.VANILLA_STRATEGIC_DECKS.exists()
+    })
+
+
 # ── refresh ──────────────────────────────────────────────────────────────────
 
 @api_bp.post("/refresh")

@@ -308,6 +308,7 @@ const state = {
   howtoText: null,         // cached HOWTO.md text after first fetch
   howtoLoading: false,
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
+  rawFilesAvailable: false,
   deckQuery: "",
   vanillaCollapsedGroups: new Set(),
   vanillaCollapsedSmartGroups: new Set(),
@@ -713,7 +714,14 @@ function renderSession() {
     el("button", { class: "ghost", onclick: () => { state.settingsOpen = true; render(); }, title: "Configure mod and game folders" }, "⚙ Settings"),
     el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : "Please configure WIF Mod Folder in Settings" }, "📥 Export Mod"),
     el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : "Please configure WIF Mod Folder in Settings" }, "⚡ Build Mod"),
-    el("button", { class: "ghost", onclick: doRefreshDecks, title: "Re-parse vanilla NDF after a game patch" }, "Refresh decks"),
+    el("button", {
+      class: "ghost",
+      disabled: !state.rawFilesAvailable,
+      onclick: doRefreshDecks,
+      title: state.rawFilesAvailable
+        ? "Re-parse vanilla NDF after a game patch"
+        : "Re-parsing requires raw game files (Offline Mode)"
+    }, "Refresh decks"),
     el("button", {
       class: (state.sessionDirty || state.replicaDirty) ? "" : "ghost",
       disabled: !(state.sessionDirty || state.replicaDirty),
@@ -2664,9 +2672,20 @@ window.addEventListener("unload", () => {
   state.unitsIndex = {};
 });
 
+async function loadConfigStatus() {
+  try {
+    const status = await api("GET", "/status");
+    state.rawFilesAvailable = !!status.raw_files_available;
+    render();
+  } catch (e) {
+    console.warn("Failed to load status:", e);
+  }
+}
+
 loadCollapseState();
 bootstrapPicker();
 loadUnitsIndex();
+loadConfigStatus();
 </script>
 </body>
 </html>

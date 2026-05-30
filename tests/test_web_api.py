@@ -451,6 +451,28 @@ def test_howto_returns_markdown(client):
     assert "After a WARNO patch" in text
 
 
+def test_status_endpoint(client, monkeypatch):
+    from wif_ag_tool import config
+    
+    class MockPath:
+        def __init__(self, exists_val):
+            self.exists_val = exists_val
+        def exists(self):
+            return self.exists_val
+
+    # Test when file exists
+    monkeypatch.setattr(config, "VANILLA_STRATEGIC_DECKS", MockPath(True))
+    resp = client.get("/api/status")
+    assert resp.status_code == 200
+    assert resp.get_json()["raw_files_available"] is True
+
+    # Test when file is missing
+    monkeypatch.setattr(config, "VANILLA_STRATEGIC_DECKS", MockPath(False))
+    resp = client.get("/api/status")
+    assert resp.status_code == 200
+    assert resp.get_json()["raw_files_available"] is False
+
+
 def test_build_mod_success(client, tmp_path, monkeypatch):
     resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
     slug = resp.get_json()["slug"]
