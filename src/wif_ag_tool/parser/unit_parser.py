@@ -93,8 +93,8 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
     token_m   = _RE_TOKEN.search(block)
     button_m  = _RE_BUTTON.search(block)
 
-    # GUID and strategic values are required; everything else gets a sensible default
-    if not (guid_m and attack_m and defense_m):
+    # GUID is required; everything else gets a sensible default
+    if not guid_m:
         return None
 
     specialties = _parse_specialties(block)
@@ -110,8 +110,8 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         name=name,
         guid=guid_m.group(1),
         nation=nation,
-        attack=int(attack_m.group(1)),
-        defense=int(defense_m.group(1)),
+        attack=int(attack_m.group(1)) if attack_m else 0,
+        defense=int(defense_m.group(1)) if defense_m else 0,
         xp_bonus=int(xp_m.group(1)) if xp_m else 1,
         role=role_m.group(1) if role_m else "unknown",
         name_token=token_m.group(1) if token_m else "",
@@ -139,7 +139,7 @@ def _infer_nation(name: str) -> str:
 
 
 def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit]:
-    """Load WIF units from the UniteDescriptor.ndf file, or fallback to the json cache."""
+    """Load WIF units from the UniteDescriptor.ndf and BuildingDescriptors.ndf files, or fallback to the json cache."""
     from wif_ag_tool import config
     import json
     from dataclasses import asdict
@@ -147,6 +147,12 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
     units = {}
     if config.WIF_UNITE_DESCRIPTOR.exists():
         units = parse_wif_units(config.WIF_UNITE_DESCRIPTOR, units_csv=units_csv)
+        building_ndf = config.WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "BuildingDescriptors.ndf"
+        if building_ndf.exists():
+            try:
+                units.update(parse_wif_units(building_ndf, units_csv=units_csv, prefix=None))
+            except Exception as e:
+                print(f"warn: failed to parse WIF BuildingDescriptors.ndf: {e}")
         try:
             config.UNITS_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
             cache_data = {name: asdict(unit) for name, unit in units.items()}
@@ -163,7 +169,7 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
 
 
 def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit]:
-    """Load vanilla units from the UniteDescriptor.ndf file, or fallback to the json cache."""
+    """Load vanilla units from the UniteDescriptor.ndf and BuildingDescriptors.ndf files, or fallback to the json cache."""
     from wif_ag_tool import config
     import json
     from dataclasses import asdict
@@ -171,6 +177,12 @@ def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, Wif
     units = {}
     if config.VANILLA_UNITE_DESCRIPTOR.exists():
         units = parse_wif_units(config.VANILLA_UNITE_DESCRIPTOR, units_csv=units_csv, prefix=None)
+        building_ndf = config.VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "BuildingDescriptors.ndf"
+        if building_ndf.exists():
+            try:
+                units.update(parse_wif_units(building_ndf, units_csv=units_csv, prefix=None))
+            except Exception as e:
+                print(f"warn: failed to parse Vanilla BuildingDescriptors.ndf: {e}")
         try:
             config.VANILLA_UNITS_CACHE.parent.mkdir(parents=True, exist_ok=True)
             cache_data = {name: asdict(unit) for name, unit in units.items()}

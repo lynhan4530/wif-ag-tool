@@ -1,7 +1,7 @@
 {
   "Descriptor_Deck_pion_US_11ACR_1": {
     "saved": true,
-    "updated_at": "2026-05-27T17:23:02.169841+00:00",
+    "updated_at": "2026-05-30T18:15:58.195740+00:00",
     "groups": [
       {
         "name": "A",
@@ -196,6 +196,22 @@
                 "unit_id": "WF_M1064_Mort_US",
                 "xp": 2,
                 "count": 2,
+                "attack_override": null,
+                "defense_override": null,
+                "transport_id": null
+              },
+              {
+                "unit_id": "WF_Ka_52K_SEAD_RUS",
+                "xp": 1,
+                "count": 1,
+                "attack_override": null,
+                "defense_override": null,
+                "transport_id": null
+              },
+              {
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1,
+                "count": 1,
                 "attack_override": null,
                 "defense_override": null,
                 "transport_id": null
@@ -1896,7 +1912,7 @@
   },
   "Descriptor_Deck_pion_US_11ACR_4": {
     "saved": true,
-    "updated_at": "2026-05-29T18:27:16.539209+00:00",
+    "updated_at": "2026-05-30T18:15:27.720060+00:00",
     "groups": [
       {
         "name": "HQ",
@@ -1981,17 +1997,9 @@
             "name": "LOGISTICS GROUP",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
+                "unit_id": "WF_AH64_Apache_E_US",
                 "xp": 2,
                 "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_AH64_Apache_E_US",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
                 "defense_override": null,
                 "transport_id": null
@@ -2015,7 +2023,7 @@
             "name": "LOGISTICS GROUP 2",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
+                "unit_id": "WF_AH64_Apache_E_US",
                 "xp": 2,
                 "count": 2,
                 "attack_override": null,
@@ -2049,7 +2057,7 @@
                 "transport_id": null
               },
               {
-                "unit_id": "OH58C_Scout_US",
+                "unit_id": "WF_AH64_Apache_Reco_US",
                 "xp": 2,
                 "count": 1,
                 "attack_override": null,
