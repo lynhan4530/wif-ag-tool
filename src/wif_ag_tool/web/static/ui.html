@@ -973,6 +973,14 @@ function renderRightPane() {
       title: "Seed this replica with a full copy of the vanilla deck, then edit it down for balance. The replica IS the deck — only what's here gets exported.",
       onclick: copyVanillaToReplica,
     }, "⧉ Copy vanilla"),
+    el("button", {
+      title: "Copy this replica's deck list to clipboard to share it",
+      onclick: copyReplicaToClipboard,
+    }, "📋 Share"),
+    el("button", {
+      title: "Paste/Import a shared deck list into this replica",
+      onclick: importReplicaFromClipboard,
+    }, "📥 Import"),
     el("span", { class: "tree-toggle" },
       el("button", { title: "Collapse all", onclick: replicaCollapseAll },
         el("span", { class: "tt-icon" }, "▸"), el("span", { class: "tt-label" }, "Collapse")),
@@ -1049,6 +1057,43 @@ function copyVanillaToReplica() {
   markReplicaDirty();
   render();
   toast(`Copied ${groups.length} combat group(s) from vanilla — edit down, then Save deck.`);
+}
+
+function copyReplicaToClipboard() {
+  if (state.replicaGroups.length === 0) {
+    toast("Nothing to share (deck is empty).", true);
+    return;
+  }
+  const deckData = {
+    deck_name: state.activeDeck,
+    groups: state.replicaGroups
+  };
+  const text = JSON.stringify(deckData);
+  navigator.clipboard.writeText(text).then(() => {
+    toast("Deck code copied to clipboard! Share it with your friend.");
+  }).catch(err => {
+    toast("Failed to copy: " + err, true);
+  });
+}
+
+function importReplicaFromClipboard() {
+  const text = prompt("Paste the Deck Code JSON here:");
+  if (!text) return;
+  try {
+    const data = JSON.parse(text);
+    if (!data || !Array.isArray(data.groups)) {
+      throw new Error("Invalid deck code format: missing groups array.");
+    }
+    if (countTotalUnits() > 0 && !confirm("Replace the current replica content with the imported deck?")) {
+      return;
+    }
+    state.replicaGroups = data.groups;
+    markReplicaDirty();
+    render();
+    toast("Deck successfully imported! Don't forget to click 'Save deck'.");
+  } catch (err) {
+    alert("Import failed: " + err.message);
+  }
 }
 
 function copyCombatGroup(gi) {
