@@ -105,4 +105,36 @@ def _parse_block(name: str, block: str) -> CombatGroup:
     return cg
 
 
-__all__ = ["CombatGroup", "SmartGroup", "parse_combat_groups"]
+def load_vanilla_combat_groups() -> dict[str, CombatGroup]:
+    """Load vanilla combat groups from StrategicCombatGroups.ndf or JSON cache."""
+    from wif_ag_tool import config
+    import json
+    from dataclasses import asdict
+
+    combat_groups = {}
+    if config.VANILLA_COMBAT_GROUPS.exists():
+        combat_groups = parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
+        try:
+            config.VANILLA_COMBAT_GROUPS_CACHE.parent.mkdir(parents=True, exist_ok=True)
+            cache_data = {name: asdict(cg) for name, cg in combat_groups.items()}
+            config.VANILLA_COMBAT_GROUPS_CACHE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
+        except Exception as e:
+            print(f"warn: failed to cache vanilla combat groups: {e}")
+    elif config.VANILLA_COMBAT_GROUPS_CACHE.exists():
+        try:
+            cache_data = json.loads(config.VANILLA_COMBAT_GROUPS_CACHE.read_text(encoding="utf-8"))
+            combat_groups = {}
+            for name, data in cache_data.items():
+                sgs = [SmartGroup(**sg) for sg in data.get("smart_groups", [])]
+                combat_groups[name] = CombatGroup(
+                    name=data["name"],
+                    token=data.get("token", ""),
+                    is_hq=data.get("is_hq", False),
+                    smart_groups=sgs
+                )
+        except Exception as e:
+            print(f"warn: failed to load vanilla combat groups cache: {e}")
+    return combat_groups
+
+
+__all__ = ["CombatGroup", "SmartGroup", "parse_combat_groups", "load_vanilla_combat_groups"]

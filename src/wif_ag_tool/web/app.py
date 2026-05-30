@@ -7,8 +7,8 @@ from flask import Flask, send_from_directory
 from wif_ag_tool import config
 from wif_ag_tool.parser.unit_parser import parse_wif_units, load_wif_units
 from wif_ag_tool.parser.icon_parser import parse_button_textures
-from wif_ag_tool.parser.pack_parser import parse_strategic_packs
-from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
+from wif_ag_tool.parser.pack_parser import parse_strategic_packs, load_vanilla_packs
+from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups, load_vanilla_combat_groups
 from wif_ag_tool.parser.deck_parser import list_decks
 from wif_ag_tool.parser.division_parser import parse_divisions
 from wif_ag_tool.parser.localisation_csv import load_units_csv
@@ -88,16 +88,8 @@ def create_app(load_data: bool = True) -> Flask:
         icons: dict = {}
         if config.WIF_BUTTON_TEXTURES.exists():
             icons.update(parse_button_textures(config.WIF_BUTTON_TEXTURES, config.WIF_ROOT))
-        packs = (
-            parse_strategic_packs(config.VANILLA_STRATEGIC_PACKS)
-            if config.VANILLA_STRATEGIC_PACKS.exists()
-            else {}
-        )
-        combat_groups = (
-            parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
-            if config.VANILLA_COMBAT_GROUPS.exists()
-            else {}
-        )
+        packs = load_vanilla_packs()
+        combat_groups = load_vanilla_combat_groups()
         # Divisions: prefer vanilla (more complete); fall back to WIF mod's copy.
         divisions: dict = {}
         if config.VANILLA_DIVISIONS_NDF.exists():
