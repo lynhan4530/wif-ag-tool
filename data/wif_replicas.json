@@ -1014,6 +1014,30 @@
     "saved": true,
     "updated_at": "2026-05-29T16:27:59.880811+00:00"
   },
+  "Descriptor_Deck_pion_SOV_368OCHAP": {
+    "groups": [
+      {
+        "name": "III",
+        "platoons": [
+          {
+            "name": "VZVOD OBESPECHENIYA 2",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T62M_CMD_DNR",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:16:02.641021+00:00"
+  },
   "Descriptor_Deck_pion_SOV_39GMRD": {
     "groups": [
       {
@@ -1494,6 +1518,366 @@
     "saved": true,
     "updated_at": "2026-05-30T19:37:59.234685+00:00"
   },
+  "Descriptor_Deck_pion_SOV_57GMRD": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Naval_Rifle_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:18:21.042279+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_113Reco": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "2-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:14:29.500703+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_128Art_1": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1-YA BATAREYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:06:42.944309+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_128Art_2": {
+    "groups": [
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "2-YA BATAREYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:14:13.352901+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_128Art_3": {
+    "groups": [
+      {
+        "name": "7",
+        "platoons": [
+          {
+            "name": "1-YA BATAREYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:17:11.426482+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_128Art_4": {
+    "groups": [
+      {
+        "name": "10",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:17:52.009307+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_170GMSP_1": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:12:42.198566+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_170GMSP_2": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:12:49.655127+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_170GMSP_3": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:12:49.684028+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_174GMSP_1": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:13:43.015304+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_174GMSP_2": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:13:49.811816+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_174GMSP_3": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:13:49.839698+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_241GMSP_1": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:16:41.687169+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_241GMSP_2": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:16:54.159335+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_241GMSP_3": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:16:54.186357+00:00"
+  },
   "Descriptor_Deck_pion_SOV_57GMRD_29TkInde": {
     "groups": [
       {
@@ -1517,6 +1901,126 @@
     ],
     "saved": true,
     "updated_at": "2026-05-30T19:53:58.088209+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_51GTk_1": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:17:31.304313+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_51GTk_2": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:17:35.161372+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_51GTk_3": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:17:35.190714+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_57GMRD_901AAR": {
+    "groups": [
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1-YA BATAREYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:19:08.719647+00:00"
+  },
+  "Descriptor_Deck_pion_SOV_85IGAP": {
+    "groups": [
+      {
+        "name": "III",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T62M_CMD_DNR",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T20:15:20.559220+00:00"
   },
   "Descriptor_Deck_pion_SOV_8GA": {
     "groups": [
