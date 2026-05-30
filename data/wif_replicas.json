@@ -1481,6 +1481,30 @@
     "saved": true,
     "updated_at": "2026-05-30T19:37:59.234685+00:00"
   },
+  "Descriptor_Deck_pion_SOV_57GMRD_29TkInde": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T62M_CMD_DNR",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T19:53:58.088209+00:00"
+  },
   "Descriptor_Deck_pion_SOV_8GA": {
     "groups": [
       {
