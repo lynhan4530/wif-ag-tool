@@ -1,1192 +1,5 @@
 {
-  "Descriptor_Deck_pion_US_11ACR_1": {
-    "saved": true,
-    "updated_at": "2026-05-30T18:15:58.195740+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "1ST RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "1ST TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "2ND RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "2ND TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "B",
-        "platoons": [
-          {
-            "name": "1ST RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "1ST TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "2ND RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "2ND TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Ka_52K_SEAD_RUS",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_T90A_CMD_RUS",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "C",
-        "platoons": [
-          {
-            "name": "1ST RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "1ST TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "2ND RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
-              }
-            ]
-          },
-          {
-            "name": "2ND TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "D",
-        "platoons": [
-          {
-            "name": "1ST TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "2ND TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "3RD TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M109A6_Excalibur_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "1ST RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_Stryker_Engineers_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "WF_MATV_US"
-              },
-              {
-                "unit_id": "WF_Engineers_US",
-                "xp": 2,
-                "count": 3,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "WF_MATV_US"
-              },
-              {
-                "unit_id": "WF_Javelin_Team_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "WF_MATV_US"
-              }
-            ]
-          },
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_MSHORAD_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_MANPAD_Stinger_E_US",
-                "xp": 2,
-                "count": 6,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "SUPPORT GROUP",
-            "units": [
-              {
-                "unit_id": "WF_LMTV_supply_US",
-                "xp": 2,
-                "count": 12,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_HEMTT_trans_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "2ND PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_CEWI_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "WF_MATV_RWS_US"
-              },
-              {
-                "unit_id": "WF_Scout_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": "WF_MATV_RWS_US"
-              },
-              {
-                "unit_id": "WF_M3A3_Bradley_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_RQ7_Shadow_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "WF_M1150_ABV_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_CENT_44ADA_3": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:09:17.461063+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "COMPANY HQ",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_8ID_68Arm_1": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:09:49.562231+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "COMPANY HQ",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_5C_130Eng_54Eng": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:10:20.257838+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "1ST RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_22TFS": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:11:19.424196+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "2ND PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_23TFS": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:11:24.977021+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_10TFS": {
-    "saved": true,
-    "updated_at": "2026-05-30T17:50:14.621469+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "1ST AIR DEFENSE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16C_CBU_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "B",
-        "platoons": [
-          {
-            "name": "1ST AIR DEFENSE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16C_JDAM_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "C",
-        "platoons": [
-          {
-            "name": "1ST AIR DEFENSE PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
-              {
-                "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_7Cav_4": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:14:12.753837+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "TROOP HQ",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              },
-              {
-                "unit_id": "CH47_Chinook_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_AviaBrigade": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:14:28.491719+00:00",
-    "groups": [
-      {
-        "name": "2",
-        "platoons": [
-          {
-            "name": "3RD PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_67Arm_2": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:14:46.699408+00:00",
-    "groups": [
-      {
-        "name": "E",
-        "platoons": [
-          {
-            "name": "3RD TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_67Arm_4": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:14:56.418602+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "3RD PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_36Mech_1": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:18:55.194055+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "3RD RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_82Art_4": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:21:44.774445+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "SUPPORT GROUP",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_8Arm_3": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:22:34.632553+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "1ST PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_8Arm_4": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:23:02.936484+00:00",
-    "groups": [
-      {
-        "name": "HQ",
-        "platoons": [
-          {
-            "name": "2ND PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_18Mech_5": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:23:28.378608+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "3RD RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_82Art_2": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:23:37.746186+00:00",
-    "groups": [
-      {
-        "name": "E",
-        "platoons": [
-          {
-            "name": "2ND PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:24:08.408553+00:00",
-    "groups": [
-      {
-        "name": "503rd",
-        "platoons": [
-          {
-            "name": "3RD RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_trans_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_US_3AD_23Eng": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:24:19.979446+00:00",
-    "groups": [
-      {
-        "name": "A",
-        "platoons": [
-          {
-            "name": "3RD RIFLE PLATOON",
-            "units": [
-              {
-                "unit_id": "CH46E_SeaKnight_supply_US",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_5PzD_141MxPz": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:25:36.798420+00:00",
-    "groups": [
-      {
-        "name": "1",
-        "platoons": [
-          {
-            "name": "2ND TANK PLATOON",
-            "units": [
-              {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_5PzD_143Pz": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:25:45.869088+00:00",
-    "groups": [
-      {
-        "name": "1",
-        "platoons": [
-          {
-            "name": "COMPANY HQ",
-            "units": [
-              {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_5PzD_144Pz": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:25:54.158802+00:00",
-    "groups": [
-      {
-        "name": "1",
-        "platoons": [
-          {
-            "name": "COMPANY HQ",
-            "units": [
-              {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_5PzD_145Art": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:26:03.070312+00:00",
+  "Descriptor_Deck_pion_RFA_12PzD_3555Art": {
     "groups": [
       {
         "name": "1",
@@ -1195,22 +8,22 @@
             "name": "3RD PLATOON",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:28:35.288130+00:00"
   },
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:26:24.306326+00:00",
     "groups": [
       {
         "name": "1",
@@ -1219,22 +32,46 @@
             "name": "COMPANY HQ",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:26:24.306326+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_5PzD_141MxPz": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "2ND TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:25:36.798420+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_142PzG": {
-    "saved": true,
-    "updated_at": "2026-05-29T16:26:58.252743+00:00",
     "groups": [
       {
         "name": "1",
@@ -1243,70 +80,70 @@
             "name": "3RD RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_5PzD_152PzG": {
+    ],
     "saved": true,
-    "updated_at": "2026-05-29T16:27:06.908320+00:00",
+    "updated_at": "2026-05-29T16:26:58.252743+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_5PzD_143Pz": {
     "groups": [
       {
         "name": "1",
         "platoons": [
           {
-            "name": "SUPPORT GROUP",
+            "name": "COMPANY HQ",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
+    ],
     "saved": true,
-    "updated_at": "2026-05-29T16:27:59.880811+00:00",
+    "updated_at": "2026-05-29T16:25:45.869088+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_5PzD_144Pz": {
     "groups": [
       {
         "name": "1",
         "platoons": [
           {
-            "name": "1ST PLATOON",
+            "name": "COMPANY HQ",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
-  },
-  "Descriptor_Deck_pion_RFA_12PzD_3555Art": {
+    ],
     "saved": true,
-    "updated_at": "2026-05-29T16:28:35.288130+00:00",
+    "updated_at": "2026-05-29T16:25:54.158802+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_5PzD_145Art": {
     "groups": [
       {
         "name": "1",
@@ -1315,22 +152,169 @@
             "name": "3RD PLATOON",
             "units": [
               {
-                "unit_id": "CH53G_trans_RFA",
-                "xp": 1,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
               }
             ]
           }
         ]
       }
-    ]
-  },
-  "Descriptor_Deck_pion_US_11ACR_3": {
+    ],
     "saved": true,
-    "updated_at": "2026-05-29T18:07:35.647423+00:00",
+    "updated_at": "2026-05-29T16:26:03.070312+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_5PzD_152PzG": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "SUPPORT GROUP",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:27:06.908320+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
+    "groups": [
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH53G_trans_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:27:59.880811+00:00"
+  },
+  "Descriptor_Deck_pion_US_10TFS": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "1ST AIR DEFENSE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_AA_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST SUPPLY PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_CBU_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "B",
+        "platoons": [
+          {
+            "name": "1ST AIR DEFENSE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_AA_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST SUPPLY PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_JDAM_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "C",
+        "platoons": [
+          {
+            "name": "1ST AIR DEFENSE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_AA_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST SUPPLY PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T17:50:14.621469+00:00"
+  },
+  "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
       {
         "name": "A",
@@ -1339,20 +323,20 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1360,12 +344,12 @@
             "name": "1ST TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1373,20 +357,20 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1394,12 +378,12 @@
             "name": "2ND TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1407,12 +391,12 @@
             "name": "1ST PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
               }
             ]
           },
@@ -1420,28 +404,28 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
               }
             ]
           }
@@ -1454,20 +438,20 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1475,12 +459,12 @@
             "name": "1ST TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1488,20 +472,20 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1509,12 +493,12 @@
             "name": "2ND TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1522,12 +506,28 @@
             "name": "1ST PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Ka_52K_SEAD_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
               }
             ]
           },
@@ -1535,28 +535,28 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
               }
             ]
           }
@@ -1569,20 +569,20 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1590,12 +590,12 @@
             "name": "1ST TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1603,20 +603,20 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_M3A3_Bradley_2B_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Mech_Rifles_AT4_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "M1038_Humvee_US"
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
               }
             ]
           },
@@ -1624,12 +624,12 @@
             "name": "2ND TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
               }
             ]
           },
@@ -1637,12 +637,12 @@
             "name": "1ST PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1064_Mort_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
               }
             ]
           },
@@ -1650,28 +650,28 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M7A3_BFIST_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "WF_M109A6_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
               }
             ]
           }
@@ -1684,20 +684,20 @@
             "name": "1ST TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
               }
             ]
           },
@@ -1705,20 +705,20 @@
             "name": "2ND TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
               }
             ]
           },
@@ -1726,20 +726,20 @@
             "name": "3RD TANK PLATOON",
             "units": [
               {
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
               }
             ]
           },
@@ -1747,28 +747,28 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1A2_SEPV3_Abrams_CMD_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1A2_SEPV3_Abrams_US",
-                "xp": 2,
-                "count": 1,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "WF_M109A6_Excalibur_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M109A6_Excalibur_US",
+                "xp": 2
               }
             ]
           }
@@ -1781,28 +781,28 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "WF_Stryker_Engineers_CMD_US",
-                "xp": 2,
+                "attack_override": null,
                 "count": 1,
-                "attack_override": null,
                 "defense_override": null,
-                "transport_id": "WF_MATV_US"
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Stryker_Engineers_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Engineers_US",
-                "xp": 2,
+                "attack_override": null,
                 "count": 3,
-                "attack_override": null,
                 "defense_override": null,
-                "transport_id": "WF_MATV_US"
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Engineers_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Javelin_Team_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "WF_MATV_US"
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Javelin_Team_US",
+                "xp": 2
               }
             ]
           },
@@ -1810,20 +810,20 @@
             "name": "1ST PLATOON",
             "units": [
               {
-                "unit_id": "WF_MSHORAD_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_MSHORAD_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_MANPAD_Stinger_E_US",
-                "xp": 2,
-                "count": 6,
                 "attack_override": null,
+                "count": 6,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_MANPAD_Stinger_E_US",
+                "xp": 2
               }
             ]
           },
@@ -1831,20 +831,20 @@
             "name": "SUPPORT GROUP",
             "units": [
               {
-                "unit_id": "WF_LMTV_supply_US",
-                "xp": 2,
-                "count": 12,
                 "attack_override": null,
+                "count": 12,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_LMTV_supply_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_HEMTT_trans_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_HEMTT_trans_US",
+                "xp": 2
               }
             ]
           },
@@ -1852,28 +852,28 @@
             "name": "2ND PLATOON",
             "units": [
               {
-                "unit_id": "WF_CEWI_US",
-                "xp": 2,
+                "attack_override": null,
                 "count": 2,
-                "attack_override": null,
                 "defense_override": null,
-                "transport_id": "WF_MATV_RWS_US"
+                "transport_id": "WF_MATV_RWS_US",
+                "unit_id": "WF_CEWI_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_Scout_US",
-                "xp": 2,
+                "attack_override": null,
                 "count": 4,
-                "attack_override": null,
                 "defense_override": null,
-                "transport_id": "WF_MATV_RWS_US"
+                "transport_id": "WF_MATV_RWS_US",
+                "unit_id": "WF_Scout_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_M3A3_Bradley_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_US",
+                "xp": 2
               }
             ]
           },
@@ -1881,38 +881,620 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_M1042_Humvee_CMD_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "WF_RQ7_Shadow_US",
-                "xp": 2,
-                "count": 4,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "WF_M1150_ABV_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_M1150_ABV_US",
+                "xp": 2
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T18:15:58.195740+00:00"
+  },
+  "Descriptor_Deck_pion_US_11ACR_3": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "1ST RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1042_Humvee_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M7A3_BFIST_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "B",
+        "platoons": [
+          {
+            "name": "1ST RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1042_Humvee_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M7A3_BFIST_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "C",
+        "platoons": [
+          {
+            "name": "1ST RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_2B_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "M1038_Humvee_US",
+                "unit_id": "WF_Mech_Rifles_AT4_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV2_Abrams_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1064_Mort_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1042_Humvee_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M7A3_BFIST_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M109A6_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "D",
+        "platoons": [
+          {
+            "name": "1ST TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3RD TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1A2_SEPV3_Abrams_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M109A6_Excalibur_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "1ST RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Stryker_Engineers_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Engineers_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Javelin_Team_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MSHORAD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MANPAD_Stinger_E_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SUPPORT GROUP",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 12,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_LMTV_supply_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_HEMTT_trans_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2ND PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_MATV_RWS_US",
+                "unit_id": "WF_CEWI_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_MATV_RWS_US",
+                "unit_id": "WF_Scout_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M3A3_Bradley_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1042_Humvee_CMD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_RQ7_Shadow_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M1150_ABV_US",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T18:07:35.647423+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_4": {
-    "saved": true,
-    "updated_at": "2026-05-30T18:15:27.720060+00:00",
     "groups": [
       {
         "name": "HQ",
@@ -1921,20 +1503,20 @@
             "name": "LOGISTICS GROUP",
             "units": [
               {
-                "unit_id": "UH60A_Supply_US",
-                "xp": 2,
-                "count": 8,
                 "attack_override": null,
+                "count": 8,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "UH60A_Supply_US",
+                "xp": 2
               },
               {
-                "unit_id": "CH47_Super_Chinook_US",
-                "xp": 2,
-                "count": 4,
                 "attack_override": null,
+                "count": 4,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "CH47_Super_Chinook_US",
+                "xp": 2
               }
             ]
           },
@@ -1942,20 +1524,20 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               },
               {
-                "unit_id": "OH58_CS_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58_CS_US",
+                "xp": 2
               }
             ]
           },
@@ -1963,28 +1545,28 @@
             "name": "TROOP HQ",
             "units": [
               {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
                 "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
-                "attack_override": null,
-                "defense_override": null,
-                "transport_id": null
+                "xp": 2
               },
               {
-                "unit_id": "OH58_CS_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58_CS_US",
+                "xp": 2
               }
             ]
           }
@@ -1997,12 +1579,12 @@
             "name": "LOGISTICS GROUP",
             "units": [
               {
-                "unit_id": "WF_AH64_Apache_E_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_AH64_Apache_E_US",
+                "xp": 2
               }
             ]
           },
@@ -2010,12 +1592,12 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2023,12 +1605,12 @@
             "name": "LOGISTICS GROUP 2",
             "units": [
               {
-                "unit_id": "WF_AH64_Apache_E_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_AH64_Apache_E_US",
+                "xp": 2
               }
             ]
           },
@@ -2036,12 +1618,12 @@
             "name": "RECON GROUP 2",
             "units": [
               {
-                "unit_id": "OH58D_Combat_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58D_Combat_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2049,20 +1631,20 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "WF_AH64_Apache_Reco_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "WF_AH64_Apache_Reco_US",
+                "xp": 2
               }
             ]
           }
@@ -2075,12 +1657,12 @@
             "name": "LOGISTICS GROUP",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Hog_US",
+                "xp": 2
               }
             ]
           },
@@ -2088,12 +1670,12 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2101,12 +1683,12 @@
             "name": "LOGISTICS GROUP 2",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Hog_US",
+                "xp": 2
               }
             ]
           },
@@ -2114,12 +1696,12 @@
             "name": "RECON GROUP 2",
             "units": [
               {
-                "unit_id": "OH58D_Combat_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58D_Combat_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2127,20 +1709,20 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           }
@@ -2153,12 +1735,12 @@
             "name": "LOGISTICS GROUP",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Hog_US",
+                "xp": 2
               }
             ]
           },
@@ -2166,12 +1748,12 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2179,12 +1761,12 @@
             "name": "LOGISTICS GROUP 2",
             "units": [
               {
-                "unit_id": "AH1F_Hog_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Hog_US",
+                "xp": 2
               }
             ]
           },
@@ -2192,12 +1774,12 @@
             "name": "RECON GROUP 2",
             "units": [
               {
-                "unit_id": "OH58D_Combat_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58D_Combat_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2205,20 +1787,20 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           }
@@ -2231,12 +1813,12 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AH1F_Cobra_US",
-                "xp": 2,
-                "count": 3,
                 "attack_override": null,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Cobra_US",
+                "xp": 2
               }
             ]
           },
@@ -2244,12 +1826,12 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2257,12 +1839,12 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AH1F_Cobra_US",
-                "xp": 2,
-                "count": 3,
                 "attack_override": null,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Cobra_US",
+                "xp": 2
               }
             ]
           },
@@ -2270,12 +1852,12 @@
             "name": "RECON GROUP 2",
             "units": [
               {
-                "unit_id": "OH58D_Kiowa_Warrior_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58D_Kiowa_Warrior_US",
+                "xp": 2
               }
             ]
           },
@@ -2283,20 +1865,20 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           }
@@ -2309,12 +1891,12 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AH1F_Cobra_US",
-                "xp": 2,
-                "count": 3,
                 "attack_override": null,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Cobra_US",
+                "xp": 2
               }
             ]
           },
@@ -2322,12 +1904,12 @@
             "name": "RECON GROUP",
             "units": [
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           },
@@ -2335,12 +1917,12 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AH1F_Cobra_US",
-                "xp": 2,
-                "count": 3,
                 "attack_override": null,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "AH1F_Cobra_US",
+                "xp": 2
               }
             ]
           },
@@ -2348,12 +1930,12 @@
             "name": "RECON GROUP 2",
             "units": [
               {
-                "unit_id": "OH58D_Kiowa_Warrior_US",
-                "xp": 2,
-                "count": 2,
                 "attack_override": null,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58D_Kiowa_Warrior_US",
+                "xp": 2
               }
             ]
           },
@@ -2361,20 +1943,20 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "OH58C_CMD_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_CMD_US",
+                "xp": 2
               },
               {
-                "unit_id": "OH58C_Scout_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "OH58C_Scout_US",
+                "xp": 2
               }
             ]
           }
@@ -2387,12 +1969,12 @@
             "name": "1ST RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AeroRifles_US",
-                "xp": 2,
-                "count": 5,
                 "attack_override": null,
+                "count": 5,
                 "defense_override": null,
-                "transport_id": "UH60A_Black_Hawk_US"
+                "transport_id": "UH60A_Black_Hawk_US",
+                "unit_id": "AeroRifles_US",
+                "xp": 2
               }
             ]
           },
@@ -2400,12 +1982,12 @@
             "name": "2ND RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AeroRifles_US",
-                "xp": 2,
-                "count": 5,
                 "attack_override": null,
+                "count": 5,
                 "defense_override": null,
-                "transport_id": "UH60A_Black_Hawk_US"
+                "transport_id": "UH60A_Black_Hawk_US",
+                "unit_id": "AeroRifles_US",
+                "xp": 2
               }
             ]
           },
@@ -2413,12 +1995,12 @@
             "name": "3RD RIFLE PLATOON",
             "units": [
               {
-                "unit_id": "AeroRifles_US",
-                "xp": 2,
-                "count": 5,
                 "attack_override": null,
+                "count": 5,
                 "defense_override": null,
-                "transport_id": "UH60A_Black_Hawk_US"
+                "transport_id": "UH60A_Black_Hawk_US",
+                "unit_id": "AeroRifles_US",
+                "xp": 2
               }
             ]
           },
@@ -2426,17 +2008,435 @@
             "name": "TROOP HQ",
             "units": [
               {
-                "unit_id": "UH60A_CO_US",
-                "xp": 2,
-                "count": 1,
                 "attack_override": null,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null
+                "transport_id": null,
+                "unit_id": "UH60A_CO_US",
+                "xp": 2
               }
             ]
           }
         ]
       }
-    ]
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T18:15:27.720060+00:00"
+  },
+  "Descriptor_Deck_pion_US_22TFS": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "2ND PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:11:19.424196+00:00"
+  },
+  "Descriptor_Deck_pion_US_23TFS": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:11:24.977021+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD": {
+    "groups": [
+      {
+        "name": "503rd",
+        "platoons": [
+          {
+            "name": "3RD RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:24:08.408553+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_18Mech_5": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "3RD RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:23:28.378608+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_23Eng": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "3RD RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:24:19.979446+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_36Mech_1": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "3RD RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:18:55.194055+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_67Arm_2": {
+    "groups": [
+      {
+        "name": "E",
+        "platoons": [
+          {
+            "name": "3RD TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:14:46.699408+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_67Arm_4": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "3RD PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:14:56.418602+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_7Cav_4": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "TROOP HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH47_Chinook_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:14:12.753837+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_82Art_2": {
+    "groups": [
+      {
+        "name": "E",
+        "platoons": [
+          {
+            "name": "2ND PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:23:37.746186+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_82Art_4": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "SUPPORT GROUP",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:21:44.774445+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_8Arm_3": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "1ST PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:22:34.632553+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_8Arm_4": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "2ND PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:23:02.936484+00:00"
+  },
+  "Descriptor_Deck_pion_US_3AD_AviaBrigade": {
+    "groups": [
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "3RD PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:14:28.491719+00:00"
+  },
+  "Descriptor_Deck_pion_US_5C_130Eng_54Eng": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "1ST RIFLE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_supply_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:10:20.257838+00:00"
+  },
+  "Descriptor_Deck_pion_US_8ID_68Arm_1": {
+    "groups": [
+      {
+        "name": "A",
+        "platoons": [
+          {
+            "name": "COMPANY HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:09:49.562231+00:00"
+  },
+  "Descriptor_Deck_pion_US_CENT_44ADA_3": {
+    "groups": [
+      {
+        "name": "HQ",
+        "platoons": [
+          {
+            "name": "COMPANY HQ",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "CH46E_SeaKnight_trans_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-29T16:09:17.461063+00:00"
   }
 }

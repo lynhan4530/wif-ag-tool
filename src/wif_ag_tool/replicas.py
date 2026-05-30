@@ -33,7 +33,7 @@ def _write(payload: dict, path: Path | None = None) -> None:
     p = path or config.REPLICAS_FILE
     p.parent.mkdir(parents=True, exist_ok=True)
     tmp = p.with_suffix(".json.tmp")
-    tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    tmp.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
     tmp.replace(p)
 
 
