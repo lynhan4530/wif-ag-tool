@@ -812,17 +812,43 @@
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
     "groups": [
       {
-        "name": "1",
+        "name": "SB",
         "platoons": [
           {
-            "name": "COMPANY HQ",
+            "name": "STAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "CH53G_trans_RFA",
+                "unit_id": "Iltis_para_CMD_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_MANPAD_Stinger_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tiger_UHT_Multi_GER",
                 "xp": 1
               }
             ]
@@ -835,7 +861,275 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "Alouette_II_reco_RFA",
+                "unit_id": "CH53G_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "FOB_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Engineers_CMD_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Marder_Roland_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Gepard_1A2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Engineers_CMD_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Marder_Roland_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Gepard_1A2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Engineers_CMD_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Marder_Roland_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Gepard_1A2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Engineers_CMD_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Marder_Roland_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Gepard_1A2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
                 "xp": 1
               }
             ]
@@ -844,7 +1138,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:58:00.318251+00:00"
+    "updated_at": "2026-05-30T20:39:40.378971+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_141MxPz": {
     "groups": [
