@@ -2393,6 +2393,170 @@
     "saved": true,
     "updated_at": "2026-05-30T22:28:21.902512+00:00"
   },
+  "Descriptor_Deck_pion_RFA_JG74": {
+    "groups": [
+      {
+        "name": "I",
+        "platoons": [
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_AA_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tornado_IDS_SEAD_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_CLUS_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_HE1_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_AT1_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_CAS1_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_CAS2_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T23:56:39.795412+00:00"
+  },
+  "Descriptor_Deck_pion_RFA_JG74_2": {
+    "groups": [
+      {
+        "name": "I",
+        "platoons": [
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_AA_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tornado_IDS_SEAD_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_CLUS_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_HE1_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Tornado_IDS_AT1_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_CAS1_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Typhoon_CAS2_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T23:56:52.423897+00:00"
+  },
   "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
     "groups": [
       {
