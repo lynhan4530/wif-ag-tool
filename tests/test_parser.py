@@ -83,3 +83,9 @@ def test_parse_unit_leaves_display_name_empty_when_token_missing(fixture_units_p
     # CSV map without WF_M2A4_Bradley_US's token → unresolved
     units = parse_wif_units(fixture_units_path, units_csv={"WFM1ASV2": "Abrams"})
     assert units["WF_M2A4_Bradley_US"].display_name == ""
+
+
+def test_parse_unit_extracts_is_transport(fixture_units_path):
+    units = parse_wif_units(fixture_units_path)
+    assert units["WF_M1A2_SEPV2_Abrams_US"].is_transport is False
+    assert units["WF_M113A3_apc_US"].is_transport is True

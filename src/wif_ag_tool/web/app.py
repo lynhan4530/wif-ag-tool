@@ -5,7 +5,7 @@ from pathlib import Path
 from flask import Flask, send_from_directory
 
 from wif_ag_tool import config
-from wif_ag_tool.parser.unit_parser import parse_wif_units, load_wif_units
+from wif_ag_tool.parser.unit_parser import parse_wif_units, load_wif_units, load_vanilla_units
 from wif_ag_tool.parser.icon_parser import parse_button_textures
 from wif_ag_tool.parser.pack_parser import parse_strategic_packs, load_vanilla_packs
 from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups, load_vanilla_combat_groups
@@ -57,13 +57,7 @@ def create_app(load_data: bool = True) -> Flask:
             except Exception as e:
                 print(f"warn: failed to load WIF platoons csv: {e}")
         units = load_wif_units(units_csv=units_csv)
-        vanilla_units = (
-            parse_wif_units(
-                config.VANILLA_UNITE_DESCRIPTOR, units_csv=units_csv, prefix=None,
-            )
-            if config.VANILLA_UNITE_DESCRIPTOR.exists()
-            else {}
-        )
+        vanilla_units = load_vanilla_units(units_csv=units_csv)
         decks = load_deck_cache(config.CACHE_FILE)
         # First-run convenience: if no cache yet but the vanilla NDF is available,
         # build the cache automatically so the UI is usable out of the box.

@@ -103,6 +103,7 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         if 'transportable' not in specialties:
             specialties.append('transportable')
     nation = country_m.group(1) if country_m else _infer_nation(name)
+    is_transport = 'TTransporterModuleDescriptor' in block
 
     return WifUnit(
         name=name,
@@ -115,6 +116,7 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         name_token=token_m.group(1) if token_m else "",
         specialties=specialties,
         button_texture=button_m.group(1) if button_m else "",
+        is_transport=is_transport,
     )
 
 
@@ -155,4 +157,28 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
             units = {name: WifUnit(**data) for name, data in cache_data.items()}
         except Exception as e:
             print(f"warn: failed to load WIF units cache: {e}")
+    return units
+
+
+def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit]:
+    """Load vanilla units from the UniteDescriptor.ndf file, or fallback to the json cache."""
+    from wif_ag_tool import config
+    import json
+    from dataclasses import asdict
+
+    units = {}
+    if config.VANILLA_UNITE_DESCRIPTOR.exists():
+        units = parse_wif_units(config.VANILLA_UNITE_DESCRIPTOR, units_csv=units_csv, prefix=None)
+        try:
+            config.VANILLA_UNITS_CACHE.parent.mkdir(parents=True, exist_ok=True)
+            cache_data = {name: asdict(unit) for name, unit in units.items()}
+            config.VANILLA_UNITS_CACHE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
+        except Exception as e:
+            print(f"warn: failed to cache vanilla units: {e}")
+    elif config.VANILLA_UNITS_CACHE.exists():
+        try:
+            cache_data = json.loads(config.VANILLA_UNITS_CACHE.read_text(encoding="utf-8"))
+            units = {name: WifUnit(**data) for name, data in cache_data.items()}
+        except Exception as e:
+            print(f"warn: failed to load vanilla units cache: {e}")
     return units

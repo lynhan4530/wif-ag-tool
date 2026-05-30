@@ -10,7 +10,8 @@
     "name_token": "WFStrRif",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_US",
-    "display_name": "MOT. RIFLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Rifles_DMR_US": {
     "name": "WF_Stryker_Rifles_DMR_US",
@@ -23,7 +24,8 @@
     "name_token": "WFStrDMR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_LAW_US",
-    "display_name": "MOT. RIFLES (DMR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Rifles_AT4_US": {
     "name": "WF_Stryker_Rifles_AT4_US",
@@ -36,7 +38,8 @@
     "name_token": "WFStrAT4",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_LightRifles_Dragon_US",
-    "display_name": "MOT. RIFLES (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Rifles_HMG_US": {
     "name": "WF_Stryker_Rifles_HMG_US",
@@ -49,7 +52,8 @@
     "name_token": "WFStrHMG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_HMG_US",
-    "display_name": "MOT. GUNNERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Engineers_US": {
     "name": "WF_Stryker_Engineers_US",
@@ -64,7 +68,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_US",
-    "display_name": "MOT. ENGINEERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Engineers_AT4_US": {
     "name": "WF_Stryker_Engineers_AT4_US",
@@ -79,7 +84,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_Dragon_US",
-    "display_name": "MOT. ENGINEERS (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_CMD_US": {
     "name": "WF_Rifles_CMD_US",
@@ -94,7 +100,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_CMD_US",
-    "display_name": "#CMD MOT. RIFLES LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Engineers_CMD_US": {
     "name": "WF_Stryker_Engineers_CMD_US",
@@ -110,7 +117,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_NatGuard_Engineers_CMD_US",
-    "display_name": "#CMD ENGINEERS LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Javelin_Team_US": {
     "name": "WF_Javelin_Team_US",
@@ -123,7 +131,8 @@
     "name_token": "WFFGMJav",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_TOW_US",
-    "display_name": "JAVELIN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rangers_US": {
     "name": "WF_Rangers_US",
@@ -139,7 +148,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Ranger_US",
-    "display_name": "RANGERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rangers_MMG_US": {
     "name": "WF_Rangers_MMG_US",
@@ -155,7 +165,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Ranger_tuto_US",
-    "display_name": "RANGER GUNNERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ranger_Javelin_US": {
     "name": "WF_Ranger_Javelin_US",
@@ -171,7 +182,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Ranger_Dragon_US",
-    "display_name": "RANGERS JAVELIN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rangers_CMD_US": {
     "name": "WF_Rangers_CMD_US",
@@ -188,7 +200,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Rangers_CMD_US",
-    "display_name": "RANGERS LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_TOW2A_US": {
     "name": "WF_ATteam_TOW2A_US",
@@ -201,7 +214,8 @@
     "name_token": "WFTow2A",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_TOW2_US",
-    "display_name": "TOW-2A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_TOW2B_US": {
     "name": "WF_ATteam_TOW2B_US",
@@ -214,7 +228,8 @@
     "name_token": "WFTow2B",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_TOW_US",
-    "display_name": "TOW-2B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_US": {
     "name": "WF_Scout_US",
@@ -227,7 +242,8 @@
     "name_token": "VCGQAVQWUZ",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_US",
-    "display_name": "SCOUTS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Javelin_US": {
     "name": "WF_Scout_Javelin_US",
@@ -240,7 +256,8 @@
     "name_token": "WFSctJav",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_NG_US",
-    "display_name": "#RECO2 SCOUTS (JAVELIN)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_RSTA_US": {
     "name": "WF_RSTA_US",
@@ -258,7 +275,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_LRRP_US",
-    "display_name": "#RECO3 RSTA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MP_US": {
     "name": "WF_MP_US",
@@ -274,7 +292,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_MP_US",
-    "display_name": "MP PATROL"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MP_Patrol_US": {
     "name": "WF_MP_Patrol_US",
@@ -290,7 +309,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_MP_Combat_US",
-    "display_name": "MP COMBAT PATROL"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_CEWI_US": {
     "name": "WF_CEWI_US",
@@ -305,7 +325,8 @@
       "_singint"
     ],
     "button_texture": "Texture_Button_Unit_LRRP_CEWI_US",
-    "display_name": "CEWI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Stinger_E_US": {
     "name": "WF_MANPAD_Stinger_E_US",
@@ -318,7 +339,8 @@
     "name_token": "WFSTIBLO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Stinger_C_US",
-    "display_name": "STINGER E"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Stinger_J_US": {
     "name": "WF_MANPAD_Stinger_J_US",
@@ -331,7 +353,8 @@
     "name_token": "WFSTIPRO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Stinger_C_US",
-    "display_name": "STINGER J"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M998_Avenger_E_US": {
     "name": "WF_M998_Avenger_E_US",
@@ -344,7 +367,8 @@
     "name_token": "WFAVENGE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M998_Avenger_nonPara_US",
-    "display_name": "M998 AVENGER E"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M998_Avenger_K_US": {
     "name": "WF_M998_Avenger_K_US",
@@ -357,7 +381,8 @@
     "name_token": "WFAVENGK",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M998_Avenger_US",
-    "display_name": "M998 AVENGER K"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_CV_US": {
     "name": "WF_Stryker_CV_US",
@@ -373,7 +398,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_CV",
-    "display_name": "#CMD M1130 CV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_ICV_US": {
     "name": "WF_Stryker_ICV_US",
@@ -390,7 +416,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_ICV",
-    "display_name": "M1126 ICV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Stryker_ICV_MK19_US": {
     "name": "WF_Stryker_ICV_MK19_US",
@@ -407,7 +434,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_ICV_MK19",
-    "display_name": "M1126 ICV Mk.19"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Stryker_ICV_FGM_US": {
     "name": "WF_Stryker_ICV_FGM_US",
@@ -424,7 +452,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_ICV_J",
-    "display_name": "M1126 ICV CROWS-J"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Stryker_MGS_US": {
     "name": "WF_Stryker_MGS_US",
@@ -440,7 +469,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_MGS",
-    "display_name": "M1128 MGS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_MGS_Slat_US": {
     "name": "WF_Stryker_MGS_Slat_US",
@@ -457,7 +487,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_MGS_Slat",
-    "display_name": "M1128 MGS SLAT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Mort_US": {
     "name": "WF_Stryker_Mort_US",
@@ -473,7 +504,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_MCV",
-    "display_name": "M1129 MC"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Stryker_Mort_PGM_US": {
     "name": "WF_Stryker_Mort_PGM_US",
@@ -489,7 +521,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_MCV_PGM",
-    "display_name": "M1129 MC (PGM)"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Stryker_Tow_US": {
     "name": "WF_Stryker_Tow_US",
@@ -504,7 +537,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_SAT",
-    "display_name": "M1134 ATGM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_Tow_Slat_US": {
     "name": "WF_Stryker_Tow_Slat_US",
@@ -520,7 +554,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_SAT_Slat",
-    "display_name": "M1253 ATVV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stryker_RV_US": {
     "name": "WF_Stryker_RV_US",
@@ -538,7 +573,8 @@
       "_singint"
     ],
     "button_texture": "Texture_Button_Unit_Stryker_RV",
-    "display_name": "#RECO3 M1127 RV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Howz_M777_155mm_US": {
     "name": "WF_Howz_M777_155mm_US",
@@ -554,7 +590,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_M777",
-    "display_name": "M777"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_M777_155mm_PGK_US": {
     "name": "WF_Howz_M777_155mm_PGK_US",
@@ -570,7 +607,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_M777_PGK",
-    "display_name": "M777A2 (PGK)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_Longbow_US": {
     "name": "WF_AH64_Apache_Longbow_US",
@@ -583,7 +621,8 @@
     "name_token": "WFAPAD16",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_AH64_Apache_emp1_US",
-    "display_name": "AH-64D LONGBOW"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_E_US": {
     "name": "WF_AH64_Apache_E_US",
@@ -596,7 +635,8 @@
     "name_token": "WFAPAEUS",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_AH64_Apache_US",
-    "display_name": "AH-64E APACHE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_RKT_US": {
     "name": "WF_AH64_Apache_RKT_US",
@@ -609,7 +649,8 @@
     "name_token": "WFAPARKT",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_AH64_Apache_emp2_US",
-    "display_name": "AH-64E APACHE [RKT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_ATAS_US": {
     "name": "WF_AH64_Apache_ATAS_US",
@@ -622,7 +663,8 @@
     "name_token": "WFAPAATA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_AH64_Apache_ATAS_US",
-    "display_name": "AH-64E APACHE [ATAS]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_Reco_US": {
     "name": "WF_AH64_Apache_Reco_US",
@@ -635,7 +677,8 @@
     "name_token": "WFAPAERE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_AH64_Apache_US",
-    "display_name": "#RECO2 AH-64E APACHE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_US": {
     "name": "WF_M270A1_GMLRS_US",
@@ -648,7 +691,8 @@
     "name_token": "WFMRLCLU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_cluster_US",
-    "display_name": "M270A1 MLRS [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_HE_US": {
     "name": "WF_M270A1_GMLRS_HE_US",
@@ -661,7 +705,8 @@
     "name_token": "WFMRLHE1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_US",
-    "display_name": "M270A1 MLRS [HE]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HIMARS_ATACMS_US": {
     "name": "WF_HIMARS_ATACMS_US",
@@ -674,7 +719,8 @@
     "name_token": "WFHIMATA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HIMARS_ATACMS",
-    "display_name": "M142 ATACMS [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HIMARS_GMLRS_US": {
     "name": "WF_HIMARS_GMLRS_US",
@@ -687,7 +733,8 @@
     "name_token": "WFHIMMRL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HIMARS",
-    "display_name": "M142 HIMARS [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HIMARS_ATACMS_HE_US": {
     "name": "WF_HIMARS_ATACMS_HE_US",
@@ -700,7 +747,8 @@
     "name_token": "WFHIMAHE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HIMARS_ATACMS_HE",
-    "display_name": "M142 ATACMS [HE]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1045_Humvee_TOW_2A_US": {
     "name": "WF_M1045_Humvee_TOW_2A_US",
@@ -713,7 +761,8 @@
     "name_token": "WFHUMTOW",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_TOW_US",
-    "display_name": "M1045 HUMVEE TOW-2A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1045_Humvee_TOW_2B_US": {
     "name": "WF_M1045_Humvee_TOW_2B_US",
@@ -726,7 +775,8 @@
     "name_token": "WFHUMTO2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_TOW_LUX",
-    "display_name": "M1045 HUMVEE TOW-2B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F15C_Eagle_AA_US": {
     "name": "WF_F15C_Eagle_AA_US",
@@ -739,7 +789,8 @@
     "name_token": "WLPMYCCIMG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F15C_Eagle_AA2_US",
-    "display_name": "F-15C EAGLE [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F15E_StrikeEagle_US": {
     "name": "WF_F15E_StrikeEagle_US",
@@ -752,7 +803,8 @@
     "name_token": "VWGZDEJNRV",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F15E_StrikeEagle_US",
-    "display_name": "F-15E STRIKE EAGLE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F15E_StrikeEagle_JDAM_US": {
     "name": "WF_F15E_StrikeEagle_JDAM_US",
@@ -765,7 +817,8 @@
     "name_token": "WFSTREAG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F15E_StrikeEagle_US",
-    "display_name": "F-15E STRIKE EAGLE [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16C_AA_US": {
     "name": "WF_F16C_AA_US",
@@ -778,7 +831,8 @@
     "name_token": "EONOCHKEKZ",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16E_AA_US",
-    "display_name": "F-16C [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16CM_SEAD_US": {
     "name": "WF_F16CM_SEAD_US",
@@ -791,7 +845,8 @@
     "name_token": "WFF16SEA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16E_SEAD_US",
-    "display_name": "F-16CM [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16C_CBU_US": {
     "name": "WF_F16C_CBU_US",
@@ -804,7 +859,8 @@
     "name_token": "WFF16CBU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16E_CBU_US",
-    "display_name": "F-16C [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16C_JDAM_US": {
     "name": "WF_F16C_JDAM_US",
@@ -817,7 +873,8 @@
     "name_token": "WFF16LGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16C_LGB_US",
-    "display_name": "F-16C [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_A10C_Thunderbolt_II_ATGM_US": {
     "name": "WF_A10C_Thunderbolt_II_ATGM_US",
@@ -830,7 +887,8 @@
     "name_token": "WFA10MAV",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_A10_Thunderbolt_II_ATGM_US",
-    "display_name": "A-10C [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_A10C_Thunderbolt_II_JDAM_US": {
     "name": "WF_A10C_Thunderbolt_II_JDAM_US",
@@ -843,7 +901,8 @@
     "name_token": "WFA10JDA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_A10_Thunderbolt_II_US",
-    "display_name": "A-10C [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F22A_Raptor_AA_US": {
     "name": "WF_F22A_Raptor_AA_US",
@@ -856,7 +915,8 @@
     "name_token": "WFF22RAP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F22_Raptor",
-    "display_name": "F-22A RAPTOR [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F22A_Raptor_JDAM_US": {
     "name": "WF_F22A_Raptor_JDAM_US",
@@ -869,7 +929,8 @@
     "name_token": "WFF22JDA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F22_Raptor_JDAM",
-    "display_name": "F-22A RAPTOR [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F22A_Raptor_AA2_US": {
     "name": "WF_F22A_Raptor_AA2_US",
@@ -882,7 +943,8 @@
     "name_token": "WFF22RA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F22_Raptor_AA2",
-    "display_name": "F-22A RAPTOR [AA2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F35_Lightning_AA_US": {
     "name": "WF_F35_Lightning_AA_US",
@@ -895,7 +957,8 @@
     "name_token": "WFF35AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_AA",
-    "display_name": "F-35A LIGHTNING II [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F35_Lightning_JDAM_US": {
     "name": "WF_F35_Lightning_JDAM_US",
@@ -908,7 +971,8 @@
     "name_token": "WFF35JDA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_JDAM",
-    "display_name": "F-35A LIGHTNING II [PGM1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F35_Lightning_AA2_US": {
     "name": "WF_F35_Lightning_AA2_US",
@@ -921,7 +985,8 @@
     "name_token": "WFF35AA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_AA2",
-    "display_name": "F-35A LIGHTNING II [AA2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F35_Lightning_JDAM2_US": {
     "name": "WF_F35_Lightning_JDAM2_US",
@@ -934,7 +999,8 @@
     "name_token": "WFF35JD2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_JDAM2",
-    "display_name": "F-35A LIGHTNING II [PGM2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MQ1C_US": {
     "name": "WF_MQ1C_US",
@@ -949,7 +1015,8 @@
       "uav2"
     ],
     "button_texture": "Texture_Button_Unit_MQ1C",
-    "display_name": "#RECO3 MQ-1C GRAY EAGLE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MQ1C_ATGM_US": {
     "name": "WF_MQ1C_ATGM_US",
@@ -964,7 +1031,8 @@
       "uav2"
     ],
     "button_texture": "Texture_Button_Unit_MQ1C_ATGM",
-    "display_name": "#RECO3 MQ-1C GRAY EAGLE [ATGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_EA18G_SEAD_US": {
     "name": "WF_EA18G_SEAD_US",
@@ -979,7 +1047,8 @@
       "_electronic_warfare"
     ],
     "button_texture": "Texture_Button_Unit_EA18G",
-    "display_name": "EA-18G GROWLER [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_RQ7_Shadow_US": {
     "name": "WF_RQ7_Shadow_US",
@@ -994,7 +1063,8 @@
       "uav"
     ],
     "button_texture": "Texture_Button_Unit_RQ7",
-    "display_name": "#RECO3 RQ-7B SHADOW"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1042_Humvee_CMD_US": {
     "name": "WF_M1042_Humvee_CMD_US",
@@ -1009,7 +1079,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_CMD_US",
-    "display_name": "#CMD M1042 HUMVEE CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1097_Humvee_US": {
     "name": "WF_M1097_Humvee_US",
@@ -1025,7 +1096,8 @@
       "_canBeAirlifted3"
     ],
     "button_texture": "Texture_Button_Unit_M1038_Humvee_US",
-    "display_name": "M1097 HUMVEE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M1097_Humvee_supply_US": {
     "name": "WF_M1097_Humvee_supply_US",
@@ -1040,7 +1112,8 @@
       "_canBeAirlifted3"
     ],
     "button_texture": "Texture_Button_Unit_M1038_Humvee_US",
-    "display_name": "M1097 HUMVEE SUPPLY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1114_Humvee_US": {
     "name": "WF_M1114_Humvee_US",
@@ -1056,7 +1129,8 @@
       "_canBeAirlifted3"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_MP_US",
-    "display_name": "M1114 HUMVEE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MATV_HMG_US": {
     "name": "WF_MATV_HMG_US",
@@ -1072,7 +1146,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV_HMG",
-    "display_name": "M1240A1 M-ATV PATROL"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MATV_RWS_US": {
     "name": "WF_MATV_RWS_US",
@@ -1088,7 +1163,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV_RWS",
-    "display_name": "#RECO2 M1277 M-ATV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MATV_HMG_MP_US": {
     "name": "WF_MATV_HMG_MP_US",
@@ -1105,7 +1181,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV_MP",
-    "display_name": "M1240A1 M-ATV MP"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MATV_US": {
     "name": "WF_MATV_US",
@@ -1121,7 +1198,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV",
-    "display_name": "M1240A1 M-ATV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mech_Rifles_US": {
     "name": "WF_Mech_Rifles_US",
@@ -1134,7 +1212,8 @@
     "name_token": "WFMecRif",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_half_Dragon_US",
-    "display_name": "MECH. RIFLES (JAVELIN)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_AT4_US": {
     "name": "WF_Mech_Rifles_AT4_US",
@@ -1147,7 +1226,8 @@
     "name_token": "WFMecAT4",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_half_AT4_US",
-    "display_name": "MECH. RIFLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M240B_US": {
     "name": "WF_HMGteam_M240B_US",
@@ -1160,7 +1240,8 @@
     "name_token": "WFHMG240",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_M60_US",
-    "display_name": "M240B 7,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_81mm_mortar_US": {
     "name": "WF_81mm_mortar_US",
@@ -1175,7 +1256,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_81mm_mortar_US",
-    "display_name": "M252 81mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_LDR_US": {
     "name": "WF_Mech_Rifles_LDR_US",
@@ -1190,7 +1272,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_half_CMD_US",
-    "display_name": "#CMD MECH. RIFLES LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_US": {
     "name": "WF_Engineers_US",
@@ -1205,7 +1288,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_US",
-    "display_name": "ENGINEERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_AT4_US": {
     "name": "WF_Engineers_AT4_US",
@@ -1220,7 +1304,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_Dragon_US",
-    "display_name": "ENGINEERS (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M2A2_Bradley_ODS_US": {
     "name": "WF_M2A2_Bradley_ODS_US",
@@ -1239,7 +1324,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_M2A2_Bradley_IFV_US",
-    "display_name": "M2A2 BRADLEY ODS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M2A2_Bradley_ODS_NG_US": {
     "name": "WF_M2A2_Bradley_ODS_NG_US",
@@ -1259,7 +1345,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M2A2_Bradley_IFV_US",
-    "display_name": "N.G. M2A2 BRADLEY ODS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M2A3_Bradley_US": {
     "name": "WF_M2A3_Bradley_US",
@@ -1279,7 +1366,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_M2A3_A",
-    "display_name": "M2A3 BRADLEY"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M2A3_Bradley_2B_US": {
     "name": "WF_M2A3_Bradley_2B_US",
@@ -1300,7 +1388,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_M2A3_B",
-    "display_name": "M2A3 BRADLEY BUSK"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M3A3_Bradley_US": {
     "name": "WF_M3A3_Bradley_US",
@@ -1318,7 +1407,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M3A3",
-    "display_name": "#RECO2 M3A3 BRADLEY CFV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M3A3_Bradley_2B_US": {
     "name": "WF_M3A3_Bradley_2B_US",
@@ -1336,7 +1426,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M3A3B",
-    "display_name": "#RECO2 M3A3 BRADLEY CFV TOW-2B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M2A3_Bradley_CP_US": {
     "name": "WF_M2A3_Bradley_CP_US",
@@ -1356,7 +1447,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M2A2_Bradley_Leader_US",
-    "display_name": "M3A3 BRADLEY CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MSHORAD_US": {
     "name": "WF_MSHORAD_US",
@@ -1371,7 +1463,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_MSHORAD",
-    "display_name": "M-SHORAD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MSHORAD_AGM_US": {
     "name": "WF_MSHORAD_AGM_US",
@@ -1386,7 +1479,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_MSHORAD_AGM",
-    "display_name": "M-SHORAD HELLFIRE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV2_Abrams_US": {
     "name": "WF_M1A2_SEPV2_Abrams_US",
@@ -1402,7 +1496,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV2",
-    "display_name": "M1A2B SEPV2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV2_ERA_Abrams_US": {
     "name": "WF_M1A2_SEPV2_ERA_Abrams_US",
@@ -1419,7 +1514,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV2_ERA",
-    "display_name": "M1A2B TUSK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV2_Abrams_CMD_US": {
     "name": "WF_M1A2_SEPV2_Abrams_CMD_US",
@@ -1436,7 +1532,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV2_CP",
-    "display_name": "#CMD M1A2B CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV3_Abrams_US": {
     "name": "WF_M1A2_SEPV3_Abrams_US",
@@ -1452,7 +1549,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV3",
-    "display_name": "M1A2C ABRAMS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV3_ERA_Abrams_US": {
     "name": "WF_M1A2_SEPV3_ERA_Abrams_US",
@@ -1469,7 +1567,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV3_ERA",
-    "display_name": "M1A2C ABRAMS TROPHY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV3_Abrams_CMD_US": {
     "name": "WF_M1A2_SEPV3_Abrams_CMD_US",
@@ -1486,7 +1585,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV3_CP",
-    "display_name": "#CMD M1A2C CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M109A6_US": {
     "name": "WF_M109A6_US",
@@ -1499,7 +1599,8 @@
     "name_token": "WF109PAL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M109A",
-    "display_name": "M109A6 PALADIN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M109A6_Excalibur_US": {
     "name": "WF_M109A6_Excalibur_US",
@@ -1512,7 +1613,8 @@
     "name_token": "WF109EXC",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M109B",
-    "display_name": "M109A6 PALADIN [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1064_Mort_US": {
     "name": "WF_M1064_Mort_US",
@@ -1525,7 +1627,8 @@
     "name_token": "WFMor106",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M106A2_HOWZ_US",
-    "display_name": "M1064A3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1150_ABV_US": {
     "name": "WF_M1150_ABV_US",
@@ -1541,7 +1644,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_M1150",
-    "display_name": "M1150 ABV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M7A3_BFIST_US": {
     "name": "WF_M7A3_BFIST_US",
@@ -1558,7 +1662,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_M7A3",
-    "display_name": "#RECO3 M7A3 BFIST"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M2A2_Bradley_IFV_NG_US": {
     "name": "WF_M2A2_Bradley_IFV_NG_US",
@@ -1576,7 +1681,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M2A2_Bradley_IFV_US",
-    "display_name": "N.G. M2A2 BRADLEY"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mech_Rifles_NG_US": {
     "name": "WF_Mech_Rifles_NG_US",
@@ -1591,7 +1697,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_half_Dragon_US",
-    "display_name": "N.G. MECH. RIFLES (JAVELIN)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_AT4_NG_US": {
     "name": "WF_Mech_Rifles_AT4_NG_US",
@@ -1606,7 +1713,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_half_AT4_US",
-    "display_name": "N.G. MECH. RIFLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_LDR_NG_US": {
     "name": "WF_Mech_Rifles_LDR_NG_US",
@@ -1622,7 +1730,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_half_CMD_US",
-    "display_name": "#CMD N.G. MECH. RIFLES LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_NG_US": {
     "name": "WF_Engineers_NG_US",
@@ -1638,7 +1747,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_US",
-    "display_name": "N.G. ENGINEERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_AT4_NG_US": {
     "name": "WF_Engineers_AT4_NG_US",
@@ -1654,7 +1764,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_Dragon_US",
-    "display_name": "N.G. ENGINEERS (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_NG_US": {
     "name": "WF_Engineers_CMD_NG_US",
@@ -1671,7 +1782,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_NatGuard_Engineers_CMD_US",
-    "display_name": "#CMD N.G. ENGINEERS LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_TOW2A_NG_US": {
     "name": "WF_ATteam_TOW2A_NG_US",
@@ -1686,7 +1798,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_TOW2_US",
-    "display_name": "N.G. TOW-2A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_TOW2B_NG_US": {
     "name": "WF_ATteam_TOW2B_NG_US",
@@ -1701,7 +1814,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_TOW_US",
-    "display_name": "N.G. TOW-2B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_DMR_NG_US": {
     "name": "WF_LightRifles_DMR_NG_US",
@@ -1716,7 +1830,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_LAW_US",
-    "display_name": "N.G. LIGHT RIFLES (DMR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_NG_US": {
     "name": "WF_LightRifles_NG_US",
@@ -1731,7 +1846,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_Dragon_US",
-    "display_name": "N.G. LIGHT RIFLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_CMD_NG_US": {
     "name": "WF_Rifles_CMD_NG_US",
@@ -1747,7 +1863,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_CMD_US",
-    "display_name": "#CMD N.G. RIFLES LDR."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_MMG_NG_US": {
     "name": "WF_LightRifles_MMG_NG_US",
@@ -1762,7 +1879,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_Dragon_US",
-    "display_name": "N.G. WEAPONS TEAM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M240B_NG_US": {
     "name": "WF_HMGteam_M240B_NG_US",
@@ -1777,7 +1895,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_M60_US",
-    "display_name": "N.G. M240B 7,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_Patriot_US": {
     "name": "WF_DCA_Patriot_US",
@@ -1792,7 +1911,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Patriot",
-    "display_name": "MIM-104 PATRIOT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_NG_US": {
     "name": "WF_Scout_NG_US",
@@ -1807,7 +1927,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Scout_NG_US",
-    "display_name": "N.G. SCOUTS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Javelin_NG_US": {
     "name": "WF_Scout_Javelin_NG_US",
@@ -1822,7 +1943,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_HvyScout_NG_Dragon_US",
-    "display_name": "#RECO2 N.G. SCOUTS (JAVELIN)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_RSTA_NG_US": {
     "name": "WF_RSTA_NG_US",
@@ -1838,7 +1960,8 @@
       "_singint"
     ],
     "button_texture": "Texture_Button_Unit_Scout_Aero_US",
-    "display_name": "#RECO3 N.G. RSTA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_NG_US": {
     "name": "WF_Sniper_NG_US",
@@ -1853,7 +1976,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_US",
-    "display_name": "#RECO2 N.G. SNIPER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1025_Humvee_AGL_NG_US": {
     "name": "WF_M1025_Humvee_AGL_NG_US",
@@ -1870,7 +1994,8 @@
       "_canBeAirlifted3"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_AGL_nonPara_US",
-    "display_name": "#RECO1 M1114 HUMVEE AGL"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M1114_Humvee_HMG_NG_US": {
     "name": "WF_M1114_Humvee_HMG_NG_US",
@@ -1887,7 +2012,8 @@
       "_canBeAirlifted3"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_scout_US",
-    "display_name": "#RECO1 M1114 HUMVEE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_AH64_Apache_D_NG_US": {
     "name": "WF_AH64_Apache_D_NG_US",
@@ -1902,7 +2028,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_AH64_Apache_US",
-    "display_name": "N.G. AH-64D APACHE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_RKT_NG_US": {
     "name": "WF_AH64_Apache_RKT_NG_US",
@@ -1917,7 +2044,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_AH64_Apache_emp2_US",
-    "display_name": "N.G. AH-64D APACHE [RKT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AH64_Apache_Longbow_NG_US": {
     "name": "WF_AH64_Apache_Longbow_NG_US",
@@ -1932,7 +2060,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_AH64_Apache_emp1_US",
-    "display_name": "N.G. AH-64D LONGBOW"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_Aero_NG_US": {
     "name": "WF_LightRifles_Aero_NG_US",
@@ -1947,7 +2076,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_LAW_US",
-    "display_name": "N.G. AERO RIFLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A1HA_Abrams_CMD_US": {
     "name": "WF_M1A1HA_Abrams_CMD_US",
@@ -1965,7 +2095,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_M1A1HA_Abrams_CMD_US",
-    "display_name": "#CMD N.G M1A1(HA) CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A1HA_Abrams_US": {
     "name": "WF_M1A1HA_Abrams_US",
@@ -1982,7 +2113,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1A1HA_Abrams_US",
-    "display_name": "N.G M1A1(HA)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A1SA_Abrams_CMD_US": {
     "name": "WF_M1A1SA_Abrams_CMD_US",
@@ -2000,7 +2132,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_M1A1_Abrams_CMD_US",
-    "display_name": "#CMD N.G M1A1 SA CP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A1SA_Abrams_US": {
     "name": "WF_M1A1SA_Abrams_US",
@@ -2017,7 +2150,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1A1_Abrams_US",
-    "display_name": "N.G M1A1 SA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A1_Abrams_NG_US": {
     "name": "WF_M1A1_Abrams_NG_US",
@@ -2034,7 +2168,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1_Abrams_NG_US",
-    "display_name": "N.G M1A1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1025_Humvee_TOW_NG_US": {
     "name": "WF_M1025_Humvee_TOW_NG_US",
@@ -2049,7 +2184,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_TOW_US",
-    "display_name": "N.G. M1025 HUMVEE TOW"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1025_Humvee_TOW2B_NG_US": {
     "name": "WF_M1025_Humvee_TOW2B_NG_US",
@@ -2064,7 +2200,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_TOW_US",
-    "display_name": "N.G. M1025 HUMVEE TOW-2B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M109A6_NG_US": {
     "name": "WF_M109A6_NG_US",
@@ -2079,7 +2216,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M109A",
-    "display_name": "N.G. M109A6 PALADIN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HIMARS_GMLRS_NG_US": {
     "name": "WF_HIMARS_GMLRS_NG_US",
@@ -2094,7 +2232,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_HIMARS",
-    "display_name": "N.G. M142 HIMARS [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_M777_155mm_NG_US": {
     "name": "WF_Howz_M777_155mm_NG_US",
@@ -2111,7 +2250,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_M777",
-    "display_name": "N.G. M777"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_L118_105mm_NG_US": {
     "name": "WF_Howz_L118_105mm_NG_US",
@@ -2128,7 +2268,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_L118_105mm_LUX",
-    "display_name": "M119"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Stinger_E_NG_US": {
     "name": "WF_MANPAD_Stinger_E_NG_US",
@@ -2143,7 +2284,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_MANPAD_Stinger_C_US",
-    "display_name": "N.G. STINGER E"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Stinger_NG_US": {
     "name": "WF_MANPAD_Stinger_NG_US",
@@ -2158,7 +2300,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_MANPAD_Stinger_C_US",
-    "display_name": "N.G. STINGER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M998_Avenger_E_NG_US": {
     "name": "WF_M998_Avenger_E_NG_US",
@@ -2173,7 +2316,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M998_Avenger_nonPara_US",
-    "display_name": "N.G. M998 AVENGER E"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_B2_Spirit_US": {
     "name": "WF_B2_Spirit_US",
@@ -2186,7 +2330,8 @@
     "name_token": "WFB2SJDA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_B2_Spirit",
-    "display_name": "B-2 SPIRIT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_B2_Spirit_JSOW_US": {
     "name": "WF_B2_Spirit_JSOW_US",
@@ -2199,7 +2344,8 @@
     "name_token": "WFB2SJSO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_B2_Spirit_JSOW",
-    "display_name": "B-2 SPIRIT [JSOW]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Cougar_HE_NG_US": {
     "name": "WF_Cougar_HE_NG_US",
@@ -2216,7 +2362,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Cougar_HE",
-    "display_name": "N.G. COUGAR HE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M1150_ABV_NG_US": {
     "name": "WF_M1150_ABV_NG_US",
@@ -2233,7 +2380,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M1150",
-    "display_name": "N.G. M1150 ABV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M3A2_Bradley_CFV_NG_US": {
     "name": "WF_M3A2_Bradley_CFV_NG_US",
@@ -2249,7 +2397,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_M3A2_Bradley_CFV_US",
-    "display_name": "#RECO2 N.G. M3A2 BRADLEY CFV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HEMTT_trans_US": {
     "name": "WF_HEMTT_trans_US",
@@ -2264,7 +2413,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_HEMTT_trans",
-    "display_name": "M977 HEMTT"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_B2_Spirit_MOP_US": {
     "name": "WF_B2_Spirit_MOP_US",
@@ -2277,7 +2427,8 @@
     "name_token": "WFB2SMOP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_B2_Spirit_MOP",
-    "display_name": "B-2 SPIRIT [MOP]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BMP_RUS": {
     "name": "WF_MotRifles_BMP_RUS",
@@ -2292,7 +2443,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (BMP)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BMP_22_RUS": {
     "name": "WF_MotRifles_BMP_22_RUS",
@@ -2307,7 +2459,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_RPG22_SOV",
-    "display_name": "MOTOSTRELKI (RPG-22)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BMP_27_RUS": {
     "name": "WF_MotRifles_BMP_27_RUS",
@@ -2322,7 +2475,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_TTsko_SOV",
-    "display_name": "MOTOSTRELKI (RPG-27)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_CMD_RUS": {
     "name": "WF_MotRifles_CMD_RUS",
@@ -2338,7 +2492,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_CMD_SOV",
-    "display_name": "#CMD MOTOSTRELKI KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_HMG_RUS": {
     "name": "WF_MotRifles_HMG_RUS",
@@ -2353,7 +2508,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_HMG_SOV",
-    "display_name": "PULEMETCHIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_Flam_RUS": {
     "name": "WF_Engineers_Flam_RUS",
@@ -2368,7 +2524,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_Flam_SOV",
-    "display_name": "OGNEMETCHIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_RUS": {
     "name": "WF_Engineers_RUS",
@@ -2383,7 +2540,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_SOV",
-    "display_name": "SAPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_RPG_RUS": {
     "name": "WF_Engineers_RPG_RUS",
@@ -2398,7 +2556,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Security_SOV",
-    "display_name": "SAPERI (RPG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_RUS": {
     "name": "WF_Engineers_CMD_RUS",
@@ -2414,7 +2573,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_SOV",
-    "display_name": "SAPERI KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_RUS": {
     "name": "WF_Scout_RUS",
@@ -2427,7 +2587,8 @@
     "name_token": "TKOHPJWBRH",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_SOV",
-    "display_name": "RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HvyScout_RUS": {
     "name": "WF_HvyScout_RUS",
@@ -2442,7 +2603,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_HvyScout_SOV",
-    "display_name": "MOT. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_RUS": {
     "name": "WF_Sniper_RUS",
@@ -2457,7 +2619,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_Spetsnaz_SOV",
-    "display_name": "#RECO2 SNAYPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_CEWI_RUS": {
     "name": "WF_CEWI_RUS",
@@ -2472,7 +2635,8 @@
       "_singint"
     ],
     "button_texture": "Texture_Button_Unit_Scout_TTsko_SOV",
-    "display_name": "#RECO2 RT RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Kornet_RUS": {
     "name": "WF_ATteam_Kornet_RUS",
@@ -2485,7 +2649,8 @@
     "name_token": "WFATGKOR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_KonkursM_TTsko_SOV",
-    "display_name": "KORNET"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Igla_RUS": {
     "name": "WF_MANPAD_Igla_RUS",
@@ -2498,7 +2663,8 @@
     "name_token": "PRBDKEAUZB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_SOV",
-    "display_name": "IGLA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Igla_S_RUS": {
     "name": "WF_MANPAD_Igla_S_RUS",
@@ -2511,7 +2677,8 @@
     "name_token": "WFIGSRUS",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_SOV",
-    "display_name": "IGLA-S"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Verba_RUS": {
     "name": "WF_MANPAD_Verba_RUS",
@@ -2524,7 +2691,8 @@
     "name_token": "WFVERRUS",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_SOV",
-    "display_name": "VERBA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_AGS30_RUS": {
     "name": "WF_HMGteam_AGS30_RUS",
@@ -2537,7 +2705,8 @@
     "name_token": "WERFZOETSM",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_AGS17_TTsko_SOV",
-    "display_name": "PLAMYA 30mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_LRRP_RUS": {
     "name": "WF_Scout_LRRP_RUS",
@@ -2555,7 +2724,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_Scout_LRRP_SOV",
-    "display_name": "SPETSNAZ GRU"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MP_RUS": {
     "name": "WF_MP_RUS",
@@ -2571,7 +2741,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_MP_SOV",
-    "display_name": "VP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_2S12M_120mm_RUS": {
     "name": "WF_Mortier_2S12M_120mm_RUS",
@@ -2586,7 +2757,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_2S12_120mm_TTsko_SOV",
-    "display_name": "2S12M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_2S12M_120mm_Laser_RUS": {
     "name": "WF_Mortier_2S12M_120mm_Laser_RUS",
@@ -2601,7 +2773,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_2S12_120mm_SOV",
-    "display_name": "2S12M [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80U_RUS": {
     "name": "WF_T80U_RUS",
@@ -2617,7 +2790,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T80U_SOV",
-    "display_name": "T-80U"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80UE_RUS": {
     "name": "WF_T80UE_RUS",
@@ -2634,7 +2808,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T80UD_SOV",
-    "display_name": "T-80U-E1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80U_CMD_RUS": {
     "name": "WF_T80U_CMD_RUS",
@@ -2653,7 +2828,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T80U_CMD_SOV",
-    "display_name": "T-80UK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BVM_RUS": {
     "name": "WF_T80BVM_RUS",
@@ -2670,7 +2846,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T80BVM",
-    "display_name": "T-80BVM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BV_CMD_RUS": {
     "name": "WF_T80BV_CMD_RUS",
@@ -2687,7 +2864,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T80BV_CMD_SOV",
-    "display_name": "T-80BVK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BV_RUS": {
     "name": "WF_T80BV_RUS",
@@ -2703,7 +2881,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T80BV_SOV",
-    "display_name": "T-80BV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_2_RUS": {
     "name": "WF_BMP_2_RUS",
@@ -2721,7 +2900,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BMP_2_SOV",
-    "display_name": "BMP-2"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_2M_RUS": {
     "name": "WF_BMP_2M_RUS",
@@ -2740,7 +2920,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMP2M",
-    "display_name": "BMP-2M"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_2S19M2_MstaS_RUS": {
     "name": "WF_2S19M2_MstaS_RUS",
@@ -2755,7 +2936,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S19_MstaS_SOV",
-    "display_name": "MSTA-SM2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tor_M1_RUS": {
     "name": "WF_Tor_M1_RUS",
@@ -2768,7 +2950,8 @@
     "name_token": "WFTORRM1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Tor_SOV",
-    "display_name": "9K331 TOR-M1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tor_M2_RUS": {
     "name": "WF_Tor_M2_RUS",
@@ -2781,7 +2964,8 @@
     "name_token": "WFTORRM2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Tor_SOV",
-    "display_name": "9K332 TOR-M2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Buk_9K37M12_SOV": {
     "name": "WF_Buk_9K37M12_SOV",
@@ -2794,7 +2978,8 @@
     "name_token": "WFBUKM12",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Buk_9K37M_SOV",
-    "display_name": "BUK-M1-2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BM27_Uragan_CLU_RUS": {
     "name": "WF_BM27_Uragan_CLU_RUS",
@@ -2807,7 +2992,8 @@
     "name_token": "WFURACLU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_BM27_Uragan_SOV",
-    "display_name": "BM-27 URAGAN [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MTLB_Strela10M4_RUS": {
     "name": "WF_MTLB_Strela10M4_RUS",
@@ -2822,7 +3008,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_Strela10M3_SOV",
-    "display_name": "STRELA-10M4"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tunguska_2K22M1_RUS": {
     "name": "WF_Tunguska_2K22M1_RUS",
@@ -2835,7 +3022,8 @@
     "name_token": "WFTUN2M1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Tunguska_2K22_SOV",
-    "display_name": "2K22M1 TUNGUSKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tigr_HMG_RUS": {
     "name": "WF_Tigr_HMG_RUS",
@@ -2851,7 +3039,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TIGR_REC",
-    "display_name": "TIGR-M KORD"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Tigr_RUS": {
     "name": "WF_Tigr_RUS",
@@ -2868,7 +3057,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TIGR",
-    "display_name": "TIGR-M"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Tigr_Reco_RUS": {
     "name": "WF_Tigr_Reco_RUS",
@@ -2884,7 +3074,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TIGR_REC",
-    "display_name": "#RECO2 TIGR-M"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Typhoon_RUS": {
     "name": "WF_Typhoon_RUS",
@@ -2900,7 +3091,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Typhoon",
-    "display_name": "TYPHOON"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Kamaz66_RUS": {
     "name": "WF_Kamaz66_RUS",
@@ -2916,7 +3108,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_KAM6x6",
-    "display_name": "KAMAZ 6X6"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Kamaz66_Supply_RUS": {
     "name": "WF_Kamaz66_Supply_RUS",
@@ -2929,7 +3122,8 @@
     "name_token": "WFKAM66S",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KAM6x6_Sup",
-    "display_name": "KAMAZ 6X6 SNAB."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Kamaz44_RUS": {
     "name": "WF_Kamaz44_RUS",
@@ -2945,7 +3139,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_KAM4x4",
-    "display_name": "KAMAZ 4X4"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Kamaz44_Supply_RUS": {
     "name": "WF_Kamaz44_Supply_RUS",
@@ -2958,7 +3153,8 @@
     "name_token": "WFKAM44S",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KAM4x4_Sup",
-    "display_name": "KAMAZ 4X4 SNAB."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_25SM3_RUS": {
     "name": "WF_Su_25SM3_RUS",
@@ -2971,7 +3167,8 @@
     "name_token": "WFS25SM3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU25SM3",
-    "display_name": "SU-25SM3 [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_25SM3_LGB_RUS": {
     "name": "WF_Su_25SM3_LGB_RUS",
@@ -2984,7 +3181,8 @@
     "name_token": "WFS25GBU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU25SM3_LGB",
-    "display_name": "SU-25SM3 [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_25SM_LGB_RUS": {
     "name": "WF_Su_25SM_LGB_RUS",
@@ -2997,7 +3195,8 @@
     "name_token": "WFS25LGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Su_25_he_SOV",
-    "display_name": "SU-25SM [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_25SM_Rkt_RUS": {
     "name": "WF_Su_25SM_Rkt_RUS",
@@ -3010,7 +3209,8 @@
     "name_token": "WFS25RKT",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Su_25_rkt2_SOV",
-    "display_name": "SU-25SM [RKT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_25SM_RUS": {
     "name": "WF_Su_25SM_RUS",
@@ -3023,7 +3223,8 @@
     "name_token": "WFS25AT2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Su_25_SOV",
-    "display_name": "SU-25SM [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_35S_AA1_RUS": {
     "name": "WF_Su_35S_AA1_RUS",
@@ -3036,7 +3237,8 @@
     "name_token": "WFS35AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU35_AA1",
-    "display_name": "SU-35S [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_35S_AA2_RUS": {
     "name": "WF_Su_35S_AA2_RUS",
@@ -3049,7 +3251,8 @@
     "name_token": "WFS35AA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU35_AA2",
-    "display_name": "SU-35S [AA2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_35S_SEAD_RUS": {
     "name": "WF_Su_35S_SEAD_RUS",
@@ -3062,7 +3265,8 @@
     "name_token": "WFS35SE1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU35_SEAD",
-    "display_name": "SU-35S [SEAD1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mi_35_AA_RUS": {
     "name": "WF_Mi_35_AA_RUS",
@@ -3075,7 +3279,8 @@
     "name_token": "WFM35MIX",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI35M_AA",
-    "display_name": "MI-35M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mi_35_RKT1_RUS": {
     "name": "WF_Mi_35_RKT1_RUS",
@@ -3088,7 +3293,8 @@
     "name_token": "WFM35RK1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI35M_RKT1",
-    "display_name": "MI-35M [RKT1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mi_35_RKT2_RUS": {
     "name": "WF_Mi_35_RKT2_RUS",
@@ -3101,7 +3307,8 @@
     "name_token": "WFM35RK2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI35M_RKT2",
-    "display_name": "MI-35M [RKT2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mi_35_AT_RUS": {
     "name": "WF_Mi_35_AT_RUS",
@@ -3114,7 +3321,8 @@
     "name_token": "WFM35AT1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI35M_AT",
-    "display_name": "MI-35M [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80UM2_RUS": {
     "name": "WF_T80UM2_RUS",
@@ -3130,7 +3338,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T80UM2",
-    "display_name": "T-80UM2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Supercam_RUS": {
     "name": "WF_Supercam_RUS",
@@ -3145,7 +3354,8 @@
       "uav"
     ],
     "button_texture": "Texture_Button_Unit_Supercam",
-    "display_name": "#RECO3 SUPERCAM S350"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T90A_RUS": {
     "name": "WF_T90A_RUS",
@@ -3163,7 +3373,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T90A",
-    "display_name": "T-90A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T90A_CMD_RUS": {
     "name": "WF_T90A_CMD_RUS",
@@ -3182,7 +3393,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T90A_CMD",
-    "display_name": "#CMD T-90K"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T90M_RUS": {
     "name": "WF_T90M_RUS",
@@ -3200,7 +3412,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T90M",
-    "display_name": "T-90M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80U1_RUS": {
     "name": "WF_T80U1_RUS",
@@ -3216,7 +3429,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T80BV_Beast_SOV",
-    "display_name": "T-80U1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B3_RUS": {
     "name": "WF_T72B3_RUS",
@@ -3233,7 +3447,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T72B3",
-    "display_name": "T-72B3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B3M_RUS": {
     "name": "WF_T72B3M_RUS",
@@ -3250,7 +3465,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T72B3M",
-    "display_name": "T-72B3M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B3M1_RUS": {
     "name": "WF_T72B3M1_RUS",
@@ -3267,7 +3483,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T72B3M1",
-    "display_name": "T-72B3M1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B3M_CMD_RUS": {
     "name": "WF_T72B3M_CMD_RUS",
@@ -3285,7 +3502,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T72B3M_CMD",
-    "display_name": "#CMD T-72B3M KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BTR_80A_RUS": {
     "name": "WF_BTR_80A_RUS",
@@ -3302,7 +3520,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BTR_80A",
-    "display_name": "BTR-80A"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BTR_80A_ATGM_RUS": {
     "name": "WF_BTR_80A_ATGM_RUS",
@@ -3320,7 +3539,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_BTR_82_AT",
-    "display_name": "BTR-82AT KORNET"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_9P157_Khriz_RUS": {
     "name": "WF_9P157_Khriz_RUS",
@@ -3335,7 +3555,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_Khriz",
-    "display_name": "KHRIZANTEMA-S"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BTR_28_RUS": {
     "name": "WF_MotRifles_BTR_28_RUS",
@@ -3348,7 +3569,8 @@
     "name_token": "WFMOTB28",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (RPG-28)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_SVD_RUS": {
     "name": "WF_MotRifles_SVD_RUS",
@@ -3361,7 +3583,8 @@
     "name_token": "WFMOTSVD",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (SVD)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_Metis_RUS": {
     "name": "WF_MotRifles_Metis_RUS",
@@ -3374,7 +3597,8 @@
     "name_token": "WFMOTMET",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (METIS)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tornado_G_RUS": {
     "name": "WF_Tornado_G_RUS",
@@ -3387,7 +3611,8 @@
     "name_token": "WFTORGHE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_BM21_Grad_POL",
-    "display_name": "TORNADO-G"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tornado_G_CLU_RUS": {
     "name": "WF_Tornado_G_CLU_RUS",
@@ -3400,7 +3625,8 @@
     "name_token": "WFTORCLU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_BM21_Grad_DDR",
-    "display_name": "TORNADO-G [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_57_AA1_RUS": {
     "name": "WF_Su_57_AA1_RUS",
@@ -3413,7 +3639,8 @@
     "name_token": "WFS57AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU57_AA1",
-    "display_name": "SU-57 [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_57_SEAD_RUS": {
     "name": "WF_Su_57_SEAD_RUS",
@@ -3426,7 +3653,8 @@
     "name_token": "WFS57SEA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU57_SEAD",
-    "display_name": "SU-57 [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_LGB1_RUS": {
     "name": "WF_Su_34_LGB1_RUS",
@@ -3439,7 +3667,8 @@
     "name_token": "WFS34LG1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_LGB",
-    "display_name": "SU-34 [LGB2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_AT_RUS": {
     "name": "WF_Su_34_AT_RUS",
@@ -3452,7 +3681,8 @@
     "name_token": "WFS34AT1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_AT",
-    "display_name": "SU-34 [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_Thermo_RUS": {
     "name": "WF_Su_34_Thermo_RUS",
@@ -3465,7 +3695,8 @@
     "name_token": "WFS34ODA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_Therm",
-    "display_name": "SU-34 [TRM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_HE1_RUS": {
     "name": "WF_Su_34_HE1_RUS",
@@ -3478,7 +3709,8 @@
     "name_token": "WFS34HE1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_HE",
-    "display_name": "SU-34 [HE]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_CLU_RUS": {
     "name": "WF_Su_34_CLU_RUS",
@@ -3491,7 +3723,8 @@
     "name_token": "WFS34CLU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_CLU",
-    "display_name": "SU-34 [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_34_LGB2_RUS": {
     "name": "WF_Su_34_LGB2_RUS",
@@ -3504,7 +3737,8 @@
     "name_token": "WFS34LG2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU34_LGB",
-    "display_name": "SU-34 [LGB1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ka_52_RUS": {
     "name": "WF_Ka_52_RUS",
@@ -3517,7 +3751,8 @@
     "name_token": "WFK52ATG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KA52",
-    "display_name": "KA-52"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ka_52_AA_RUS": {
     "name": "WF_Ka_52_AA_RUS",
@@ -3530,7 +3765,8 @@
     "name_token": "WFK52AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KA52_AA",
-    "display_name": "KA-52 [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S19M2_MstaS_CLU_RUS": {
     "name": "WF_2S19M2_MstaS_CLU_RUS",
@@ -3545,7 +3781,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S19_MstaS_SOV",
-    "display_name": "MSTA-SM2 [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S19M2_MstaS_PGM_RUS": {
     "name": "WF_2S19M2_MstaS_PGM_RUS",
@@ -3560,7 +3797,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S19_MstaS_SOV",
-    "display_name": "MSTA-SM2 [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMPT_RUS": {
     "name": "WF_BMPT_RUS",
@@ -3577,7 +3815,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMPT",
-    "display_name": "BMPT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S34_Hosta_RUS": {
     "name": "WF_2S34_Hosta_RUS",
@@ -3592,7 +3831,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_Hosta",
-    "display_name": "2S34 HOSTA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S34_Hosta_Laser_RUS": {
     "name": "WF_2S34_Hosta_Laser_RUS",
@@ -3607,7 +3847,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_HostaL",
-    "display_name": "2S34 HOSTA [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_TOS1A_RUS": {
     "name": "WF_TOS1A_RUS",
@@ -3622,7 +3863,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_TOS1A",
-    "display_name": "TOS-1A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_S400_RUS": {
     "name": "WF_DCA_S400_RUS",
@@ -3637,7 +3879,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_S400",
-    "display_name": "S-400"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BAZ_64022_RUS": {
     "name": "WF_BAZ_64022_RUS",
@@ -3652,7 +3895,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_S400_Truck",
-    "display_name": "BAZ-64022"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_DCA_Radar_RUS": {
     "name": "WF_DCA_Radar_RUS",
@@ -3667,7 +3911,8 @@
       "Radar"
     ],
     "button_texture": "Texture_Button_Unit_S400_Radar",
-    "display_name": "96L6E"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Pantsir_S1_RUS": {
     "name": "WF_Pantsir_S1_RUS",
@@ -3680,7 +3925,8 @@
     "name_token": "WFPNTS1R",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Pantsir",
-    "display_name": "PANTSIR S-2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72AV_RUS": {
     "name": "WF_T72AV_RUS",
@@ -3696,7 +3942,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T72AV",
-    "display_name": "T-72AV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72AV_CMD_RUS": {
     "name": "WF_T72AV_CMD_RUS",
@@ -3713,7 +3960,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T72AV_CMD",
-    "display_name": "#CMD T-72AV KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B_89_RUS": {
     "name": "WF_T72B_89_RUS",
@@ -3729,7 +3977,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T72B89",
-    "display_name": "T-72B OBR. 89"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B_89_CMD_RUS": {
     "name": "WF_T72B_89_CMD_RUS",
@@ -3746,7 +3995,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T72M1_CMD_DDR",
-    "display_name": "#CMD T-72B KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72BA_RUS": {
     "name": "WF_T72BA_RUS",
@@ -3762,7 +4012,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T72BA",
-    "display_name": "T-72BA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_1AM_RUS": {
     "name": "WF_BMP_1AM_RUS",
@@ -3780,7 +4031,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BMP1AM",
-    "display_name": "BMP-1AM"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BRM_1M_RUS": {
     "name": "WF_BRM_1M_RUS",
@@ -3796,7 +4048,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BRM1M",
-    "display_name": "#RECO3 BRM-1K OBR. 2021"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Shturm_RUS": {
     "name": "WF_Shturm_RUS",
@@ -3809,7 +4062,8 @@
     "name_token": "WFSHTRPG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "SHTURMOVIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Shturm_Flam_RUS": {
     "name": "WF_Shturm_Flam_RUS",
@@ -3822,7 +4076,8 @@
     "name_token": "WFSHTRPO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Engineers_Flam_TTsko_SOV",
-    "display_name": "INZHENERY-SHTURMOVIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_27SM_RUS": {
     "name": "WF_Su_27SM_RUS",
@@ -3835,7 +4090,8 @@
     "name_token": "WFS27AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Su_27S_SOV",
-    "display_name": "SU-27SM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_1P_APP_RUS": {
     "name": "WF_BMP_1P_APP_RUS",
@@ -3854,7 +4110,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_BMP1_APP",
-    "display_name": "BMP-1P 675-SB3KDZ"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_2_APP_RUS": {
     "name": "WF_BMP_2_APP_RUS",
@@ -3873,7 +4130,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_BMP2_APP",
-    "display_name": "BMP-2 675-SB3KDZ"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_1AM_APP_RUS": {
     "name": "WF_BMP_1AM_APP_RUS",
@@ -3892,7 +4150,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_BMP1AM_APP",
-    "display_name": "BMP-1AM 675-SB3KDZ"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BRM_1_APP_RUS": {
     "name": "WF_BRM_1_APP_RUS",
@@ -3909,7 +4168,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_BRM1_APP",
-    "display_name": "#RECO3 BRM-1K 675-SB3KDZ"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72A_RUS": {
     "name": "WF_T72A_RUS",
@@ -3924,7 +4184,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_T72M1_DDR",
-    "display_name": "T-72A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B_22_RUS": {
     "name": "WF_T72B_22_RUS",
@@ -3941,7 +4202,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_T72B22",
-    "display_name": "T-72B OBR. 2022"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M2HB_US": {
     "name": "WF_HMGteam_M2HB_US",
@@ -3954,7 +4216,8 @@
     "name_token": "NTAPFMTXET",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_US",
-    "display_name": "M2HB 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_Mk19_US": {
     "name": "WF_HMGteam_Mk19_US",
@@ -3967,7 +4230,8 @@
     "name_token": "HVKRKYCPIX",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_Mk19_US",
-    "display_name": "Mk.19 40mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M2HB_NG_US": {
     "name": "WF_HMGteam_M2HB_NG_US",
@@ -3982,7 +4246,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_NG_US",
-    "display_name": "N.G. M2HB 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_107mm_NG_US": {
     "name": "WF_Mortier_107mm_NG_US",
@@ -3998,7 +4263,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_107mm_NG_US",
-    "display_name": "N.G. M30 107mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_81mm_mortar_NG_US": {
     "name": "WF_81mm_mortar_NG_US",
@@ -4014,7 +4280,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_81mm_mortar_NG_US",
-    "display_name": "N.G. M29 81mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_KonkursM_RUS": {
     "name": "WF_ATteam_KonkursM_RUS",
@@ -4027,7 +4294,8 @@
     "name_token": "NYPGWBSBYP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_KonkursM_TTsko_SOV",
-    "display_name": "KONKURS-M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_MstaB_150mm_RUS": {
     "name": "WF_Howz_MstaB_150mm_RUS",
@@ -4043,7 +4311,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_MstaB_150mm_SOV",
-    "display_name": "2A65 Msta-B 152mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_D30_122mm_RUS": {
     "name": "WF_Howz_D30_122mm_RUS",
@@ -4059,7 +4328,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_D30_122mm_SOV",
-    "display_name": "D-30 122mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_NSV_RUS": {
     "name": "WF_HMGteam_NSV_RUS",
@@ -4072,7 +4342,8 @@
     "name_token": "XPYSPBEZYC",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_NSV_SOV",
-    "display_name": "NSV 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leclerc_FR": {
     "name": "WF_Leclerc_FR",
@@ -4088,7 +4359,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leclerc",
-    "display_name": "LECLERC S2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leclerc_XXI_FR": {
     "name": "WF_Leclerc_XXI_FR",
@@ -4104,7 +4376,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leclerc_XXI",
-    "display_name": "LECLERC XXI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leclerc_XLR_FR": {
     "name": "WF_Leclerc_XLR_FR",
@@ -4121,7 +4394,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_Leclerc_XLR",
-    "display_name": "LECLERC XLR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leclerc_XLR_CMD_FR": {
     "name": "WF_Leclerc_XLR_CMD_FR",
@@ -4139,7 +4413,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_Leclerc_CMD",
-    "display_name": "#CMD LECLERC XLR CMD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leclerc_XXI_CMD_FR": {
     "name": "WF_Leclerc_XXI_CMD_FR",
@@ -4156,7 +4431,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leclerc_XXI_CMD",
-    "display_name": "#CMD LECLERC XXI CMD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBCI_FR": {
     "name": "WF_VBCI_FR",
@@ -4176,7 +4452,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_VBCI",
-    "display_name": "VBCI"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_VBCI_CMD_FR": {
     "name": "WF_VBCI_CMD_FR",
@@ -4194,7 +4471,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_VBCI_CP",
-    "display_name": "#CMD VPC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_EBRC_FR": {
     "name": "WF_EBRC_FR",
@@ -4211,7 +4489,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_EBRC",
-    "display_name": "EBRC SPAHIS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_EBRC_LEG_FR": {
     "name": "WF_EBRC_LEG_FR",
@@ -4229,7 +4508,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_EBRC_Leg",
-    "display_name": "EBRC LEGION"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBMR_FR": {
     "name": "WF_VBMR_FR",
@@ -4247,7 +4527,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_VBMR",
-    "display_name": "GRIFFON VTT"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_VBMR_CMD_FR": {
     "name": "WF_VBMR_CMD_FR",
@@ -4263,7 +4544,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_VBMR_CP",
-    "display_name": "#CMD GRIFFON EPC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBMR_120_FR": {
     "name": "WF_VBMR_120_FR",
@@ -4276,7 +4558,8 @@
     "name_token": "WFVBMMOR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_VBMR_MOR",
-    "display_name": "GRIFFON MEPAC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_CAESAR_FR": {
     "name": "WF_CAESAR_FR",
@@ -4289,7 +4572,8 @@
     "name_token": "WFCAE6X6",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Caesar",
-    "display_name": "CAESAR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_CAESAR_CLU_FR": {
     "name": "WF_CAESAR_CLU_FR",
@@ -4302,7 +4586,8 @@
     "name_token": "WFCAECLU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Caesar_CLU",
-    "display_name": "CAESAR [CLU]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_SAMPT_FR": {
     "name": "WF_SAMPT_FR",
@@ -4315,7 +4600,8 @@
     "name_token": "WFSAMMAM",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SAMPT",
-    "display_name": "MAMBA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Crotale_NG_FR": {
     "name": "WF_Crotale_NG_FR",
@@ -4330,7 +4616,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Crotale",
-    "display_name": "CROTALE NG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VT4_FR": {
     "name": "WF_VT4_FR",
@@ -4346,7 +4633,8 @@
       "_canBeAirlifted2"
     ],
     "button_texture": "Texture_Button_Unit_VT4",
-    "display_name": "VT4"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_VT4_PC_FR": {
     "name": "WF_VT4_PC_FR",
@@ -4361,7 +4649,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_VT4_CP",
-    "display_name": "#CMD VT4 PC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_MMP_FR": {
     "name": "WF_ATteam_MMP_FR",
@@ -4374,7 +4663,8 @@
     "name_token": "WFATGMMP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_Milan_2_RIMa_FR",
-    "display_name": "AKERON MP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_FR": {
     "name": "WF_Chasseurs_FR",
@@ -4389,7 +4679,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Chasseurs_FR",
-    "display_name": "CHASSEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_Eryx_FR": {
     "name": "WF_Chasseurs_Eryx_FR",
@@ -4404,7 +4695,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_RIMa_FR",
-    "display_name": "CHASSEURS ANTICHAR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_FR": {
     "name": "WF_Rifles_FR",
@@ -4417,7 +4709,8 @@
     "name_token": "WFRIFFRA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_FR",
-    "display_name": "MARSOUINS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Eryx_FR": {
     "name": "WF_Rifles_Eryx_FR",
@@ -4430,7 +4723,8 @@
     "name_token": "WFRIFERY",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_DMR_FR",
-    "display_name": "MARSOUINS (ERYX)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AT_Group_FR": {
     "name": "WF_AT_Group_FR",
@@ -4443,7 +4737,8 @@
     "name_token": "WFRIFATC",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Groupe_AT_FR",
-    "display_name": "MARSOUINS ANTICHAR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_Res_FR": {
     "name": "WF_Chasseurs_Res_FR",
@@ -4459,7 +4754,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Reserviste_FR",
-    "display_name": "RES. CHASSEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Res_FR": {
     "name": "WF_Rifles_Res_FR",
@@ -4474,7 +4770,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Reserviste_FAMAS_FR",
-    "display_name": "RESERVISTES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_FR": {
     "name": "WF_Sapeurs_FR",
@@ -4489,7 +4786,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Sapeurs_FR",
-    "display_name": "SAPEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_AT4_FR": {
     "name": "WF_Sapeurs_AT4_FR",
@@ -4504,7 +4802,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_APILAS_FR",
-    "display_name": "SAPEURS (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Gendarmerie_FR": {
     "name": "WF_Gendarmerie_FR",
@@ -4520,7 +4819,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_Gendarmerie_FR",
-    "display_name": "PR\u00c9V\u00d4T\u00c9"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_CMD_FR": {
     "name": "WF_Chasseurs_CMD_FR",
@@ -4536,7 +4836,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Chasseurs_CMD_FR",
-    "display_name": "CMDT CHASSEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_CMD_FR": {
     "name": "WF_Rifles_CMD_FR",
@@ -4551,7 +4852,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_CMD_FR",
-    "display_name": "#CMD CMDT MARSOUINS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_CMD_FR": {
     "name": "WF_Sapeurs_CMD_FR",
@@ -4567,7 +4869,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Sapeurs_CMD_FR",
-    "display_name": "CMDT SAPEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_FR": {
     "name": "WF_Scout_FR",
@@ -4580,7 +4883,8 @@
     "name_token": "TGGLXTAMXF",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_FR",
-    "display_name": "ECLAIREURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Eryx_FR": {
     "name": "WF_Scout_Eryx_FR",
@@ -4593,7 +4897,8 @@
     "name_token": "WFSCTERY",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_RIMa_FR",
-    "display_name": "#RECO2 ECLAIREURS (ERYX)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_FR": {
     "name": "WF_Sniper_FR",
@@ -4609,7 +4914,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_M82_US",
-    "display_name": "#RECO2 LEGION. SNIPER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LRRP_FR": {
     "name": "WF_LRRP_FR",
@@ -4627,7 +4933,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_LRRP_FR",
-    "display_name": "DRAGON-PARAS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Mistral_FR": {
     "name": "WF_MANPAD_Mistral_FR",
@@ -4640,7 +4947,8 @@
     "name_token": "WFMANMR3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Mistral_FR",
-    "display_name": "MISTRAL 3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Mistral_BME_FR": {
     "name": "WF_MANPAD_Mistral_BME_FR",
@@ -4653,7 +4961,8 @@
     "name_token": "WFMANMR3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Mistral_FR",
-    "display_name": "MISTRAL 3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Milan_ER_FR": {
     "name": "WF_ATteam_Milan_ER_FR",
@@ -4666,7 +4975,8 @@
     "name_token": "WFMIL3ER",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_Milan_2_FR",
-    "display_name": "MILAN 3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_MAG_FR": {
     "name": "WF_HMGteam_MAG_FR",
@@ -4679,7 +4989,8 @@
     "name_token": "WFHMGMAG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_AANF1_FR",
-    "display_name": "FN MAG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M2HB_FR": {
     "name": "WF_HMGteam_M2HB_FR",
@@ -4692,7 +5003,8 @@
     "name_token": "EWKNDNQHXI",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_FR",
-    "display_name": "M2HB 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VAB_HOT_3_FR": {
     "name": "WF_VAB_HOT_3_FR",
@@ -4707,7 +5019,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_VAB_HOT_FR",
-    "display_name": "VAB MEPHISTO"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBL_MILAN_3_FR": {
     "name": "WF_VBL_MILAN_3_FR",
@@ -4722,7 +5035,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_VBL_MILAN_FR",
-    "display_name": "VBL MILAN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBL_MILAN_ER_FR": {
     "name": "WF_VBL_MILAN_ER_FR",
@@ -4737,7 +5051,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_VBL_AT",
-    "display_name": "VBL MILAN ER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VLRA_Mistral_FR": {
     "name": "WF_VLRA_Mistral_FR",
@@ -4750,7 +5065,8 @@
     "name_token": "VQFIOVHKIQ",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_VLRA_Mistral_FR",
-    "display_name": "VLRA PAMELA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VPS_FR": {
     "name": "WF_VPS_FR",
@@ -4767,7 +5083,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_M998_Humvee_Delta_US",
-    "display_name": "#RECO1 VPS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_GBC180_supply_FR": {
     "name": "WF_GBC180_supply_FR",
@@ -4780,7 +5097,8 @@
     "name_token": "WFGBCSUP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_GBC180",
-    "display_name": "GBC 180"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_Legion_FR": {
     "name": "WF_Chasseurs_Legion_FR",
@@ -4796,7 +5114,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Chasseurs_FR",
-    "display_name": "LEGION.-CHASSEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Legion_FR": {
     "name": "WF_Rifles_Legion_FR",
@@ -4811,7 +5130,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_FR",
-    "display_name": "LEGIONNAIRES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Eryx_Legion_FR": {
     "name": "WF_Rifles_Eryx_Legion_FR",
@@ -4826,7 +5146,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_FR",
-    "display_name": "LEGIONNAIRES (ERYX)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_Legion_FR": {
     "name": "WF_Sapeurs_Legion_FR",
@@ -4842,7 +5163,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Sapeurs_FR",
-    "display_name": "LEGION.-SAPEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_Legion_AT4_FR": {
     "name": "WF_Sapeurs_Legion_AT4_FR",
@@ -4858,7 +5180,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Sapeurs_FR",
-    "display_name": "LEGION.-SAPEURS (AT4)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Legion_CMD_FR": {
     "name": "WF_Rifles_Legion_CMD_FR",
@@ -4874,7 +5197,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Chasseurs_CMD_FR",
-    "display_name": "#CMD CMDT LEGION."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sapeurs_Legion_CMD_FR": {
     "name": "WF_Sapeurs_Legion_CMD_FR",
@@ -4891,7 +5215,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Sapeurs_CMD_FR",
-    "display_name": "#CMD CMDT LEGION.-SAPEURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_MMP_Legion_FR": {
     "name": "WF_ATteam_MMP_Legion_FR",
@@ -4906,7 +5231,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_Milan_2_FR",
-    "display_name": "LEGION. AKERON MP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M2HB_Legion_FR": {
     "name": "WF_HMGteam_M2HB_Legion_FR",
@@ -4921,7 +5247,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_FR",
-    "display_name": "LEGION. M2HB"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Legion_FR": {
     "name": "WF_Scout_Legion_FR",
@@ -4936,7 +5263,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Scout_FR",
-    "display_name": "#RECO2 LEGION. ECLAIREURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Patrol_FR": {
     "name": "WF_Scout_Patrol_FR",
@@ -4951,7 +5279,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Scout_FR",
-    "display_name": "#RECO2 LEGION. PATROL"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBMR_VOA_FR": {
     "name": "WF_VBMR_VOA_FR",
@@ -4966,7 +5295,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_VBMR_REC",
-    "display_name": "#RECO3 GRIFFON VOA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VBCI_Legion_FR": {
     "name": "WF_VBCI_Legion_FR",
@@ -4987,7 +5317,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_VBCI_LEG",
-    "display_name": "VBCI LEGION"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_VBMR_Legion_FR": {
     "name": "WF_VBMR_Legion_FR",
@@ -5006,7 +5337,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_VBMR_LEG",
-    "display_name": "GRIFFON VTT LEGION"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Tiger_HAP_FR": {
     "name": "WF_Tiger_HAP_FR",
@@ -5019,7 +5351,8 @@
     "name_token": "WFTIGHAP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HAP",
-    "display_name": "TIGER HAP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_HAP_RKT_FR": {
     "name": "WF_Tiger_HAP_RKT_FR",
@@ -5032,7 +5365,8 @@
     "name_token": "WFTIGRKT",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HAP_RKT",
-    "display_name": "TIGER HAP [RKT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_HAD_FR": {
     "name": "WF_Tiger_HAD_FR",
@@ -5045,7 +5379,8 @@
     "name_token": "WFTIGHAD",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HAD",
-    "display_name": "TIGER HAD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_HAD_AA_FR": {
     "name": "WF_Tiger_HAD_AA_FR",
@@ -5058,7 +5393,8 @@
     "name_token": "WFTIGHAA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HAD_AA",
-    "display_name": "TIGER HAD [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_NH90_Supply_FR": {
     "name": "WF_NH90_Supply_FR",
@@ -5071,7 +5407,8 @@
     "name_token": "WFNH9SUP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_NH90_Sup",
-    "display_name": "CAIMAN LOG."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_NH90_MG_FR": {
     "name": "WF_NH90_MG_FR",
@@ -5087,7 +5424,8 @@
       "_airlift"
     ],
     "button_texture": "Texture_Button_Unit_NH90_MAG",
-    "display_name": "CAIMAN TTH"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Gazelle_HOT_3_FR": {
     "name": "WF_Gazelle_HOT_3_FR",
@@ -5100,7 +5438,8 @@
     "name_token": "WFGAZHO3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Gazelle_HOT_2_FR",
-    "display_name": "GAZELLE HOT 3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Gazelle_trans_FR": {
     "name": "WF_Gazelle_trans_FR",
@@ -5115,7 +5454,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_Gazelle_trans_UK",
-    "display_name": "GAZELLE LBH.1"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Rafale_AA_FR": {
     "name": "WF_Rafale_AA_FR",
@@ -5128,7 +5468,8 @@
     "name_token": "WFRAFAA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rafale_AA",
-    "display_name": "RAFALE C [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rafale_AA2_FR": {
     "name": "WF_Rafale_AA2_FR",
@@ -5141,7 +5482,8 @@
     "name_token": "WFRAFAA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rafale_AA2",
-    "display_name": "RAFALE C [AA2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rafale_CAS_FR": {
     "name": "WF_Rafale_CAS_FR",
@@ -5154,7 +5496,8 @@
     "name_token": "WFRAFCAS",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rafale_PSM",
-    "display_name": "RAFALE C [PSM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rafale_CAS2_FR": {
     "name": "WF_Rafale_CAS2_FR",
@@ -5167,7 +5510,8 @@
     "name_token": "WFRAFCA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rafale_LGB",
-    "display_name": "RAFALE C [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rafale_CAS3_FR": {
     "name": "WF_Rafale_CAS3_FR",
@@ -5180,7 +5524,8 @@
     "name_token": "WFRAFCA3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rafale_SCALP",
-    "display_name": "RAFALE C [SCALP]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_5F_FR": {
     "name": "WF_Mirage_2000_5F_FR",
@@ -5193,7 +5538,8 @@
     "name_token": "WFMIR25F",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Mirage_2000_C_FR",
-    "display_name": "MIRAGE 2000 5F"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_LGB_FR": {
     "name": "WF_Mirage_2000_D_LGB_FR",
@@ -5206,7 +5552,8 @@
     "name_token": "WFMIR2D1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_LGB",
-    "display_name": "MIRAGE 2000 D [LGB1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_SCALP_FR": {
     "name": "WF_Mirage_2000_D_SCALP_FR",
@@ -5219,7 +5566,8 @@
     "name_token": "WFMIR2D2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_SCALP",
-    "display_name": "MIRAGE 2000 D [SCALP]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_AT_FR": {
     "name": "WF_Mirage_2000_D_AT_FR",
@@ -5232,7 +5580,8 @@
     "name_token": "WFMIR2D3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_AT",
-    "display_name": "MIRAGE 2000 D [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_LGB2_FR": {
     "name": "WF_Mirage_2000_D_LGB2_FR",
@@ -5245,7 +5594,8 @@
     "name_token": "WFMIR2D4",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_LGB2",
-    "display_name": "MIRAGE 2000 D [LGB2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_RKT_FR": {
     "name": "WF_Mirage_2000_D_RKT_FR",
@@ -5258,7 +5608,8 @@
     "name_token": "WFMIR2D5",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_RKT",
-    "display_name": "MIRAGE 2000 D [RKT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mirage_2000_D_HE_FR": {
     "name": "WF_Mirage_2000_D_HE_FR",
@@ -5271,7 +5622,8 @@
     "name_token": "WFMIR2D6",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M2000_HE",
-    "display_name": "MIRAGE 2000 D [HE]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_81mm_FR": {
     "name": "WF_Mortier_81mm_FR",
@@ -5287,7 +5639,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_81mm_FR",
-    "display_name": "MO-81-61-C 81mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_MORT61_120mm_FR": {
     "name": "WF_Mortier_MORT61_120mm_FR",
@@ -5303,7 +5656,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_MORT61_120mm_FR",
-    "display_name": "MO-120-RT61"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Piranha_IIIC_BEL": {
     "name": "WF_Piranha_IIIC_BEL",
@@ -5320,7 +5674,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_AIV",
-    "display_name": "AIV FUSELIER"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Piranha_DF90_BEL": {
     "name": "WF_Piranha_DF90_BEL",
@@ -5336,7 +5691,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_AIV_DF90",
-    "display_name": "AIV DF90"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Piranha_DF30_BEL": {
     "name": "WF_Piranha_DF30_BEL",
@@ -5354,7 +5710,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_AIV_DF30",
-    "display_name": "AIV DF30"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Piranha_DF30_Rec_BEL": {
     "name": "WF_Piranha_DF30_Rec_BEL",
@@ -5370,7 +5727,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_AIV_DF30_Rec",
-    "display_name": "#RECO2 AIV DF30 ISTAR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Piranha_IIIC_CMD_BEL": {
     "name": "WF_Piranha_IIIC_CMD_BEL",
@@ -5385,7 +5743,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_AIV_PC",
-    "display_name": "#CMD AIV PC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_BEL": {
     "name": "WF_Rifles_BEL",
@@ -5398,7 +5757,8 @@
     "name_token": "SIUQLRWSES",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_BEL",
-    "display_name": "FUSILIER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_MMG_BEL": {
     "name": "WF_Rifles_MMG_BEL",
@@ -5411,7 +5771,8 @@
     "name_token": "WFRIBMMG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_AT_BEL",
-    "display_name": "FUSILIERS (MMG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_DMR_BEL": {
     "name": "WF_Rifles_DMR_BEL",
@@ -5424,7 +5785,8 @@
     "name_token": "WFRIBDMR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_BEL",
-    "display_name": "FUSILIERS (DMR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Team_BEL": {
     "name": "WF_Rifles_Team_BEL",
@@ -5437,7 +5799,8 @@
     "name_token": "WFRIBWPN",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_BEL",
-    "display_name": "GROUPE APPUI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_BEL": {
     "name": "WF_Engineers_BEL",
@@ -5452,7 +5815,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_BEL",
-    "display_name": "PIONIERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_AT_BEL": {
     "name": "WF_Engineers_AT_BEL",
@@ -5467,7 +5831,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_AT_BEL",
-    "display_name": "PIONIERS (MATADOR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ParaCmdo_Pionier_BEL": {
     "name": "WF_ParaCmdo_Pionier_BEL",
@@ -5483,7 +5848,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_ParaCmdo_Pionier_BEL",
-    "display_name": "GENIE PARACHUTISTE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_CMD_BEL": {
     "name": "WF_Rifles_CMD_BEL",
@@ -5498,7 +5864,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_CMD_BEL",
-    "display_name": "CMDT FUSILIER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_BEL": {
     "name": "WF_Engineers_CMD_BEL",
@@ -5514,7 +5881,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_BEL",
-    "display_name": "CMDT PIONIERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MP_BEL": {
     "name": "WF_MP_BEL",
@@ -5530,7 +5898,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_MP_BEL",
-    "display_name": "PR\u00c9V\u00d4T\u00c9"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Chasseurs_BEL": {
     "name": "WF_Chasseurs_BEL",
@@ -5545,7 +5914,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_ChasseurArdennais_BEL",
-    "display_name": "CHASSEURS ARDENNAIS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_BEL": {
     "name": "WF_Scout_BEL",
@@ -5558,7 +5928,8 @@
     "name_token": "BYDZXPVCJK",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_BEL",
-    "display_name": "PATROUILLES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_ESR_BEL": {
     "name": "WF_Sniper_ESR_BEL",
@@ -5575,7 +5946,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_ESR_BEL",
-    "display_name": "SNIPER ESR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LRRP_BEL": {
     "name": "WF_LRRP_BEL",
@@ -5593,7 +5965,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_LRRP_BEL",
-    "display_name": "ESR-GVP"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Dingo_2_BEL": {
     "name": "WF_Dingo_2_BEL",
@@ -5610,7 +5983,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_BEL",
-    "display_name": "DINGO 2 FUS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Dingo_2_CMD_BEL": {
     "name": "WF_Dingo_2_CMD_BEL",
@@ -5625,7 +5999,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_PC",
-    "display_name": "#CMD DINGO 2 PC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_JLTV_RWS_BEL": {
     "name": "WF_JLTV_RWS_BEL",
@@ -5641,7 +6016,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV_RWS",
-    "display_name": "CLV FALCON PATROL"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_JLTV_BEL": {
     "name": "WF_JLTV_BEL",
@@ -5657,7 +6033,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV",
-    "display_name": "CLV FALCON"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_HMGteam_M2HB_BEL": {
     "name": "WF_HMGteam_M2HB_BEL",
@@ -5670,7 +6047,8 @@
     "name_token": "XSENGPKHLP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_BEL",
-    "display_name": "M2HB 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_MAG_BEL": {
     "name": "WF_HMGteam_MAG_BEL",
@@ -5683,7 +6061,8 @@
     "name_token": "NRSJRXAMMO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_MAG_BEL",
-    "display_name": "MAG 7,62mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Spike_BEL": {
     "name": "WF_ATteam_Spike_BEL",
@@ -5696,7 +6075,8 @@
     "name_token": "WFSPIBEL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_Milan_2_BEL",
-    "display_name": "SPIKE MR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_81mm_BEL": {
     "name": "WF_Mortier_81mm_BEL",
@@ -5712,7 +6092,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_81mm_BEL",
-    "display_name": "M1 81mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_MORT61_120mm_BEL": {
     "name": "WF_Mortier_MORT61_120mm_BEL",
@@ -5728,7 +6109,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_MORT61_120mm_FR",
-    "display_name": "MO-120-RT61"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_LG1_105mm_BEL": {
     "name": "WF_Howz_LG1_105mm_BEL",
@@ -5744,7 +6126,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_L118_105mm_LUX",
-    "display_name": "LG1 105MM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Piranha_DF30_Spike_BEL": {
     "name": "WF_Piranha_DF30_Spike_BEL",
@@ -5760,7 +6143,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_AIV_DF30_Spike",
-    "display_name": "AIV DF30 SPIKE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_LUX": {
     "name": "WF_LightRifles_LUX",
@@ -5775,7 +6159,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_LUX",
-    "display_name": "FUSILIERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LightRifles_CMD_LUX": {
     "name": "WF_LightRifles_CMD_LUX",
@@ -5791,7 +6176,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_LightRifles_CMD_LUX",
-    "display_name": "CMDT FUSILIERS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_LUX": {
     "name": "WF_Scout_LUX",
@@ -5806,7 +6192,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Scout_LUX",
-    "display_name": "ECLAIREURS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Dingo_2_LUX": {
     "name": "WF_Dingo_2_LUX",
@@ -5823,7 +6210,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_LUX",
-    "display_name": "DINGO 2 PPV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Dingo_2_MAG_BEL": {
     "name": "WF_Dingo_2_MAG_BEL",
@@ -5840,7 +6228,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_MG",
-    "display_name": "DINGO 2 FUS MAG"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M1114_Humvee_HMG_LUX": {
     "name": "WF_M1114_Humvee_HMG_LUX",
@@ -5855,7 +6244,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_M1025_Humvee_HMG_LUX",
-    "display_name": "#RECO1 M1114 HUMVEE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_F35_Lightning_AA_BEL": {
     "name": "WF_F35_Lightning_AA_BEL",
@@ -5868,7 +6258,8 @@
     "name_token": "WFF35AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_AA",
-    "display_name": "F-35A LIGHTNING II [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16AM_AA_BEL": {
     "name": "WF_F16AM_AA_BEL",
@@ -5881,7 +6272,8 @@
     "name_token": "WFF16BAA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16E_AA_US",
-    "display_name": "F-16AM [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16AM_LGB_BEL": {
     "name": "WF_F16AM_LGB_BEL",
@@ -5894,7 +6286,8 @@
     "name_token": "WFF16BLG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16C_LGB_US",
-    "display_name": "F-16AM [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_F16AM_GBU_BEL": {
     "name": "WF_F16AM_GBU_BEL",
@@ -5907,7 +6300,8 @@
     "name_token": "WFF16BGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F16A_CBU_BEL",
-    "display_name": "F-16AM [PGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spy_Ranger_FR": {
     "name": "WF_Spy_Ranger_FR",
@@ -5922,7 +6316,8 @@
       "uav"
     ],
     "button_texture": "Texture_Button_Unit_RQ7",
-    "display_name": "#RECO3 SPY'RANGER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A6_GER": {
     "name": "WF_Leopard_2A6_GER",
@@ -5938,7 +6333,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A6",
-    "display_name": "LEOPARD 2A6"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A6MA3_GER": {
     "name": "WF_Leopard_2A6MA3_GER",
@@ -5954,7 +6350,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A6M",
-    "display_name": "LEOPARD 2A6 MA3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A7V_GER": {
     "name": "WF_Leopard_2A7V_GER",
@@ -5970,7 +6367,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A7",
-    "display_name": "LEOPARD 2A7V"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A7A1_GER": {
     "name": "WF_Leopard_2A7A1_GER",
@@ -5986,7 +6384,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A71",
-    "display_name": "LEOPARD 2A7 A1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A7V_CMD_GER": {
     "name": "WF_Leopard_2A7V_CMD_GER",
@@ -6003,7 +6402,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A7_CMD",
-    "display_name": "#CMD PZ.BED. LEOPARD 2A7V"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Leopard_2A6_CMD_GER": {
     "name": "WF_Leopard_2A6_CMD_GER",
@@ -6020,7 +6420,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2A6_CMD",
-    "display_name": "#CMD PZ.BED. LEOPARD 2A6"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Puma_Spike_GER": {
     "name": "WF_Puma_Spike_GER",
@@ -6041,7 +6442,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Puma_Spike",
-    "display_name": "PUMA MELLS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Puma_GER": {
     "name": "WF_Puma_GER",
@@ -6062,7 +6464,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Puma",
-    "display_name": "PUMA"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Marder_1A5_MELLS_GER": {
     "name": "WF_Marder_1A5_MELLS_GER",
@@ -6081,7 +6484,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Marder_1A3_MILAN_RFA",
-    "display_name": "MARDER 1A5 MELLS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Marder_1A5_GER": {
     "name": "WF_Marder_1A5_GER",
@@ -6100,7 +6504,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Marder_1A3_RFA",
-    "display_name": "MARDER 1A5"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Boxer_50_GER": {
     "name": "WF_Boxer_50_GER",
@@ -6117,7 +6522,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Boxer_50",
-    "display_name": "GTK BOXER"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Boxer_AGL_GER": {
     "name": "WF_Boxer_AGL_GER",
@@ -6134,7 +6540,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Boxer_GMG",
-    "display_name": "GTK BOXER GMG"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Boxer_CMD_GER": {
     "name": "WF_Boxer_CMD_GER",
@@ -6150,7 +6557,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Boxer_CMD",
-    "display_name": "#CMD GTK BOXER F\u00dcFZG."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Dingo_2_GER": {
     "name": "WF_Dingo_2_GER",
@@ -6167,7 +6575,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_BEL",
-    "display_name": "DINGO 2 FUS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Dingo_1_GER": {
     "name": "WF_Dingo_1_GER",
@@ -6183,7 +6592,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_1",
-    "display_name": "DINGO 1"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Dingo_2_CMD_GER": {
     "name": "WF_Dingo_2_CMD_GER",
@@ -6198,7 +6608,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Dingo_PC",
-    "display_name": "#CMD DINGO 2 PC"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Fennek_AGL_GER": {
     "name": "WF_Fennek_AGL_GER",
@@ -6215,7 +6626,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Fennek_GMG",
-    "display_name": "#RECO2 FENNEK 1A1"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Fennek_MMG_GER": {
     "name": "WF_Fennek_MMG_GER",
@@ -6230,7 +6642,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Fennek_MMG",
-    "display_name": "#RECO2 FENNEK 1A1 MG3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_PZH_2000_GER": {
     "name": "WF_PZH_2000_GER",
@@ -6245,7 +6658,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_PZH_2000",
-    "display_name": "PZH. 2000"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_PZH_2000_CLU_GER": {
     "name": "WF_PZH_2000_CLU_GER",
@@ -6260,7 +6674,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_PZH_2000_CLU",
-    "display_name": "PZH. 2000 (CLU)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_PZH_2000_PGM_GER": {
     "name": "WF_PZH_2000_PGM_GER",
@@ -6275,7 +6690,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_PZH_2000_PGM",
-    "display_name": "PZH. 2000 (PGM)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ozelot_GER": {
     "name": "WF_Ozelot_GER",
@@ -6290,7 +6706,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Ozelot",
-    "display_name": "OZELOT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_IRIST_GER": {
     "name": "WF_IRIST_GER",
@@ -6303,7 +6720,8 @@
     "name_token": "WFSAMIRI",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_IRIS",
-    "display_name": "IRIS-T SLM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Panzergrenadier_GER": {
     "name": "WF_Panzergrenadier_GER",
@@ -6318,7 +6736,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Panzergrenadier_IFV_RFA",
-    "display_name": "PZ.GRENADIER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Panzergrenadier_DMR_GER": {
     "name": "WF_Panzergrenadier_DMR_GER",
@@ -6333,7 +6752,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Panzergrenadier_APC_RFA",
-    "display_name": "PZ.GRENADIER (DMR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Jager_GER": {
     "name": "WF_Jager_GER",
@@ -6346,7 +6766,8 @@
     "name_token": "WFJAGPZF",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Jager_RFA",
-    "display_name": "JAGER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Jager_MMG_GER": {
     "name": "WF_Jager_MMG_GER",
@@ -6359,7 +6780,8 @@
     "name_token": "WFJAGMMG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Jager_noAT_RFA",
-    "display_name": "JAGER (MMG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Jager_MRAP_GER": {
     "name": "WF_Jager_MRAP_GER",
@@ -6372,7 +6794,8 @@
     "name_token": "WFJAGMRA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Jager_Carl_RFA",
-    "display_name": "JAGER (DINGO)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Panzergrenadier_CMD_GER": {
     "name": "WF_Panzergrenadier_CMD_GER",
@@ -6388,7 +6811,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Panzergrenadier_CMD_RFA",
-    "display_name": "PZ.GREN. F\u00dcH."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Jager_CMD_GER": {
     "name": "WF_Jager_CMD_GER",
@@ -6403,7 +6827,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Jager_CMD_RFA",
-    "display_name": "J\u00c4GER F\u00dcH."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_GER": {
     "name": "WF_Engineers_GER",
@@ -6418,7 +6843,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_RFA",
-    "display_name": "PIONIER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_AT_GER": {
     "name": "WF_Engineers_AT_GER",
@@ -6433,7 +6859,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_AT_RFA",
-    "display_name": "PIONIER (CarlG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_GER": {
     "name": "WF_Engineers_CMD_GER",
@@ -6449,7 +6876,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_RFA",
-    "display_name": "PIONIER F\u00dcH."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Feldgendarmerie_GER": {
     "name": "WF_Feldgendarmerie_GER",
@@ -6465,7 +6893,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_Feldgendarmerie_RFA",
-    "display_name": "FELDJ\u00c4GER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Fernspaher_GER": {
     "name": "WF_Fernspaher_GER",
@@ -6483,7 +6912,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_Fernspaher_RFA",
-    "display_name": "#RECO3 KSK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_GER": {
     "name": "WF_Scout_GER",
@@ -6496,7 +6926,8 @@
     "name_token": "WXYMBFGUPG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_RFA",
-    "display_name": "AUFKL\u00c4RER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Stinger_GER": {
     "name": "WF_MANPAD_Stinger_GER",
@@ -6509,7 +6940,8 @@
     "name_token": "PKDRBZONRY",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Redeye_RFA",
-    "display_name": "FLIEGERFAUST"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_GER": {
     "name": "WF_Sniper_GER",
@@ -6524,7 +6956,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_Geb_RFA",
-    "display_name": "#RECO2 SCHARFSCH\u00dcTZE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_KSK_GER": {
     "name": "WF_Sniper_KSK_GER",
@@ -6541,7 +6974,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_M82_US",
-    "display_name": "#RECO2 KSK SCHARFSCH\u00dcTZE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_MG3_GER": {
     "name": "WF_HMGteam_MG3_GER",
@@ -6554,7 +6988,8 @@
     "name_token": "DGDOUOVBXB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_MG3_RFA",
-    "display_name": "MG-3 7,62mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Spike_GER": {
     "name": "WF_ATteam_Spike_GER",
@@ -6567,7 +7002,8 @@
     "name_token": "WFSPIGER",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_Milan_2_RFA",
-    "display_name": "MELLS LR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_UHT_ATGM_GER": {
     "name": "WF_Tiger_UHT_ATGM_GER",
@@ -6580,7 +7016,8 @@
     "name_token": "WFTIGUH1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KHT_1",
-    "display_name": "TIGER KHT [AT2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_UHT_Gun_GER": {
     "name": "WF_Tiger_UHT_Gun_GER",
@@ -6593,7 +7030,8 @@
     "name_token": "WFTIGUH2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KHT_2",
-    "display_name": "TIGER KHT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_UHT_HOT_GER": {
     "name": "WF_Tiger_UHT_HOT_GER",
@@ -6606,7 +7044,8 @@
     "name_token": "WFTIGUH3",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KHT_3",
-    "display_name": "TIGER KHT [AT1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tiger_UHT_Multi_GER": {
     "name": "WF_Tiger_UHT_Multi_GER",
@@ -6619,7 +7058,8 @@
     "name_token": "WFTIGUH4",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KHT_4",
-    "display_name": "TIGER KHT [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Typhoon_AA_GER": {
     "name": "WF_Typhoon_AA_GER",
@@ -6632,7 +7072,8 @@
     "name_token": "WFTYPAA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Typhoon_AA",
-    "display_name": "TYPHOON [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Typhoon_CAS1_GER": {
     "name": "WF_Typhoon_CAS1_GER",
@@ -6645,7 +7086,8 @@
     "name_token": "WFTYPCA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Typhoon_TAURUS",
-    "display_name": "TYPHOON [TAURUS]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Typhoon_CAS2_GER": {
     "name": "WF_Typhoon_CAS2_GER",
@@ -6658,7 +7100,8 @@
     "name_token": "WFTYPCA2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Typhoon_LGB",
-    "display_name": "TYPHOON [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Typhoon_SEAD_GER": {
     "name": "WF_Typhoon_SEAD_GER",
@@ -6671,7 +7114,8 @@
     "name_token": "WFTYPSEA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Typhoon_SEAD",
-    "display_name": "TYPHOON [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tornado_IDS_GER": {
     "name": "WF_Tornado_IDS_GER",
@@ -6684,7 +7128,8 @@
     "name_token": "WFTORLGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Tornado_IDS_RFA",
-    "display_name": "TORNADO IDS [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tornado_IDS_SEAD_GER": {
     "name": "WF_Tornado_IDS_SEAD_GER",
@@ -6697,7 +7142,8 @@
     "name_token": "DCVLQHBXWL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Tornado_IDS_SEAD_RFA",
-    "display_name": "TORNADO IDS [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_NL": {
     "name": "WF_Mech_Rifles_NL",
@@ -6712,7 +7158,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Mech_Rifles_Carl_NL",
-    "display_name": "PANTSERINFANTERIE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_DMR_NL": {
     "name": "WF_Mech_Rifles_DMR_NL",
@@ -6727,7 +7174,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Mech_Rifles_Dragon_NL",
-    "display_name": "PANTSERINFANTERIE (DMR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mot_Rifles_NL": {
     "name": "WF_Mot_Rifles_NL",
@@ -6740,7 +7188,8 @@
     "name_token": "YVBOZTXVUK",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_Carl_NL",
-    "display_name": "INFANTERIE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mech_Rifles_CMD_NL": {
     "name": "WF_Mech_Rifles_CMD_NL",
@@ -6756,7 +7205,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Mech_Rifles_CMD_NL",
-    "display_name": "PANTSERINF. CMG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mot_Rifles_CMD_NL": {
     "name": "WF_Mot_Rifles_CMD_NL",
@@ -6771,7 +7221,8 @@
       "_leader"
     ],
     "button_texture": "Texture_Button_Unit_Rifles_CMD_NL",
-    "display_name": "INFANTERIE CMG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_NL": {
     "name": "WF_Engineers_NL",
@@ -6786,7 +7237,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_NL",
-    "display_name": "GENIE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_NL": {
     "name": "WF_Engineers_CMD_NL",
@@ -6802,7 +7254,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_NL",
-    "display_name": "GENIE CMG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_CV9035_MLU_NL": {
     "name": "WF_CV9035_MLU_NL",
@@ -6821,7 +7274,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_CV90_MLU",
-    "display_name": "CV9035 MKIIIC MLU"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_CV9035_NL": {
     "name": "WF_CV9035_NL",
@@ -6840,7 +7294,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_CV90",
-    "display_name": "CV9035 MKIII"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Boxer_50_NL": {
     "name": "WF_Boxer_50_NL",
@@ -6857,7 +7312,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Boxer_50",
-    "display_name": "GTK BOXER GENIE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Fennek_50_NL": {
     "name": "WF_Fennek_50_NL",
@@ -6874,7 +7330,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Fennek_50",
-    "display_name": "#RECO2 FENNEK 1A1"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Fennek_trans_NL": {
     "name": "WF_Fennek_trans_NL",
@@ -6891,7 +7348,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Fennek_trans",
-    "display_name": "FENNEK 1"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Leopard_2A6MA2_NL": {
     "name": "WF_Leopard_2A6MA2_NL",
@@ -6907,7 +7365,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Leo_2NL",
-    "display_name": "LEOPARD 2A6 MA2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_NASAMS_NL": {
     "name": "WF_DCA_NASAMS_NL",
@@ -6922,7 +7381,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_DCA_Aspide_ESP",
-    "display_name": "NASAMS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Spike_MR_NL": {
     "name": "WF_ATteam_Spike_MR_NL",
@@ -6935,7 +7395,8 @@
     "name_token": "WFSPIMNL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_ATteam_TOW2_NL",
-    "display_name": "SPIKE MR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_M2HB_NL": {
     "name": "WF_HMGteam_M2HB_NL",
@@ -6948,7 +7409,8 @@
     "name_token": "XSENGPKHLP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_HMGteam_M2HB_NL",
-    "display_name": "M2HB 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Wiesel_TOW_GER": {
     "name": "WF_Wiesel_TOW_GER",
@@ -6963,7 +7425,8 @@
       "_canBeAirlifted2"
     ],
     "button_texture": "Texture_Button_Unit_Wiesel_TOW_RFA",
-    "display_name": "WIESEL TOW-2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Unimog_U1350L_GER": {
     "name": "WF_Unimog_U1350L_GER",
@@ -6979,7 +7442,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_Unimog_U1350L_BEL",
-    "display_name": "UNIMOG U4000"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_DAF_YA_4400_supply_BEL": {
     "name": "WF_DAF_YA_4400_supply_BEL",
@@ -6992,7 +7456,8 @@
     "name_token": "WFDAFBEL",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_DAF_YA_4400_supply_NL",
-    "display_name": "DAF CF 4X4 LOG."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Unimog_U1350L_supply_BEL": {
     "name": "WF_Unimog_U1350L_supply_BEL",
@@ -7005,7 +7470,8 @@
     "name_token": "OIESDAEBCJ",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Unimog_U1350L_supply_BEL",
-    "display_name": "UNIMOG U1350L LOG."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Unimog_U1350L_supply_GER": {
     "name": "WF_Unimog_U1350L_supply_GER",
@@ -7018,7 +7484,8 @@
     "name_token": "WFUNILOG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Unimog_U1350L_supply_BEL",
-    "display_name": "UNIMOG U4000 MUN."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_GER": {
     "name": "WF_M270A1_GMLRS_GER",
@@ -7031,7 +7498,8 @@
     "name_token": "WFM27GER",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_RFA",
-    "display_name": "MARS II (CLU)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_HE_GER": {
     "name": "WF_M270A1_GMLRS_HE_GER",
@@ -7044,7 +7512,8 @@
     "name_token": "WFM27GHE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_cluster_NL",
-    "display_name": "MARS II (HE)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VPS_GER": {
     "name": "WF_VPS_GER",
@@ -7061,7 +7530,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_M998_Humvee_Delta_US",
-    "display_name": "AGF SERVAL"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Wolf_GER": {
     "name": "WF_Wolf_GER",
@@ -7077,7 +7547,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_Wolf",
-    "display_name": "WOLF III"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Boxer_RCT30_NL": {
     "name": "WF_Boxer_RCT30_NL",
@@ -7094,7 +7565,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Boxer_RCT30",
-    "display_name": "GTK BOXER RCT30"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_F35_Lightning_AA_NL": {
     "name": "WF_F35_Lightning_AA_NL",
@@ -7107,7 +7579,8 @@
     "name_token": "WFF35AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_F35_AA",
-    "display_name": "F-35A LIGHTNING II [AA1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Commandos_Para_FR": {
     "name": "WF_Commandos_Para_FR",
@@ -7124,7 +7597,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Commandos_CRAP_Para_FR",
-    "display_name": "COMMANDOS PARA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Commandos_Legion_FR": {
     "name": "WF_Commandos_Legion_FR",
@@ -7141,7 +7615,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Commandos_Legion_FR",
-    "display_name": "DINOPS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifles_Aero_FR": {
     "name": "WF_Rifles_Aero_FR",
@@ -7154,7 +7629,8 @@
     "name_token": "FMBEZQMQMN",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Rifles_Aero_FR",
-    "display_name": "AEROMOBILES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_FR": {
     "name": "WF_M270A1_GMLRS_FR",
@@ -7167,7 +7643,8 @@
     "name_token": "WFM27FRC",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_FR",
-    "display_name": "LRU (CLU)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M270A1_GMLRS_HE_FR": {
     "name": "WF_M270A1_GMLRS_HE_FR",
@@ -7180,7 +7657,8 @@
     "name_token": "WFM27FRH",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_M270_MLRS_US",
-    "display_name": "LRU (HE)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spy_Ranger_GER": {
     "name": "WF_Spy_Ranger_GER",
@@ -7195,7 +7673,8 @@
       "uav"
     ],
     "button_texture": "Texture_Button_Unit_RQ7",
-    "display_name": "EMT ALADIN"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_NH90_trans_GER": {
     "name": "WF_NH90_trans_GER",
@@ -7211,7 +7690,8 @@
       "_airlift"
     ],
     "button_texture": "Texture_Button_Unit_NH90_MAG",
-    "display_name": "NH90 TGEE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_NH90_Supply_GER": {
     "name": "WF_NH90_Supply_GER",
@@ -7224,7 +7704,8 @@
     "name_token": "WFNH9SGR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_NH90_Sup",
-    "display_name": "NH90 MUN."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MTV_trans_US": {
     "name": "WF_MTV_trans_US",
@@ -7240,7 +7721,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_MTV",
-    "display_name": "M1083A1 MTV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_LMTV_trans_US": {
     "name": "WF_LMTV_trans_US",
@@ -7256,7 +7738,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_LMTV",
-    "display_name": "M1078A1 LMTV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MTV_supply_US": {
     "name": "WF_MTV_supply_US",
@@ -7269,7 +7752,8 @@
     "name_token": "WFMTVSUP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MTV_Sup",
-    "display_name": "M1083A1 MTV SUPPLY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LMTV_supply_US": {
     "name": "WF_LMTV_supply_US",
@@ -7282,7 +7766,8 @@
     "name_token": "WFLMVSUP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_LMTV_Sup",
-    "display_name": "M1078A1 LMTV SUPPLY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Dragoon_US": {
     "name": "WF_Dragoon_US",
@@ -7299,7 +7784,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Dragoon",
-    "display_name": "M1129 ICV DRAGOON"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_M2A4_Bradley_US": {
     "name": "WF_M2A4_Bradley_US",
@@ -7320,7 +7806,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_M2A4",
-    "display_name": "M2A4 BRADLEY"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_PVP_FR": {
     "name": "WF_PVP_FR",
@@ -7336,7 +7823,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_PVP",
-    "display_name": "PANHARD PVP"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMD_4M_RUS": {
     "name": "WF_BMD_4M_RUS",
@@ -7356,7 +7844,8 @@
       "_canBeAirlifted5"
     ],
     "button_texture": "Texture_Button_Unit_BMD4",
-    "display_name": "BMD-4M"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMD_4M_APP_RUS": {
     "name": "WF_BMD_4M_APP_RUS",
@@ -7375,7 +7864,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMD4M",
-    "display_name": "BMD-4MD"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BTR_MDM_RUS": {
     "name": "WF_BTR_MDM_RUS",
@@ -7392,7 +7882,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BTRMDM",
-    "display_name": "BTR-MDM"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Kornet_BMD_RUS": {
     "name": "WF_Kornet_BMD_RUS",
@@ -7410,7 +7901,8 @@
       "_canBeAirlifted5"
     ],
     "button_texture": "Texture_Button_Unit_KORNBMD",
-    "display_name": "KORNET-D1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S31_Vena_RUS": {
     "name": "WF_2S31_Vena_RUS",
@@ -7426,7 +7918,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_VENA",
-    "display_name": "2S31 VENA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S31_Vena_PGM_RUS": {
     "name": "WF_2S31_Vena_PGM_RUS",
@@ -7442,7 +7935,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_VENAPGM",
-    "display_name": "2S31 VENA (PGM)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S41_Drok_RUS": {
     "name": "WF_2S41_Drok_RUS",
@@ -7457,7 +7951,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_DROK",
-    "display_name": "2S41 DROK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_3_ERA_RUS": {
     "name": "WF_BMP_3_ERA_RUS",
@@ -7477,7 +7972,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMP3ERA",
-    "display_name": "BMP-3 4S24"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_3_RUS": {
     "name": "WF_BMP_3_RUS",
@@ -7496,7 +7992,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMP3NV",
-    "display_name": "BMP-3"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BRDM_2M_RUS": {
     "name": "WF_BRDM_2M_RUS",
@@ -7511,7 +8008,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_BRDM2M",
-    "display_name": "#RECO2 BRDM-2M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BTR_82A_RUS": {
     "name": "WF_BTR_82A_RUS",
@@ -7529,7 +8027,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_BTR_82A",
-    "display_name": "BTR-82A"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BTR_82AT_RUS": {
     "name": "WF_BTR_82AT_RUS",
@@ -7548,7 +8047,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_BTR_82AT",
-    "display_name": "BTR-82AT"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BTR_90_RUS": {
     "name": "WF_BTR_90_RUS",
@@ -7567,7 +8067,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_BTR90",
-    "display_name": "BTR-90"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Kornet_BMP_RUS": {
     "name": "WF_Kornet_BMP_RUS",
@@ -7582,7 +8083,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_Khriz",
-    "display_name": "KORNET-T"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MTLBM_trans_RUS": {
     "name": "WF_MTLBM_trans_RUS",
@@ -7599,7 +8101,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_MTLBM",
-    "display_name": "MT-LBM"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MTLB_6M_RUS": {
     "name": "WF_MTLB_6M_RUS",
@@ -7616,7 +8119,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_6M",
-    "display_name": "MT-LBM 6MB"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MTLB_Rapira_RUS": {
     "name": "WF_MTLB_Rapira_RUS",
@@ -7631,7 +8135,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_MT12",
-    "display_name": "MT-LB MT-12"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MTLB_ZU_23_2_RUS": {
     "name": "WF_MTLB_ZU_23_2_RUS",
@@ -7646,7 +8151,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_ZU",
-    "display_name": "MT-LB ZU-23-2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_SARMAT_HMG_RUS": {
     "name": "WF_SARMAT_HMG_RUS",
@@ -7662,7 +8168,8 @@
       "_canBeAirlifted2"
     ],
     "button_texture": "Texture_Button_Unit_SARMAT_HMG",
-    "display_name": "#RECO2 SARMAT-2 KORD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_SARMAT_RUS": {
     "name": "WF_SARMAT_RUS",
@@ -7679,7 +8186,8 @@
       "_canBeAirlifted2"
     ],
     "button_texture": "Texture_Button_Unit_SARMAT",
-    "display_name": "#RECO1 SARMAT-2"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Sprut_RUS": {
     "name": "WF_Sprut_RUS",
@@ -7696,7 +8204,8 @@
       "_canBeAirlifted5"
     ],
     "button_texture": "Texture_Button_Unit_SPRUT",
-    "display_name": "2S-25 SPRUT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T14_RUS": {
     "name": "WF_T14_RUS",
@@ -7714,7 +8223,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T14",
-    "display_name": "T-14 ARMATA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T15_RUS": {
     "name": "WF_T15_RUS",
@@ -7735,7 +8245,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T15",
-    "display_name": "T-15 ARMATA"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_T90M_ERA_RUS": {
     "name": "WF_T90M_ERA_RUS",
@@ -7753,7 +8264,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T90MERA",
-    "display_name": "T-90M OBR.2020"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T90M_ARENA_RUS": {
     "name": "WF_T90M_ARENA_RUS",
@@ -7771,7 +8283,8 @@
       "_eo_dazzler"
     ],
     "button_texture": "Texture_Button_Unit_T90MARE",
-    "display_name": "T-90M OBR.2023"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S35_RUS": {
     "name": "WF_2S35_RUS",
@@ -7786,7 +8299,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S35",
-    "display_name": "2S-35 KOALITSIYA-SV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_2S35_PGM_RUS": {
     "name": "WF_2S35_PGM_RUS",
@@ -7801,7 +8315,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S35_PGM",
-    "display_name": "2S-35 KOALITSIYA-SV (PGM)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Typhoon_VDV_HMG_RUS": {
     "name": "WF_Typhoon_VDV_HMG_RUS",
@@ -7818,7 +8333,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TYPHMG",
-    "display_name": "TYPHOON PVO"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Typhoon_VDV_RUS": {
     "name": "WF_Typhoon_VDV_RUS",
@@ -7835,7 +8351,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TYPHK",
-    "display_name": "TYPHOON K"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Typhoon_VDV_30_RUS": {
     "name": "WF_Typhoon_VDV_30_RUS",
@@ -7852,7 +8369,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_TYPH30",
-    "display_name": "TYPHOON VDV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_UR77_RUS": {
     "name": "WF_UR77_RUS",
@@ -7867,7 +8385,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_UR77",
-    "display_name": "UR-77 METEORIT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Tor_E2_RUS": {
     "name": "WF_Tor_E2_RUS",
@@ -7880,7 +8399,8 @@
     "name_token": "WFTORRE2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_TORM2",
-    "display_name": "9K332 TOR-M2U"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Buk_M3_RUS": {
     "name": "WF_Buk_M3_RUS",
@@ -7893,7 +8413,8 @@
     "name_token": "WFBUKM3V",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Buk_9K37M_SOV",
-    "display_name": "BUK-M3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_S300VM_RUS": {
     "name": "WF_DCA_S300VM_RUS",
@@ -7906,7 +8427,8 @@
     "name_token": "WFAAMS3V",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_S300VM",
-    "display_name": "S-300VM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_S350_RUS": {
     "name": "WF_DCA_S350_RUS",
@@ -7919,7 +8441,8 @@
     "name_token": "WFAAMS35",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_S350",
-    "display_name": "S-350"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_Mech_RUS": {
     "name": "WF_VDV_Mech_RUS",
@@ -7936,7 +8459,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_Mech_SOV",
-    "display_name": "DESANTNIKI (BMD)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_RPG_RUS": {
     "name": "WF_VDV_RPG_RUS",
@@ -7953,7 +8477,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_SOV",
-    "display_name": "DESANTNIKI (RPG-28)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_Metis_RUS": {
     "name": "WF_VDV_Metis_RUS",
@@ -7970,7 +8495,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_Metis_SOV",
-    "display_name": "DESANTNIKI (METIS)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_BTR_RUS": {
     "name": "WF_VDV_BTR_RUS",
@@ -7987,7 +8513,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_Combine_SOV",
-    "display_name": "DESANTNIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DShV_RUS": {
     "name": "WF_DShV_RUS",
@@ -8002,7 +8529,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_DShV_SOV",
-    "display_name": "DSh. (RPG-7)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DShV_Combine_RUS": {
     "name": "WF_DShV_Combine_RUS",
@@ -8017,7 +8545,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_DShV_SOV",
-    "display_name": "DSHV (RPG-30)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_HMG_RUS": {
     "name": "WF_VDV_HMG_RUS",
@@ -8033,7 +8562,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_HMG_SOV",
-    "display_name": "DESANT. PULEMETCHIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spetsnaz_RUS": {
     "name": "WF_Spetsnaz_RUS",
@@ -8049,7 +8579,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Spetsnaz_SOV",
-    "display_name": "SPETSNAZ"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spetsnaz_GMG_RUS": {
     "name": "WF_Spetsnaz_GMG_RUS",
@@ -8066,7 +8597,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_Afgantsy_SOV",
-    "display_name": "SPETSNAZ (RG-6)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spetsnaz_CMD_RUS": {
     "name": "WF_Spetsnaz_CMD_RUS",
@@ -8084,7 +8616,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Spetsnaz_CMD_SOV",
-    "display_name": "SPETSNAZ KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_VDV_CMD_RUS": {
     "name": "WF_VDV_CMD_RUS",
@@ -8102,7 +8635,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_CMD_SOV",
-    "display_name": "DESANT. KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DShV_CMD_RUS": {
     "name": "WF_DShV_CMD_RUS",
@@ -8118,7 +8652,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_DShV_CMD_SOV",
-    "display_name": "DSh. KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Verba_VDV_RUS": {
     "name": "WF_MANPAD_Verba_VDV_RUS",
@@ -8133,7 +8668,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_VDV_SOV",
-    "display_name": "DESANT. VERBA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_DShV_RUS": {
     "name": "WF_MANPAD_DShV_RUS",
@@ -8146,7 +8682,8 @@
     "name_token": "DUAXJDUNWD",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_DShV_SOV",
-    "display_name": "DSh. IGLA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Kornet_VDV_RUS": {
     "name": "WF_ATteam_Kornet_VDV_RUS",
@@ -8161,7 +8698,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Atteam_Konkurs_VDV_SOV",
-    "display_name": "DESANT. KORNET"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_NSV_VDV_RUS": {
     "name": "WF_HMGteam_NSV_VDV_RUS",
@@ -8176,7 +8714,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_NSV_VDV_SOV",
-    "display_name": "DESANT. NSV 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_AGS30_VDV_RUS": {
     "name": "WF_HMGteam_AGS30_VDV_RUS",
@@ -8191,7 +8730,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_AGS17_VDV_SOV",
-    "display_name": "DESANT. AGS-30"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_VDV_RUS": {
     "name": "WF_Engineers_VDV_RUS",
@@ -8207,7 +8747,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_VDV_SOV",
-    "display_name": "DESANT. SAPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_VDV_RPG_RUS": {
     "name": "WF_Engineers_VDV_RPG_RUS",
@@ -8223,7 +8764,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_VDV_Afgantsy_SOV",
-    "display_name": "DESANT. SAPERI (RPG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_CMD_VDV_RUS": {
     "name": "WF_Engineers_CMD_VDV_RUS",
@@ -8240,7 +8782,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_VDV_SOV",
-    "display_name": "DESANT. SAPERI KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Spetsnaz_VDV_RUS": {
     "name": "WF_Scout_Spetsnaz_VDV_RUS",
@@ -8256,7 +8799,8 @@
       "_sf"
     ],
     "button_texture": "Texture_Button_Unit_Scout_Spetsnaz_VDV_SOV",
-    "display_name": "DESANT. SPETSRAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_Spetsnaz_RUS": {
     "name": "WF_Sniper_Spetsnaz_RUS",
@@ -8274,7 +8818,8 @@
       "_sniper"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_Spetsnaz_SOV",
-    "display_name": "SPETSNAZ SNAYPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_VDV_RUS": {
     "name": "WF_Scout_VDV_RUS",
@@ -8290,7 +8835,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Scout_VDV_SOV",
-    "display_name": "DESANT. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HvyScout_DShV_RUS": {
     "name": "WF_HvyScout_DShV_RUS",
@@ -8305,7 +8851,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_HvyScout_DShV_SOV",
-    "display_name": "DSh. MOT. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mi_35_Desant_RUS": {
     "name": "WF_Mi_35_Desant_RUS",
@@ -8320,7 +8867,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_Mi_24D_Desant_SOV",
-    "display_name": "MI-35M DESANT."
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mi_24P_AA_Des_RUS": {
     "name": "WF_Mi_24P_AA_Des_RUS",
@@ -8335,7 +8883,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_Mi_24P_AA_SOV",
-    "display_name": "MI-24P DESANT."
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mi_8MTV5_RUS": {
     "name": "WF_Mi_8MTV5_RUS",
@@ -8351,7 +8900,8 @@
       "_airlift"
     ],
     "button_texture": "Texture_Button_Unit_Mi_8TV_non_arme_SOV",
-    "display_name": "MI-8MTV-5"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mi_8MTV5_RKT1_RUS": {
     "name": "WF_Mi_8MTV5_RKT1_RUS",
@@ -8366,7 +8916,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_Mi_8MTV_SOV",
-    "display_name": "MI-8MTV-5 [RKT1]"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mi_8MTV5_RKT2_RUS": {
     "name": "WF_Mi_8MTV5_RKT2_RUS",
@@ -8381,7 +8932,8 @@
       "_transport1"
     ],
     "button_texture": "Texture_Button_Unit_Mi_8MTV_SOV",
-    "display_name": "MI-8MTV-5 [RKT2]"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Sprut_CMD_RUS": {
     "name": "WF_Sprut_CMD_RUS",
@@ -8399,7 +8951,8 @@
       "_canBeAirlifted5"
     ],
     "button_texture": "Texture_Button_Unit_SPRUTCMD",
-    "display_name": "#CMD 2S-25 SPRUT KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MI_26_RUS": {
     "name": "WF_MI_26_RUS",
@@ -8415,7 +8968,8 @@
       "_airlift"
     ],
     "button_texture": "Texture_Button_Unit_MI26",
-    "display_name": "MI-26"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MI_28N_RUS": {
     "name": "WF_MI_28N_RUS",
@@ -8428,7 +8982,8 @@
     "name_token": "WFM28ATA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI28N",
-    "display_name": "MI-28N [AT1]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MI_28N_AT2_RUS": {
     "name": "WF_MI_28N_AT2_RUS",
@@ -8441,7 +8996,8 @@
     "name_token": "WFM28AT2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI28N2",
-    "display_name": "MI-28N [AT2]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MI_28N_AA_RUS": {
     "name": "WF_MI_28N_AA_RUS",
@@ -8454,7 +9010,8 @@
     "name_token": "WFM28NAA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI28N3",
-    "display_name": "MI-28N [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MI_28NM_RUS": {
     "name": "WF_MI_28NM_RUS",
@@ -8467,7 +9024,8 @@
     "name_token": "WFM28NMK",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI28NM2",
-    "display_name": "MI-28NM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MI_28NM_AT_RUS": {
     "name": "WF_MI_28NM_AT_RUS",
@@ -8480,7 +9038,8 @@
     "name_token": "WFM28NM2",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MI28NM",
-    "display_name": "MI-28NM [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_30SM_AA_RUS": {
     "name": "WF_Su_30SM_AA_RUS",
@@ -8493,7 +9052,8 @@
     "name_token": "WFS30AA1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU30AA",
-    "display_name": "SU-30SM [AA]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_30SM_SEAD_RUS": {
     "name": "WF_Su_30SM_SEAD_RUS",
@@ -8506,7 +9066,8 @@
     "name_token": "WFS30SEA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU30SEAD",
-    "display_name": "SU-30SM [SEAD]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_30SM_AT_RUS": {
     "name": "WF_Su_30SM_AT_RUS",
@@ -8519,7 +9080,8 @@
     "name_token": "WFS30AT1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU30AT",
-    "display_name": "SU-30SM [AT]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Su_30SM_LGB_RUS": {
     "name": "WF_Su_30SM_LGB_RUS",
@@ -8532,7 +9094,8 @@
     "name_token": "WFS30LGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_SU30LGB",
-    "display_name": "SU-30SM [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Korsar_RUS": {
     "name": "WF_Korsar_RUS",
@@ -8547,7 +9110,8 @@
       "uav"
     ],
     "button_texture": "Texture_Button_Unit_Korsar",
-    "display_name": "#RECO3 KORSAR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Orion_RUS": {
     "name": "WF_Orion_RUS",
@@ -8562,7 +9126,8 @@
       "uav2"
     ],
     "button_texture": "Texture_Button_Unit_ORION",
-    "display_name": "#RECO3 ORION"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Orion_ATGM_RUS": {
     "name": "WF_Orion_ATGM_RUS",
@@ -8577,7 +9142,8 @@
       "uav2"
     ],
     "button_texture": "Texture_Button_Unit_ORIONATGM",
-    "display_name": "#RECO3 ORION [ATGM]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Naval_Rifle_BMP_RUS": {
     "name": "WF_Naval_Rifle_BMP_RUS",
@@ -8593,7 +9159,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MORSKAYA PEKHOTA (BMP)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Naval_Rifle_SVD_RUS": {
     "name": "WF_Naval_Rifle_SVD_RUS",
@@ -8608,7 +9175,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MORSKAYA PEKHOTA (SVD)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Naval_Rifle_BMP_28_RUS": {
     "name": "WF_Naval_Rifle_BMP_28_RUS",
@@ -8624,7 +9192,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MORSKAYA PEKHOTA (RPG-28)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Naval_Rifle_MMG_RUS": {
     "name": "WF_Naval_Rifle_MMG_RUS",
@@ -8639,7 +9208,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MORSKAYA PEKHOTA (DSh.)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Naval_Rifle_CMD_RUS": {
     "name": "WF_Naval_Rifle_CMD_RUS",
@@ -8655,7 +9225,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Naval_Rifle_CMD_POL",
-    "display_name": "#CMD MORSKAYA PEKHOTA KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Reserve_MTLB_RUS": {
     "name": "WF_Reserve_MTLB_RUS",
@@ -8670,7 +9241,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "RESERVISTI (MTLB)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Reserve_CMD_RUS": {
     "name": "WF_Reserve_CMD_RUS",
@@ -8686,7 +9258,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_CMD_SOV",
-    "display_name": "REZERVISTI KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Security_Naval_RUS": {
     "name": "WF_Security_Naval_RUS",
@@ -8702,7 +9275,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Security_Naval_SOV",
-    "display_name": "BEREGOVAYA OKHRANA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Kornet_Naval_RUS": {
     "name": "WF_ATteam_Kornet_Naval_RUS",
@@ -8717,7 +9291,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_KonkursM_TTsko_SOV",
-    "display_name": "MORSK. KORNET"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_KonkursM_Naval_RUS": {
     "name": "WF_ATteam_KonkursM_Naval_RUS",
@@ -8732,7 +9307,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_KonkursM_TTsko_SOV",
-    "display_name": "MORSK. KONKUR-M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_NSV_Naval_RUS": {
     "name": "WF_HMGteam_NSV_Naval_RUS",
@@ -8747,7 +9323,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_NSV_SOV",
-    "display_name": "MORSK. NSV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_AGS30_Naval_RUS": {
     "name": "WF_HMGteam_AGS30_Naval_RUS",
@@ -8762,7 +9339,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_AGS17_TTsko_SOV",
-    "display_name": "MORSK. AGS-30"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BVM_22_RUS": {
     "name": "WF_T80BVM_22_RUS",
@@ -8779,7 +9357,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_T80M22",
-    "display_name": "T-80BVM OBR.2022"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BV_22_RUS": {
     "name": "WF_T80BV_22_RUS",
@@ -8796,7 +9375,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_T8022",
-    "display_name": "T-80BV OBR.2022"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BV_Recon_RUS": {
     "name": "WF_T80BV_Recon_RUS",
@@ -8812,7 +9392,8 @@
       "_era"
     ],
     "button_texture": "Texture_Button_Unit_T64B1_reco_SOV",
-    "display_name": "#RECO1 T-80BV RAZV."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BRM_3K_RUS": {
     "name": "WF_BRM_3K_RUS",
@@ -8829,7 +9410,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BRM3K",
-    "display_name": "#RECO3 BRM-3K RYS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Naval_RUS": {
     "name": "WF_Scout_Naval_RUS",
@@ -8844,7 +9426,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Scout_SOV",
-    "display_name": "#RECO2 MORSK. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HvyScout_Naval_RUS": {
     "name": "WF_HvyScout_Naval_RUS",
@@ -8860,7 +9443,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_HvyScout_SOV",
-    "display_name": "#RECO2 MORSK. MOT. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spetsnaz_Naval_RUS": {
     "name": "WF_Spetsnaz_Naval_RUS",
@@ -8877,7 +9461,8 @@
       "_gsr"
     ],
     "button_texture": "Texture_Button_Unit_Scout_LRRP_SOV",
-    "display_name": "#RECO3 SPETSNAZ VMF"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_Naval_RUS": {
     "name": "WF_Engineers_Naval_RUS",
@@ -8893,7 +9478,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_SOV",
-    "display_name": "MORSK. SAPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_Naval_RPG_RUS": {
     "name": "WF_Engineers_Naval_RPG_RUS",
@@ -8909,7 +9495,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Security_SOV",
-    "display_name": "MORSK. SAPERI (RPG)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Engineers_Naval_CMD_RUS": {
     "name": "WF_Engineers_Naval_CMD_RUS",
@@ -8925,7 +9512,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Engineers_CMD_SOV",
-    "display_name": "#CMD MORSK. SAPERI KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_3_CMD_RUS": {
     "name": "WF_BMP_3_CMD_RUS",
@@ -8943,7 +9531,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BMP3K",
-    "display_name": "#CMD BMP-3K"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ka_52K_RUS": {
     "name": "WF_Ka_52K_RUS",
@@ -8956,7 +9545,8 @@
     "name_token": "WFK52KAT",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KA52",
-    "display_name": "KA-52K"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ka_52K_SEAD_RUS": {
     "name": "WF_Ka_52K_SEAD_RUS",
@@ -8969,7 +9559,8 @@
     "name_token": "WFK52SEA",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_KA52K",
-    "display_name": "#RECO2 KA-52K"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_3_APP_RUS": {
     "name": "WF_BMP_3_APP_RUS",
@@ -8989,7 +9580,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMP3APP",
-    "display_name": "BMP-3 688A-SB6-2KP"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_T90S_RUS": {
     "name": "WF_T90S_RUS",
@@ -9006,7 +9598,8 @@
       "Thermals1"
     ],
     "button_texture": "Texture_Button_Unit_T90S",
-    "display_name": "T-90S"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MiG_31BM_RUS": {
     "name": "WF_MiG_31BM_RUS",
@@ -9019,7 +9612,8 @@
     "name_token": "WFMIG31M",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MiG_31M_SOV",
-    "display_name": "MIG-31BM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ural_4320_trans_RUS": {
     "name": "WF_Ural_4320_trans_RUS",
@@ -9035,7 +9629,8 @@
       "_transport2"
     ],
     "button_texture": "Texture_Button_Unit_Ural_4320_trans_SOV",
-    "display_name": "URAL-4320"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MTLB_transp_RUS": {
     "name": "WF_MTLB_transp_RUS",
@@ -9052,7 +9647,8 @@
       "_amphibie"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_transp_SOV",
-    "display_name": "MT-LB"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BTR_80_RUS": {
     "name": "WF_BTR_80_RUS",
@@ -9069,7 +9665,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BTR_80_SOV",
-    "display_name": "BTR-80"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Forpost_RUS": {
     "name": "WF_Forpost_RUS",
@@ -9082,7 +9679,8 @@
     "name_token": "WFFORUAV",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Forpost",
-    "display_name": "#RECO3 FORPOST"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_3_Base_RUS": {
     "name": "WF_BMP_3_Base_RUS",
@@ -9101,7 +9699,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_BMP_3_SOV",
-    "display_name": "BMP-3"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Security_OMON_RUS": {
     "name": "WF_Security_OMON_RUS",
@@ -9117,7 +9716,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Security_SOV",
-    "display_name": "OMONOVTSY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_SOBR_RUS": {
     "name": "WF_SOBR_RUS",
@@ -9134,7 +9734,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Security_SOV",
-    "display_name": "SOBR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Spetsnaz_Vympel_RUS": {
     "name": "WF_Spetsnaz_Vympel_RUS",
@@ -9151,7 +9752,8 @@
       "_para"
     ],
     "button_texture": "Texture_Button_Unit_Spetsnaz_Vympel_SOV",
-    "display_name": "SPETSGRUPPA V"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifle_ODON_RUS": {
     "name": "WF_Rifle_ODON_RUS",
@@ -9164,7 +9766,8 @@
     "name_token": "WFDEZBTR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "DZERZHINTSEV (BTR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifle_ODON_Truck_RUS": {
     "name": "WF_Rifle_ODON_Truck_RUS",
@@ -9177,7 +9780,8 @@
     "name_token": "WFDEZTRU",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "DZERZHINTSEV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_FireSupport_ODON_RUS": {
     "name": "WF_FireSupport_ODON_RUS",
@@ -9190,7 +9794,8 @@
     "name_token": "WFDEZSUP",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_FireSupport_SOV",
-    "display_name": "O.P. DZERZHINTSEV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifle_Vityaz_RUS": {
     "name": "WF_Rifle_Vityaz_RUS",
@@ -9205,7 +9810,8 @@
       "_sf"
     ],
     "button_texture": "Texture_Button_Unit_Spetsnaz_Vympel_SOV",
-    "display_name": "VITYAZ"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Rifle_ODON_CMD_RUS": {
     "name": "WF_Rifle_ODON_CMD_RUS",
@@ -9221,7 +9827,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_Naval_Rifle_CMD_POL",
-    "display_name": "#CMD DZERZHINTSEV (KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Gvardeitsy_BTR_RUS": {
     "name": "WF_Gvardeitsy_BTR_RUS",
@@ -9236,7 +9843,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Gvardeitsy_BTR_SOV",
-    "display_name": "GVARDEITSY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Gvardeitsy_CMD_RUS": {
     "name": "WF_Gvardeitsy_CMD_RUS",
@@ -9253,7 +9861,8 @@
       "_resolute"
     ],
     "button_texture": "Texture_Button_Unit_Gvardeitsy_CMD_SOV",
-    "display_name": "GVARDEITSY KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Reserve_BMP_RUS": {
     "name": "WF_Reserve_BMP_RUS",
@@ -9269,7 +9878,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "NOVOBRANTSY (BMP)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MP_OMON_RUS": {
     "name": "WF_MP_OMON_RUS",
@@ -9285,7 +9895,8 @@
       "_mp"
     ],
     "button_texture": "Texture_Button_Unit_Security_SOV",
-    "display_name": "OMONOVTSY"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_M1A2_SEPV3_Abrams_MINI_US": {
     "name": "WF_M1A2_SEPV3_Abrams_MINI_US",
@@ -9301,7 +9912,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_M1A2_SEPV3",
-    "display_name": "M1A2C ABRAMS M134"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Falcatus_RUS": {
     "name": "WF_Falcatus_RUS",
@@ -9319,7 +9931,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_FALC",
-    "display_name": "FALCATUS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Avtozaks_RUS": {
     "name": "WF_Avtozaks_RUS",
@@ -9335,7 +9948,8 @@
       "_mp"
     ],
     "button_texture": "Texture_Button_Unit_ZAKS",
-    "display_name": "AVTOZAKS"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_2S38_RUS": {
     "name": "WF_2S38_RUS",
@@ -9350,7 +9964,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_2S38",
-    "display_name": "2S38"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_TU22M3_KH47_RUS": {
     "name": "WF_TU22M3_KH47_RUS",
@@ -9363,7 +9978,8 @@
     "name_token": "WFT22K47",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_TU22",
-    "display_name": "TU-22M3 [KH47]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_TU22M3_LGB_RUS": {
     "name": "WF_TU22M3_LGB_RUS",
@@ -9376,7 +9992,8 @@
     "name_token": "WFT22LGB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_TU22_LGB",
-    "display_name": "TU-22M3 [LGB]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_TU22M3_HE_RUS": {
     "name": "WF_TU22M3_HE_RUS",
@@ -9389,7 +10006,8 @@
     "name_token": "WFT22HE1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_TU22_KH47",
-    "display_name": "TU-22M3 [HE]"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_SOBR_Sniper_RUS": {
     "name": "WF_SOBR_Sniper_RUS",
@@ -9405,7 +10023,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_Spetsnaz_SOV",
-    "display_name": "#RECO2 SNAYPERI SOBR"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_Vityaz_RUS": {
     "name": "WF_Scout_Vityaz_RUS",
@@ -9421,7 +10040,8 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Scout_SpetsnazGRU_Stinger_SOV",
-    "display_name": "#RECO2 RAZVEDKA VITYAZ"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Scout_ODON_RUS": {
     "name": "WF_Scout_ODON_RUS",
@@ -9434,7 +10054,8 @@
     "name_token": "WFRECMVD",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Scout_SOV",
-    "display_name": "#RECO2 RAZVEDKA MVD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HvyScout_Reserve_RUS": {
     "name": "WF_HvyScout_Reserve_RUS",
@@ -9450,7 +10071,8 @@
       "_ifv"
     ],
     "button_texture": "Texture_Button_Unit_HvyScout_Reserve_SOV",
-    "display_name": "#RECO2 NOVO. RAZVEDKA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_PKM_MVD_RUS": {
     "name": "WF_HMGteam_PKM_MVD_RUS",
@@ -9465,7 +10087,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_PKM_SOV",
-    "display_name": "PKM MVD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BMP_1P_reco_Res_RUS": {
     "name": "WF_BMP_1P_reco_Res_RUS",
@@ -9484,7 +10107,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_BMP_1P_reco_SOV",
-    "display_name": "#RECO1 NOVO. RAZV. BMP-1P"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_2_Res_RUS": {
     "name": "WF_BMP_2_Res_RUS",
@@ -9503,7 +10127,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_BMP_2_SOV",
-    "display_name": "NOVO. BMP-2"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_1P_Res_RUS": {
     "name": "WF_BMP_1P_Res_RUS",
@@ -9522,7 +10147,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_BMP_1_SP1_DDR",
-    "display_name": "NOVO. BMP-1P"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_BMP_3_Inst_RUS": {
     "name": "WF_BMP_3_Inst_RUS",
@@ -9541,7 +10167,8 @@
       "_instructor"
     ],
     "button_texture": "Texture_Button_Unit_BMP_3_SOV",
-    "display_name": "PRAPOR. BMP-3"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MotRifles_Inst_RUS": {
     "name": "WF_MotRifles_Inst_RUS",
@@ -9557,7 +10184,8 @@
       "_instructor"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "PRAPORSHCHIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T64B1_Res_RUS": {
     "name": "WF_T64B1_Res_RUS",
@@ -9573,7 +10201,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_T64B1_SOV",
-    "display_name": "NOVO. T-64B1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T64BV_Inst_RUS": {
     "name": "WF_T64BV_Inst_RUS",
@@ -9590,7 +10219,8 @@
       "_instructor"
     ],
     "button_texture": "Texture_Button_Unit_T64BV_SOV",
-    "display_name": "PRAPOR. T-64BV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B_Res_RUS": {
     "name": "WF_T72B_Res_RUS",
@@ -9607,7 +10237,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_T72B1_SOV",
-    "display_name": "NOVO. T-72B1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80UD_Inst_CMD_RUS": {
     "name": "WF_T80UD_Inst_CMD_RUS",
@@ -9625,7 +10256,8 @@
       "_instructor"
     ],
     "button_texture": "Texture_Button_Unit_T80U_CMD_SOV",
-    "display_name": "#CMD PRAPOR. T-80UD KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80U_Res_RUS": {
     "name": "WF_T80U_Res_RUS",
@@ -9642,7 +10274,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_T80U_Obr89_SOV",
-    "display_name": "REZ. T-80U"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T90A_Res_RUS": {
     "name": "WF_T90A_Res_RUS",
@@ -9661,7 +10294,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_T90A",
-    "display_name": "NOVO. T-90A"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T80BV_Res_RUS": {
     "name": "WF_T80BV_Res_RUS",
@@ -9678,7 +10312,8 @@
       "_reservist"
     ],
     "button_texture": "Texture_Button_Unit_T80BV_SOV",
-    "display_name": "REZ. T-80BV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_KonkursM_MVD_RUS": {
     "name": "WF_ATteam_KonkursM_MVD_RUS",
@@ -9693,7 +10328,8 @@
       "_security"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_KonkursM_TTsko_SOV",
-    "display_name": "KONKURS MVD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_A222_Bereg_RUS": {
     "name": "WF_A222_Bereg_RUS",
@@ -9706,7 +10342,8 @@
     "name_token": "VTQTIQUQBD",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_A222_Bereg_SOV",
-    "display_name": "A-222 BEREG"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sniper_DNR": {
     "name": "WF_Sniper_DNR",
@@ -9722,7 +10359,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Sniper_Spetsnaz_SOV",
-    "display_name": "#RECO2 MIL. SNAYPERI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Reserve_DNR": {
     "name": "WF_Reserve_DNR",
@@ -9738,7 +10376,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "REZ. MILITSIYA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Reserve_Truck_DNR": {
     "name": "WF_Reserve_Truck_DNR",
@@ -9753,7 +10392,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "MILITSIYA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BTR_DNR": {
     "name": "WF_MotRifles_BTR_DNR",
@@ -9768,7 +10408,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "MILITSIYA (BTR)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_BMP_DNR": {
     "name": "WF_MotRifles_BMP_DNR",
@@ -9784,7 +10425,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "MILITSIYA (BMP)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_HMG_DNR": {
     "name": "WF_MotRifles_HMG_DNR",
@@ -9799,7 +10441,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Reserve_SOV",
-    "display_name": "MIL. PULEMETCHIKI"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_CMD_DNR": {
     "name": "WF_MotRifles_CMD_DNR",
@@ -9815,7 +10458,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_MotRifles_CMD_SOV",
-    "display_name": "#CMD MILITSIYA KOM."
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_RCL_SPG9_DNR": {
     "name": "WF_ATteam_RCL_SPG9_DNR",
@@ -9830,7 +10474,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_RCL_SPG9_SOV",
-    "display_name": "MIL. SPG-9"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_Maxim_DNR": {
     "name": "WF_HMGteam_Maxim_DNR",
@@ -9845,7 +10490,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_Maxim_Reserve_SOV",
-    "display_name": "MIL. MAKSIM 7,62mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_HMGteam_NSV_DNR": {
     "name": "WF_HMGteam_NSV_DNR",
@@ -9860,7 +10506,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_HMGteam_NSV_SOV",
-    "display_name": "MIL. NSV 12,7mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_Nona_K_120mm_DNR": {
     "name": "WF_Mortier_Nona_K_120mm_DNR",
@@ -9877,7 +10524,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_Nona_K_120mm_SOV",
-    "display_name": "MIL. NONA-K 120mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Mortier_2B14_82mm_DNR": {
     "name": "WF_Mortier_2B14_82mm_DNR",
@@ -9894,7 +10542,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Mortier_2B14_82mm_SOV",
-    "display_name": "MIL. 2B14 82mm"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_ATteam_Fagot_DNR": {
     "name": "WF_ATteam_Fagot_DNR",
@@ -9909,7 +10558,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_ATteam_Fagot_SOV",
-    "display_name": "MIL. FAGOT"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_FireSupport_DNR": {
     "name": "WF_FireSupport_DNR",
@@ -9924,7 +10574,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_FireSupport_SOV",
-    "display_name": "MIL. METIS"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_DCA_ZU_23_2_DNR": {
     "name": "WF_DCA_ZU_23_2_DNR",
@@ -9941,7 +10592,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_DCA_ZU_23_2_SOV",
-    "display_name": "MIL. ZU-23-2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MANPAD_Strela_2M_DNR": {
     "name": "WF_MANPAD_Strela_2M_DNR",
@@ -9956,7 +10608,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_MANPAD_Igla_SOV",
-    "display_name": "MIL. STRELA-2M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Howz_BS3_100mm_DNR": {
     "name": "WF_Howz_BS3_100mm_DNR",
@@ -9972,7 +10625,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_Howz_BS3_100mm_SOV",
-    "display_name": "MIL. BS-3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_AT_T12_Rapira_DNR": {
     "name": "WF_AT_T12_Rapira_DNR",
@@ -9988,7 +10642,8 @@
       "transportable"
     ],
     "button_texture": "Texture_Button_Unit_AT_T12_Rapira_SOV",
-    "display_name": "MIL. MT-12"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T62M1_DNR": {
     "name": "WF_T62M1_DNR",
@@ -10004,7 +10659,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_T62M1_SOV",
-    "display_name": "MIL. T-62M1"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T62MV_DNR": {
     "name": "WF_T62MV_DNR",
@@ -10021,7 +10677,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_T62MV_SOV",
-    "display_name": "MIL. T-62MV"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T62M_CMD_DNR": {
     "name": "WF_T62M_CMD_DNR",
@@ -10038,7 +10695,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_T62M_CMD_SOV",
-    "display_name": "#CMD MIL. T-62MK"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T64AM_DNR": {
     "name": "WF_T64AM_DNR",
@@ -10054,7 +10712,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_T64AM_SOV",
-    "display_name": "MIL. T-64AM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_T72B_89_DNR": {
     "name": "WF_T72B_89_DNR",
@@ -10071,7 +10730,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_T72B89",
-    "display_name": "MIL. T-72B"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Osa_9K33M3_DNR": {
     "name": "WF_Osa_9K33M3_DNR",
@@ -10087,7 +10747,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_Osa_9K33M3_SOV",
-    "display_name": "MIL. OSA"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MTLB_Strela10_DNR": {
     "name": "WF_MTLB_Strela10_DNR",
@@ -10103,7 +10764,8 @@
       "_militia"
     ],
     "button_texture": "Texture_Button_Unit_MTLB_Strela10_SOV",
-    "display_name": "MIL. STRELA-10M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_MTLB_RUS": {
     "name": "WF_MotRifles_MTLB_RUS",
@@ -10116,7 +10778,8 @@
     "name_token": "WFMOTR32",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (RPG-32)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_Igla_RUS": {
     "name": "WF_MotRifles_Igla_RUS",
@@ -10129,7 +10792,8 @@
     "name_token": "WFMOTSTR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (IGLA)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_MetisM1_RUS": {
     "name": "WF_MotRifles_MetisM1_RUS",
@@ -10142,7 +10806,8 @@
     "name_token": "WFMOTME1",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (METIS-M1)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_MotRifles_RPO_RUS": {
     "name": "WF_MotRifles_RPO_RUS",
@@ -10155,7 +10820,8 @@
     "name_token": "WFMOTRPO",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MotRifles_SOV",
-    "display_name": "MOTOSTRELKI (RPO)"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_BM30_Smerch_RUS": {
     "name": "WF_BM30_Smerch_RUS",
@@ -10168,7 +10834,8 @@
     "name_token": "WFB30TOR",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_BM30_Smerch_SOV",
-    "display_name": "9A54 TORNADO-S"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Iskander_RUS": {
     "name": "WF_Iskander_RUS",
@@ -10181,7 +10848,8 @@
     "name_token": "WFISKROK",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Iskand",
-    "display_name": "9K720 ISKANDER-M"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Challenger_2_OES_UK": {
     "name": "WF_Challenger_2_OES_UK",
@@ -10198,7 +10866,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Challenger_1_Mk3_UK",
-    "display_name": "CHALLENGER 2 OES"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Challenger_2_ERA_UK": {
     "name": "WF_Challenger_2_ERA_UK",
@@ -10215,7 +10884,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Challenger_1_Mk3_UK",
-    "display_name": "CHALLENGER 2 2F"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Challenger_3_UK": {
     "name": "WF_Challenger_3_UK",
@@ -10231,7 +10901,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Challenger_1_Mk3_UK",
-    "display_name": "CHALLENGER 3"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Challenger_2_UK": {
     "name": "WF_Challenger_2_UK",
@@ -10247,7 +10918,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Challenger_1_Mk3_UK",
-    "display_name": "CHALLENGER 2"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Challenger_2_CMD_UK": {
     "name": "WF_Challenger_2_CMD_UK",
@@ -10265,7 +10937,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_Challenger_1_Mk1_CMD_UK",
-    "display_name": "#CMD CHALLENGER 2 CMD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Stormer_HVM_UK": {
     "name": "WF_Stormer_HVM_UK",
@@ -10280,7 +10953,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Ozelot",
-    "display_name": "STORMER HVM"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Sabre_UK": {
     "name": "WF_Sabre_UK",
@@ -10293,7 +10967,8 @@
     "name_token": "WFSAMSKY",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_IRIS",
-    "display_name": "SKY SABRE"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Ajax_UK": {
     "name": "WF_Ajax_UK",
@@ -10309,7 +10984,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_FV721_Fox_ZB298_UK",
-    "display_name": "#RECO3 AJAX"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_FV430_UK": {
     "name": "WF_FV430_UK",
@@ -10327,7 +11003,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_FV432_UK",
-    "display_name": "FV430 BULLDOG"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Mastiff_UK": {
     "name": "WF_Mastiff_UK",
@@ -10344,7 +11021,8 @@
       "Slat"
     ],
     "button_texture": "Texture_Button_Unit_Cougar_HE",
-    "display_name": "MASTIFF PPV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Foxhound_UK": {
     "name": "WF_Foxhound_UK",
@@ -10360,7 +11038,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_MATV",
-    "display_name": "FOXHOUND PPV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_MCV_80_Warrior_UK": {
     "name": "WF_MCV_80_Warrior_UK",
@@ -10378,7 +11057,8 @@
       "Thermals2"
     ],
     "button_texture": "Texture_Button_Unit_MCV_80_Warrior_UK",
-    "display_name": "FV510 WARRIOR APPLIQUE"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_LMV_CMD_UK": {
     "name": "WF_LMV_CMD_UK",
@@ -10394,7 +11074,8 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Saxon_CMD_UK",
-    "display_name": "PANTHER CLV CMD"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_LMV_trans_UK": {
     "name": "WF_LMV_trans_UK",
@@ -10412,7 +11093,8 @@
       "MRAP"
     ],
     "button_texture": "Texture_Button_Unit_Saxon_UK",
-    "display_name": "M1078A1 LMTV"
+    "display_name": "",
+    "is_transport": true
   },
   "WF_Archer_155mm_UK": {
     "name": "WF_Archer_155mm_UK",
@@ -10425,7 +11107,8 @@
     "name_token": "WFARCSPG",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_Caesar",
-    "display_name": "ARCHER"
+    "display_name": "",
+    "is_transport": false
   },
   "WF_Jackal_2_UK": {
     "name": "WF_Jackal_2_UK",
@@ -10440,6 +11123,7 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_Ferret_Mk2_UK",
-    "display_name": "JACKAL 2"
+    "display_name": "",
+    "is_transport": false
   }
 }

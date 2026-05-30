@@ -523,13 +523,10 @@ function getAvailableTransports(unit_id) {
     return false;
   };
   const list = [];
-  const isTransportSpec = s => /^_?transport\d*$/i.test(s || "");
   for (const id in state.unitsIndex) {
     const u = state.unitsIndex[id];
     if (!matchNation(u.nation, un)) continue;
-    const roleOk = ["ifv", "supply", "helicopter"].includes(getNormalizedRole(u));
-    const specOk = Array.isArray(u.specialties) && u.specialties.some(isTransportSpec);
-    if (roleOk || specOk) list.push(u);
+    if (u.is_transport) list.push(u);
   }
   list.sort((a, b) => (a.display_name || a.name).localeCompare(b.display_name || b.name));
   return list;

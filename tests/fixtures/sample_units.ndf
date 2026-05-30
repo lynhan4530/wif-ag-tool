@@ -91,3 +91,35 @@ export Descriptor_Unit_WF_T90M_RUS is TEntityDescriptor
         ),
     ]
 )
+
+export Descriptor_Unit_WF_M113A3_apc_US is TEntityDescriptor
+(
+    DescriptorId = GUID:{cccccccc-1111-2222-3333-dddddddddddd}
+    ClassNameForDebug = 'Unit_WF_M113A3_apc_US'
+    ModulesDescriptors = [
+        TTypeUnitModuleDescriptor
+        (
+            Coalition = ECoalition/NATO
+            MotherCountry = 'US'
+        ),
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue = 10
+            UnitDefenseValue = 20
+            UnitBonusXpPerLevelValue = 1
+        ),
+        TUnitUIModuleDescriptor
+        (
+            PriceCategory = 'apc'
+            UnitRole = 'ifv'
+            SpecialtiesList = [
+                '_transport1',
+            ]
+            NameToken = 'WFM113A3'
+        ),
+        TTransporterModuleDescriptor
+        (
+            HarvesterTransportOption = true
+        )
+    ]
+)
