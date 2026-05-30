@@ -1,0 +1,4720 @@
+{
+  "BEL_16e_Mecanisee_multi": {
+    "cfg_name": "BEL_16e_Mecanisee_multi",
+    "division_name_token": "DCPLBIYTNN",
+    "description_token": "DCPLBIYTNN",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "BEL",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_16e_Meca",
+    "display_name": "16DE PANTSERDIVISION"
+  },
+  "BEL_Division_Mobilisation_multi": {
+    "cfg_name": "BEL_Division_Mobilisation_multi",
+    "division_name_token": "CODMEOMHDV",
+    "description_token": "ZGEORIVEPL",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "BEL",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_DivMob",
+    "display_name": "DIVMOB"
+  },
+  "CAN_1st_Canadian_multi": {
+    "cfg_name": "CAN_1st_Canadian_multi",
+    "division_name_token": "PUHREDFXOM",
+    "description_token": "NDLCSJEWBC",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "CAN",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_CAN_1st_division",
+    "display_name": "1 CANADIAN DIVISION"
+  },
+  "DK_Jyske_multi": {
+    "cfg_name": "DK_Jyske_multi",
+    "division_name_token": "SXLPEXVKMR",
+    "description_token": "VFFWEPTDJT",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "DK",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DK_Jyske",
+    "display_name": "JYSKE DIVISION"
+  },
+  "DK_Ostre_Landkommando_multi": {
+    "cfg_name": "DK_Ostre_Landkommando_multi",
+    "division_name_token": "FRGLSOWZWS",
+    "description_token": "GLCZEVUTIJ",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "DK",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DK_Ostre_Landkommando",
+    "display_name": "\u00d8STRE LANDKOMMANDO"
+  },
+  "ESP_Division_Brunete_multi": {
+    "cfg_name": "ESP_Division_Brunete_multi",
+    "division_name_token": "SUBZCHCRXV",
+    "description_token": "ZXRBOEEYUK",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "ESP",
+      "NATO",
+      "MOTORIZD"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_ESP_Brunete",
+    "display_name": "DIVISION ACORAZADA 'BRUNETE'"
+  },
+  "ESP_Division_Guzman_multi": {
+    "cfg_name": "ESP_Division_Guzman_multi",
+    "division_name_token": "MWCCWPKTOX",
+    "description_token": "MWCCWPKTOX",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "ESP",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_ESP_Guzman",
+    "display_name": "DIVISI\u00d3N DE INF. MECA. 'GUZM\u00c1N EL BUENO'"
+  },
+  "FR_11e_Para_multi": {
+    "cfg_name": "FR_11e_Para_multi",
+    "division_name_token": "PPYRYDDJRK",
+    "description_token": "PPYRYDDJRK",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "FR",
+      "NATO",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_11e_Para",
+    "display_name": "11E DIVISION PARACHUTISTE"
+  },
+  "FR_152e_Infanterie_multi": {
+    "cfg_name": "FR_152e_Infanterie_multi",
+    "division_name_token": "YHHSJATYLU",
+    "description_token": "AEINBNGLTE",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "FR",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_152eID",
+    "display_name": "152E DIVISION D'INFANTERIE"
+  },
+  "FR_5e_Blindee_multi": {
+    "cfg_name": "FR_5e_Blindee_multi",
+    "division_name_token": "MVUBDSQMBB",
+    "description_token": "MVUBDSQMBB",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "FR",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_5eDB",
+    "display_name": "5E DIVISION BLINDEE"
+  },
+  "FR_6e_Blindee_Legere_multi": {
+    "cfg_name": "FR_6e_Blindee_Legere_multi",
+    "division_name_token": "SDQTSPQMIQ",
+    "description_token": "YCQRBQVSTK",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "FR",
+      "NATO",
+      "MOTORIZD"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_6e_DBL",
+    "display_name": "6E DIVISION LEGERE BLINDEE"
+  },
+  "FR_Division_du_Rhin_multi": {
+    "cfg_name": "FR_Division_du_Rhin_multi",
+    "division_name_token": "KIKUPFXIKH",
+    "description_token": "KIKUPFXIKH",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "FR",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_Div_Rhin",
+    "display_name": "DIVISION DU RHIN"
+  },
+  "NATO_Garnison_Berlin_multi": {
+    "cfg_name": "NATO_Garnison_Berlin_multi",
+    "division_name_token": "EYKCGOHKBG",
+    "description_token": "EYKCGOHKBG",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_Berlin_Command",
+    "display_name": "BERLIN COMMAND"
+  },
+  "NL_4e_Divisie_multi": {
+    "cfg_name": "NL_4e_Divisie_multi",
+    "division_name_token": "MRBOKCBPXP",
+    "description_token": "FUYMSLGESC",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "NL",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "4E DIVISIE"
+  },
+  "NL_CLKA_multi": {
+    "cfg_name": "NL_CLKA_multi",
+    "division_name_token": "TOVCKJKZIO",
+    "description_token": "ANIIELXLXU",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "NL",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_CLKA",
+    "display_name": "CLKA"
+  },
+  "POL_15_Zmechanizowana_multi": {
+    "cfg_name": "POL_15_Zmechanizowana_multi",
+    "division_name_token": "JETRSMLRDX",
+    "description_token": "JETRSMLRDX",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "POL",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_15_ZMech",
+    "display_name": "15 DYW. ZMECHANIZOWANA"
+  },
+  "POL_20_Pancerna_multi": {
+    "cfg_name": "POL_20_Pancerna_multi",
+    "division_name_token": "EGPXSAYCXO",
+    "description_token": "EGPXSAYCXO",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "POL",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "20 DYWIZJA PANCERNA"
+  },
+  "POL_4_Zmechanizowana_multi": {
+    "cfg_name": "POL_4_Zmechanizowana_multi",
+    "division_name_token": "ZYGJBHWQHW",
+    "description_token": "ZYGJBHWQHW",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "POL",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_4_ZMech",
+    "display_name": "4 DYW. ZMECHANIZOWANA"
+  },
+  "POL_Korpus_Desantowy_multi": {
+    "cfg_name": "POL_Korpus_Desantowy_multi",
+    "division_name_token": "CZOHUXQNCE",
+    "description_token": "CZOHUXQNCE",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "POL",
+      "PACT",
+      "DIVNAVAL"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_Korpus_Desantowy",
+    "display_name": "KORPUS DESANTOWY"
+  },
+  "RDA_20_MSD_multi": {
+    "cfg_name": "RDA_20_MSD_multi",
+    "division_name_token": "YQBSRWMUUE",
+    "description_token": "YQBSRWMUUE",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_20_MSD",
+    "display_name": "20. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_4_MSD_multi": {
+    "cfg_name": "RDA_4_MSD_multi",
+    "division_name_token": "XPXHEQABVZ",
+    "description_token": "XPXHEQABVZ",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "4. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_7_Panzer_multi": {
+    "cfg_name": "RDA_7_Panzer_multi",
+    "division_name_token": "NIZAYXAMPN",
+    "description_token": "NIZAYXAMPN",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_7_PzD",
+    "display_name": "7. PANZERDIVISION"
+  },
+  "RDA_9_Panzer_multi": {
+    "cfg_name": "RDA_9_Panzer_multi",
+    "division_name_token": "SXATWWYSVI",
+    "description_token": "SXATWWYSVI",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA__9_Panzer",
+    "display_name": "9. PANZERDIVISION"
+  },
+  "RDA_KdA_Bezirk_Erfurt_multi": {
+    "cfg_name": "RDA_KdA_Bezirk_Erfurt_multi",
+    "division_name_token": "OVYVCMLGYY",
+    "description_token": "OVYVCMLGYY",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_KDA_Erfurt",
+    "display_name": "K.d.A. BEZIRK ERFURT"
+  },
+  "RDA_Rugen_Gruppierung": {
+    "cfg_name": "RDA_Rugen_Gruppierung",
+    "division_name_token": "PKOEWMXLJF",
+    "description_token": "MTGLPEEASU",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_Rugen_Gruppierung",
+    "display_name": "R\u00dcGENER GRUPPIERUNG"
+  },
+  "RFA_1_Luftlande_multi": {
+    "cfg_name": "RFA_1_Luftlande_multi",
+    "division_name_token": "DHPCXIPJOW",
+    "description_token": "RISEYHTMGA",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "RFA",
+      "NATO",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_1LLDiv",
+    "display_name": "1. LUFTLANDE-DIVISION"
+  },
+  "RFA_2_PzGrenadier_multi": {
+    "cfg_name": "RFA_2_PzGrenadier_multi",
+    "division_name_token": "XKYVHEFNED",
+    "description_token": "XKYVHEFNED",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "RFA",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_2_PzGrenDivision_RFA",
+    "display_name": "2. PZ.GRENADIER-DIVISION"
+  },
+  "RFA_5_Panzer_multi": {
+    "cfg_name": "RFA_5_Panzer_multi",
+    "division_name_token": "WOEQADLOKM",
+    "description_token": "WOEQADLOKM",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "RFA",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "5. PANZERDIVISION"
+  },
+  "RFA_6_PzGrenadier_multi": {
+    "cfg_name": "RFA_6_PzGrenadier_multi",
+    "division_name_token": "RRAKKLVRJR",
+    "description_token": "IBJQBSTJRN",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "RFA",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_6_PzGrenDivision",
+    "display_name": "6. PZ.GRENADIER-DIVISION"
+  },
+  "RFA_TerrKdo_Sud_multi": {
+    "cfg_name": "RFA_TerrKdo_Sud_multi",
+    "division_name_token": "BIHXAJRCJA",
+    "description_token": "BIHXAJRCJA",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "RFA",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "TERRITORIALKOMMANDO S\u00dcD"
+  },
+  "SOV_119IndTkBrig_multi": {
+    "cfg_name": "SOV_119IndTkBrig_multi",
+    "division_name_token": "QGUHEAAYWW",
+    "description_token": "QGUHEAAYWW",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_119OdtTP",
+    "display_name": "119-Y OTD. TANK. POLK"
+  },
+  "SOV_157_Rifle_multi": {
+    "cfg_name": "SOV_157_Rifle_multi",
+    "division_name_token": "QAULTYGPIU",
+    "description_token": "ZMRQMSTUED",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_157MSD",
+    "display_name": "157-YA MOTOSTRELK. DIV."
+  },
+  "SOV_17_Gds_Tank_multi": {
+    "cfg_name": "SOV_17_Gds_Tank_multi",
+    "division_name_token": "RRWLDBAEUA",
+    "description_token": "LQBTRUSZSA",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_17gvTD",
+    "display_name": "17-YA GV. TANK. DIV."
+  },
+  "SOV_1_Gds_Rifle_multi": {
+    "cfg_name": "SOV_1_Gds_Rifle_multi",
+    "division_name_token": "DCYKEDXANC",
+    "description_token": "DIOSAQYULZ",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_1GvMSD",
+    "display_name": "1-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_25_Tank_multi": {
+    "cfg_name": "SOV_25_Tank_multi",
+    "division_name_token": "UGKDOPAYTF",
+    "description_token": "AFSKFYGENE",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_25th_TD",
+    "display_name": "25-YA TANK. DIV."
+  },
+  "SOV_27_Gds_Rifle_multi": {
+    "cfg_name": "SOV_27_Gds_Rifle_multi",
+    "division_name_token": "PFMPJNZAXB",
+    "description_token": "QTEOMZACJF",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_27GvMSD",
+    "display_name": "27-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_2_Gds_Rifle_multi": {
+    "cfg_name": "SOV_2_Gds_Rifle_multi",
+    "division_name_token": "GLCHUFJCAE",
+    "description_token": "JEFNHMECFG",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_2GvMSD",
+    "display_name": "2-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_31_Tank_multi": {
+    "cfg_name": "SOV_31_Tank_multi",
+    "division_name_token": "ZIJBGPJKVX",
+    "description_token": "FBKUZZVVQQ",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_31TD",
+    "display_name": "31-YA TANK. DIV."
+  },
+  "SOV_336_Naval_Brigade_multi": {
+    "cfg_name": "SOV_336_Naval_Brigade_multi",
+    "division_name_token": "BGIPDWUZNN",
+    "description_token": "BGIPDWUZNN",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "DIVNAVAL"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_336_Naval_Brigade",
+    "display_name": "336-YA O.G. BRIGADA MORSKOY PEKHOTY"
+  },
+  "SOV_35_AirAslt_Brig_multi": {
+    "cfg_name": "SOV_35_AirAslt_Brig_multi",
+    "division_name_token": "PFEYNGDKVR",
+    "description_token": "PFEYNGDKVR",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_35th_VDV",
+    "display_name": "35-YA OG DESANTNO-SHTURMOVAYA BRIG."
+  },
+  "SOV_39_Gds_Rifle_multi": {
+    "cfg_name": "SOV_39_Gds_Rifle_multi",
+    "division_name_token": "QBSDOMYDBX",
+    "description_token": "QBSDOMYDBX",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_39_gvMSD",
+    "display_name": "39-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_56_AirAslt_Brig_multi": {
+    "cfg_name": "SOV_56_AirAslt_Brig_multi",
+    "division_name_token": "OJZIMECUCU",
+    "description_token": "SGEEXVOOPI",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "AIRMOBIL"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_56th_VDV",
+    "display_name": "56-YA OG DESANTNO-SHTURMOVAYA BRIG."
+  },
+  "SOV_6IndMSBrig_multi": {
+    "cfg_name": "SOV_6IndMSBrig_multi",
+    "division_name_token": "VKPNQYHZZN",
+    "description_token": "DVUAMGKBXK",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_6OdtMSB",
+    "display_name": "6-YA OG MOTOSTRELK. BRIG."
+  },
+  "SOV_76_VDV_multi": {
+    "cfg_name": "SOV_76_VDV_multi",
+    "division_name_token": "HOVSLMGDMN",
+    "description_token": "CRUYREPWFR",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_76th_VDV",
+    "display_name": "76-YA GV VOZDUSHNO-DESANTNAYA DIV."
+  },
+  "SOV_79_Gds_Tank_multi": {
+    "cfg_name": "SOV_79_Gds_Tank_multi",
+    "division_name_token": "ABQKCQLERY",
+    "description_token": "ABQKCQLERY",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_79_gvTD",
+    "display_name": "79-YA GV. TANK. DIV."
+  },
+  "SOV_94_Gds_Rifle_multi": {
+    "cfg_name": "SOV_94_Gds_Rifle_multi",
+    "division_name_token": "ZHOVVXEYQL",
+    "description_token": "VXXYPZNDNF",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "SOV",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_94gvMSD",
+    "display_name": "94-YA GV. MOTOSTRELK. DIV."
+  },
+  "TCH_19_MSD_multi": {
+    "cfg_name": "TCH_19_MSD_multi",
+    "division_name_token": "SVEHBMUYZL",
+    "description_token": "JKMLTNCXVK",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "TCH",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_19_MSD",
+    "display_name": "19. MOTOSTRELECKA DIVIZE"
+  },
+  "TCH_1_Tank_multi": {
+    "cfg_name": "TCH_1_Tank_multi",
+    "division_name_token": "XKRAHADQAE",
+    "description_token": "UEAGAZCLDQ",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "TCH",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_1_Tank",
+    "display_name": "1. TANKOVA DIVIZE"
+  },
+  "TCH_2_MSD_multi": {
+    "cfg_name": "TCH_2_MSD_multi",
+    "division_name_token": "COCUIJLWPM",
+    "description_token": "XNEYPNTARL",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "TCH",
+      "PACT",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_2_MSD",
+    "display_name": "2. MOTOSTRELECKA DIVIZE"
+  },
+  "TCH_303_Tank_multi": {
+    "cfg_name": "TCH_303_Tank_multi",
+    "division_name_token": "CUVYCAIFIX",
+    "description_token": "YAOHQBWUVR",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "TCH",
+      "PACT",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_303_Tank",
+    "display_name": "303. TANKOVA DIVIZE"
+  },
+  "UK_1st_Armoured_multi": {
+    "cfg_name": "UK_1st_Armoured_multi",
+    "division_name_token": "YPUIEGDPJD",
+    "description_token": "YPUIEGDPJD",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1st_Armoured",
+    "display_name": "1ST ARMOURED DIVISION"
+  },
+  "UK_2nd_Infantry_multi": {
+    "cfg_name": "UK_2nd_Infantry_multi",
+    "division_name_token": "RSIUYDSXND",
+    "description_token": "RSIUYDSXND",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "MOTORIZD"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_2nd_Infantry",
+    "display_name": "2ND INFANTRY DIVISION"
+  },
+  "UK_4th_Armoured_multi": {
+    "cfg_name": "UK_4th_Armoured_multi",
+    "division_name_token": "PFQAMEYXCU",
+    "description_token": "PFQAMEYXCU",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_4th_Armoured",
+    "display_name": "4TH ARMOURED DIVISION"
+  },
+  "UK_5th_Airborne_Brigade_multi": {
+    "cfg_name": "UK_5th_Airborne_Brigade_multi",
+    "division_name_token": "PWMGFMXLIK",
+    "description_token": "GOMSACYMBS",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_5th_Airborne",
+    "display_name": "MNAD"
+  },
+  "UK_London_HDR_multi": {
+    "cfg_name": "UK_London_HDR_multi",
+    "division_name_token": "JIUNYRKVBK",
+    "description_token": "IXEQASWYLR",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "UK",
+      "NATO",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_London_HDR",
+    "display_name": "H.D.R. LONDON"
+  },
+  "US_101st_Airmobile_multi": {
+    "cfg_name": "US_101st_Airmobile_multi",
+    "division_name_token": "VLZCYKIFPB",
+    "description_token": "XSZZQFMIYD",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "AIRMOBIL"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_101st_Airmobile",
+    "display_name": "101ST AIRBORNE DIVISION"
+  },
+  "US_11ACR_multi": {
+    "cfg_name": "US_11ACR_multi",
+    "division_name_token": "AJSWBANTOA",
+    "description_token": "AJSWBANTOA",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "ARMORREC"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_11ACR",
+    "display_name": "11TH ARM. CAVALRY REGT."
+  },
+  "US_1st_Cavalry_multi": {
+    "cfg_name": "US_1st_Cavalry_multi",
+    "division_name_token": "HELEEEWWHS",
+    "description_token": "KAOWXWQTKA",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_1st_Cavalry_Division",
+    "display_name": "1ST CAVALRY DIVISION"
+  },
+  "US_24th_Inf_multi": {
+    "cfg_name": "US_24th_Inf_multi",
+    "division_name_token": "DGUURLVDNS",
+    "description_token": "HEFRKMJXZB",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_24th_infantry_division",
+    "display_name": "24TH INFANTRY DIVISION (MECH.)"
+  },
+  "US_2nd_Marine_multi": {
+    "cfg_name": "US_2nd_Marine_multi",
+    "division_name_token": "MJMLGHNZHN",
+    "description_token": "REPOMYEXZK",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "DIVNAVAL"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_2nd_Marine_Division",
+    "display_name": "2ND MARINE DIVISION"
+  },
+  "US_35th_Inf_multi": {
+    "cfg_name": "US_35th_Inf_multi",
+    "division_name_token": "EUQUXKDWZK",
+    "description_token": "LNXOPMIBHC",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_35th_infantry_division",
+    "display_name": "35TH INFANTRY DIVISION (MECH.)"
+  },
+  "US_3rd_Arm_multi": {
+    "cfg_name": "US_3rd_Arm_multi",
+    "division_name_token": "RSEACNWCQI",
+    "description_token": "RSEACNWCQI",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "ARMORED"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "3RD ARMORED DIVISION"
+  },
+  "US_6th_Light_multi": {
+    "cfg_name": "US_6th_Light_multi",
+    "division_name_token": "VHQMMDXDKP",
+    "description_token": "CLFOCJLIHB",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "MOTORIZD"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_6th_Light",
+    "display_name": "6TH INFANTRY DIVISION (LIGHT)"
+  },
+  "US_82nd_Airborne_multi": {
+    "cfg_name": "US_82nd_Airborne_multi",
+    "division_name_token": "TATZFZUVYM",
+    "description_token": "TATZFZUVYM",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "AIRBORNE"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_82nd_airborne",
+    "display_name": "82ND AIRBORNE DIVISION"
+  },
+  "US_8th_Inf_multi": {
+    "cfg_name": "US_8th_Inf_multi",
+    "division_name_token": "ECGMWQOEZA",
+    "description_token": "ECGMWQOEZA",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "MECHANIZ"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_8th_infantry_division",
+    "display_name": "8TH INFANTRY DIVISION (MECH.)"
+  },
+  "US_9th_Mot_multi": {
+    "cfg_name": "US_9th_Mot_multi",
+    "division_name_token": "RYTYXPJEGM",
+    "description_token": "RYTYXPJEGM",
+    "coalition": "NATO",
+    "tags": [
+      "DEFAULT",
+      "US",
+      "NATO",
+      "MOTORIZD"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_9th_Motorized",
+    "display_name": "9TH INFANTRY DIVISION (MOT.)"
+  },
+  "WP_Unternehmen_Zentrum_multi": {
+    "cfg_name": "WP_Unternehmen_Zentrum_multi",
+    "division_name_token": "CHKSNFWOEZ",
+    "description_token": "CHKSNFWOEZ",
+    "coalition": "PACT",
+    "tags": [
+      "DEFAULT",
+      "DDR",
+      "PACT",
+      "INFANREG"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_WP_Unternehmen_Stoss",
+    "display_name": "BERLINER GRUPPIERUNG"
+  },
+  "BEL_10PtserBrig_solo": {
+    "cfg_name": "BEL_10PtserBrig_solo",
+    "division_name_token": "DTNMQBUQTC",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_16e_Meca",
+    "display_name": "10de Pantserinfanteriebrigade"
+  },
+  "BEL_10Wing_solo": {
+    "cfg_name": "BEL_10Wing_solo",
+    "division_name_token": "NQFNHFVZRL",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "10ste Wing"
+  },
+  "BEL_12BrigInf_solo": {
+    "cfg_name": "BEL_12BrigInf_solo",
+    "division_name_token": "AQCDISWEEA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1e_Infanterie",
+    "display_name": "4de Pantserinfanteriebrigade"
+  },
+  "BEL_16de_PtserDiv_solo": {
+    "cfg_name": "BEL_16de_PtserDiv_solo",
+    "division_name_token": "HWCKRNBHGQ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_16e_Meca",
+    "display_name": "16DE PANTSERDIVISIE"
+  },
+  "BEL_17BrigBlind_solo": {
+    "cfg_name": "BEL_17BrigBlind_solo",
+    "division_name_token": "BQXKOGZJOB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_16e_Meca",
+    "display_name": "17e Brigade Blind\u00e9e"
+  },
+  "BEL_1DivInfanterie_solo": {
+    "cfg_name": "BEL_1DivInfanterie_solo",
+    "division_name_token": "IJZDSAJYMF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1e_Infanterie",
+    "display_name": "1E DIVISION MECANISEE"
+  },
+  "BEL_1PtserInfBrig_solo": {
+    "cfg_name": "BEL_1PtserInfBrig_solo",
+    "division_name_token": "HVTIECLPHD",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1e_Infanterie",
+    "display_name": "10de Pantserinfanteriebrigade"
+  },
+  "BEL_1Wing_solo": {
+    "cfg_name": "BEL_1Wing_solo",
+    "division_name_token": "RPEDYNISZM",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "1ste Wing"
+  },
+  "BEL_2Wing_solo": {
+    "cfg_name": "BEL_2Wing_solo",
+    "division_name_token": "ACCLMCNNMU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "2ste Wing"
+  },
+  "BEL_3Wing_solo": {
+    "cfg_name": "BEL_3Wing_solo",
+    "division_name_token": "GSJNHUIYCT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "3ste Wing"
+  },
+  "BEL_4PtserBrig_solo": {
+    "cfg_name": "BEL_4PtserBrig_solo",
+    "division_name_token": "LGVADKMAFW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_16e_Meca",
+    "display_name": "4de Pantserinfanteriebrigade"
+  },
+  "BEL_7BrigInfBlind_solo": {
+    "cfg_name": "BEL_7BrigInfBlind_solo",
+    "division_name_token": "DKCHAOPGKW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1e_Infanterie",
+    "display_name": "17e Brigade Blind\u00e9e"
+  },
+  "BEL_9Wing_solo": {
+    "cfg_name": "BEL_9Wing_solo",
+    "division_name_token": "OYSSDXPNZZ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "9ste Wing"
+  },
+  "BEL_BAF_solo": {
+    "cfg_name": "BEL_BAF_solo",
+    "division_name_token": "UCVXXLOUBF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_Air_Force",
+    "display_name": "Belgische Luchtmacht"
+  },
+  "CAN_1AirDiv_solo": {
+    "cfg_name": "CAN_1AirDiv_solo",
+    "division_name_token": "EJGUWZNWTR",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_CAN_1st_division",
+    "display_name": "1st Canadian Division"
+  },
+  "CAN_1DIV_solo": {
+    "cfg_name": "CAN_1DIV_solo",
+    "division_name_token": "MPSYEUILQF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_CAN_1st_division",
+    "display_name": "1st Canadian Air Division"
+  },
+  "CAN_CFE_solo": {
+    "cfg_name": "CAN_CFE_solo",
+    "division_name_token": "OFRYKBDCLI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_CAN_1st_division",
+    "display_name": "Canadian Forces Europe"
+  },
+  "ESP_Brigada_Jarama_solo": {
+    "cfg_name": "ESP_Brigada_Jarama_solo",
+    "division_name_token": "OINHAGVXHV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_ESP_Brunete",
+    "display_name": "Brigada de Cab. Jarama"
+  },
+  "ESP_CuerpoExp_solo": {
+    "cfg_name": "ESP_CuerpoExp_solo",
+    "division_name_token": "NEQACQADZR",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_ESP_Brunete",
+    "display_name": "Cuerpo Expedicionario"
+  },
+  "ESP_Division_Brunete_solo": {
+    "cfg_name": "ESP_Division_Brunete_solo",
+    "division_name_token": "UHCYBLIEFI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_ESP_Brunete",
+    "display_name": "Divisi\u00f3n Meca. Brunete n\u00b01"
+  },
+  "FR_1A_solo": {
+    "cfg_name": "FR_1A_solo",
+    "division_name_token": "QWQOSGUBFU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "401 Rgt. d'Artillerie"
+  },
+  "FR_1C_12DBL_solo": {
+    "cfg_name": "FR_1C_12DBL_solo",
+    "division_name_token": "BFQPKKNMLG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-12e DBL"
+  },
+  "FR_1C_14DBL_solo": {
+    "cfg_name": "FR_1C_14DBL_solo",
+    "division_name_token": "ENWOTYGKWE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-14e DBL"
+  },
+  "FR_1C_1DB_solo": {
+    "cfg_name": "FR_1C_1DB_solo",
+    "division_name_token": "UQLDXSXEGZ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-1\u00e8re DB"
+  },
+  "FR_1C_7DB_solo": {
+    "cfg_name": "FR_1C_7DB_solo",
+    "division_name_token": "KIZQGSJELF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-7e DB"
+  },
+  "FR_1C_CorpsArt_solo": {
+    "cfg_name": "FR_1C_CorpsArt_solo",
+    "division_name_token": "OCPFWAOBXG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "25e Rgt. d'Artillerie"
+  },
+  "FR_1C_solo": {
+    "cfg_name": "FR_1C_solo",
+    "division_name_token": "XJRZQPCFTU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "1e Corps d'Arm\u00e9e"
+  },
+  "FR_2C_15DI_solo": {
+    "cfg_name": "FR_2C_15DI_solo",
+    "division_name_token": "UTKHOTNKZA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-15e DI"
+  },
+  "FR_2C_3DB_solo": {
+    "cfg_name": "FR_2C_3DB_solo",
+    "division_name_token": "RXZAHDZNXY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "EM-3e DB"
+  },
+  "FR_2C_5DB_solo": {
+    "cfg_name": "FR_2C_5DB_solo",
+    "division_name_token": "FOZZQUYGFW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_5eDB",
+    "display_name": "EM-5e DB"
+  },
+  "FR_2C_CorpsArt_solo": {
+    "cfg_name": "FR_2C_CorpsArt_solo",
+    "division_name_token": "CXNZJNJRUP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "12e Rgt. d'Artillerie"
+  },
+  "FR_2C_solo": {
+    "cfg_name": "FR_2C_solo",
+    "division_name_token": "LQMVDIGKQT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "2e Corps d'Arm\u00e9e"
+  },
+  "FR_Chasse11_solo": {
+    "cfg_name": "FR_Chasse11_solo",
+    "division_name_token": "BBESQIKHRT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "Escadre de Chasse 11"
+  },
+  "FR_Chasse2_solo": {
+    "cfg_name": "FR_Chasse2_solo",
+    "division_name_token": "XPGBQJHLXB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "Escadre de Chasse 2"
+  },
+  "FR_Chasse30_solo": {
+    "cfg_name": "FR_Chasse30_solo",
+    "division_name_token": "JFBDYLGGAX",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "Escadre de Chasse 30"
+  },
+  "FR_Chasse3_solo": {
+    "cfg_name": "FR_Chasse3_solo",
+    "division_name_token": "MFBRYUDOGS",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "Escadre de Chasse 3"
+  },
+  "FR_FAR_11DP_solo": {
+    "cfg_name": "FR_FAR_11DP_solo",
+    "division_name_token": "IVZGGMIBMR",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_11e_Para",
+    "display_name": "EM-11e DP"
+  },
+  "FR_FAR_4DAM_solo": {
+    "cfg_name": "FR_FAR_4DAM_solo",
+    "division_name_token": "KKMNMISNNT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_4eDAM",
+    "display_name": "EM-4e DAM"
+  },
+  "FR_FAR_6DBL_solo": {
+    "cfg_name": "FR_FAR_6DBL_solo",
+    "division_name_token": "QNCCWWJMFW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_6e_DBL",
+    "display_name": "EM-6e DLB"
+  },
+  "FR_FAR_solo": {
+    "cfg_name": "FR_FAR_solo",
+    "division_name_token": "XRLSIFQAMK",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "Force d'Action Rapide"
+  },
+  "FR_SOUTHAG_solo": {
+    "cfg_name": "FR_SOUTHAG_solo",
+    "division_name_token": "LQOOHVKRWH",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FRA_Generic",
+    "display_name": "SOUTHAG"
+  },
+  "NATO_32ADG_solo": {
+    "cfg_name": "NATO_32ADG_solo",
+    "division_name_token": "TJRVFXGQDQ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "32nd Air Defense Group"
+  },
+  "NATO_CENTAG_solo": {
+    "cfg_name": "NATO_CENTAG_solo",
+    "division_name_token": "SSUSFSRKEO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_flag_us",
+    "display_name": "CENTRAL ARMY GROUP"
+  },
+  "NL_1Div_solo": {
+    "cfg_name": "NL_1Div_solo",
+    "division_name_token": "DBYNGRSHOC",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "1E DIVISIE"
+  },
+  "NL_1LK_solo": {
+    "cfg_name": "NL_1LK_solo",
+    "division_name_token": "TKPXWLNVCG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "EERSTE LEGERKORPS"
+  },
+  "NL_4Div_solo": {
+    "cfg_name": "NL_4Div_solo",
+    "division_name_token": "MRBOKCBPXP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "4E DIVISIE"
+  },
+  "NL_5Div_solo": {
+    "cfg_name": "NL_5Div_solo",
+    "division_name_token": "NYBZOPZDST",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "5E DIVISIE"
+  },
+  "NL_CLKA_solo": {
+    "cfg_name": "NL_CLKA_solo",
+    "division_name_token": "INCNCOSXQE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "CLKA"
+  },
+  "POL_10MSD_solo": {
+    "cfg_name": "POL_10MSD_solo",
+    "division_name_token": "RIQLNYTBHG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "10 DYWIZJA ZMECH."
+  },
+  "POL_11TkD_solo": {
+    "cfg_name": "POL_11TkD_solo",
+    "division_name_token": "NOVGSEAZZR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "11 DYWIZJA PANCERNA"
+  },
+  "POL_12MSD_solo": {
+    "cfg_name": "POL_12MSD_solo",
+    "division_name_token": "SPPVUGHCVH",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "12 DYWIZJA ZMECH."
+  },
+  "POL_15MSD_solo": {
+    "cfg_name": "POL_15MSD_solo",
+    "division_name_token": "TQFYOEIPLP",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "15 DYWIZJA ZMECH."
+  },
+  "POL_16MSD_solo": {
+    "cfg_name": "POL_16MSD_solo",
+    "division_name_token": "WXWLGURWUX",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "16 DYWIZJA ZMECH."
+  },
+  "POL_1Armia_solo": {
+    "cfg_name": "POL_1Armia_solo",
+    "division_name_token": "OTXYLCTVRH",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "1 ARMIA"
+  },
+  "POL_20TkD_solo": {
+    "cfg_name": "POL_20TkD_solo",
+    "division_name_token": "EGPXSAYCXO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "20 DYWIZJA PANCERNA"
+  },
+  "POL_23ArtGr_solo": {
+    "cfg_name": "POL_23ArtGr_solo",
+    "division_name_token": "RQFANWIXRN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "23 BRYG. ART. ARMAT"
+  },
+  "POL_24ArtGr_solo": {
+    "cfg_name": "POL_24ArtGr_solo",
+    "division_name_token": "WKOKVVSDOZ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "24 BRYG. ART. ARMAT"
+  },
+  "POL_2Armia_solo": {
+    "cfg_name": "POL_2Armia_solo",
+    "division_name_token": "OKHYSASGMM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "2 ARMIA"
+  },
+  "POL_2MSD_solo": {
+    "cfg_name": "POL_2MSD_solo",
+    "division_name_token": "LMXEXFRVYJ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "2 DYWIZJA ZMECH."
+  },
+  "POL_30RMD_solo": {
+    "cfg_name": "POL_30RMD_solo",
+    "division_name_token": "MTEHADENDP",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "30 RES. DYWIZJA ZMECH."
+  },
+  "POL_3_DLMB_solo": {
+    "cfg_name": "POL_3_DLMB_solo",
+    "division_name_token": "QAFHCYROEI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "DLWP"
+  },
+  "POL_4MSD_solo": {
+    "cfg_name": "POL_4MSD_solo",
+    "division_name_token": "JPGSSGIHHN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "4 DYWIZJA ZMECH."
+  },
+  "POL_5ArtGr_solo": {
+    "cfg_name": "POL_5ArtGr_solo",
+    "division_name_token": "DBLFBJNJMP",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "5 BRYG. ART. ARMAT"
+  },
+  "POL_5TkD_solo": {
+    "cfg_name": "POL_5TkD_solo",
+    "division_name_token": "EXEFNUFAYO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "5 DYWIZJA ZMECH."
+  },
+  "POL_61SAMBrig_solo": {
+    "cfg_name": "POL_61SAMBrig_solo",
+    "division_name_token": "VFDWDVGFLR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "61 BRYG. ART. WOJSK OPL"
+  },
+  "POL_6AirBrig_solo": {
+    "cfg_name": "POL_6AirBrig_solo",
+    "division_name_token": "XKNLFKIZGQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "6 BRYG. P.DESANTOWA"
+  },
+  "POL_6ArtGr_solo": {
+    "cfg_name": "POL_6ArtGr_solo",
+    "division_name_token": "QUANLMLBFX",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "6 BRYG. ART. ARMAT"
+  },
+  "POL_7ArtGr_solo": {
+    "cfg_name": "POL_7ArtGr_solo",
+    "division_name_token": "AIITRYYOBF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "7 BRYG. ART. ARMAT"
+  },
+  "POL_7NavalBrig_solo": {
+    "cfg_name": "POL_7NavalBrig_solo",
+    "division_name_token": "DIYVSUJTZC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "7 BRYG. DESANTOWA"
+  },
+  "POL_8ArtGr_solo": {
+    "cfg_name": "POL_8ArtGr_solo",
+    "division_name_token": "MFTHYAFPKR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "8 BRYG. ART. ARMAT"
+  },
+  "POL_8MSD_solo": {
+    "cfg_name": "POL_8MSD_solo",
+    "division_name_token": "KEAOQOBUTH",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "8 DYWIZJA ZMECH."
+  },
+  "POL_DesantK_solo": {
+    "cfg_name": "POL_DesantK_solo",
+    "division_name_token": "MUYAMIWFVR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "ZGRUPOWANIE DESANTOWE"
+  },
+  "POL_LWP_solo": {
+    "cfg_name": "POL_LWP_solo",
+    "division_name_token": "UJABTWUSMV",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "3. DLMB"
+  },
+  "RDA_10MSD_solo": {
+    "cfg_name": "RDA_10MSD_solo",
+    "division_name_token": "CUEWTCIFNK",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_GroundForces_SansFond",
+    "display_name": "10. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_11MSD_solo": {
+    "cfg_name": "RDA_11MSD_solo",
+    "division_name_token": "VIHBYIAHTG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_GroundForces_SansFond",
+    "display_name": "11. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_15ResPzR_solo": {
+    "cfg_name": "RDA_15ResPzR_solo",
+    "division_name_token": "TIDKVZHKFD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "15. RESERVE-PANZER6RGT."
+  },
+  "RDA_17MSD_solo": {
+    "cfg_name": "RDA_17MSD_solo",
+    "division_name_token": "HFMCQDUSQA",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_GroundForces_SansFond",
+    "display_name": "17. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_19MSD_solo": {
+    "cfg_name": "RDA_19MSD_solo",
+    "division_name_token": "SOZSQRHTUP",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_19_MSD",
+    "display_name": "19. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_1MSD_solo": {
+    "cfg_name": "RDA_1MSD_solo",
+    "division_name_token": "DZTTOSCXCV",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "1. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_20MSD_solo": {
+    "cfg_name": "RDA_20MSD_solo",
+    "division_name_token": "AZZCODQNFN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_20_MSD",
+    "display_name": "20. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_25MSR_solo": {
+    "cfg_name": "RDA_25MSR_solo",
+    "division_name_token": "AMASYORJLT",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "25. MOT.-SCH\u00dcTZEN-REGIMENT"
+  },
+  "RDA_4MSD_solo": {
+    "cfg_name": "RDA_4MSD_solo",
+    "division_name_token": "WKYGGWDXIQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "4. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_5ArtBrig_solo": {
+    "cfg_name": "RDA_5ArtBrig_solo",
+    "division_name_token": "NVGFNTOKVC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "ARTILLERIE-BRIGADE 5"
+  },
+  "RDA_5GEWR_solo": {
+    "cfg_name": "RDA_5GEWR_solo",
+    "division_name_token": "WKHJDSOXDM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "GESCHOSSWERFER-ABTEILUNG 5"
+  },
+  "RDA_7PzD_solo": {
+    "cfg_name": "RDA_7PzD_solo",
+    "division_name_token": "UJMWGQIZDB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_7_PzD",
+    "display_name": "7. PANZERDIVISION"
+  },
+  "RDA_8MSD_solo": {
+    "cfg_name": "RDA_8MSD_solo",
+    "division_name_token": "ATNHPRZBUA",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_8_MSD",
+    "display_name": "8. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_9PzD_solo": {
+    "cfg_name": "RDA_9PzD_solo",
+    "division_name_token": "BTMJHETUOU",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_9_PzD",
+    "display_name": "9. PANZERDIVISION"
+  },
+  "RDA_ArtRgt3_solo": {
+    "cfg_name": "RDA_ArtRgt3_solo",
+    "division_name_token": "VWRVQKNFEL",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_MB_III",
+    "display_name": "Artillerie-Regiment 3"
+  },
+  "RDA_ArtRgt40_solo": {
+    "cfg_name": "RDA_ArtRgt40_solo",
+    "division_name_token": "ZVJPHODORW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_MB_III",
+    "display_name": "Artillerie-Brigade 40"
+  },
+  "RDA_LStR40_solo": {
+    "cfg_name": "RDA_LStR40_solo",
+    "division_name_token": "WURNOJAGAT",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_LStR40",
+    "display_name": "Luftsturmregiment 40"
+  },
+  "RDA_MBDIII_solo": {
+    "cfg_name": "RDA_MBDIII_solo",
+    "division_name_token": "KOGFRBNZHG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RDA_MB_III",
+    "display_name": "Milit\u00e4rbezirk III"
+  },
+  "RDA_MBDV_solo": {
+    "cfg_name": "RDA_MBDV_solo",
+    "division_name_token": "WKYGGWDXIQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "4. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RFA_10PzD_solo": {
+    "cfg_name": "RFA_10PzD_solo",
+    "division_name_token": "IQYHRLEGVH",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_10_Panzer",
+    "display_name": "10. Panzerdivision"
+  },
+  "RFA_11PzGrD_solo": {
+    "cfg_name": "RFA_11PzGrD_solo",
+    "division_name_token": "OGRDRQFQOG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "11. PZ.GRENADIER-DIVISION"
+  },
+  "RFA_12PzD_solo": {
+    "cfg_name": "RFA_12PzD_solo",
+    "division_name_token": "BFHCIUHWQJ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_12_Panzer",
+    "display_name": "12. PANZERDIVISION"
+  },
+  "RFA_1GebD_solo": {
+    "cfg_name": "RFA_1GebD_solo",
+    "division_name_token": "LXTZFGKIYF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_1_Gebirgs",
+    "display_name": "1. Gebirgsdivision"
+  },
+  "RFA_1Korps_solo": {
+    "cfg_name": "RFA_1Korps_solo",
+    "division_name_token": "ZUFYSTIZQW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "I. KORPS"
+  },
+  "RFA_1LLD_solo": {
+    "cfg_name": "RFA_1LLD_solo",
+    "division_name_token": "FOMRBIEDNQ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_1LLDiv",
+    "display_name": "1. Luftlande-Division"
+  },
+  "RFA_1PioKommando_solo": {
+    "cfg_name": "RFA_1PioKommando_solo",
+    "division_name_token": "UMPVBDYXCY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "PIONIERKOMMANDO 1"
+  },
+  "RFA_1PzD_solo": {
+    "cfg_name": "RFA_1PzD_solo",
+    "division_name_token": "ZUIJYUBKPY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_1_Panzerdivision",
+    "display_name": "1. PANZERDIVISION"
+  },
+  "RFA_26AB_solo": {
+    "cfg_name": "RFA_26AB_solo",
+    "division_name_token": "VZRWVXGGRI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_26LLB",
+    "display_name": "26. Luftlandebrigade"
+  },
+  "RFA_2K_FlaKdo2_solo": {
+    "cfg_name": "RFA_2K_FlaKdo2_solo",
+    "division_name_token": "BCOBGWUHGN",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Flugabwehr-Rgt. 200"
+  },
+  "RFA_2Korps_solo": {
+    "cfg_name": "RFA_2Korps_solo",
+    "division_name_token": "ENFUZFRZJE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "II. Korps"
+  },
+  "RFA_2LwDiv_solo": {
+    "cfg_name": "RFA_2LwDiv_solo",
+    "division_name_token": "SHMXFYGRWE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_Luftwaffe",
+    "display_name": "2. Luftwaffendivision"
+  },
+  "RFA_2PioKommando_solo": {
+    "cfg_name": "RFA_2PioKommando_solo",
+    "division_name_token": "DXUQFLOVUX",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Pionierkommando 2"
+  },
+  "RFA_2PzGrD_solo": {
+    "cfg_name": "RFA_2PzGrD_solo",
+    "division_name_token": "XKYVHEFNED",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_2_PzGrenDivision_RFA",
+    "display_name": "2. PZ.GRENADIER-DIVISION"
+  },
+  "RFA_3EngBrig_solo": {
+    "cfg_name": "RFA_3EngBrig_solo",
+    "division_name_token": "WCMKOZAWFU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_III_Korps",
+    "display_name": "3. Pionier-Kdo"
+  },
+  "RFA_3FlakBrig_solo": {
+    "cfg_name": "RFA_3FlakBrig_solo",
+    "division_name_token": "POSMNWFHJY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_III_Korps",
+    "display_name": "3. Flugabwehr-Kdo"
+  },
+  "RFA_3HFG_solo": {
+    "cfg_name": "RFA_3HFG_solo",
+    "division_name_token": "HTXKTCYTUO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_III_Korps",
+    "display_name": "3rd Heeresflieger-Kdo"
+  },
+  "RFA_3Korps_solo": {
+    "cfg_name": "RFA_3Korps_solo",
+    "division_name_token": "NXNQFFTQWE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_III_Korps",
+    "display_name": "III. Korps"
+  },
+  "RFA_3PzD_solo": {
+    "cfg_name": "RFA_3PzD_solo",
+    "division_name_token": "MINOBGNNQN",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_3_Panzerdivision",
+    "display_name": "3. PANZERDIVISION"
+  },
+  "RFA_4PzGrD_solo": {
+    "cfg_name": "RFA_4PzGrD_solo",
+    "division_name_token": "KYVWBRWGQM",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_4_PzGrenadier",
+    "display_name": "4. Pz.Gren.-Division"
+  },
+  "RFA_54Brig_solo": {
+    "cfg_name": "RFA_54Brig_solo",
+    "division_name_token": "XFNPQTAXXH",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "54. Heimatschutz-Brig."
+  },
+  "RFA_5PzD_solo": {
+    "cfg_name": "RFA_5PzD_solo",
+    "division_name_token": "LKSVNPCUYG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "5. PANZERDIVISION"
+  },
+  "RFA_64Brig_solo": {
+    "cfg_name": "RFA_64Brig_solo",
+    "division_name_token": "QAYHWXLBRP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "64. Heimatschutz-Brig."
+  },
+  "RFA_74PioRgt_solo": {
+    "cfg_name": "RFA_74PioRgt_solo",
+    "division_name_token": "PPHRFSJBZP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "74. Pionier-Rgt."
+  },
+  "RFA_7PzD_solo": {
+    "cfg_name": "RFA_7PzD_solo",
+    "division_name_token": "WUDSACQWCO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "7. PANZERDIVISION"
+  },
+  "RFA_FlaKdo1_solo": {
+    "cfg_name": "RFA_FlaKdo1_solo",
+    "division_name_token": "SHOPGELWAY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "FLA.KOMMANDO 1"
+  },
+  "RFA_FlaKdo2_solo": {
+    "cfg_name": "RFA_FlaKdo2_solo",
+    "division_name_token": "PQNTGIMBEF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Flugabwehr-Rgt. 230"
+  },
+  "RFA_FlakRakRgt14_solo": {
+    "cfg_name": "RFA_FlakRakRgt14_solo",
+    "division_name_token": "WJIWZEREHI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Luftwaffe"
+  },
+  "RFA_FlakRakRgt3_solo": {
+    "cfg_name": "RFA_FlakRakRgt3_solo",
+    "division_name_token": "RYHEICFCRL",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Luftwaffe"
+  },
+  "RFA_FlakRakRgt4_solo": {
+    "cfg_name": "RFA_FlakRakRgt4_solo",
+    "division_name_token": "AGBQFAGBHU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Luftwaffe"
+  },
+  "RFA_FlakRakRgt6_solo": {
+    "cfg_name": "RFA_FlakRakRgt6_solo",
+    "division_name_token": "MEITBYLAKO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_default",
+    "display_name": "Luftwaffe"
+  },
+  "RFA_Heimat71_solo": {
+    "cfg_name": "RFA_Heimat71_solo",
+    "division_name_token": "LTMLXRICID",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "71. Heimatschutz-Rgt."
+  },
+  "RFA_Heimat84_solo": {
+    "cfg_name": "RFA_Heimat84_solo",
+    "division_name_token": "NHKOOQHRRZ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "84. Heimatschutz-Rgt."
+  },
+  "RFA_Heimat94_solo": {
+    "cfg_name": "RFA_Heimat94_solo",
+    "division_name_token": "YPXMWNQODK",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "94. Heimatschutz-Rgt."
+  },
+  "RFA_Luftwaffe_solo": {
+    "cfg_name": "RFA_Luftwaffe_solo",
+    "division_name_token": "QERCZGUPTN",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_Luftwaffe",
+    "display_name": "Luftwaffe"
+  },
+  "RFA_TK_Nord_solo": {
+    "cfg_name": "RFA_TK_Nord_solo",
+    "division_name_token": "SRNIPMIGYA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "TK Nord"
+  },
+  "RFA_TK_Nord_solo_30": {
+    "cfg_name": "RFA_TK_Nord_solo_30",
+    "division_name_token": "SRNIPMIGYA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "TK Nord"
+  },
+  "RFA_TK_Sud_solo": {
+    "cfg_name": "RFA_TK_Sud_solo",
+    "division_name_token": "EQJNLVYMVL",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "TK SUD"
+  },
+  "RFA_VBK_41_solo": {
+    "cfg_name": "RFA_VBK_41_solo",
+    "division_name_token": "SDTDGFUTEL",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 41"
+  },
+  "RFA_VBK_42_solo": {
+    "cfg_name": "RFA_VBK_42_solo",
+    "division_name_token": "QTJLQWWZPJ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 42"
+  },
+  "RFA_VBK_43_solo": {
+    "cfg_name": "RFA_VBK_43_solo",
+    "division_name_token": "AUZXMJPIPI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 43"
+  },
+  "RFA_VBK_44_solo": {
+    "cfg_name": "RFA_VBK_44_solo",
+    "division_name_token": "WRYDHVWUFR",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 44"
+  },
+  "RFA_VBK_45_solo": {
+    "cfg_name": "RFA_VBK_45_solo",
+    "division_name_token": "TXJSUWVGLD",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 45"
+  },
+  "RFA_VBK_46_solo": {
+    "cfg_name": "RFA_VBK_46_solo",
+    "division_name_token": "KUAJNYEVQX",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 46"
+  },
+  "RFA_VBK_47_solo": {
+    "cfg_name": "RFA_VBK_47_solo",
+    "division_name_token": "PLDWPZVFDV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "VBK 47"
+  },
+  "SOV_105ADIB_solo": {
+    "cfg_name": "SOV_105ADIB_solo",
+    "division_name_token": "YZQRQUWKHE",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "105-ya ADIB"
+  },
+  "SOV_10GTkD_solo": {
+    "cfg_name": "SOV_10GTkD_solo",
+    "division_name_token": "SXJRJLZBUU",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "10-YA GV. TANK. DIV."
+  },
+  "SOV_115TkInde_solo": {
+    "cfg_name": "SOV_115TkInde_solo",
+    "division_name_token": "PKHOCERPIW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "115-Y OTD. TANK. POLK"
+  },
+  "SOV_119IndTkBrig_solo": {
+    "cfg_name": "SOV_119IndTkBrig_solo",
+    "division_name_token": "QGUHEAAYWW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_119OdtTP",
+    "display_name": "119-Y OTD. TANK. POLK"
+  },
+  "SOV_11GTkD_solo": {
+    "cfg_name": "SOV_11GTkD_solo",
+    "division_name_token": "XMQYPCOXKV",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "11-YA GV. TANK. DIV."
+  },
+  "SOV_11ORAP_solo": {
+    "cfg_name": "SOV_11ORAP_solo",
+    "division_name_token": "GAFYKHWDVX",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "11-Y ORAP"
+  },
+  "SOV_125ADIB_solo": {
+    "cfg_name": "SOV_125ADIB_solo",
+    "division_name_token": "LBFRPMYQQL",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "125-ya ADIB"
+  },
+  "SOV_126IAD_solo": {
+    "cfg_name": "SOV_126IAD_solo",
+    "division_name_token": "GCCUEIHHKG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "126-ya IAD"
+  },
+  "SOV_12GTkD_solo": {
+    "cfg_name": "SOV_12GTkD_solo",
+    "division_name_token": "DFHBGEUXHW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "12-YA GV. TANK. DIV."
+  },
+  "SOV_138TkInde_solo": {
+    "cfg_name": "SOV_138TkInde_solo",
+    "division_name_token": "UQMSVYKMIO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "138-Y OTD. TANK. POLK"
+  },
+  "SOV_145TkInde_solo": {
+    "cfg_name": "SOV_145TkInde_solo",
+    "division_name_token": "COBHYHAZNB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "145-Y OTD. TANK. POLK"
+  },
+  "SOV_15GTkD_solo": {
+    "cfg_name": "SOV_15GTkD_solo",
+    "division_name_token": "VZMWUFFWTV",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "15-ya Gv. Tank. Div."
+  },
+  "SOV_16GTkD_solo": {
+    "cfg_name": "SOV_16GTkD_solo",
+    "division_name_token": "NWNEUMQHLF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "16-YA GV. TANK. DIV."
+  },
+  "SOV_16GvIAD_solo": {
+    "cfg_name": "SOV_16GvIAD_solo",
+    "division_name_token": "AFJWXFWHID",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "16-ya Gv. IAD"
+  },
+  "SOV_18GMRD_solo": {
+    "cfg_name": "SOV_18GMRD_solo",
+    "division_name_token": "NKDEFKPTGD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "18-ya Gv. MSD"
+  },
+  "SOV_1GTA_SAM_Brig_solo": {
+    "cfg_name": "SOV_1GTA_SAM_Brig_solo",
+    "division_name_token": "NFWANBEEGH",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "53-ya Zen. Rak. Brigade"
+  },
+  "SOV_1GTA_solo": {
+    "cfg_name": "SOV_1GTA_solo",
+    "division_name_token": "JGEKAKPDYF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "1-YA GV. TANK. ARMYIA"
+  },
+  "SOV_1LVD_solo": {
+    "cfg_name": "SOV_1LVD_solo",
+    "division_name_token": "EBECBWLJER",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "1. LVD"
+  },
+  "SOV_207MRD_solo": {
+    "cfg_name": "SOV_207MRD_solo",
+    "division_name_token": "RCUXZYXOTD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "207-YA STRELK. DIV."
+  },
+  "SOV_20GMRD_solo": {
+    "cfg_name": "SOV_20GMRD_solo",
+    "division_name_token": "HKQRLEJVQX",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "20 GMRD"
+  },
+  "SOV_211GArtBrig_solo": {
+    "cfg_name": "SOV_211GArtBrig_solo",
+    "division_name_token": "IVMWTUDWCW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "211-y Gv. Art. Polk"
+  },
+  "SOV_21MRD_solo": {
+    "cfg_name": "SOV_21MRD_solo",
+    "division_name_token": "UEGUTODADY",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "21-YA STRELK. DIV."
+  },
+  "SOV_221TkInde_solo": {
+    "cfg_name": "SOV_221TkInde_solo",
+    "division_name_token": "EVJFJYDIXI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "221-Y OTD. TANK. POLK"
+  },
+  "SOV_27GMRD_solo": {
+    "cfg_name": "SOV_27GMRD_solo",
+    "division_name_token": "DIDKXPCIFL",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_27GvMSD",
+    "display_name": "27 GMRD"
+  },
+  "SOV_28C_solo": {
+    "cfg_name": "SOV_28C_solo",
+    "division_name_token": "AUHZNAMAIM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "28-y Korpus"
+  },
+  "SOV_290ArtBrig_solo": {
+    "cfg_name": "SOV_290ArtBrig_solo",
+    "division_name_token": "IDADXAUEHZ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "(290th Cannon Art. Brig.)"
+  },
+  "SOV_294ORAP_solo": {
+    "cfg_name": "SOV_294ORAP_solo",
+    "division_name_token": "ZADWXNWCXK",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "294-Y ORAP"
+  },
+  "SOV_2GTA_solo": {
+    "cfg_name": "SOV_2GTA_solo",
+    "division_name_token": "KLGKHIPTLF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "2-YA GV. TANK. ARMYIA"
+  },
+  "SOV_308ArtBr_solo": {
+    "cfg_name": "SOV_308ArtBr_solo",
+    "division_name_token": "BEGLGQZKJN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "308th Cannon Art. Brig."
+  },
+  "SOV_30GMRD_solo": {
+    "cfg_name": "SOV_30GMRD_solo",
+    "division_name_token": "CYVHEDTMNO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "30-ya Gv. MSD"
+  },
+  "SOV_31TkD_solo": {
+    "cfg_name": "SOV_31TkD_solo",
+    "division_name_token": "VIWDBFBYNI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_31TD",
+    "display_name": "31-ya Tank. Div."
+  },
+  "SOV_34ArtDiv_solo": {
+    "cfg_name": "SOV_34ArtDiv_solo",
+    "division_name_token": "IAQCIDWWAN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "34-ya (Art.) Div."
+  },
+  "SOV_357OCHAP_solo": {
+    "cfg_name": "SOV_357OCHAP_solo",
+    "division_name_token": "CLBSQAABHG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "357-Y OCHAP"
+  },
+  "SOV_35GvDSHB_solo": {
+    "cfg_name": "SOV_35GvDSHB_solo",
+    "division_name_token": "YMFLAGHXMM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_35th_VDV",
+    "display_name": "35-ya GvDShB"
+  },
+  "SOV_368OCHAP_solo": {
+    "cfg_name": "SOV_368OCHAP_solo",
+    "division_name_token": "BABJKBKYAG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "368-Y OCHAP"
+  },
+  "SOV_385ArtBrig_solo": {
+    "cfg_name": "SOV_385ArtBrig_solo",
+    "division_name_token": "JCKEGESFSQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "(390th Cannon Art. Brig.)"
+  },
+  "SOV_390ArtBr_solo": {
+    "cfg_name": "SOV_390ArtBr_solo",
+    "division_name_token": "JCKEGESFSQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "(390th Cannon Art. Brig.)"
+  },
+  "SOV_39GMRD_solo": {
+    "cfg_name": "SOV_39GMRD_solo",
+    "division_name_token": "YVLMVYSOCN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_39_gvMSD",
+    "display_name": "39-YA GV. STRELK. DIV."
+  },
+  "SOV_3A_solo": {
+    "cfg_name": "SOV_3A_solo",
+    "division_name_token": "JQEMAWSOOB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "3-YA ARMYIA"
+  },
+  "SOV_3FrontUkr_solo": {
+    "cfg_name": "SOV_3FrontUkr_solo",
+    "division_name_token": "DPZFNAINUO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "check unit\u00e9s"
+  },
+  "SOV_3LVD_solo": {
+    "cfg_name": "SOV_3LVD_solo",
+    "division_name_token": "UQCTRBWSWG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "3. LVD"
+  },
+  "SOV_46SAMBrig_solo": {
+    "cfg_name": "SOV_46SAMBrig_solo",
+    "division_name_token": "VPQKVRDDWT",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "46-YA ZEN. RAK. BRIGADA"
+  },
+  "SOV_47GTkD_solo": {
+    "cfg_name": "SOV_47GTkD_solo",
+    "division_name_token": "UZSEOTPZYB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "47-YA GV. TANK. DIV."
+  },
+  "SOV_48MRD_solo": {
+    "cfg_name": "SOV_48MRD_solo",
+    "division_name_token": "AIMABJTUXN",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "48-ya MSD"
+  },
+  "SOV_57GMRD_solo": {
+    "cfg_name": "SOV_57GMRD_solo",
+    "division_name_token": "CXOLPZKDDB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_Blazon57th_gtd",
+    "display_name": "57-YA GV. STRELK. DIV."
+  },
+  "SOV_5SAMBrig_solo": {
+    "cfg_name": "SOV_5SAMBrig_solo",
+    "division_name_token": "EMCTLSPSCS",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "5-y Zen.-Rak. Brig."
+  },
+  "SOV_61SAMBrig_solo": {
+    "cfg_name": "SOV_61SAMBrig_solo",
+    "division_name_token": "JJXSZSZODB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "61-YA ZEN. RAK. BRIGADA"
+  },
+  "SOV_6GvIAD_solo": {
+    "cfg_name": "SOV_6GvIAD_solo",
+    "division_name_token": "PCERLWWWMI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "16-ya Gv. IAD"
+  },
+  "SOV_79GTkD_solo": {
+    "cfg_name": "SOV_79GTkD_solo",
+    "division_name_token": "TANGJJSVLC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_79_gvTD",
+    "display_name": "79-YA GV. TANK. DIV."
+  },
+  "SOV_7GTkD_solo": {
+    "cfg_name": "SOV_7GTkD_solo",
+    "division_name_token": "HGPGDUUVOQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "7-YA GV. TANK. DIV."
+  },
+  "SOV_8GA_SAM_Brig_solo": {
+    "cfg_name": "SOV_8GA_SAM_Brig_solo",
+    "division_name_token": "XJTAWJBJGT",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "18-ya Zen. Rak. Brigade"
+  },
+  "SOV_8GA_solo": {
+    "cfg_name": "SOV_8GA_solo",
+    "division_name_token": "JVORBKCZCQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "8-YA GV. ARMYIA"
+  },
+  "SOV_931ORAP_solo": {
+    "cfg_name": "SOV_931ORAP_solo",
+    "division_name_token": "OJCVUVYNHK",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_AirForce",
+    "display_name": "931-Y ORAP"
+  },
+  "SOV_94GMRD_solo": {
+    "cfg_name": "SOV_94GMRD_solo",
+    "division_name_token": "EMWRLJXZXG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_94gvMSD",
+    "display_name": "94-YA GV. STRELK. DIV."
+  },
+  "SOV_9TkD_solo": {
+    "cfg_name": "SOV_9TkD_solo",
+    "division_name_token": "GNIFXKTHNO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "9 TD"
+  },
+  "SOV_CGV_solo": {
+    "cfg_name": "SOV_CGV_solo",
+    "division_name_token": "JBPOTBWQXU",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "Kom.-CGV"
+  },
+  "SOV_NGF_solo": {
+    "cfg_name": "SOV_NGF_solo",
+    "division_name_token": "HSQNSLSYKC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_defaut",
+    "display_name": "(NORHERN GROUP OF FORCES)"
+  },
+  "SOV_WGF_solo": {
+    "cfg_name": "SOV_WGF_solo",
+    "division_name_token": "HVWPWZYUMW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_flag_soviet",
+    "display_name": "(WESTERN GROUP OF FORCES)"
+  },
+  "TCH_13TkD_solo": {
+    "cfg_name": "TCH_13TkD_solo",
+    "division_name_token": "TBPLXSHYFD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "13. Tankov\u00e1 Divize"
+  },
+  "TCH_14TkD_solo": {
+    "cfg_name": "TCH_14TkD_solo",
+    "division_name_token": "EKLDFHPFDI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "14. Tankov\u00e1 Divize"
+  },
+  "TCH_15MRD_solo": {
+    "cfg_name": "TCH_15MRD_solo",
+    "division_name_token": "HMVXUFIJTA",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "3. Motost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_171SAM_solo": {
+    "cfg_name": "TCH_171SAM_solo",
+    "division_name_token": "TMJINUJQHK",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "171. Plrp"
+  },
+  "TCH_19MRD_solo": {
+    "cfg_name": "TCH_19MRD_solo",
+    "division_name_token": "OOGNUZZFZP",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_19_MSD",
+    "display_name": "19. Motost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_1Armee_solo": {
+    "cfg_name": "TCH_1Armee_solo",
+    "division_name_token": "BPCUSAKUIM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "1. Arm\u00e1da"
+  },
+  "TCH_1FighterDivsion_solo": {
+    "cfg_name": "TCH_1FighterDivsion_solo",
+    "division_name_token": "SIVRNRCCAM",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "1. St\u00edhac\u00ed Leteck\u00e9 Divize"
+  },
+  "TCH_1TkD_solo": {
+    "cfg_name": "TCH_1TkD_solo",
+    "division_name_token": "XENCKWVTRB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_1_Tank",
+    "display_name": "1. Tankov\u00e1 Divize"
+  },
+  "TCH_20MRD_solo": {
+    "cfg_name": "TCH_20MRD_solo",
+    "division_name_token": "DSGHCCLQMB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "20. Motost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_216TkInde_solo": {
+    "cfg_name": "TCH_216TkInde_solo",
+    "division_name_token": "AJKQDPWROU",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "216. Protitankov\u00fd Pluk"
+  },
+  "TCH_217TkInde_solo": {
+    "cfg_name": "TCH_217TkInde_solo",
+    "division_name_token": "ECPYYRDZVV",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "217. Protitankov\u00fd Pluk"
+  },
+  "TCH_251SAM_solo": {
+    "cfg_name": "TCH_251SAM_solo",
+    "division_name_token": "EXOFQTEUVF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "251. Plrp"
+  },
+  "TCH_2MRD_solo": {
+    "cfg_name": "TCH_2MRD_solo",
+    "division_name_token": "SXLPYGVLUU",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_2_MSD",
+    "display_name": "2. Motost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_322GArtBrig_solo": {
+    "cfg_name": "TCH_322GArtBrig_solo",
+    "division_name_token": "AOGFTLIBWR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "322. Kan\u00f3nov\u00e1 D\u011blost\u0159. Brig\u00e1da"
+  },
+  "TCH_332GArtBrig_solo": {
+    "cfg_name": "TCH_332GArtBrig_solo",
+    "division_name_token": "YDJUCZBCSW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "332. Kan\u00f3nov\u00e1 D\u011blost\u0159. Brig\u00e1da"
+  },
+  "TCH_34FightBombDivsion_solo": {
+    "cfg_name": "TCH_34FightBombDivsion_solo",
+    "division_name_token": "QHWKNJQAVD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "34. St\u00edhac\u00ed Bomb. Leteck\u00e1 Divize"
+  },
+  "TCH_3AirDivsion_solo": {
+    "cfg_name": "TCH_3AirDivsion_solo",
+    "division_name_token": "KXWWKRHFBT",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "3. Div. Protivzdu\u0161n\u00e9 Obrany"
+  },
+  "TCH_3MRD_solo": {
+    "cfg_name": "TCH_3MRD_solo",
+    "division_name_token": "HMVXUFIJTA",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "3. Motost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_4TkD_solo": {
+    "cfg_name": "TCH_4TkD_solo",
+    "division_name_token": "DBFCDCUZCS",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "4. Tankov\u00e1 Divize"
+  },
+  "TCH_7GArtD_solo": {
+    "cfg_name": "TCH_7GArtD_solo",
+    "division_name_token": "LNTVEUSIYQ",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "7. D\u011blost\u0159eleck\u00e1 Divize"
+  },
+  "TCH_82SAM_solo": {
+    "cfg_name": "TCH_82SAM_solo",
+    "division_name_token": "YKXEIVKYJO",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "82. Protiletadlov\u00e1 Raket. Brig\u00e1da"
+  },
+  "TCH_9TkD_solo": {
+    "cfg_name": "TCH_9TkD_solo",
+    "division_name_token": "ZAIIQFITDK",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "9. Tankov\u00e1 Divize"
+  },
+  "TCH_CSLA_solo": {
+    "cfg_name": "TCH_CSLA_solo",
+    "division_name_token": "FWACUZDMOF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "STRAT",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_defaut",
+    "display_name": "\u010cSLA"
+  },
+  "UK_1ArmDiv_solo": {
+    "cfg_name": "UK_1ArmDiv_solo",
+    "division_name_token": "YPUIEGDPJD",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1st_Armoured",
+    "display_name": "1ST ARMOURED DIVISION"
+  },
+  "UK_1BrC_solo_30": {
+    "cfg_name": "UK_1BrC_solo_30",
+    "division_name_token": "YOWBMGVFWE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1_Corps",
+    "display_name": "I British Corps"
+  },
+  "UK_2ATAF_solo": {
+    "cfg_name": "UK_2ATAF_solo",
+    "division_name_token": "FJPGXBJJHP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "2nd ATAF"
+  },
+  "UK_2InfDiv_solo": {
+    "cfg_name": "UK_2InfDiv_solo",
+    "division_name_token": "HDQPSYLNXS",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_2nd_Infantry",
+    "display_name": "2ND INFANTRY DIVISION"
+  },
+  "UK_4ArmDiv_solo": {
+    "cfg_name": "UK_4ArmDiv_solo",
+    "division_name_token": "LCVRURPXLV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_4th_Armoured",
+    "display_name": "4TH ARMOURED DIVISION"
+  },
+  "UK_MNAD_solo": {
+    "cfg_name": "UK_MNAD_solo",
+    "division_name_token": "WHOHCKMOET",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1st_Armoured",
+    "display_name": "MNAD"
+  },
+  "UK_NORTHAG_solo": {
+    "cfg_name": "UK_NORTHAG_solo",
+    "division_name_token": "CXCRBGXKQG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_BAOR",
+    "display_name": "NORTHAG"
+  },
+  "UK_RAFG_solo": {
+    "cfg_name": "UK_RAFG_solo",
+    "division_name_token": "MZONZDXLPW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "RAF Germany"
+  },
+  "UK_RAF_Bruggen_solo": {
+    "cfg_name": "UK_RAF_Bruggen_solo",
+    "division_name_token": "FOWWAHLVMF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "RAF Bruggen"
+  },
+  "UK_RAF_Gutersloh_solo": {
+    "cfg_name": "UK_RAF_Gutersloh_solo",
+    "division_name_token": "RYRVTKNPAV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "RAF Gutersloh"
+  },
+  "UK_RAF_Laarbruch_solo": {
+    "cfg_name": "UK_RAF_Laarbruch_solo",
+    "division_name_token": "BFMMTTTZXB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "RAF Laarbruch"
+  },
+  "UK_RAF_Wildenrath_solo": {
+    "cfg_name": "UK_RAF_Wildenrath_solo",
+    "division_name_token": "AUBZYRMSFQ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_RAF",
+    "display_name": "RAF Wildenrath"
+  },
+  "US_10TFW_solo": {
+    "cfg_name": "US_10TFW_solo",
+    "division_name_token": "QOWCXNHSTP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "10th Tac. Fighter Wing"
+  },
+  "US_11ACR_solo": {
+    "cfg_name": "US_11ACR_solo",
+    "division_name_token": "AJSWBANTOA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_11ACR",
+    "display_name": "11TH ARM. CAVALRY REGT."
+  },
+  "US_11AviaBrig_solo": {
+    "cfg_name": "US_11AviaBrig_solo",
+    "division_name_token": "ZBTYQDKGDQ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "11th Aviation Brig."
+  },
+  "US_12AviaGroup_solo": {
+    "cfg_name": "US_12AviaGroup_solo",
+    "division_name_token": "OJWMXBRPQJ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "12th Aviation Brigade"
+  },
+  "US_130Eng_solo": {
+    "cfg_name": "US_130Eng_solo",
+    "division_name_token": "BGKQWCFSDP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "130TH ENGINEER BRIGADE"
+  },
+  "US_14MPBrig_solo": {
+    "cfg_name": "US_14MPBrig_solo",
+    "division_name_token": "QBDIBHTMDV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "14th MP Brigade"
+  },
+  "US_17ABCorps_solo": {
+    "cfg_name": "US_17ABCorps_solo",
+    "division_name_token": "CZSQNXGGTS",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_XVII_Corps",
+    "display_name": "17TH AIRBORNE CORPS"
+  },
+  "US_17AF_solo": {
+    "cfg_name": "US_17AF_solo",
+    "division_name_token": "QIKUVABKDH",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "17th Air Force"
+  },
+  "US_17ArtBrig_solo": {
+    "cfg_name": "US_17ArtBrig_solo",
+    "division_name_token": "BPCQDIABSJ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "17th Field Artillery Brig."
+  },
+  "US_18Eng_solo": {
+    "cfg_name": "US_18Eng_solo",
+    "division_name_token": "HZFHDVBEKR",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_flag_us",
+    "display_name": "18TH ENGINEER BRIGADE"
+  },
+  "US_18MPBrig_solo": {
+    "cfg_name": "US_18MPBrig_solo",
+    "division_name_token": "NXSAJFPRZN",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "18th MP Brigade"
+  },
+  "US_194ArmBrig_solo": {
+    "cfg_name": "US_194ArmBrig_solo",
+    "division_name_token": "RQYMEKQIKU",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_194th_Armored_Brigade",
+    "display_name": "194th MECH. BRIGADE"
+  },
+  "US_197MechBrig_solo": {
+    "cfg_name": "US_197MechBrig_solo",
+    "division_name_token": "STYBNFYSZO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_197th_Mechanized_Brigade",
+    "display_name": "197th MECH. BRIGADE"
+  },
+  "US_1Arm_solo": {
+    "cfg_name": "US_1Arm_solo",
+    "division_name_token": "PRTCDCACMB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_1st_Armored_Division",
+    "display_name": "1ST ARM. CAVALRY REGT."
+  },
+  "US_1Inf_solo": {
+    "cfg_name": "US_1Inf_solo",
+    "division_name_token": "KZQJKXKBFL",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem__vide",
+    "display_name": "1st Infantry Division (Mech.)"
+  },
+  "US_20TFW_solo": {
+    "cfg_name": "US_20TFW_solo",
+    "division_name_token": "NMXKEWXSXC",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "20th Tac. Fighter Wing"
+  },
+  "US_210ArtBrig_solo": {
+    "cfg_name": "US_210ArtBrig_solo",
+    "division_name_token": "HFPUEYYLWJ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "210th Field Artillery Brig."
+  },
+  "US_2ACR_solo": {
+    "cfg_name": "US_2ACR_solo",
+    "division_name_token": "BAHLYMAFMD",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "2ND ARM. CAVALRY REGT."
+  },
+  "US_2Arm_solo": {
+    "cfg_name": "US_2Arm_solo",
+    "division_name_token": "RPZVLOJMAT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "2ND ARMORED DIVISION"
+  },
+  "US_36TFW_solo": {
+    "cfg_name": "US_36TFW_solo",
+    "division_name_token": "YUJKFMIJOF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "36th Tac. Fighter Wing"
+  },
+  "US_3AF_solo": {
+    "cfg_name": "US_3AF_solo",
+    "division_name_token": "LAFILSKGDX",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "3rd Air Force"
+  },
+  "US_3Arm_solo": {
+    "cfg_name": "US_3Arm_solo",
+    "division_name_token": "RSEACNWCQI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "3RD ARMORED DIVISION"
+  },
+  "US_3Corps_solo": {
+    "cfg_name": "US_3Corps_solo",
+    "division_name_token": "ZTKHWWMFHP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "III. CORPS"
+  },
+  "US_3Inf_solo": {
+    "cfg_name": "US_3Inf_solo",
+    "division_name_token": "GXVZANBEUY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_infantry_division",
+    "display_name": "3RD INFANTRY DIVISION"
+  },
+  "US_3rd_Arm_solo": {
+    "cfg_name": "US_3rd_Arm_solo",
+    "division_name_token": "RSEACNWCQI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "3RD ARMORED DIVISION"
+  },
+  "US_41FABrig_solo": {
+    "cfg_name": "US_41FABrig_solo",
+    "division_name_token": "KXDHOZGFIO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "41st Field Art. Group"
+  },
+  "US_42FABrig_solo": {
+    "cfg_name": "US_42FABrig_solo",
+    "division_name_token": "APWHVTICZW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "42nd Field Art. Group"
+  },
+  "US_48TFW_solo": {
+    "cfg_name": "US_48TFW_solo",
+    "division_name_token": "PCOYCDRMXA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "48th Tac. Fighter Wing"
+  },
+  "US_4ATAF_solo": {
+    "cfg_name": "US_4ATAF_solo",
+    "division_name_token": "XAZRSRXGOP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "4TH ATAF"
+  },
+  "US_50TFW_solo": {
+    "cfg_name": "US_50TFW_solo",
+    "division_name_token": "QOVRQVZAOI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "50th Tac. Fighter Wing"
+  },
+  "US_52TFW_solo": {
+    "cfg_name": "US_52TFW_solo",
+    "division_name_token": "SSVYVMHOZM",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "52nd Tac. Fighter Wing"
+  },
+  "US_5Corps_solo": {
+    "cfg_name": "US_5Corps_solo",
+    "division_name_token": "XIFVCZXVJC",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_V_Corps",
+    "display_name": "V. Corps"
+  },
+  "US_72ArtBrig_solo": {
+    "cfg_name": "US_72ArtBrig_solo",
+    "division_name_token": "RBNPNWZIMF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "72nd Field Artillery Brig."
+  },
+  "US_7Corps_solo": {
+    "cfg_name": "US_7Corps_solo",
+    "division_name_token": "JNWISSLMCA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "#US  VII. Corps"
+  },
+  "US_7Eng_solo": {
+    "cfg_name": "US_7Eng_solo",
+    "division_name_token": "ESGVHRWUCP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_VII_Corps",
+    "display_name": "7TH ENGINEER BRIGADE"
+  },
+  "US_81TFW_solo": {
+    "cfg_name": "US_81TFW_solo",
+    "division_name_token": "MQOZMVGKHB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "81st Tac. Fighter Wing"
+  },
+  "US_82AB_solo": {
+    "cfg_name": "US_82AB_solo",
+    "division_name_token": "AWINESUMIZ",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_82nd_airborne",
+    "display_name": "82ND AIRBORNE DIVISION"
+  },
+  "US_86TFW_solo": {
+    "cfg_name": "US_86TFW_solo",
+    "division_name_token": "VWMNPXFNRP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_US_AirForce",
+    "display_name": "86th Tac. Fighter Wing"
+  },
+  "US_8Inf_solo": {
+    "cfg_name": "US_8Inf_solo",
+    "division_name_token": "PFWJUTBNGI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_8th_infantry_division",
+    "display_name": "8TH INFANTRY DIVISION"
+  },
+  "US_BEL_1BEC_solo": {
+    "cfg_name": "US_BEL_1BEC_solo",
+    "division_name_token": "CXRQZNZYVC",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1_Corps",
+    "display_name": "1 BE Corps"
+  },
+  "US_BEL_COMRECCE_solo": {
+    "cfg_name": "US_BEL_COMRECCE_solo",
+    "division_name_token": "MINGNQHLTO",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1_Corps",
+    "display_name": "COMRECCE"
+  },
+  "US_CENTAG_solo": {
+    "cfg_name": "US_CENTAG_solo",
+    "division_name_token": "COBTUEBJOK",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_flag_us",
+    "display_name": "CENTRAL ARMY GROUP"
+  },
+  "US_UK_1BrC_solo": {
+    "cfg_name": "US_UK_1BrC_solo",
+    "division_name_token": "YOWBMGVFWE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1_Corps",
+    "display_name": "I British Corps"
+  },
+  "US_UK_33ArmBrig_solo": {
+    "cfg_name": "US_UK_33ArmBrig_solo",
+    "division_name_token": "BRFWUEGMRN",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_3rd_Armoured",
+    "display_name": "33rd Armoured Brigade"
+  },
+  "US_UK_3ArmDiv_solo": {
+    "cfg_name": "US_UK_3ArmDiv_solo",
+    "division_name_token": "GYPOTPNSDB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_3rd_Armoured",
+    "display_name": "3rd Armoured Division"
+  },
+  "US_UK_6ArmBrig_solo": {
+    "cfg_name": "US_UK_6ArmBrig_solo",
+    "division_name_token": "KMMAQOBPDS",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "STRAT",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_3rd_Armoured",
+    "display_name": "6th Armoured Brigade"
+  },
+  "BEL_1BEC_challenge": {
+    "cfg_name": "BEL_1BEC_challenge",
+    "division_name_token": "ZVXSHDXJZE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_BEL_1_Corps",
+    "display_name": "I(BE) Corps"
+  },
+  "CAN_1st_Canadian_challenge": {
+    "cfg_name": "CAN_1st_Canadian_challenge",
+    "division_name_token": "NDAGDIMWPK",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_CAN_1st_division",
+    "display_name": "1ST CANADIAN DIVISION"
+  },
+  "DDR_20MSD_challenge": {
+    "cfg_name": "DDR_20MSD_challenge",
+    "division_name_token": "SANJZXSUTI",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_20_MSD",
+    "display_name": "20 GMRD"
+  },
+  "DDR_23_MSB_challenge": {
+    "cfg_name": "DDR_23_MSB_challenge",
+    "division_name_token": "RSLOTCIYSH",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_GroundForces_SansFond",
+    "display_name": "Res. 23 MSB"
+  },
+  "FR_11e_para_challenge": {
+    "cfg_name": "FR_11e_para_challenge",
+    "division_name_token": "NBETCNKODY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_11e_Para",
+    "display_name": "11E DIVISION PARACHUTISTE"
+  },
+  "FR_5e_Blindee_challenge": {
+    "cfg_name": "FR_5e_Blindee_challenge",
+    "division_name_token": "SWOESKMZMF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_5eDB",
+    "display_name": "5E DIVISION BLINDEE"
+  },
+  "FR_6e_Blindee_Legere_challenge": {
+    "cfg_name": "FR_6e_Blindee_Legere_challenge",
+    "division_name_token": "YKMNOPTYHE",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_6e_DBL",
+    "display_name": "6E DIVISION LEGERE BLINDEE"
+  },
+  "FR_7e_Blindee_challenge": {
+    "cfg_name": "FR_7e_Blindee_challenge",
+    "division_name_token": "OUTIKXRJRP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_FR_7eDB",
+    "display_name": "NOm placeholder"
+  },
+  "NL_4e_Divisie_challenge": {
+    "cfg_name": "NL_4e_Divisie_challenge",
+    "division_name_token": "EWOIOHQJJT",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_NL_4e_Divisie",
+    "display_name": "4E DIVISIE"
+  },
+  "POL_11TkD_challenge": {
+    "cfg_name": "POL_11TkD_challenge",
+    "division_name_token": "",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_11_TkD",
+    "display_name": ""
+  },
+  "POL_1SF_challenge": {
+    "cfg_name": "POL_1SF_challenge",
+    "division_name_token": "TQUMUBRSBF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "20 DIV. PANCERNA"
+  },
+  "POL_30RMD_84MSR_challenge": {
+    "cfg_name": "POL_30RMD_84MSR_challenge",
+    "division_name_token": "EQTOVWSYGC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_POL_20_Pc",
+    "display_name": "20 DIV. PANCERNA"
+  },
+  "RDA_11MSD_challenge": {
+    "cfg_name": "RDA_11MSD_challenge",
+    "division_name_token": "VIHBYIAHTG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_GroundForces_SansFond",
+    "display_name": "11. MOT.-SCH\u00dcTZEN-DIVISION"
+  },
+  "RDA_4_MSD_challenge": {
+    "cfg_name": "RDA_4_MSD_challenge",
+    "division_name_token": "QTLZNDFNJC",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_DDR_4_MSD",
+    "display_name": "4MSDChallenge"
+  },
+  "RFA_12_Panzer_challenge": {
+    "cfg_name": "RFA_12_Panzer_challenge",
+    "division_name_token": "OVWMHFFBFY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_12_Panzer",
+    "display_name": "12. PZ.GRENADIER-DIVISION"
+  },
+  "RFA_1_Luftlande_challenge": {
+    "cfg_name": "RFA_1_Luftlande_challenge",
+    "division_name_token": "MUUGHLYRWV",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_1LLDiv",
+    "display_name": "1. LUFTLANDE-DIVISION"
+  },
+  "RFA_2_PzGrenadier_challenge": {
+    "cfg_name": "RFA_2_PzGrenadier_challenge",
+    "division_name_token": "YFXMMZXILW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Nord",
+    "display_name": "2PzGrenChallenge"
+  },
+  "RFA_4PzGrD_challenge": {
+    "cfg_name": "RFA_4PzGrD_challenge",
+    "division_name_token": "OWQLCXWSLP",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_2_PzGrenDivision_RFA",
+    "display_name": "4. PzGrd"
+  },
+  "RFA_5_Panzer_challenge": {
+    "cfg_name": "RFA_5_Panzer_challenge",
+    "division_name_token": "THWOAZQTOB",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_5_Panzerdivision_RFA",
+    "display_name": "5. Panzer Challenge"
+  },
+  "RFA_TerrKdo_Sud_challenge": {
+    "cfg_name": "RFA_TerrKdo_Sud_challenge",
+    "division_name_token": "BIHXAJRCJA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_RFA_TerrKdo_Sud",
+    "display_name": "TERRITORIALKOMMANDO S\u00dcD"
+  },
+  "SOV_138_TkInde_challenge": {
+    "cfg_name": "SOV_138_TkInde_challenge",
+    "division_name_token": "WYNOTADMUW",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_138OdtTP",
+    "display_name": "79-YA GV. TANK. DIV."
+  },
+  "SOV_27_Gds_Rifle_challenge": {
+    "cfg_name": "SOV_27_Gds_Rifle_challenge",
+    "division_name_token": "PFMPJNZAXB",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_27GvMSD",
+    "display_name": "27-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_35_AirAslt_Brig_challenge": {
+    "cfg_name": "SOV_35_AirAslt_Brig_challenge",
+    "division_name_token": "PFEYNGDKVR",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_35th_VDV",
+    "display_name": "35-YA OG DESANTNO-SHTURMOVAYA BRIG."
+  },
+  "SOV_39_Gds_Rifle_challenge": {
+    "cfg_name": "SOV_39_Gds_Rifle_challenge",
+    "division_name_token": "WHXBXIENCF",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_39_gvMSD",
+    "display_name": "39-YA GV. MOTOSTRELK. DIV."
+  },
+  "SOV_57_GMRD_challenge": {
+    "cfg_name": "SOV_57_GMRD_challenge",
+    "division_name_token": "JLEMTCILBD",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_Blazon57th_gtd",
+    "display_name": "57-YA GV. STRELK. DIV."
+  },
+  "SOV_79_Gds_Tank_challenge": {
+    "cfg_name": "SOV_79_Gds_Tank_challenge",
+    "division_name_token": "ABQKCQLERY",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_79_gvTD",
+    "display_name": "79-YA GV. TANK. DIV."
+  },
+  "SOV_9_Gds_Tank_challenge": {
+    "cfg_name": "SOV_9_Gds_Tank_challenge",
+    "division_name_token": "UCHGNEBJWY",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_SOV_9TD",
+    "display_name": "9-YA GV. TANK. DIV."
+  },
+  "TCH_19_MSD_challenge": {
+    "cfg_name": "TCH_19_MSD_challenge",
+    "division_name_token": "CMEODGSPXG",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_19_MSD",
+    "display_name": "19. MOTOSTRELECKE DIVIZE"
+  },
+  "TCH_1_Tank_challenge": {
+    "cfg_name": "TCH_1_Tank_challenge",
+    "division_name_token": "YPEMXPWDPL",
+    "description_token": "",
+    "coalition": "PACT",
+    "tags": [
+      "HB",
+      "PACT"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_TCH_1_Tank",
+    "display_name": "1. TANKOVA DIVIZE"
+  },
+  "UK_1st_Armoured_challenge": {
+    "cfg_name": "UK_1st_Armoured_challenge",
+    "division_name_token": "YPUIEGDPJD",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_1st_Armoured",
+    "display_name": "1ST ARMOURED DIVISION"
+  },
+  "UK_2nd_Infantry_challenge": {
+    "cfg_name": "UK_2nd_Infantry_challenge",
+    "division_name_token": "",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_2nd_Infantry",
+    "display_name": ""
+  },
+  "UK_4th_Armoured_challenge": {
+    "cfg_name": "UK_4th_Armoured_challenge",
+    "division_name_token": "EDKSESFKOW",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_4th_Armoured",
+    "display_name": "4TH ARMOURED DIVISION"
+  },
+  "UK_5th_Airborne_Brigade_challenge": {
+    "cfg_name": "UK_5th_Airborne_Brigade_challenge",
+    "division_name_token": "HEWSNUTIYY",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_5th_Airborne",
+    "display_name": "MNAD"
+  },
+  "UK_Blues_Royals_challenge": {
+    "cfg_name": "UK_Blues_Royals_challenge",
+    "division_name_token": "MSVIEZBTGS",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_3rd_Armoured",
+    "display_name": "Queen's Own Highlanders"
+  },
+  "UK_Queens_Own_Highlanders_challenge": {
+    "cfg_name": "UK_Queens_Own_Highlanders_challenge",
+    "division_name_token": "XMPEHKSGGF",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_UK_3rd_Armoured",
+    "display_name": "Queen's Own Highlanders"
+  },
+  "US_11ACR_challenge": {
+    "cfg_name": "US_11ACR_challenge",
+    "division_name_token": "GKSQUEBHOA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_11ACR",
+    "display_name": "challenge 11 ACR"
+  },
+  "US_3rd_Arm_challenge": {
+    "cfg_name": "US_3rd_Arm_challenge",
+    "division_name_token": "RSEACNWCQI",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_3rd_Armored_Division",
+    "display_name": "3RD ARMORED DIVISION"
+  },
+  "US_82nd_Airborne_challenge": {
+    "cfg_name": "US_82nd_Airborne_challenge",
+    "division_name_token": "XWAETHXNYG",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_82nd_airborne",
+    "display_name": "82ND AIRBORNE DIVISION"
+  },
+  "US_8th_Inf_challenge": {
+    "cfg_name": "US_8th_Inf_challenge",
+    "division_name_token": "ECGMWQOEZA",
+    "description_token": "",
+    "coalition": "NATO",
+    "tags": [
+      "HB",
+      "NATO"
+    ],
+    "emblem_texture": "Texture_Division_Emblem_8th_infantry_division",
+    "display_name": "8TH INFANTRY DIVISION (MECH.)"
+  }
+}

@@ -77,8 +77,8 @@ def _deck_label(deck_name: str) -> dict:
     div = None
     if deck and deck.division_ref:
         div = _state["divisions"].get(deck.division_ref)
-    if div and div.division_name_token:
-        ref = _state["units_csv"].get(div.division_name_token)
+    if div:
+        ref = div.display_name or _state["units_csv"].get(div.division_name_token)
         if ref:
             # Tail = part of deck name not covered by division ref
             # e.g. deck pion_RDA_10MSD_16MSR_2 / division RDA_10MSD_solo → "16MSR_2"

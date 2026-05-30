@@ -32,3 +32,10 @@ def test_parse_returns_dict_keyed_by_cfg_name():
 def test_parse_extracts_emblem_texture():
     d = parse_divisions(FIX)
     assert d["RDA_10MSD_solo"].emblem_texture == "Texture_Division_Emblem_RDA_10MSD"
+
+
+def test_parse_divisions_resolves_display_name():
+    csv_map = {"DIV10MSD": "10. Panzerdivision"}
+    d = parse_divisions(FIX, units_csv=csv_map)
+    assert d["RDA_10MSD_solo"].display_name == "10. Panzerdivision"
+    assert d["TEST_NoToken_solo"].display_name == ""

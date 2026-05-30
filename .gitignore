@@ -14,6 +14,8 @@ data/*
 !data/wif_units_cache.json
 !data/wif_replicas.json
 !data/vanilla_units_cache.json
+!data/vanilla_divisions_cache.json
 !data/vanilla_combat_groups_cache.json
 !data/vanilla_packs_cache.json
+
 

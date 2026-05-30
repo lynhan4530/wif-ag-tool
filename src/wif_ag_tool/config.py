@@ -53,4 +53,5 @@ UNITS_CACHE_FILE = TOOL_ROOT / "data" / "wif_units_cache.json"   # WIF master un
 VANILLA_UNITS_CACHE = TOOL_ROOT / "data" / "vanilla_units_cache.json" # Vanilla master units cache
 VANILLA_COMBAT_GROUPS_CACHE = TOOL_ROOT / "data" / "vanilla_combat_groups_cache.json"   # Vanilla CGs cache
 VANILLA_PACKS_CACHE = TOOL_ROOT / "data" / "vanilla_packs_cache.json"   # Vanilla Packs cache
+VANILLA_DIVISIONS_CACHE = TOOL_ROOT / "data" / "vanilla_divisions_cache.json" # Vanilla Divisions cache
 CAMPAIGN_DECKS_YAML = TOOL_ROOT / "configs" / "campaign_decks.yaml"   # optional, v1 unused

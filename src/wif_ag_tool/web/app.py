@@ -10,7 +10,7 @@ from wif_ag_tool.parser.icon_parser import parse_button_textures
 from wif_ag_tool.parser.pack_parser import parse_strategic_packs, load_vanilla_packs
 from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups, load_vanilla_combat_groups
 from wif_ag_tool.parser.deck_parser import list_decks
-from wif_ag_tool.parser.division_parser import parse_divisions
+from wif_ag_tool.parser.division_parser import parse_divisions, load_vanilla_divisions
 from wif_ag_tool.parser.localisation_csv import load_units_csv
 from wif_ag_tool.pipeline import load_deck_cache, migrate_legacy_assignments, refresh_deck_cache
 from wif_ag_tool.web.api import api_bp, set_state
@@ -84,14 +84,7 @@ def create_app(load_data: bool = True) -> Flask:
             icons.update(parse_button_textures(config.WIF_BUTTON_TEXTURES, config.WIF_ROOT))
         packs = load_vanilla_packs()
         combat_groups = load_vanilla_combat_groups()
-        # Divisions: prefer vanilla (more complete); fall back to WIF mod's copy.
-        divisions: dict = {}
-        if config.VANILLA_DIVISIONS_NDF.exists():
-            divisions = parse_divisions(config.VANILLA_DIVISIONS_NDF)
-        elif (config.WIF_ROOT / "Generated/Gameplay/Decks/Divisions.ndf").exists():
-            divisions = parse_divisions(
-                config.WIF_ROOT / "Generated/Gameplay/Decks/Divisions.ndf"
-            )
+        divisions = load_vanilla_divisions(units_csv=units_csv)
     else:
         units, decks, icons, packs, combat_groups = {}, {}, {}, {}, {}
         units_csv, vanilla_units, divisions = {}, {}, {}
