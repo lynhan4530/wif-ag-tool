@@ -49,4 +49,5 @@ CACHE_FILE       = TOOL_ROOT / ".deck_cache.json"        # refreshed after every
 
 SESSIONS_DIR     = TOOL_ROOT / "sessions"                # one file per campaign
 REPLICAS_FILE    = TOOL_ROOT / "data" / "wif_replicas.json"   # global per-deck WIF replicas
+UNITS_CACHE_FILE = TOOL_ROOT / "data" / "wif_units_cache.json"   # WIF master units cache
 CAMPAIGN_DECKS_YAML = TOOL_ROOT / "configs" / "campaign_decks.yaml"   # optional, v1 unused

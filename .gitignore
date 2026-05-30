@@ -7,7 +7,9 @@ build/
 .pytest_cache/
 assignments.json
 assignments.json.migrated
-.deck_cache.json
+# .deck_cache.json tracked now
 output/
 sessions/
-data/
+data/*
+!data/wif_units_cache.json
+!data/wif_replicas.json

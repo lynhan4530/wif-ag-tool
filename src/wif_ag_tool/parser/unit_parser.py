@@ -132,3 +132,27 @@ def _infer_nation(name: str) -> str:
         if name.endswith(suffix):
             return suffix.lstrip("_")
     return "UNKNOWN"
+
+
+def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit]:
+    """Load WIF units from the UniteDescriptor.ndf file, or fallback to the json cache."""
+    from wif_ag_tool import config
+    import json
+    from dataclasses import asdict
+
+    units = {}
+    if config.WIF_UNITE_DESCRIPTOR.exists():
+        units = parse_wif_units(config.WIF_UNITE_DESCRIPTOR, units_csv=units_csv)
+        try:
+            config.UNITS_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+            cache_data = {name: asdict(unit) for name, unit in units.items()}
+            config.UNITS_CACHE_FILE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
+        except Exception as e:
+            print(f"warn: failed to cache WIF units: {e}")
+    elif config.UNITS_CACHE_FILE.exists():
+        try:
+            cache_data = json.loads(config.UNITS_CACHE_FILE.read_text(encoding="utf-8"))
+            units = {name: WifUnit(**data) for name, data in cache_data.items()}
+        except Exception as e:
+            print(f"warn: failed to load WIF units cache: {e}")
+    return units

@@ -45,12 +45,16 @@ def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list
         else:
             non_hq_vanillas.append(cg)
 
-    if hq_replicas and hq_vanillas:
-        mapping[hq_replicas[0]] = hq_vanillas[0]
-
-    unmatched_replicas = []
     matched_vanillas = set()
 
+    # 1. Match HQ first
+    if hq_replicas and hq_vanillas:
+        mapping[hq_replicas[0]] = hq_vanillas[0]
+        matched_vanillas.add(hq_vanillas[0])
+
+    unmatched_replicas = []
+
+    # 2. Match non-HQ by letter
     for gname in non_hq_replicas:
         target_in = f"_{gname}_"
         target_end = f"_{gname}"
@@ -67,6 +71,7 @@ def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list
         if not matched:
             unmatched_replicas.append(gname)
 
+    # 3. Match any remaining unmatched replica groups to unmatched vanilla groups in index order
     unmatched_vanillas = [cg for cg in non_hq_vanillas if cg not in matched_vanillas and cg.startswith("Descriptor_CombatGroup_")]
     for r_gname, v_cg in zip(unmatched_replicas, unmatched_vanillas):
         mapping[r_gname] = v_cg
@@ -256,3 +261,61 @@ def generate_grouped_combat_group(
 
     lines.extend(["    ]", ")"])
     return "\n".join(lines)
+
+
+def generate_unmatched_combat_group(
+    cg_name: str,
+    cg_token: str,
+    is_hq: bool,
+    smart_groups: list[any],
+    deck_pack_list: list[str],
+    new_packs: list[str],
+    running_pack_list: list[str],
+) -> str:
+    """Emit a TDeckCombatGroupDescriptor for an unmatched vanilla combat group.
+
+    Packs referenced by this group are copied from the original deck pack list,
+    appended to the new pack lists in-place, and their indices are remapped.
+    """
+    lines = [
+        f"{cg_name} is TDeckCombatGroupDescriptor",
+        "(",
+        f'    Name = "{cg_token}"',
+    ]
+    if is_hq:
+        lines.append("    IsHQ = True")
+    lines.extend([
+        "    SmartGroupList =",
+        "    [",
+    ])
+    for sg in smart_groups:
+        new_tuples = []
+        for orig_idx, count in sg.pack_indices:
+            if 0 <= orig_idx < len(deck_pack_list):
+                pname = deck_pack_list[orig_idx]
+                new_start_idx = len(new_packs)
+                for _ in range(count):
+                    new_packs.append(pname)
+                    running_pack_list.append(pname)
+                new_tuples.append((new_start_idx, count))
+
+        lines.extend([
+            "        TDeckSmartGroupDescriptor",
+            "        (",
+            f'            Name = "{sg.name}"',
+        ])
+        if sg.is_hq:
+            lines.append("            IsHQ = True")
+        lines.extend([
+            "            PackIndexUnitNumberList =",
+            "            [",
+        ])
+        for start_idx, count in new_tuples:
+            lines.append(f"                ({start_idx},{count}),")
+        lines.extend([
+            "            ]",
+            "        ),",
+        ])
+    lines.extend(["    ]", ")"])
+    return "\n".join(lines)
+

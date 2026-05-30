@@ -5,7 +5,7 @@ from pathlib import Path
 
 from wif_ag_tool import config
 from wif_ag_tool.parser.deck_parser import list_decks
-from wif_ag_tool.parser.unit_parser import parse_wif_units
+from wif_ag_tool.parser.unit_parser import load_wif_units
 from wif_ag_tool.pipeline import (
     refresh_deck_cache,
     load_deck_cache,
@@ -18,9 +18,9 @@ USAGE = """\
 usage: py -m wif_ag_tool <command>
 
 commands:
-    refresh   re-parse vanilla StrategicDecks.ndf → .deck_cache.json
-    export    read assignments.json → write NDF patch files to ./output/
-    serve     start Flask dev server on localhost:5000
+  refresh    build deck cache from vanilla StrategicDecks.ndf
+  export     generate all NDF changes for mod folder from wif_replicas.json
+  serve      start web session server on 127.0.0.1:5000
 """
 
 
@@ -32,13 +32,14 @@ def main(argv: list[str] | None = None) -> int:
     cmd = argv[0]
     if cmd == "refresh":
         return cmd_refresh()
-    if cmd == "export":
+    elif cmd == "export":
         return cmd_export()
-    if cmd == "serve":
+    elif cmd == "serve":
         return cmd_serve()
-    print(f"unknown command: {cmd}\n", file=sys.stderr)
-    print(USAGE, file=sys.stderr)
-    return 1
+    else:
+        print(f"unknown command: {cmd}", file=sys.stderr)
+        print(USAGE, file=sys.stderr)
+        return 1
 
 
 def cmd_refresh() -> int:
@@ -58,7 +59,7 @@ def cmd_export() -> int:
     if not decks:
         print("no deck cache — run `refresh` first", file=sys.stderr)
         return 2
-    units = parse_wif_units(config.WIF_UNITE_DESCRIPTOR)
+    units = load_wif_units()
     output_dir = config.TOOL_ROOT / "output"
     paths = export_from_replicas(decks, units, output_dir, replicas=store)
     for label, path in paths.items():

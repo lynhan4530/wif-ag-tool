@@ -78,6 +78,19 @@ python -m wif_ag_tool refresh
 
 ---
 
+## Sharing and Collaborating (Master Data Caching)
+
+The tool automatically caches parsed WIF units and vanilla decks, making it extremely easy to share your modding workspace with others (even if they do not have access to the WIF Git repository):
+
+* **How it works**: When you run the tool on a machine with the WIF repository, it automatically parses `UniteDescriptor.ndf` and writes/updates all unit data into `data/wif_units_cache.json`.
+* **To share the tool**: Simply zip/share the entire `wif-ag-tool` folder with your collaborator, making sure it includes:
+  - `data/wif_units_cache.json` (the master unit data cache)
+  - `data/wif_replicas.json` (your replica deck configurations)
+  - `.deck_cache.json` (the parsed vanilla campaign decks cache)
+* **On your collaborator's machine**: Since they don't have the WIF repository, the tool will automatically fall back to loading the WIF units and metadata directly from the JSON cache files. They can edit replicas, direct-export to their own mod folder, and compile successfully out-of-the-box!
+
+---
+
 ## How to Use the Tool (Modding Workflow)
 
 1. **Open/Create a Session**: In the campaign picker, choose your campaign save or create a manual session.

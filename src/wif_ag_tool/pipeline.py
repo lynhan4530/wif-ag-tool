@@ -180,7 +180,47 @@ def build_export_blocks(
             new_groups.append(cg_name)
             running.combat_group_list.append(cg_name)
 
+        # 1. Verify invariant on replica-added packs first
         _assert_pack_index_invariant(deck_name, deck_assignments, len(new_packs))
+
+        # 2. Keep and append unmatched vanilla combat groups to avoid breaking pawn-to-group bindings
+        matched_vanilla_cgs = set(cg_names_map.values())
+        unmatched_vanilla_cgs = [cg for cg in deck.combat_group_list if cg not in matched_vanilla_cgs]
+
+        for cg_name in unmatched_vanilla_cgs:
+            if not cg_name.startswith("Descriptor_CombatGroup_"):
+                continue
+            vanilla = combat_groups.get(cg_name)
+            if not vanilla:
+                continue
+
+            cg_token = vanilla.token
+            is_hq = vanilla.is_hq
+
+            from wif_ag_tool.generator.group_generator import generate_unmatched_combat_group
+            groups_blocks.append(generate_unmatched_combat_group(
+                cg_name=cg_name,
+                cg_token=cg_token,
+                is_hq=is_hq,
+                smart_groups=vanilla.smart_groups,
+                deck_pack_list=deck.pack_list,
+                new_packs=new_packs,
+                running_pack_list=running.pack_list,
+            ))
+
+            new_groups.append(cg_name)
+            running.combat_group_list.append(cg_name)
+
+        # Reorder new_groups to match the exact original order of combat groups in the deck,
+        # keeping any new/extra (WIF) groups appended at the end.
+        vanilla_indices = {name: idx for idx, name in enumerate(deck.combat_group_list)}
+        new_groups_orig = list(new_groups)
+        new_groups.sort(key=lambda name: (
+            0 if name in vanilla_indices else 1,
+            vanilla_indices.get(name, 0) if name in vanilla_indices else new_groups_orig.index(name)
+        ))
+        running.combat_group_list = list(new_groups)
+
         deck_lists[deck_name] = (new_packs, new_groups)
 
     return packs_blocks, groups_blocks, deck_lists

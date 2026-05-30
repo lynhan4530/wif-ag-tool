@@ -167,6 +167,8 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     # AG can load the deck). Group B has no vanilla match → WIF name.
     assert "Descriptor_CombatGroup_pion_TEST_Alpha_1_A is" in groups_text
     assert "Descriptor_CombatGroup_TEST_Alpha_1_WIF_B is" in groups_text
+    # The unmatched vanilla group (HQ) is preserved and appended
+    assert "Descriptor_CombatGroup_pion_TEST_Alpha_1_HQ is" in groups_text
 
 
 def test_migrate_legacy_assignments(tmp_path):
