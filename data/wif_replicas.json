@@ -1253,89 +1253,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_Leopard_2A6_GER",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "1. INFANTERIEZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": "WF_Puma_GER",
-                "unit_id": "WF_Panzergrenadier_GER",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": "WF_Marder_1A5_GER",
-                "unit_id": "WF_Panzergrenadier_DMR_GER",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "2. INFANTERIEZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": "WF_Puma_Spike_GER",
-                "unit_id": "WF_ATteam_Spike_GER",
-                "xp": 1
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "3",
-        "platoons": [
-          {
-            "name": "STAB",
-            "units": []
-          },
-          {
-            "name": "1. PANZERZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_Leopard_2A7A1_GER",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "2. PANZERZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_Leopard_2A7V_GER",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "3. PANZERZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
+                "count": 6,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Leopard_2A6_GER",
@@ -1417,7 +1335,89 @@
             "units": [
               {
                 "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Leopard_2A6_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
                 "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Puma_GER",
+                "unit_id": "WF_Panzergrenadier_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Marder_1A5_GER",
+                "unit_id": "WF_Panzergrenadier_DMR_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Puma_Spike_GER",
+                "unit_id": "WF_ATteam_Spike_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": []
+          },
+          {
+            "name": "1. PANZERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Leopard_2A7A1_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. PANZERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Leopard_2A7V_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. PANZERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Leopard_2A6_GER",
@@ -1463,7 +1463,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T22:59:26.279327+00:00"
+    "updated_at": "2026-05-30T23:01:54.736725+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_142PzG": {
     "groups": [
