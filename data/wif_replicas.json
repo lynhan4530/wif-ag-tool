@@ -826,12 +826,25 @@
                 "xp": 1
               }
             ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Alouette_II_reco_RFA",
+                "xp": 1
+              }
+            ]
           }
         ]
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-29T16:26:24.306326+00:00"
+    "updated_at": "2026-05-30T19:58:00.318251+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_141MxPz": {
     "groups": [
