@@ -738,7 +738,15 @@ def howto():
 @api_bp.post("/refresh")
 def refresh():
     if not config.VANILLA_STRATEGIC_DECKS.exists():
-        return jsonify({"error": f"missing {config.VANILLA_STRATEGIC_DECKS}"}), 500
+        return jsonify({
+            "error": (
+                f"Missing vanilla reference file: {config.VANILLA_STRATEGIC_DECKS}\n\n"
+                "IMPORTANT: You do not need to refresh the deck cache since the pre-parsed campaign decks "
+                "are already committed and loaded from the Git repository. "
+                "Refreshing is only necessary after a major WARNO game update, which requires "
+                "extracting the game's base files and configuring the Vanilla Reference path."
+            )
+        }), 500
     deck_names = list_decks(config.VANILLA_STRATEGIC_DECKS)
     decks_map = refresh_deck_cache(config.VANILLA_STRATEGIC_DECKS, deck_names, config.CACHE_FILE)
     _state["decks"] = decks_map
