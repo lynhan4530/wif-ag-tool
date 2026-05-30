@@ -2490,6 +2490,30 @@
     "saved": true,
     "updated_at": "2026-05-30T18:15:58.195740+00:00"
   },
+  "Descriptor_Deck_pion_US_11ACR_2": {
+    "groups": [
+      {
+        "name": "E",
+        "platoons": [
+          {
+            "name": "1ST TANK PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Stryker_CV_US",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "saved": true,
+    "updated_at": "2026-05-30T19:58:53.042700+00:00"
+  },
   "Descriptor_Deck_pion_US_11ACR_3": {
     "groups": [
       {
