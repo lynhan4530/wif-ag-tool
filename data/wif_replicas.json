@@ -1167,17 +1167,370 @@
   "Descriptor_Deck_pion_RFA_5PzD_142PzG": {
     "groups": [
       {
-        "name": "1",
+        "name": "SK",
         "platoons": [
           {
-            "name": "3RD RIFLE PLATOON",
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Boxer_CMD_GER",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "CH53G_trans_RFA",
+                "unit_id": "FOB_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_NH90_Supply_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. FLUGABWEHRZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Marder_Roland_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_AGL_GER",
+                "unit_id": "WF_MANPAD_Stinger_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Jager_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_DMR_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Puma_GER",
+                "unit_id": "WF_Engineers_AT_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Puma_Spike_GER",
+                "unit_id": "WF_ATteam_Spike_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "ATteam_Milan_2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_CMD_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Jager_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_DMR_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Puma_GER",
+                "unit_id": "WF_Engineers_AT_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Puma_Spike_GER",
+                "unit_id": "WF_ATteam_Spike_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "ATteam_Milan_2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_CMD_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 8,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "WF_Jager_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_DMR_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Puma_GER",
+                "unit_id": "WF_Engineers_AT_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_Puma_Spike_GER",
+                "unit_id": "WF_ATteam_Spike_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Boxer_50_GER",
+                "unit_id": "ATteam_Milan_2_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Panzergrenadier_CMD_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Dingo_2_CMD_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. AUFKL\u00c4RUNGSZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Fennek_AGL_GER",
+                "unit_id": "WF_Fernspaher_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "Bo_105_trans_RFA",
+                "unit_id": "WF_Sniper_KSK_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Spy_Ranger_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "UNTERST\u00dcTZUNGSGRUPPE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "M113_PzMorser_RFA",
                 "xp": 1
               }
             ]
@@ -1186,7 +1539,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-29T16:26:58.252743+00:00"
+    "updated_at": "2026-05-30T22:37:53.907816+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_143Pz": {
     "groups": [
@@ -1299,26 +1652,13 @@
                 "count": 4,
                 "defense_override": null,
                 "transport_id": "MAN_Kat_6x6_trans_RFA",
-                "unit_id": "WF_Jager_MRAP_GER",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "3. INFANTERIEZUG",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": "MAN_Kat_6x6_trans_RFA",
                 "unit_id": "WF_Panzergrenadier_GER",
                 "xp": 1
               }
             ]
           },
           {
-            "name": "1. AUFKL\u00c4RUNGSZUG",
+            "name": "UNTERST\u00dcTZUNGSGRUPPE",
             "units": [
               {
                 "attack_override": null,
@@ -1335,32 +1675,6 @@
                 "transport_id": null,
                 "unit_id": "M113_PzMorser_RFA",
                 "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "UNTERST\u00dcTZUNGSGRUPPE",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "TPZ_Fuchs_RASIT_RFA",
-                "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "UNTERST\u00dcTZUNGSGRUPPE 2",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": "WF_Fennek_AGL_GER",
-                "unit_id": "WF_Fernspaher_GER",
-                "xp": 3
               }
             ]
           },
@@ -1395,15 +1709,10 @@
                 "transport_id": null,
                 "unit_id": "FOB_RFA",
                 "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "NACHSCHUBGRUPPE 2",
-            "units": [
+              },
               {
                 "attack_override": null,
-                "count": 6,
+                "count": 8,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "MAN_Kat_6x6_RFA",
@@ -1736,8 +2045,24 @@
             ]
           },
           {
-            "name": "UNTERST\u00dcTZUNGSGRUPPE",
+            "name": "1. AUFKL\u00c4RUNGSZUG",
             "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "UH1D_RFA",
+                "unit_id": "WF_Sniper_KSK_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Spy_Ranger_GER",
+                "xp": 1
+              },
               {
                 "attack_override": null,
                 "count": 4,
@@ -1749,22 +2074,14 @@
             ]
           },
           {
-            "name": "UNTERST\u00dcTZUNGSGRUPPE 2",
+            "name": "UNTERST\u00dcTZUNGSGRUPPE",
             "units": [
               {
                 "attack_override": null,
                 "count": 2,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_Spy_Ranger_GER",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": "UH1D_RFA",
-                "unit_id": "WF_Sniper_KSK_GER",
+                "transport_id": "Unimog_trans_RFA",
+                "unit_id": "WF_Engineers_GER",
                 "xp": 1
               }
             ]
@@ -1773,7 +2090,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T22:09:13.770488+00:00"
+    "updated_at": "2026-05-30T22:28:21.902512+00:00"
   },
   "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
     "groups": [
