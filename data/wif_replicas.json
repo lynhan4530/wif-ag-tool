@@ -2513,7 +2513,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Stryker_CV_US",
@@ -2525,7 +2525,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:58:53.042700+00:00"
+    "updated_at": "2026-05-30T20:02:08.430852+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_3": {
     "groups": [
