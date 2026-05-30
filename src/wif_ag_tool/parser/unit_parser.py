@@ -104,6 +104,7 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
             specialties.append('transportable')
     nation = country_m.group(1) if country_m else _infer_nation(name)
     is_transport = 'TTransporterModuleDescriptor' in block
+    is_transportable = 'TTransportableModuleDescriptor' in block
 
     return WifUnit(
         name=name,
@@ -117,6 +118,7 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         specialties=specialties,
         button_texture=button_m.group(1) if button_m else "",
         is_transport=is_transport,
+        is_transportable=is_transportable,
     )
 
 

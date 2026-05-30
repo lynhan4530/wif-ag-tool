@@ -123,3 +123,33 @@ export Descriptor_Unit_WF_M113A3_apc_US is TEntityDescriptor
         )
     ]
 )
+
+export Descriptor_Unit_WF_Rifles_US is TEntityDescriptor
+(
+    DescriptorId = GUID:{dddddddd-1111-2222-3333-eeeeeeeeeeee}
+    ClassNameForDebug = 'Unit_WF_Rifles_US'
+    ModulesDescriptors = [
+        TTypeUnitModuleDescriptor
+        (
+            Coalition = ECoalition/NATO
+            MotherCountry = 'US'
+        ),
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue = 5
+            UnitDefenseValue = 5
+            UnitBonusXpPerLevelValue = 1
+        ),
+        TUnitUIModuleDescriptor
+        (
+            PriceCategory = 'infantry'
+            UnitRole = 'infantry'
+            SpecialtiesList = []
+            NameToken = 'WFRifles'
+        ),
+        TTransportableModuleDescriptor
+        (
+            SupportedTransports = []
+        )
+    ]
+)

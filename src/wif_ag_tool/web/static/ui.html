@@ -456,58 +456,9 @@ function getAvailableGroups() {
   return groups;
 }
 
-const FOOT_TEAM_ROLES = new Set([
-  "at", "atgm", "manpads", "sam_inf", "aa_inf",
-  "mortar", "mortar_inf", "mortar_team",
-  "hmg", "mmg", "mg_team", "sniper",
-  "spotter", "fo", "forward_observer",
-  "support_inf", "supp_inf", "sapper",
-]);
-
 function needsTransport(u) {
   if (!u) return false;
-  
-  const norm = getNormalizedRole(u);
-  // Foot infantry and engineers always need transport
-  if (norm === "infantry" || norm === "engineer") return true;
-
-  const nameLower = (u.name || "").toLowerCase();
-  
-  // Exclude helicopters
-  const HELICOPTER_KEYWORDS = /helo|heli|alouette|bo_105|gazelle|mi_|oh58|kiowa|wildcat|puma|cobra|apache|lynx|sea_king|super_puma|ch53|ch_53|ch_47|chinook|uh1|uh_1|defender|ec_665|tiger_uht/i;
-  if (HELICOPTER_KEYWORDS.test(nameLower)) return false;
-  
-  // Exclude self-propelled vehicle platforms
-  // Use negative lookahead (?![0-9]) on 2s1/2s3/2s5/2s7 to prevent matching towed systems like 2S12 Sani
-  const VEHICLE_KEYWORDS = /m109|m110|2s1(?![0-9])|2s3(?![0-9])|2s5(?![0-9])|2s7(?![0-9])|2s19|amx|as90|automoteur|dana|caesar|pzh|archer|bereg|gvozdika|akatsiya|malka|pion|tyulpan|giatsints|giatsint_s|vab|bdx|m106|m125|fv432|lav_m|btr|mtlb|stryker|vbmr|hosta|vena|drok|panzermorser|pm_81|pram|vlra|bmr|luchs|fuchs|tuto|m113|humvee|m1025|uaz|jeep|rover|iltis|fuch|m151|bmd|gtmu|ot_62|ot_810|lav|unimog|gaz|truck/i;
-  if (VEHICLE_KEYWORDS.test(nameLower)) return false;
-
-  // Explicitly marked as transportable/towed in NDF TagSet
-  if (Array.isArray(u.specialties) && u.specialties.includes("transportable")) return true;
-
-  // Remaining ground recon must be foot recon squads
-  if (norm === "recon") return true;
-
-  const raw = (u.role || "").toLowerCase();
-  if (FOOT_TEAM_ROLES.has(raw)) return true;
-  
-  // Compound name matching for heavy weapon / foot teams (camelCase & singular inclusive)
-  if (/atgm|atteam|antitank|at_team|at_inf|manpad|sam_inf|missile_team|javelin|stinger|tow_team|panzerfaust|rpg|hmg|mmg|mg_team|mortar_inf|mortar_team|sniper|spotter|commando|sapper/.test(nameLower)) return true;
-
-  // Fallbacks:
-  // Towed Howitzers / Artillery
-  if (norm === "artillery" || raw === "howizer") {
-    if (/howz|fh70|obusier|2a36|bs3|zis3|trf1|m777|lg1|mstab|msta_b/.test(nameLower)) return true;
-  }
-  // Towed AA Guns
-  if (norm === "aa" || raw === "aa") {
-    if (/zu_23|fk20/.test(nameLower)) return true;
-  }
-  // Towed AT Guns / Recoilless Rifles
-  if (norm === "at" || raw === "at") {
-    if (/t12_rapira|zis2|vz52|rcl|wombat|spg9|m40a1/.test(nameLower)) return true;
-  }
-  return false;
+  return !!u.is_transportable;
 }
 
 function getAvailableTransports(unit_id) {

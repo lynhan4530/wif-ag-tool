@@ -37,6 +37,7 @@ class WifUnit:
     button_texture: str = ""   # e.g. 'Texture_Button_Unit_M1A2_SEPV2' — resolves via icon_map
     display_name: str = ""     # human-readable, from UNITS.csv via name_token; "" → fallback to pretty ID
     is_transport: bool = False
+    is_transportable: bool = False
 
     @property
     def descriptor_name(self) -> str:
