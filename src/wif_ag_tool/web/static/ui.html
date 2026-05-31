@@ -622,6 +622,16 @@ function saveCollapseState() {
 // ── render ───────────────────────────────────────────────────────────────────
 function render() {
   const root = $("#root");
+  
+  // Save scroll positions before clearing DOM
+  const leftPane = document.querySelector(".session > .pane:nth-child(1)");
+  const centerPane = document.querySelector(".session > .pane:nth-child(2)");
+  const rightPane = document.querySelector(".session > .pane:nth-child(3)");
+  
+  if (leftPane) state.lastScrollLeft = leftPane.scrollTop;
+  if (centerPane) state.lastScrollCenter = centerPane.scrollTop;
+  if (rightPane) state.lastScrollRight = rightPane.scrollTop;
+
   const activeId = document.activeElement?.id;
   const selStart = document.activeElement?.selectionStart;
   const selEnd = document.activeElement?.selectionEnd;
@@ -635,6 +645,15 @@ function render() {
   if (state.settingsOpen) root.appendChild(renderSettingsModal());
   if (state.buildOpen) root.appendChild(renderBuildModal());
   if (state.howtoOpen) root.appendChild(renderHowtoModal());
+
+  // Restore scroll positions in the new DOM
+  const newLeftPane = document.querySelector(".session > .pane:nth-child(1)");
+  const newCenterPane = document.querySelector(".session > .pane:nth-child(2)");
+  const newRightPane = document.querySelector(".session > .pane:nth-child(3)");
+  
+  if (newLeftPane && state.lastScrollLeft !== undefined) newLeftPane.scrollTop = state.lastScrollLeft;
+  if (newCenterPane && state.lastScrollCenter !== undefined) newCenterPane.scrollTop = state.lastScrollCenter;
+  if (newRightPane && state.lastScrollRight !== undefined) newRightPane.scrollTop = state.lastScrollRight;
 
   if (activeId) {
     const activeEl = document.getElementById(activeId);
@@ -2218,6 +2237,9 @@ async function openSession(slug) {
     state.replicaDirty = false;
     state.sessionDirty = false;
     state.view = "session";
+    state.lastScrollLeft = 0;
+    state.lastScrollCenter = 0;
+    state.lastScrollRight = 0;
     loadCollapseState();
     await reloadScopedDecks();
     render();
@@ -2301,6 +2323,8 @@ async function selectDeck(name) {
   state.replicaGroups = [];
   state.initialReplica = "[]";
   state.replicaDirty = false;
+  state.lastScrollCenter = 0;
+  state.lastScrollRight = 0;
   render();
   try {
     const [v, r] = await Promise.all([
