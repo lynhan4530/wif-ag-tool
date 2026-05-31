@@ -236,7 +236,13 @@ def sessions_export_direct(slug: str):
     if not decks_map:
         return jsonify({"error": "No deck cache loaded — run refresh first"}), 400
 
-    scoped = session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys())
+    body = request.get_json(silent=True) or {}
+    scope = request.args.get("scope") or body.get("scope") or "all"
+
+    scoped = None
+    if scope == "session":
+        scoped = session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys())
+
     store = replicas_mod.load_replicas()
     assignments = replicas_mod.replicas_to_assignments(store, scope_decks=scoped)
 
