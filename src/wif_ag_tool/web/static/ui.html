@@ -2537,9 +2537,11 @@ async function openAddModal(gi, pi) {
   state.modalOpen = true;
   state.modalTarget = (gi !== undefined && pi !== undefined) ? { groupIdx: gi, platoonIdx: pi } : null;
   const dn = state.activeDeck.split("_")[3];
-  // Preserve a previously typed search across modal opens by keeping `q` if it's there.
+  // Preserve previous search, source, and role filters across modal opens.
   const prevQ = state.modalFilters?.q || "";
-  state.modalFilters = { nation: dn || "", role: "all", q: prevQ, source: "all" };
+  const prevSource = state.modalFilters?.source || "all";
+  const prevRole = state.modalFilters?.role || "all";
+  state.modalFilters = { nation: dn || "", role: prevRole, q: prevQ, source: prevSource };
   // The catalogue is loaded once at page boot; if it isn't ready yet, fall back to
   // an async load so the first modal open isn't empty.
   if (Object.keys(state.unitsIndex).length === 0) {
