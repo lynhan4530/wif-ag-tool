@@ -3612,7 +3612,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 8,
+                "count": 12,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_AA_GER",
@@ -3625,7 +3625,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Tornado_IDS_SEAD_GER",
@@ -3633,7 +3633,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Tornado_IDS_CLUS_RFA",
@@ -3641,7 +3641,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 8,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Tornado_IDS_HE1_RFA",
@@ -3662,7 +3662,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_CAS1_GER",
@@ -3670,7 +3670,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_CAS2_GER",
@@ -3682,7 +3682,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T23:56:39.795412+00:00"
+    "updated_at": "2026-05-31T06:15:12.322476+00:00"
   },
   "Descriptor_Deck_pion_RFA_JG74_2": {
     "groups": [
@@ -3694,7 +3694,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 8,
+                "count": 12,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_AA_GER",
@@ -3707,7 +3707,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Tornado_IDS_SEAD_GER",
@@ -3715,7 +3715,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Tornado_IDS_CLUS_RFA",
@@ -3723,7 +3723,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 8,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Tornado_IDS_HE1_RFA",
@@ -3744,7 +3744,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_CAS1_GER",
@@ -3752,7 +3752,7 @@
               },
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_Typhoon_CAS2_GER",
@@ -3764,7 +3764,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T23:56:52.423897+00:00"
+    "updated_at": "2026-05-31T06:15:20.451476+00:00"
   },
   "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
     "groups": [
