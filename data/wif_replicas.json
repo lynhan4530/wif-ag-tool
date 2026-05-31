@@ -5480,7 +5480,7 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_AA_US",
+                "unit_id": "WF_F35_Lightning_AA_US",
                 "xp": 2
               }
             ]
@@ -5490,19 +5490,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_CBU_US",
+                "unit_id": "WF_F16CM_SEAD_US",
                 "xp": 2
               },
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_CBU_US",
-                "xp": 2
+                "unit_id": "WF_F35_Lightning_JDAM_US",
+                "xp": 1
               }
             ]
           }
@@ -5519,7 +5519,7 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_AA_US",
+                "unit_id": "WF_F35_Lightning_AA2_US",
                 "xp": 2
               }
             ]
@@ -5529,19 +5529,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_HE_US",
-                "xp": 2
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 3
               },
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16C_LGB_US",
-                "xp": 2
+                "unit_id": "WF_F35_Lightning_JDAM_US",
+                "xp": 1
               }
             ]
           }
@@ -5555,11 +5555,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_AA_US",
-                "xp": 2
+                "unit_id": "WF_F35_Lightning_JDAM_US",
+                "xp": 1
               }
             ]
           },
@@ -5571,8 +5571,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "F16E_napalm_US",
-                "xp": 2
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 3
               }
             ]
           }
@@ -5580,7 +5580,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T18:02:06.723143+00:00"
+    "updated_at": "2026-05-31T23:39:21.697669+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
