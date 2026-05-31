@@ -7883,11 +7883,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F15C_Eagle_AA_US",
-                "xp": 2
+                "unit_id": "WF_F22A_Raptor_AA_US",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F22A_Raptor_AA2_US",
+                "xp": 1
               }
             ]
           },
@@ -7896,11 +7904,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F15E_StrikeEagle_US",
-                "xp": 2
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 3
               }
             ]
           }
@@ -7914,11 +7922,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F15C_Eagle_AA_US",
-                "xp": 2
+                "xp": 3
               }
             ]
           },
@@ -7927,11 +7935,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F15E_StrikeEagle_US",
-                "xp": 2
+                "xp": 1
               }
             ]
           }
@@ -7945,11 +7953,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F15C_Eagle_AA_US",
-                "xp": 2
+                "xp": 1
               }
             ]
           },
@@ -7958,11 +7966,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F15E_StrikeEagle_US",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
-                "xp": 2
+                "xp": 1
               }
             ]
           }
@@ -7970,7 +7986,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T17:45:25.307185+00:00"
+    "updated_at": "2026-05-31T20:46:09.657274+00:00"
   },
   "Descriptor_Deck_pion_US_23TFS": {
     "groups": [
