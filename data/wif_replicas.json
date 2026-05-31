@@ -5096,24 +5096,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
+                "unit_id": "WF_F35_Lightning_AA_US",
+                "xp": 1
+              },
               {
                 "attack_override": null,
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16C_CBU_US",
-                "xp": 2
+                "unit_id": "WF_F35_Lightning_AA2_US",
+                "xp": 1
               }
             ]
           }
@@ -5123,19 +5118,6 @@
         "name": "B",
         "platoons": [
           {
-            "name": "1ST AIR DEFENSE PLATOON",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2
-              }
-            ]
-          },
-          {
             "name": "1ST SUPPLY PLATOON",
             "units": [
               {
@@ -5143,8 +5125,37 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16C_JDAM_US",
-                "xp": 2
+                "unit_id": "WF_B2_Spirit_US",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_B2_Spirit_JSOW_US",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_B2_Spirit_MOP_US",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1ST AIR DEFENSE PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MQ1C_US",
+                "xp": 1
               }
             ]
           }
@@ -5161,21 +5172,16 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 2
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 3
+              },
               {
                 "attack_override": null,
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 2
+                "unit_id": "WF_F16C_JDAM_US",
+                "xp": 3
               }
             ]
           }
@@ -5183,7 +5189,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T17:50:14.621469+00:00"
+    "updated_at": "2026-05-31T06:42:47.570774+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
