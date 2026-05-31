@@ -561,7 +561,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Iltis_RFA",
@@ -930,7 +930,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T08:04:33.207225+00:00"
+    "updated_at": "2026-05-31T18:15:24.790035+00:00"
   },
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
     "groups": [
@@ -5580,7 +5580,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T07:12:07.189656+00:00"
+    "updated_at": "2026-05-31T18:02:06.723143+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
