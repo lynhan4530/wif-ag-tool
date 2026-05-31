@@ -561,10 +561,10 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 1,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "Iltis_para_CMD_RFA",
+                "unit_id": "Iltis_RFA",
                 "xp": 1
               }
             ]
@@ -574,11 +574,19 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 5,
+                "count": 2,
                 "defense_override": null,
-                "transport_id": "Iltis_trans_RFA",
-                "unit_id": "Fernspaher_RFA",
-                "xp": 2
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 9,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Spy_Ranger_GER",
+                "xp": 1
               }
             ]
           },
@@ -587,7 +595,15 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "FOB_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 10,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "MAN_Kat_6x6_RFA",
@@ -600,18 +616,18 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "CL_289_RFA",
-                "xp": 1
+                "transport_id": "Iltis_reco_RFA",
+                "unit_id": "WF_Sniper_KSK_GER",
+                "xp": 3
               }
             ]
           }
         ]
       },
       {
-        "name": "2",
+        "name": "1",
         "platoons": [
           {
             "name": "STAB",
@@ -621,7 +637,7 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "M113_GreenArcher_RFA",
+                "unit_id": "Iltis_para_CMD_RFA",
                 "xp": 1
               },
               {
@@ -629,7 +645,15 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "Iltis_para_CMD_RFA",
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
                 "xp": 1
               }
             ]
@@ -639,11 +663,27 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_PZH_2000_PGM_GER",
-                "xp": 1
+                "xp": 2
               }
             ]
           },
@@ -652,17 +692,33 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 6,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_M270A1_GMLRS_GER",
-                "xp": 3
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
               }
             ]
           },
           {
             "name": "3. BATTERIE",
             "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
               {
                 "attack_override": null,
                 "count": 6,
@@ -686,7 +742,7 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "M113_GreenArcher_RFA",
+                "unit_id": "Iltis_para_CMD_RFA",
                 "xp": 1
               },
               {
@@ -694,7 +750,15 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "Iltis_para_CMD_RFA",
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
                 "xp": 1
               }
             ]
@@ -704,11 +768,27 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_PZH_2000_PGM_GER",
-                "xp": 1
+                "xp": 2
               }
             ]
           },
@@ -717,17 +797,33 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 6,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_M270A1_GMLRS_GER",
-                "xp": 3
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
               }
             ]
           },
           {
             "name": "3. BATTERIE",
             "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
               {
                 "attack_override": null,
                 "count": 6,
@@ -741,7 +837,7 @@
         ]
       },
       {
-        "name": "1",
+        "name": "2",
         "platoons": [
           {
             "name": "STAB",
@@ -751,7 +847,7 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "M113_GreenArcher_RFA",
+                "unit_id": "Iltis_para_CMD_RFA",
                 "xp": 1
               },
               {
@@ -759,7 +855,15 @@
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "Iltis_para_CMD_RFA",
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
                 "xp": 1
               }
             ]
@@ -769,11 +873,27 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_PZH_2000_PGM_GER",
-                "xp": 1
+                "xp": 2
               }
             ]
           },
@@ -782,17 +902,33 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 6,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_M270A1_GMLRS_GER",
-                "xp": 3
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
               }
             ]
           },
           {
             "name": "3. BATTERIE",
             "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
               {
                 "attack_override": null,
                 "count": 6,
@@ -807,7 +943,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:48:32.612221+00:00"
+    "updated_at": "2026-05-31T06:11:42.584322+00:00"
   },
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
     "groups": [
@@ -2608,17 +2744,387 @@
   "Descriptor_Deck_pion_RFA_5PzD_145Art": {
     "groups": [
       {
-        "name": "1",
+        "name": "SB",
         "platoons": [
           {
-            "name": "3RD PLATOON",
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Iltis_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_IRIST_GER",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 9,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Spy_Ranger_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. BATTERIE",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "CH53G_trans_RFA",
+                "unit_id": "FOB_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 10,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "Iltis_reco_RFA",
+                "unit_id": "WF_Sniper_KSK_GER",
+                "xp": 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Iltis_para_CMD_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_PGM_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Iltis_para_CMD_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_PGM_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Iltis_para_CMD_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "M113_GreenArcher_RFA",
+                "xp": 3
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_CLU_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_PGM_GER",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. BATTERIE",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_M270A1_GMLRS_HE_GER",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_PZH_2000_GER",
                 "xp": 1
               }
             ]
@@ -2627,7 +3133,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-29T16:26:03.070312+00:00"
+    "updated_at": "2026-05-31T06:12:01.594181+00:00"
   },
   "Descriptor_Deck_pion_RFA_5PzD_152PzG": {
     "groups": [
