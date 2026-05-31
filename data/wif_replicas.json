@@ -561,7 +561,7 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "Iltis_RFA",
@@ -608,19 +608,6 @@
                 "transport_id": null,
                 "unit_id": "MAN_Kat_6x6_RFA",
                 "xp": 1
-              }
-            ]
-          },
-          {
-            "name": "3. BATTERIE",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 1,
-                "defense_override": null,
-                "transport_id": "Iltis_reco_RFA",
-                "unit_id": "WF_Sniper_KSK_GER",
-                "xp": 3
               }
             ]
           }
@@ -943,7 +930,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T06:11:42.584322+00:00"
+    "updated_at": "2026-05-31T08:04:33.207225+00:00"
   },
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
     "groups": [
@@ -3769,14 +3756,43 @@
   "Descriptor_Deck_pion_RFA_TKSud_VKK442": {
     "groups": [
       {
-        "name": "1",
+        "name": "GSA",
         "platoons": [
           {
-            "name": "1ST PLATOON",
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "HeimatschutzJager_CMD_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "NACHSCHUBGRUPPE",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "FOB_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "MAN_Kat_6x6_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 5,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "CH53G_trans_RFA",
@@ -3785,10 +3801,375 @@
             ]
           }
         ]
+      },
+      {
+        "name": "SK",
+        "platoons": [
+          {
+            "name": "STAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Dingo_2_GER",
+                "unit_id": "Gebirgsjager_CMD_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "Iltis_reco_RFA",
+                "unit_id": "WF_Feldgendarmerie_GER",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "1",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. PIONIERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Strandmeister_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Engineers_Reserve_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. PIONIERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Strandmeister_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Engineers_Reserve_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "1. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3. INFANTERIEZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 5,
+                "defense_override": null,
+                "transport_id": "MAN_Kat_6x6_trans_RFA",
+                "unit_id": "Reserve_Polizei_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 50,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "HeimatschutzJager_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "KanJagdPanzer_RFA",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1. PIONIERZUG",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Strandmeister_RFA",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 20,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "Engineers_Reserve_RFA",
+                "xp": 1
+              }
+            ]
+          }
+        ]
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-29T16:27:59.880811+00:00"
+    "updated_at": "2026-05-31T08:25:00.868144+00:00"
   },
   "Descriptor_Deck_pion_SOV_368OCHAP": {
     "groups": [
