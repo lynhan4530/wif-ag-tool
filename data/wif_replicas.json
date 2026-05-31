@@ -5099,15 +5099,15 @@
                 "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_AA_US",
+                "unit_id": "WF_F35_Lightning_AA2_US",
                 "xp": 1
               },
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_AA2_US",
+                "unit_id": "WF_F35_Lightning_AA_US",
                 "xp": 1
               }
             ]
@@ -5118,7 +5118,7 @@
         "name": "B",
         "platoons": [
           {
-            "name": "1ST SUPPLY PLATOON",
+            "name": "1ST AIR DEFENSE PLATOON",
             "units": [
               {
                 "attack_override": null,
@@ -5145,19 +5145,6 @@
                 "xp": 1
               }
             ]
-          },
-          {
-            "name": "1ST AIR DEFENSE PLATOON",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 5,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_MQ1C_US",
-                "xp": 1
-              }
-            ]
           }
         ]
       },
@@ -5173,7 +5160,15 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 3
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F16C_CBU_US",
+                "xp": 1
               },
               {
                 "attack_override": null,
@@ -5181,7 +5176,7 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16C_JDAM_US",
-                "xp": 3
+                "xp": 1
               }
             ]
           }
@@ -5189,7 +5184,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T06:42:47.570774+00:00"
+    "updated_at": "2026-05-31T06:52:26.376506+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
