@@ -8003,6 +8003,14 @@
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
                 "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F15E_StrikeEagle_US",
+                "xp": 1
               }
             ]
           },
@@ -8034,6 +8042,14 @@
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
                 "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F15E_StrikeEagle_US",
+                "xp": 1
               }
             ]
           },
@@ -8065,6 +8081,14 @@
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
                 "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
+                "xp": 1
               }
             ]
           },
@@ -8085,7 +8109,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T17:47:59.946325+00:00"
+    "updated_at": "2026-06-01T00:56:11.930374+00:00"
   },
   "Descriptor_Deck_pion_US_3AD": {
     "groups": [
