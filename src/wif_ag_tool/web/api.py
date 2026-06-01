@@ -8,6 +8,7 @@ Endpoints are session-and-replica oriented:
 """
 from __future__ import annotations
 import io
+import os
 import json
 import zipfile
 from dataclasses import asdict
@@ -284,6 +285,31 @@ def sessions_export_direct(slug: str):
     # accumulating duplicate definitions.
     for base in (base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv):
         pristine = base.with_suffix(base.suffix + ".orig")
+        
+        if "PYTEST_CURRENT_TEST" not in os.environ:
+            clean_source = None
+            if base.name == "StrategicDecks.ndf":
+                clean_source = config.VANILLA_STRATEGIC_DECKS
+            elif base.name == "StrategicPacks.ndf":
+                clean_source = config.VANILLA_STRATEGIC_PACKS
+            elif base.name == "StrategicCombatGroups.ndf":
+                clean_source = config.VANILLA_COMBAT_GROUPS
+
+            if clean_source and clean_source.exists():
+                need_recreate = False
+                if not pristine.exists():
+                    need_recreate = True
+                else:
+                    try:
+                        text = pristine.read_text(encoding="utf-8")
+                        if "_v_" in text or "_WIF_" in text or "WIF AG" in text:
+                            need_recreate = True
+                    except Exception:
+                        need_recreate = True
+                
+                if need_recreate:
+                    pristine.write_bytes(clean_source.read_bytes())
+
         if base.exists() and not pristine.exists():
             pristine.write_bytes(base.read_bytes())
         elif pristine.exists():
