@@ -295,7 +295,27 @@ def sessions_export_direct(slug: str):
             elif base.name == "StrategicCombatGroups.ndf":
                 clean_source = config.VANILLA_COMBAT_GROUPS
 
+            pristine_bytes = None
             if clean_source and clean_source.exists():
+                try:
+                    pristine_bytes = clean_source.read_bytes()
+                except Exception:
+                    pass
+
+            # Fall back to extracting from base.zip if clean_source isn't available
+            if pristine_bytes is None and target_mod_dir:
+                base_zip_path = Path(target_mod_dir) / "base.zip"
+                if base_zip_path.exists():
+                    try:
+                        with zipfile.ZipFile(base_zip_path, 'r') as z:
+                            zip_internal_path = f"GameData/Generated/Gameplay/Decks/{base.name}"
+                            if base.name == "PLATOONS.csv":
+                                zip_internal_path = "Localisation/CRM_ArmyGeneral/PLATOONS.csv"
+                            pristine_bytes = z.read(zip_internal_path)
+                    except Exception:
+                        pass
+
+            if pristine_bytes is not None:
                 need_recreate = False
                 if not pristine.exists():
                     need_recreate = True
@@ -308,7 +328,7 @@ def sessions_export_direct(slug: str):
                         need_recreate = True
                 
                 if need_recreate:
-                    pristine.write_bytes(clean_source.read_bytes())
+                    pristine.write_bytes(pristine_bytes)
 
         if base.exists() and not pristine.exists():
             pristine.write_bytes(base.read_bytes())
