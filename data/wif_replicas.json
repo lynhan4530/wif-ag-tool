@@ -7690,10 +7690,10 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "AH1F_Cobra_US",
+                "unit_id": "WF_AH64_Apache_E_US",
                 "xp": 2
               }
             ]
@@ -7742,10 +7742,10 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "AH1F_Cobra_US",
+                "unit_id": "WF_AH64_Apache_E_US",
                 "xp": 2
               }
             ]
@@ -7768,10 +7768,10 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 3,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "AH1F_Cobra_US",
+                "unit_id": "WF_AH64_Apache_E_US",
                 "xp": 2
               }
             ]
@@ -7871,7 +7871,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T17:43:25.502655+00:00"
+    "updated_at": "2026-06-01T15:37:30.144844+00:00"
   },
   "Descriptor_Deck_pion_US_22TFS": {
     "groups": [
