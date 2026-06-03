@@ -632,7 +632,7 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_AAVP_7A1_USMC_US",
-    "display_name": "USMC AAVP-7A1",
+    "display_name": "USMC AAVP-7A1 UGWS",
     "is_transport": true,
     "is_transportable": false
   },
@@ -28427,7 +28427,7 @@
       "_choc"
     ],
     "button_texture": "Texture_Button_Unit_Ranger_US",
-    "display_name": "RANGERS",
+    "display_name": "RANGERS (LAW)",
     "is_transport": false,
     "is_transportable": true
   },
@@ -43659,7 +43659,7 @@
     "name_token": "NOJLHHLWFB",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MiG_17PF_POL",
-    "display_name": "Lim-6M",
+    "display_name": "LIM-6M",
     "is_transport": false,
     "is_transportable": false
   },
@@ -44004,7 +44004,7 @@
     "name_token": "WLOLVWLFIE",
     "specialties": [],
     "button_texture": "Texture_Button_Unit_MiG_21bis_RKT2_POL",
-    "display_name": "MiG-21bis [RKT2]",
+    "display_name": "MiG-21bis [RKT]",
     "is_transport": false,
     "is_transportable": false
   },

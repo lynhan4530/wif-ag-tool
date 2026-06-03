@@ -7938,8 +7938,8 @@
                 "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F15E_StrikeEagle_US",
-                "xp": 1
+                "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
+                "xp": 2
               }
             ]
           }
@@ -7986,7 +7986,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T20:46:09.657274+00:00"
+    "updated_at": "2026-06-03T18:57:52.799966+00:00"
   },
   "Descriptor_Deck_pion_US_23TFS": {
     "groups": [
