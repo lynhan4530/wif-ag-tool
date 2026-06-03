@@ -930,7 +930,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-06-01T17:39:48.169614+00:00"
+    "updated_at": "2026-06-02T21:54:47.017836+00:00"
   },
   "Descriptor_Deck_pion_RFA_3K_FlaK340": {
     "groups": [
@@ -7879,7 +7879,7 @@
         "name": "A",
         "platoons": [
           {
-            "name": "1ST AIR DEFENSE PLATOON",
+            "name": "Flight A1 CAP",
             "units": [
               {
                 "attack_override": null,
@@ -7892,7 +7892,7 @@
             ]
           },
           {
-            "name": "1ST SUPPLY PLATOON",
+            "name": "Flight A2 SEAD",
             "units": [
               {
                 "attack_override": null,
@@ -7910,27 +7910,38 @@
         "name": "B",
         "platoons": [
           {
-            "name": "1ST AIR DEFENSE PLATOON",
+            "name": "Flight B1 CAP",
             "units": [
               {
                 "attack_override": null,
+<<<<<<< Updated upstream
                 "count": 3,
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F15C_Eagle_AA_US",
+=======
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_F35_Lightning_AA_US",
+>>>>>>> Stashed changes
                 "xp": 2
               }
             ]
           },
           {
-            "name": "1ST SUPPLY PLATOON",
+            "name": "Flight B2 CAS",
             "units": [
               {
                 "attack_override": null,
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
+<<<<<<< Updated upstream
                 "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
+=======
+                "unit_id": "WF_F35_Lightning_JDAM_US",
+>>>>>>> Stashed changes
                 "xp": 2
               }
             ]
@@ -7941,13 +7952,27 @@
         "name": "C",
         "platoons": [
           {
-            "name": "1ST AIR DEFENSE PLATOON",
+            "name": "Flight C1 Escort",
             "units": [
               {
                 "attack_override": null,
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
+                "unit_id": "WF_F22A_Raptor_AA_US",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "Flight C2 Strategics",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+<<<<<<< Updated upstream
                 "unit_id": "WF_F15C_Eagle_AA_US",
                 "xp": 2
               }
@@ -7963,6 +7988,10 @@
                 "transport_id": null,
                 "unit_id": "WF_F15E_StrikeEagle_US",
                 "xp": 2
+=======
+                "unit_id": "WF_B2_Spirit_JSOW_US",
+                "xp": 3
+>>>>>>> Stashed changes
               }
             ]
           }
@@ -7970,7 +7999,11 @@
       }
     ],
     "saved": true,
+<<<<<<< Updated upstream
     "updated_at": "2026-06-03T19:01:50.962691+00:00"
+=======
+    "updated_at": "2026-06-02T22:18:13.109367+00:00"
+>>>>>>> Stashed changes
   },
   "Descriptor_Deck_pion_US_23TFS": {
     "groups": [
