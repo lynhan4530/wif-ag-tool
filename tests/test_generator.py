@@ -480,3 +480,22 @@ def test_build_export_blocks_enforces_pack_index_invariant():
             1,  # pretend only 1 ref was built for a 6-slot tuple
         )
 
+
+def test_resolve_cg_names_disambiguates_numeric_duplicates():
+    from wif_ag_tool.generator.group_generator import resolve_all_cg_names
+
+    deck_name = "Descriptor_Deck_pion_SOV_39GMRD"
+    vanilla_cgs = [
+        "Descriptor_CombatGroup_pion_SOV_39GMRD_1_489y_PT",
+        "Descriptor_CombatGroup_pion_SOV_39GMRD_1_915y_Zen__Art_",
+        "Descriptor_CombatGroup_pion_SOV_39GMRD_2_489y_PT",
+        "Descriptor_CombatGroup_pion_SOV_39GMRD_2_915y_Zen__Art_",
+    ]
+
+    mapping = resolve_all_cg_names(deck_name, ["1_489y", "1_915y", "2_489y", "2_915y"], vanilla_cgs)
+    assert mapping["1_489y"] == "Descriptor_CombatGroup_pion_SOV_39GMRD_1_489y_PT"
+    assert mapping["1_915y"] == "Descriptor_CombatGroup_pion_SOV_39GMRD_1_915y_Zen__Art_"
+    assert mapping["2_489y"] == "Descriptor_CombatGroup_pion_SOV_39GMRD_2_489y_PT"
+    assert mapping["2_915y"] == "Descriptor_CombatGroup_pion_SOV_39GMRD_2_915y_Zen__Art_"
+
+

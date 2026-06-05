@@ -29,18 +29,117 @@
   .picker .new { margin-top:18px; }
 
   /* session view */
-  .session { display:grid; grid-template-columns: 240px 1fr 1fr; height:calc(100vh - 42px); }
-  .pane { border-right:1px solid #2a2d34; overflow:auto; }
+  .session { display:grid; grid-template-columns: 1fr 1fr; flex: 1; min-height: 0; position: relative; }
+  .session.left-open { grid-template-columns: 240px 1fr 1fr; }
+  .pane { border-right:1px solid #2a2d34; overflow:auto; display: flex; flex-direction: column; }
   .pane:last-child { border-right:0; }
   .pane h2 { font-size:11px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; margin:0; padding:8px 12px; background:#1c1f25; border-bottom:1px solid #2a2d34; position:sticky; top:0; z-index:1; }
   .pane .pad { padding:8px 12px; }
 
-  @media (max-width: 1100px) {
-    .session { grid-template-columns: 210px 1fr 1fr; }
+  /* Left pane default behavior (drawer when closed/narrow) */
+  .pane.left-pane {
+    display: none;
   }
-  @media (max-width: 860px) {
-    .session { grid-template-columns: 1fr; height: auto; overflow: visible; }
-    .pane { border-right: none; border-bottom: 1px solid #2a2d34; height: auto; max-height: 480px; }
+  .session.left-open .pane.left-pane {
+    display: flex;
+  }
+
+  /* Wide screen (landscape desktop) layout */
+  @media (min-width: 1200px) {
+    .session {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .session.left-open {
+      grid-template-columns: 240px 1fr 1fr;
+    }
+    .session-drawer-backdrop {
+      display: none !important;
+    }
+    .pane.left-pane {
+      position: static;
+      width: auto;
+      box-shadow: none;
+      border-right: 1px solid #2a2d34;
+    }
+  }
+
+  /* Medium screen (portrait/narrow desktop) layout */
+  @media (max-width: 1199px) {
+    .session {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .pane.left-pane {
+      display: flex !important;
+      position: absolute;
+      top: 0;
+      left: -280px;
+      bottom: 0;
+      width: 280px;
+      z-index: 15;
+      background: #1c1f25;
+      border-right: 1px solid #3a3f4a;
+      box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+      transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .session.left-open .pane.left-pane {
+      left: 0;
+    }
+    
+    .session-drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 10;
+      display: none;
+    }
+    
+    .session.left-open .session-drawer-backdrop {
+      display: block;
+    }
+  }
+
+  /* Small screen (very narrow portrait/mobile-like) layout */
+  @media (max-width: 767px) {
+    .session {
+      grid-template-columns: 1fr;
+    }
+    .session-tabs {
+      display: flex;
+    }
+    
+    .session.show-vanilla .pane.replica-pane {
+      display: none;
+    }
+    .session.show-replica .pane.vanilla-pane {
+      display: none;
+    }
+  }
+
+  /* session tabs switcher (narrow screens) */
+  .session-tabs {
+    display: none;
+    background: #1c1f25;
+    border-bottom: 1px solid #2a2d34;
+  }
+  .session-tabs button {
+    flex: 1;
+    background: transparent;
+    color: #8aa;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 10px;
+    border-radius: 0;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  .session-tabs button.active {
+    color: #dde;
+    border-bottom-color: #2d4;
+    background: #23262d;
   }
 
   /* left */
@@ -156,7 +255,7 @@
   .tree-toggle .tt-label { font-size:11px; color:#bcd; }
 
   /* right: replica */
-  .replica-bar { display:flex; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
+  .replica-bar { display:flex; flex-wrap:wrap; gap:8px; padding:8px 12px; border-bottom:1px solid #2a2d34; align-items:center; }
   .replica-bar .grow { flex:1; }
   .replica-list { padding:6px 8px; }
   .replica-row { display:flex; flex-direction:column; gap:4px; padding:6px 8px; border-bottom:1px solid #23262d; font-size:12px; }
@@ -182,7 +281,7 @@
   .group-actions { padding:4px 12px; display:flex; gap:8px; justify-content:flex-start; }
 
   /* platoon picker */
-  .platoon-picker { background:#23262d; border:1px solid #444; min-width:360px; max-width:440px; max-height:60vh; display:flex; flex-direction:column; border-radius:4px; }
+  .platoon-picker { background:#23262d; border:1px solid #444; min-width:280px; max-width:90vw; max-height:60vh; display:flex; flex-direction:column; border-radius:4px; }
   .platoon-picker-head { padding:10px 14px; border-bottom:1px solid #333; font-size:13px; font-weight:bold; cursor:move; user-select:none; }
   .platoon-picker-body { padding:6px 0; overflow-y:auto; flex:1; }
   .platoon-picker-section { padding:4px 14px; font-size:10px; text-transform:uppercase; color:#8aa; letter-spacing:.1em; }
@@ -194,7 +293,7 @@
 
   /* modal */
   .backdrop { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:10; }
-  .modal { background:#23262d; border:1px solid #444; min-width:640px; max-width:80vw; max-height:80vh; display:flex; flex-direction:column; border-radius:4px; }
+  .modal { background:#23262d; border:1px solid #444; width: 90%; max-width: 800px; max-height: 85vh; display:flex; flex-direction:column; border-radius:4px; }
   .modal-head { padding:10px 14px; border-bottom:1px solid #333; display:flex; gap:8px; align-items:center; cursor:move; user-select:none; }
   .modal-head h3 { font-size:13px; margin:0; flex:1; }
   .modal-filters { padding:8px 14px; border-bottom:1px solid #2a2d34; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
@@ -232,8 +331,8 @@
   .hint { color:#888; font-size:10px; }
 
   /* custom searchable select */
-  .searchable-select { position:relative; display:inline-block; }
-  .searchable-select input { width:150px; font-size:11px; padding:2px 20px 2px 6px; height:22px; cursor:pointer; text-overflow:ellipsis; }
+  .searchable-select { position:relative; display:inline-block; flex-grow:1; min-width:140px; max-width: 100%; }
+  .searchable-select input { width:100%; font-size:11px; padding:2px 20px 2px 6px; height:22px; cursor:pointer; text-overflow:ellipsis; }
   .searchable-select-dropdown {
     position:absolute;
     top:100%;
@@ -436,21 +535,39 @@ function getAvailableGroups() {
   if (!state.vanilla || !state.vanilla.combat_groups) {
     return ["A", "B", "C", "HQ"];
   }
-  const groups = [];
   const deckShort = state.activeDeck.replace("Descriptor_Deck_pion_", "");
   const baseDeck = deckShort.replace(/_\d+$/, "");
-  for (const cg of state.vanilla.combat_groups) {
+  
+  const cleanNames = state.vanilla.combat_groups.map(cg => {
     let clean = cg.name.replace("Descriptor_CombatGroup_pion_", "").replace("Descriptor_CombatGroup_", "");
     if (clean.startsWith(deckShort + "_")) {
       clean = clean.slice(deckShort.length + 1);
     } else if (clean.startsWith(baseDeck + "_")) {
       clean = clean.slice(baseDeck.length + 1);
     }
-    const part = clean.split("_")[0];
-    if (part && !groups.includes(part)) {
-      groups.push(part);
+    return clean;
+  });
+
+  const firstPartCounts = {};
+  for (const name of cleanNames) {
+    const first = name.split("_")[0] || "";
+    firstPartCounts[first] = (firstPartCounts[first] || 0) + 1;
+  }
+
+  const groups = [];
+  for (const name of cleanNames) {
+    const parts = name.split("_");
+    const first = parts[0] || "";
+    let groupIdentifier = first;
+    if (firstPartCounts[first] > 1 && parts.length > 1) {
+      const second = parts[1] || "";
+      groupIdentifier = first + "_" + second;
+    }
+    if (groupIdentifier && !groups.includes(groupIdentifier)) {
+      groups.push(groupIdentifier);
     }
   }
+
   if (groups.length === 0) {
     return ["A", "B", "C", "HQ"];
   }
@@ -624,9 +741,9 @@ function render() {
   const root = $("#root");
   
   // Save scroll positions before clearing DOM
-  const leftPane = document.querySelector(".session > .pane:nth-child(1)");
-  const centerPane = document.querySelector(".session > .pane:nth-child(2)");
-  const rightPane = document.querySelector(".session > .pane:nth-child(3)");
+  const leftPane = document.querySelector(".session > .pane.left-pane");
+  const centerPane = document.querySelector(".session > .pane.vanilla-pane");
+  const rightPane = document.querySelector(".session > .pane.replica-pane");
   
   if (leftPane) state.lastScrollLeft = leftPane.scrollTop;
   if (centerPane) state.lastScrollCenter = centerPane.scrollTop;
@@ -647,9 +764,9 @@ function render() {
   if (state.howtoOpen) root.appendChild(renderHowtoModal());
 
   // Restore scroll positions in the new DOM
-  const newLeftPane = document.querySelector(".session > .pane:nth-child(1)");
-  const newCenterPane = document.querySelector(".session > .pane:nth-child(2)");
-  const newRightPane = document.querySelector(".session > .pane:nth-child(3)");
+  const newLeftPane = document.querySelector(".session > .pane.left-pane");
+  const newCenterPane = document.querySelector(".session > .pane.vanilla-pane");
+  const newRightPane = document.querySelector(".session > .pane.replica-pane");
   
   if (newLeftPane && state.lastScrollLeft !== undefined) newLeftPane.scrollTop = state.lastScrollLeft;
   if (newCenterPane && state.lastScrollCenter !== undefined) newCenterPane.scrollTop = state.lastScrollCenter;
@@ -668,7 +785,7 @@ function render() {
 }
 
 function renderPicker() {
-  const wrap = el("div");
+  const wrap = el("div", { style: "display: flex; flex-direction: column; height: 100vh; overflow: hidden;" });
   wrap.appendChild(el("header", {},
     el("h1", {}, "🎮 WIF AG Tool"),
     el("span", { class: "chip" }, "campaign picker"),
@@ -676,7 +793,7 @@ function renderPicker() {
     el("button", { class: "ghost", onclick: openHowto, title: "End-to-end guide: create a mod, build replicas, export & build" }, "❓ How to"),
   ));
 
-  const body = el("div", { class: "picker" });
+  const body = el("div", { class: "picker", style: "flex: 1; overflow-y: auto; width: 100%;" });
 
   body.appendChild(el("h2", {}, "Resume session"));
   if (state.sessions.length === 0) {
@@ -723,9 +840,28 @@ function renderPicker() {
 
 function renderSession() {
   const s = state.session;
-  const wrap = el("div");
+  
+  if (state.leftPaneOpen === undefined) {
+    state.leftPaneOpen = window.innerWidth >= 1200;
+  }
+  if (!state.activeTab) {
+    state.activeTab = "replica";
+  }
+
+  const wrap = el("div", { style: "display: flex; flex-direction: column; height: 100vh; overflow: hidden;" });
+  
+  const toggleDecksBtn = el("button", {
+    class: "ghost toggle-decks-btn" + (state.leftPaneOpen ? " active" : ""),
+    onclick: () => {
+      state.leftPaneOpen = !state.leftPaneOpen;
+      render();
+    },
+    title: "Toggle Deck List"
+  }, state.leftPaneOpen ? "✕ Close Decks" : "☰ Decks");
+
   wrap.appendChild(el("header", {},
     el("button", { class: "ghost", onclick: backToPicker }, "← Campaigns"),
+    toggleDecksBtn,
     el("h1", {}, s.campaign),
     el("span", { class: "chip" }, (s.factions_from_save || []).join(" / ") || "—"),
     el("span", { class: "spacer" }),
@@ -751,10 +887,46 @@ function renderSession() {
     el("button", { onclick: () => { state.exportOpen = true; render(); } }, "Export NDF"),
   ));
 
-  const grid = el("div", { class: "session" });
-  grid.appendChild(renderLeftPane());
-  grid.appendChild(renderCenterPane());
-  grid.appendChild(renderRightPane());
+  const tabSelector = el("div", { class: "session-tabs" },
+    el("button", {
+      class: state.activeTab === "vanilla" ? "active" : "",
+      onclick: () => { state.activeTab = "vanilla"; render(); }
+    }, "Vanilla Reference"),
+    el("button", {
+      class: state.activeTab === "replica" ? "active" : "",
+      onclick: () => { state.activeTab = "replica"; render(); }
+    }, "WIF Replica")
+  );
+  wrap.appendChild(tabSelector);
+
+  const gridClasses = ["session"];
+  if (state.leftPaneOpen) gridClasses.push("left-open");
+  gridClasses.push(state.activeTab === "vanilla" ? "show-vanilla" : "show-replica");
+
+  const grid = el("div", { class: gridClasses.join(" ") });
+
+  const drawerBackdrop = el("div", {
+    class: "session-drawer-backdrop",
+    onclick: () => {
+      state.leftPaneOpen = false;
+      render();
+    }
+  });
+  grid.appendChild(drawerBackdrop);
+
+  const leftPane = renderLeftPane();
+  leftPane.classList.add("left-pane");
+
+  const vanillaPane = renderCenterPane();
+  vanillaPane.classList.add("vanilla-pane");
+
+  const replicaPane = renderRightPane();
+  replicaPane.classList.add("replica-pane");
+
+  grid.appendChild(leftPane);
+  grid.appendChild(vanillaPane);
+  grid.appendChild(replicaPane);
+
   wrap.appendChild(grid);
   return wrap;
 }
@@ -992,14 +1164,6 @@ function renderRightPane() {
       title: "Seed this replica with a full copy of the vanilla deck, then edit it down for balance. The replica IS the deck — only what's here gets exported.",
       onclick: copyVanillaToReplica,
     }, "⧉ Copy vanilla"),
-    el("button", {
-      title: "Copy this replica's deck list to clipboard to share it",
-      onclick: copyReplicaToClipboard,
-    }, "📋 Share"),
-    el("button", {
-      title: "Paste/Import a shared deck list into this replica",
-      onclick: importReplicaFromClipboard,
-    }, "📥 Import"),
     el("span", { class: "tree-toggle" },
       el("button", { title: "Collapse all", onclick: replicaCollapseAll },
         el("span", { class: "tt-icon" }, "▸"), el("span", { class: "tt-label" }, "Collapse")),
@@ -1078,42 +1242,6 @@ function copyVanillaToReplica() {
   toast(`Copied ${groups.length} combat group(s) from vanilla — edit down, then Save deck.`);
 }
 
-function copyReplicaToClipboard() {
-  if (state.replicaGroups.length === 0) {
-    toast("Nothing to share (deck is empty).", true);
-    return;
-  }
-  const deckData = {
-    deck_name: state.activeDeck,
-    groups: state.replicaGroups
-  };
-  const text = JSON.stringify(deckData);
-  navigator.clipboard.writeText(text).then(() => {
-    toast("Deck code copied to clipboard! Share it with your friend.");
-  }).catch(err => {
-    toast("Failed to copy: " + err, true);
-  });
-}
-
-function importReplicaFromClipboard() {
-  const text = prompt("Paste the Deck Code JSON here:");
-  if (!text) return;
-  try {
-    const data = JSON.parse(text);
-    if (!data || !Array.isArray(data.groups)) {
-      throw new Error("Invalid deck code format: missing groups array.");
-    }
-    if (countTotalUnits() > 0 && !confirm("Replace the current replica content with the imported deck?")) {
-      return;
-    }
-    state.replicaGroups = data.groups;
-    markReplicaDirty();
-    render();
-    toast("Deck successfully imported! Don't forget to click 'Save deck'.");
-  } catch (err) {
-    alert("Import failed: " + err.message);
-  }
-}
 
 function copyCombatGroup(gi) {
   const src = state.replicaGroups[gi];
@@ -1484,7 +1612,28 @@ function renderReplicaGroup(group, gi) {
       el("span", { class: "drag-handle", title: "Drag to reorder group", style: "font-size:13px;" }, "⋮⋮"),
       el("span", { style: "font-size: 8px; color: #778; width: 10px; display: inline-block;" }, rgCollapsed ? "▶" : "▼"),
       el("span", {}, `⬥ Combat Group: `),
-      mkSelect(getAvailableGroups(), group.name, v => { group.name = v; markReplicaDirty(); render(); }),
+      mkSelect(getAvailableGroups(), group.name, v => { group.name = v; markReplicaDirty(); render(); }, val => {
+        if (!state.vanilla || !state.vanilla.combat_groups) return val;
+        const deckShort = state.activeDeck.replace("Descriptor_Deck_pion_", "");
+        const baseDeck = deckShort.replace(/_\d+$/, "");
+        const cg = state.vanilla.combat_groups.find(cg => {
+          let clean = cg.name.replace("Descriptor_CombatGroup_pion_", "").replace("Descriptor_CombatGroup_", "");
+          if (clean.startsWith(deckShort + "_")) {
+            clean = clean.slice(deckShort.length + 1);
+          } else if (clean.startsWith(baseDeck + "_")) {
+            clean = clean.slice(baseDeck.length + 1);
+          }
+          const parts = clean.split("_");
+          const first = parts[0] || "";
+          if (val.includes("_")) {
+            const vParts = val.split("_");
+            return parts[0] === vParts[0] && parts[1] === vParts[1];
+          } else {
+            return first === val;
+          }
+        });
+        return cg ? getFriendlyCGName(cg.name) : val;
+      }),
     ),
     el("span", { style: "display:flex; gap:6px; align-items:center;" },
       el("span", { class: "hint" }, `${group.platoons.reduce((s,p) => s + p.units.length, 0)} units`),
@@ -1686,7 +1835,14 @@ function renderReplicaRow(row, gi, pi, ui) {
         ["(None)", ...getAvailableTransports(row.unit_id).map(t => t.name)],
         row.transport_id || "(None)",
         v => { row.transport_id = v === "(None)" ? null : v; markReplicaDirty(); },
-        name => name === "(None)" ? "(None)" : unitDisplay(name)
+        name => {
+          if (name === "(None)") return "(None)";
+          const u = state.unitsIndex[name];
+          const tag = u && u.source === "vanilla" ? "[V]" : "[WIF]";
+          const isRecon = u && getNormalizedRole(u) === "recon";
+          const reconTag = isRecon ? " [RECON]" : "";
+          return `${tag}${reconTag} ${unitDisplay(name)}`;
+        }
       )) : null
     )
   );
@@ -2137,7 +2293,7 @@ function renderHowtoModal() {
   const backdrop = el("div", { class: "backdrop",
     onclick: e => { if (e.target === backdrop) { state.howtoOpen = false; render(); } } });
 
-  const modal = el("div", { class: "modal", style: "min-width:760px; max-width:900px; max-height:88vh;" });
+  const modal = el("div", { class: "modal", style: "width:95vw; max-width:900px; max-height:88vh;" });
 
   modal.appendChild(el("div", { class: "modal-head" },
     el("h3", {}, "❓ How to — End-to-End Guide"),
@@ -2173,7 +2329,7 @@ function renderBuildModal() {
   const backdrop = el("div", { class: "backdrop",
     onclick: e => { if (e.target === backdrop && state.buildStatus !== "building") { state.buildOpen = false; render(); } } });
 
-  const modal = el("div", { class: "modal", style: "min-width:600px; max-width:800px;" });
+  const modal = el("div", { class: "modal", style: "width:95vw; max-width:800px;" });
 
   let statusText = "🛠 Building Mod...";
   if (state.buildStatus === "success") {
@@ -2318,6 +2474,9 @@ async function reloadScopedDecks() {
 
 async function selectDeck(name) {
   if (state.replicaDirty && !confirm("Switch deck and lose unsaved WIF edits?")) return;
+  if (window.innerWidth < 1200) {
+    state.leftPaneOpen = false;
+  }
   state.activeDeck = name;
   state.vanilla = null;
   state.replicaGroups = [];
