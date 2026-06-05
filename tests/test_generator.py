@@ -46,9 +46,9 @@ def test_assignment_pack_name_matches_generator_for_vanilla():
     """Assignment.pack_name and generate_pack must produce the same descriptor name
     or DeckPackList refs and pack definitions won't line up."""
     a = Assignment("Descriptor_Deck_pion_US_11ACR_1", "M1A1_Abrams_US", xp_levels=[2], count=4)
-    generator_out = generate_pack(a.unit_id, xp=2, seq=a.seq)
+    generator_out = generate_pack(a.unit_id, xp=2, seq=a.seq, deck_name=a.deck_name)
     expected_name = a.pack_name(2)
-    assert expected_name == "Descriptor_StrategicPack_M1A1_Abrams_US_v_2"
+    assert expected_name == "Descriptor_StrategicPack_M1A1_Abrams_US_v_US_11ACR_1_2"
     assert f"{expected_name} is DeckPackDescriptor" in generator_out
 
 

@@ -266,10 +266,10 @@ def test_export_direct_replaces_deck_contents(client, tmp_path, monkeypatch):
     assert "VANILLA_TANK" not in decks_text
     assert "Descriptor_CombatGroup_VANILLA_HQ" not in decks_text
     # The replica's WIF pack + combat group now define the deck.
-    assert "~/Descriptor_StrategicPack_WF_M1A2_Abrams_1," in decks_text
+    assert "~/Descriptor_StrategicPack_WF_M1A2_Abrams_US_11ACR_4_1," in decks_text
     assert "~/Descriptor_CombatGroup_US_11ACR_4_WIF_A," in decks_text
     # And the pack definition was appended to StrategicPacks.ndf.
-    assert "Descriptor_StrategicPack_WF_M1A2_Abrams_1 is DeckPackDescriptor" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_Abrams_US_11ACR_4_1 is DeckPackDescriptor" in packs_text
 
 
 def test_build_mod_not_configured(client):

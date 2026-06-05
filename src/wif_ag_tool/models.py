@@ -4,7 +4,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 
-def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0) -> str:
+def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0, deck_name: str | None = None) -> str:
     """Canonical name for a generated `DeckPackDescriptor` block.
 
     WIF units (unit_id starts with ``WF_``) follow the historical format:
@@ -19,7 +19,11 @@ def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0) -> str:
     """
     seq_suffix = f"_{seq}" if seq else ""
     vanilla_marker = "" if unit_id.startswith("WF_") else "_v"
-    return f"Descriptor_StrategicPack_{unit_id}{vanilla_marker}{seq_suffix}_{xp}"
+    deck_suffix = ""
+    if deck_name:
+        deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
+        deck_suffix = f"_{deck_short}"
+    return f"Descriptor_StrategicPack_{unit_id}{vanilla_marker}{deck_suffix}{seq_suffix}_{xp}"
 
 
 @dataclass
@@ -96,7 +100,7 @@ class Assignment:
         unit rows in the same deck get distinct descriptor names. Vanilla units
         get a ``_v`` marker so generated names never collide with Eugen's packs.
         """
-        return make_pack_descriptor_name(self.unit_id, xp, self.seq)
+        return make_pack_descriptor_name(self.unit_id, xp, self.seq, deck_name=self.deck_name)
 
     def combat_group_name(self) -> str:
         """Generated CombatGroup descriptor name based on group_name."""

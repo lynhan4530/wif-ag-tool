@@ -9,6 +9,7 @@ def generate_pack(
     xp: int,
     transport_id: str | None = None,
     seq: int = 0,
+    deck_name: str | None = None,
 ) -> str:
     """Emit a single DeckPackDescriptor block as a string.
 
@@ -17,7 +18,7 @@ def generate_pack(
     prefix) get a ``_v`` marker to avoid colliding with the packs already in
     vanilla StrategicPacks.ndf.
     """
-    pack_name = make_pack_descriptor_name(unit_id, xp, seq)
+    pack_name = make_pack_descriptor_name(unit_id, xp, seq, deck_name=deck_name)
     unit_ref = f"$/GFX/Unit/Descriptor_Unit_{unit_id}"
     lines = [f"{pack_name} is DeckPackDescriptor", "("]
     if transport_id:
@@ -35,7 +36,7 @@ def generate_pack(
 def generate_packs_for_assignment(assignment: Assignment, transport_id: str | None = None) -> str:
     """Emit all packs for all XP levels in an assignment. Newline-separated."""
     blocks = [
-        generate_pack(assignment.unit_id, xp, transport_id=transport_id, seq=assignment.seq)
+        generate_pack(assignment.unit_id, xp, transport_id=transport_id, seq=assignment.seq, deck_name=assignment.deck_name)
         for xp in assignment.xp_levels
     ]
     return "\n\n".join(blocks)

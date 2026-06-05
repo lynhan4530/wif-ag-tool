@@ -6494,7 +6494,7 @@
       "_smoke_launcher"
     ],
     "button_texture": "Texture_Button_Unit_BTR_80_CMD_SOV",
-    "display_name": "#CMD R-149MA1",
+    "display_name": "R-149MA1",
     "is_transport": false,
     "is_transportable": false
   },

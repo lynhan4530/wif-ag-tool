@@ -5480,7 +5480,7 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_AA_US",
+                "unit_id": "WF_F16C_AA_US",
                 "xp": 2
               }
             ]
@@ -5493,16 +5493,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16CM_SEAD_US",
+                "unit_id": "WF_F16C_CBU_US",
                 "xp": 2
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F35_Lightning_JDAM_US",
-                "xp": 1
               }
             ]
           }
@@ -5519,7 +5511,7 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_AA2_US",
+                "unit_id": "WF_F16C_AA_US",
                 "xp": 2
               }
             ]
@@ -5532,16 +5524,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 3
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F35_Lightning_JDAM_US",
-                "xp": 1
+                "unit_id": "WF_F16C_JDAM_US",
+                "xp": 2
               }
             ]
           }
@@ -5555,11 +5539,11 @@
             "units": [
               {
                 "attack_override": null,
-                "count": 4,
+                "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_JDAM_US",
-                "xp": 1
+                "unit_id": "WF_F16C_AA_US",
+                "xp": 2
               }
             ]
           },
@@ -5571,8 +5555,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 3
+                "unit_id": "F16E_napalm_US",
+                "xp": 2
               }
             ]
           }
@@ -5580,7 +5564,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T23:39:21.697669+00:00"
+    "updated_at": "2026-06-04T17:29:11.935493+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_1": {
     "groups": [
@@ -6095,7 +6079,7 @@
                 "count": 4,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_HEMTT_trans_US",
+                "unit_id": "HEMTT_US",
                 "xp": 2
               }
             ]
@@ -6162,7 +6146,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T17:39:50.847188+00:00"
+    "updated_at": "2026-06-04T16:59:56.330245+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_2": {
     "groups": [
@@ -6362,22 +6346,6 @@
                 "transport_id": null,
                 "unit_id": "WF_M1064_Mort_US",
                 "xp": 2
-              },
-              {
-                "attack_override": null,
-                "count": 1,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_Ka_52K_SEAD_RUS",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 1,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_T90A_CMD_RUS",
-                "xp": 1
               }
             ]
           },
@@ -6760,7 +6728,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T17:41:14.110038+00:00"
+    "updated_at": "2026-06-04T17:25:28.382453+00:00"
   },
   "Descriptor_Deck_pion_US_11ACR_3": {
     "groups": [
@@ -7914,17 +7882,10 @@
             "units": [
               {
                 "attack_override": null,
-<<<<<<< Updated upstream
-                "count": 3,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F15C_Eagle_AA_US",
-=======
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F35_Lightning_AA_US",
->>>>>>> Stashed changes
+                "unit_id": "WF_F15C_Eagle_AA_US",
                 "xp": 2
               }
             ]
@@ -7937,11 +7898,7 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-<<<<<<< Updated upstream
                 "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
-=======
-                "unit_id": "WF_F35_Lightning_JDAM_US",
->>>>>>> Stashed changes
                 "xp": 2
               }
             ]
@@ -7959,8 +7916,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F22A_Raptor_AA_US",
-                "xp": 3
+                "unit_id": "WF_F15C_Eagle_AA_US",
+                "xp": 2
               }
             ]
           },
@@ -7972,26 +7929,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-<<<<<<< Updated upstream
-                "unit_id": "WF_F15C_Eagle_AA_US",
+                "unit_id": "WF_F15E_StrikeEagle_JDAM_US",
                 "xp": 2
-              }
-            ]
-          },
-          {
-            "name": "1ST SUPPLY PLATOON",
-            "units": [
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F15E_StrikeEagle_US",
-                "xp": 2
-=======
-                "unit_id": "WF_B2_Spirit_JSOW_US",
-                "xp": 3
->>>>>>> Stashed changes
               }
             ]
           }
@@ -7999,11 +7938,7 @@
       }
     ],
     "saved": true,
-<<<<<<< Updated upstream
-    "updated_at": "2026-06-03T19:01:50.962691+00:00"
-=======
-    "updated_at": "2026-06-02T22:18:13.109367+00:00"
->>>>>>> Stashed changes
+    "updated_at": "2026-06-04T17:27:41.291503+00:00"
   },
   "Descriptor_Deck_pion_US_23TFS": {
     "groups": [
@@ -13239,15 +13174,7 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 1
+                "xp": 2
               }
             ]
           },
@@ -13259,16 +13186,8 @@
                 "count": 2,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_F16C_JDAM_US",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_CBU_US",
-                "xp": 1
+                "unit_id": "WF_F16CM_SEAD_US",
+                "xp": 2
               }
             ]
           }
@@ -13287,14 +13206,6 @@
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
                 "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 1
               }
             ]
           },
@@ -13307,14 +13218,6 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16C_JDAM_US",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_CBU_US",
                 "xp": 1
               }
             ]
@@ -13333,15 +13236,7 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16CM_SEAD_US",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 4,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_AA_US",
-                "xp": 1
+                "xp": 2
               }
             ]
           },
@@ -13354,15 +13249,7 @@
                 "defense_override": null,
                 "transport_id": null,
                 "unit_id": "WF_F16C_JDAM_US",
-                "xp": 1
-              },
-              {
-                "attack_override": null,
-                "count": 2,
-                "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_F16C_CBU_US",
-                "xp": 1
+                "xp": 2
               }
             ]
           }
@@ -13409,7 +13296,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-06-01T23:17:37.091704+00:00"
+    "updated_at": "2026-06-04T17:31:35.363387+00:00"
   },
   "Descriptor_Deck_pion_US_5C_130Eng_54Eng": {
     "groups": [
@@ -14240,64 +14127,64 @@
         "name": "L",
         "platoons": [
           {
-            "name": "1ST TANK PLATOON",
+            "name": "1ST RIFLE PLATOON",
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Mech_Rifles_US",
                 "xp": 2
               },
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Stryker_Rifles_HMG_US",
                 "xp": 2
               }
             ]
           },
           {
-            "name": "2ND TANK PLATOON",
+            "name": "2ND RIFLE PLATOON",
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Mech_Rifles_US",
                 "xp": 2
               },
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Stryker_Rifles_HMG_US",
                 "xp": 2
               }
             ]
           },
           {
-            "name": "3RD TANK PLATOON",
+            "name": "3RD RIFLE PLATOON",
             "units": [
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 3,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_ERA_Abrams_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Mech_Rifles_US",
                 "xp": 2
               },
               {
                 "attack_override": null,
-                "count": 2,
+                "count": 1,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_Abrams_MINI_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Stryker_Rifles_HMG_US",
                 "xp": 2
               }
             ]
@@ -14309,16 +14196,37 @@
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
-                "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_Abrams_CMD_US",
+                "transport_id": "WF_MATV_US",
+                "unit_id": "WF_Mech_Rifles_LDR_US",
                 "xp": 2
               },
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
+                "transport_id": "WF_LMTV_trans_US",
+                "unit_id": "WF_Mech_Rifles_US",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1ST RECON PLATOON",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_M1A2_SEPV3_Abrams_US",
+                "unit_id": "M1025_Humvee_GVLLD_US",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "M125_HOWZ_US",
                 "xp": 2
               }
             ]
@@ -14327,7 +14235,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-31T19:51:29.039044+00:00"
+    "updated_at": "2026-06-04T17:24:32.858097+00:00"
   },
   "Descriptor_Deck_pion_US_CENT_44ADA_3": {
     "groups": [

@@ -67,9 +67,9 @@ def test_multi_unit_assignment(tmp_path, fixture_units_path, fixture_deck_path):
     ]
     paths = run_export(assignments, decks, units, tmp_path / "out")
     packs_text = paths["packs"].read_text(encoding="utf-8")
-    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
-    assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_1" in packs_text
-    assert "Descriptor_StrategicPack_WF_T90M_RUS_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_TEST_Alpha_1_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_TEST_Alpha_1_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_T90M_RUS_TEST_Alpha_1_1" in packs_text
 
 
 def test_attack_override_in_config(tmp_path):
@@ -103,9 +103,9 @@ def test_export_from_replicas_end_to_end(tmp_path, fixture_units_path, fixture_d
     paths = export_from_replicas(decks, units, tmp_path / "out", replicas=store)
     packs_text = paths["packs"].read_text(encoding="utf-8")
     groups_text = paths["groups"].read_text(encoding="utf-8")
-    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_TEST_Alpha_1_1" in packs_text
     assert "Transport = $/GFX/Unit/Descriptor_Unit_WF_M2A4_Bradley_US" in packs_text
-    assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_2" in packs_text
+    assert "Descriptor_StrategicPack_WF_M2A4_Bradley_US_TEST_Alpha_1_2" in packs_text
     # Full replacement: indices count from 0
     assert "(0,1)" in groups_text
     assert "(1,1)" in groups_text
@@ -141,8 +141,8 @@ def test_export_from_replicas_count_duplicates_pack_refs(tmp_path, fixture_units
     groups_text = paths["groups"].read_text(encoding="utf-8")
 
     # DeckPackList patch must contain 6 Abrams + 4 Bradley refs
-    assert decks_text.count("~/Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1") == 6
-    assert decks_text.count("~/Descriptor_StrategicPack_WF_M2A4_Bradley_US_1") == 4
+    assert decks_text.count("~/Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_TEST_Alpha_1_1") == 6
+    assert decks_text.count("~/Descriptor_StrategicPack_WF_M2A4_Bradley_US_TEST_Alpha_1_1") == 4
 
     # Full replacement: Abrams runs [0..5] = (0,6); Bradley starts at 6 = (6,4)
     assert "(0,6)" in groups_text
@@ -161,8 +161,8 @@ def test_replicas_export_seq_disambiguates_duplicates(tmp_path, fixture_units_pa
     packs_text = paths["packs"].read_text(encoding="utf-8")
     groups_text = paths["groups"].read_text(encoding="utf-8")
     # First seq has no suffix; second gets _1
-    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1" in packs_text
-    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_1_3" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_TEST_Alpha_1_1" in packs_text
+    assert "Descriptor_StrategicPack_WF_M1A2_SEPV2_Abrams_US_TEST_Alpha_1_1_3" in packs_text
     # Group A maps to the deck's vanilla combat group → reuses its vanilla name (required so
     # AG can load the deck). Group B has no vanilla match → WIF name.
     assert "Descriptor_CombatGroup_pion_TEST_Alpha_1_A is" in groups_text

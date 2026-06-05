@@ -145,7 +145,7 @@ def build_export_blocks(
                     pname = a.pack_name(xp)
                     if pname not in seen_packs:
                         seen_packs.add(pname)
-                        packs_blocks.append(generate_pack(a.unit_id, xp, transport_id=a.transport_id, seq=a.seq))
+                        packs_blocks.append(generate_pack(a.unit_id, xp, transport_id=a.transport_id, seq=a.seq, deck_name=a.deck_name))
 
             # Reuse the vanilla combat-group name + token so the campaign keeps binding to
             # it; replace its content with this group's units.
