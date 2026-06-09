@@ -1977,6 +1977,10 @@ function unitLine(unit_id, extras) {
       })
     ) : null,
     el("span", { class: "name" }, unitDisplay(unit_id)),
+    u ? el("span", {
+      class: `src-pill src-${u.source || "wif"}`,
+      title: (u.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
+    }, (u.source === "vanilla") ? "V" : "WIF") : null,
     unit_id && !unitResolved(unit_id)
       ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
     u ? renderSpecialtyBadges(u.specialties, u.role) : null,
