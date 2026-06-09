@@ -41,6 +41,10 @@ _state: dict[str, Any] = {
     "divisions": {},       # cfg_name → Division
     "units_csv": {},       # TOKEN → REFTEXT
     "platoons_csv": {},    # TOKEN → REFTEXT
+    "wif_weapons": {},
+    "vanilla_weapons": {},
+    "wif_ammo": {},
+    "vanilla_ammo": {},
 }
 
 
@@ -55,6 +59,10 @@ def set_state(
     divisions: dict | None = None,
     units_csv: dict[str, str] | None = None,
     platoons_csv: dict[str, str] | None = None,
+    wif_weapons: dict | None = None,
+    vanilla_weapons: dict | None = None,
+    wif_ammo: dict | None = None,
+    vanilla_ammo: dict | None = None,
 ) -> None:
     if units is not None:        _state["units"] = units
     if decks is not None:        _state["decks"] = decks
@@ -65,6 +73,10 @@ def set_state(
     if divisions is not None:    _state["divisions"] = divisions
     if units_csv is not None:    _state["units_csv"] = units_csv
     if platoons_csv is not None: _state["platoons_csv"] = platoons_csv
+    if wif_weapons is not None:    _state["wif_weapons"] = wif_weapons
+    if vanilla_weapons is not None: _state["vanilla_weapons"] = vanilla_weapons
+    if wif_ammo is not None:       _state["wif_ammo"] = wif_ammo
+    if vanilla_ammo is not None:   _state["vanilla_ammo"] = vanilla_ammo
 
 
 def _deck_label(deck_name: str) -> dict:
@@ -256,6 +268,7 @@ def sessions_export_direct(slug: str):
     base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
     base_csv        = export_path / "Localisation" / mod_name / "PLATOONS.csv"
     base_units_ndf  = export_path / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
+    base_ammo_ndf   = export_path / "Generated" / "Gameplay" / "Gfx" / "Ammunition.ndf"
     direct_paths = {
         "summary": decks_dir / "StrategicDecks_patch_summary.txt",
         "csv": base_csv
@@ -284,6 +297,8 @@ def sessions_export_direct(slug: str):
     base_files = [base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv]
     if base_units_ndf.exists():
         base_files.append(base_units_ndf)
+    if base_ammo_ndf.exists():
+        base_files.append(base_ammo_ndf)
 
     # Snapshot each base file to .orig on first export, then restore from .orig on
     # every subsequent export so repeated runs apply on a canvas instead of
@@ -396,14 +411,35 @@ def sessions_export_direct(slug: str):
         else:
             base_csv.write_text(csv_text, encoding="utf-8")
 
-        # Apply stats overrides to UniteDescriptor.ndf if they exist and the file is present
-        overrides = {}
+        # Apply stats overrides to UniteDescriptor.ndf and Ammunition.ndf
+        tactical_overrides = load_tactical_overrides()
+        unit_overrides = {}
+        
+        # Populate with tactical unit overrides first
+        for uid, fields in tactical_overrides.get("units", {}).items():
+            unit_overrides[uid] = dict(fields)
+            
+        # Merge strategic attack/defense overrides from assignments
         for a in assignments:
             if a.attack_override is not None or a.defense_override is not None:
-                overrides[a.unit_id] = (a.attack_override, a.defense_override)
-        if base_units_ndf.exists() and overrides:
+                if a.unit_id not in unit_overrides:
+                    unit_overrides[a.unit_id] = {}
+                # Ensure they are dict overrides
+                if isinstance(unit_overrides[a.unit_id], dict):
+                    if a.attack_override is not None:
+                        unit_overrides[a.unit_id]["attack_override"] = a.attack_override
+                    if a.defense_override is not None:
+                        unit_overrides[a.unit_id]["defense_override"] = a.defense_override
+                        
+        if base_units_ndf.exists() and unit_overrides:
             from wif_ag_tool.generator.unit_patcher import patch_unit_stats
-            patch_unit_stats(base_units_ndf, overrides)
+            patch_unit_stats(base_units_ndf, unit_overrides)
+            
+        # Apply ammunition overrides to Ammunition.ndf
+        ammo_overrides = tactical_overrides.get("ammo", {})
+        if base_ammo_ndf.exists() and ammo_overrides:
+            from wif_ag_tool.generator.ammo_patcher import patch_ammo_stats
+            patch_ammo_stats(base_ammo_ndf, ammo_overrides)
     except Exception as e:
         return jsonify({"error": f"Failed to write export files: {str(e)}"}), 500
 
@@ -782,6 +818,201 @@ def unit_icon(unit_id: str):
     # storms don't hammer the dev server.
     resp.headers["Cache-Control"] = "public, max-age=604800"
     return resp
+
+
+def load_tactical_overrides() -> dict:
+    if config.STATS_OVERRIDES_FILE.exists():
+        try:
+            return json.loads(config.STATS_OVERRIDES_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {"units": {}, "ammo": {}}
+
+
+def save_tactical_overrides(overrides: dict) -> None:
+    config.STATS_OVERRIDES_FILE.parent.mkdir(parents=True, exist_ok=True)
+    config.STATS_OVERRIDES_FILE.write_text(json.dumps(overrides, indent=2), encoding="utf-8")
+
+
+@api_bp.get("/units/<unit_id>/tactical_stats")
+def get_unit_tactical_stats(unit_id: str):
+    unit = _lookup_unit(unit_id)
+    if not unit:
+        abort(404)
+
+    overrides = load_tactical_overrides()
+    unit_overrides = overrides.get("units", {}).get(unit_id, {})
+    
+    response = {
+        "unit_id": unit_id,
+        "display_name": unit.display_name or unit.name.removeprefix("WF_").replace("_", " "),
+        "health": {
+            "base": unit.health,
+            "override": unit_overrides.get("health")
+        },
+        "max_suppression": {
+            "base": unit.max_suppression,
+            "override": unit_overrides.get("max_suppression")
+        },
+        "supply_capacity": {
+            "base": unit.supply_capacity,
+            "override": unit_overrides.get("supply_capacity")
+        },
+        "weapons": []
+    }
+
+    weapon_key = unit.weapon_descriptor_ref
+    if weapon_key and not weapon_key.startswith("WeaponDescriptor_"):
+        weapon_key = f"WeaponDescriptor_{weapon_key}"
+
+    # Search in WIF weapons then vanilla weapons
+    ammo_refs = _state["wif_weapons"].get(weapon_key) or _state["vanilla_weapons"].get(weapon_key) or []
+    
+    for ammo_ref in ammo_refs:
+        ammo_base = _state["wif_ammo"].get(ammo_ref) or _state["vanilla_ammo"].get(ammo_ref)
+        if ammo_base:
+            ammo_override = overrides.get("ammo", {}).get(ammo_ref, {})
+            response["weapons"].append({
+                "ammo_id": ammo_ref,
+                "damage_family": {
+                    "base": ammo_base.get("damage_family"),
+                    "override": ammo_override.get("damage_family")
+                },
+                "damage_index": {
+                    "base": ammo_base.get("damage_index"),
+                    "override": ammo_override.get("damage_index")
+                },
+                "max_range": {
+                    "base": ammo_base.get("max_range"),
+                    "override": ammo_override.get("max_range")
+                },
+                "min_range": {
+                    "base": ammo_base.get("min_range"),
+                    "override": ammo_override.get("min_range")
+                },
+                "time_between_shots": {
+                    "base": ammo_base.get("time_between_shots"),
+                    "override": ammo_override.get("time_between_shots")
+                },
+                "time_between_salvos": {
+                    "base": ammo_base.get("time_between_salvos"),
+                    "override": ammo_override.get("time_between_salvos")
+                },
+                "shots_per_salvo": {
+                    "base": ammo_base.get("shots_per_salvo"),
+                    "override": ammo_override.get("shots_per_salvo")
+                },
+                "physical_damages": {
+                    "base": ammo_base.get("physical_damages"),
+                    "override": ammo_override.get("physical_damages")
+                },
+                "suppress_damages": {
+                    "base": ammo_base.get("suppress_damages"),
+                    "override": ammo_override.get("suppress_damages")
+                },
+                "supply_cost": {
+                    "base": ammo_base.get("supply_cost"),
+                    "override": ammo_override.get("supply_cost")
+                }
+            })
+            
+    return jsonify(response)
+
+
+@api_bp.put("/units/<unit_id>/tactical_stats")
+def put_unit_tactical_stats(unit_id: str):
+    unit = _lookup_unit(unit_id)
+    if not unit:
+        abort(404)
+
+    body = request.get_json(force=True) or {}
+    overrides = load_tactical_overrides()
+
+    # 1. Update unit stats
+    unit_overrides = {}
+    
+    health = body.get("health")
+    if health is not None:
+        try:
+            unit_overrides["health"] = int(health)
+        except (ValueError, TypeError):
+            pass
+            
+    max_supp = body.get("max_suppression")
+    if max_supp is not None:
+        try:
+            unit_overrides["max_suppression"] = int(max_supp)
+        except (ValueError, TypeError):
+            pass
+            
+    supply = body.get("supply_capacity")
+    if supply is not None:
+        try:
+            unit_overrides["supply_capacity"] = int(supply)
+        except (ValueError, TypeError):
+            pass
+
+    # Clean up empty or null values
+    unit_overrides = {k: v for k, v in unit_overrides.items() if v is not None}
+    
+    if "units" not in overrides:
+        overrides["units"] = {}
+        
+    if unit_overrides:
+        overrides["units"][unit_id] = unit_overrides
+    elif unit_id in overrides["units"]:
+        del overrides["units"][unit_id]
+
+    # 2. Update ammo overrides
+    ammo_updates = body.get("ammo") or {}
+    if "ammo" not in overrides:
+        overrides["ammo"] = {}
+        
+    for ammo_id, fields in ammo_updates.items():
+        if not fields:
+            if ammo_id in overrides["ammo"]:
+                del overrides["ammo"][ammo_id]
+            continue
+            
+        ammo_ov = {}
+        
+        # Cast fields properly
+        if "damage_family" in fields and fields["damage_family"] is not None:
+            ammo_ov["damage_family"] = str(fields["damage_family"])
+            
+        for float_field in ("time_between_shots", "time_between_salvos", "supply_cost", "physical_damages", "suppress_damages"):
+            if float_field in fields and fields[float_field] is not None:
+                try:
+                    ammo_ov[float_field] = float(fields[float_field])
+                except (ValueError, TypeError):
+                    pass
+                    
+        for int_field in ("damage_index", "max_range", "min_range", "shots_per_salvo"):
+            if int_field in fields and fields[int_field] is not None:
+                try:
+                    ammo_ov[int_field] = int(fields[int_field])
+                except (ValueError, TypeError):
+                    pass
+
+        # Clean null values
+        ammo_ov = {k: v for k, v in ammo_ov.items() if v is not None}
+        
+        if ammo_ov:
+            overrides["ammo"][ammo_id] = ammo_ov
+        elif ammo_id in overrides["ammo"]:
+            del overrides["ammo"][ammo_id]
+
+    save_tactical_overrides(overrides)
+    return jsonify({"ok": True})
+
+
+@api_bp.get("/tactical_stats/summary")
+def get_tactical_stats_summary():
+    overrides = load_tactical_overrides()
+    return jsonify({
+        "unit_overrides_count": len(overrides.get("units", {})),
+        "ammo_overrides_count": len(overrides.get("ammo", {})),
+    })
 
 
 # ── docs ─────────────────────────────────────────────────────────────────────

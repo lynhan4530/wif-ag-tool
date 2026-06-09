@@ -681,3 +681,196 @@ export Descriptor_Unit_WF_M1A2_Abrams is TEntityDescriptor
     assert "UnitAttackValue          = 10" in orig_file.read_text(encoding="utf-8")
 
 
+def test_tactical_stats_get_put_and_export(client, tmp_path, monkeypatch):
+    # Setup paths and state
+    overrides_file = tmp_path / "data" / "unit_stats_overrides.json"
+    monkeypatch.setattr(config, "STATS_OVERRIDES_FILE", overrides_file)
+    
+    from wif_ag_tool.web import api as api_mod
+    monkeypatch.setattr(api_mod.config, "STATS_OVERRIDES_FILE", overrides_file)
+    
+    unit_id = "WF_M1A2_Abrams"
+    mock_unit = WifUnit(
+        name=unit_id,
+        guid="guid-123",
+        nation="US",
+        attack=10,
+        defense=10,
+        xp_bonus=1,
+        role="armor",
+        name_token="M1A2_TOKEN",
+        display_name="M1A2 Abrams",
+        health=10,
+        max_suppression=800,
+        supply_capacity=0,
+        weapon_descriptor_ref="M1A2_Abrams_US"
+    )
+    
+    set_state(
+        units={unit_id: mock_unit},
+        wif_weapons={"WeaponDescriptor_M1A2_Abrams_US": ["Ammo_120mm_AP"]},
+        wif_ammo={"Ammo_120mm_AP": {
+            "name": "Ammo_120mm_AP",
+            "guid": "guid-ammo",
+            "damage_family": "DamageFamily_ap",
+            "damage_index": 20,
+            "max_range": 2000,
+            "min_range": 0,
+            "time_between_shots": 0.2,
+            "time_between_salvos": 2.0,
+            "shots_per_salvo": 5,
+            "physical_damages": 1.0,
+            "suppress_damages": 15.0,
+            "supply_cost": 5.0
+        }}
+    )
+    
+    # 1. GET initial stats
+    resp = client.get(f"/api/units/{unit_id}/tactical_stats")
+    assert resp.status_code == 200
+    data = resp.get_json()
+    assert data["unit_id"] == unit_id
+    assert data["health"]["base"] == 10
+    assert data["health"]["override"] is None
+    assert len(data["weapons"]) == 1
+    assert data["weapons"][0]["ammo_id"] == "Ammo_120mm_AP"
+    assert data["weapons"][0]["max_range"]["base"] == 2000
+    assert data["weapons"][0]["max_range"]["override"] is None
+    
+    # 2. PUT stats overrides
+    payload = {
+        "health": 15,
+        "max_suppression": 900,
+        "supply_capacity": 500,
+        "ammo": {
+            "Ammo_120mm_AP": {
+                "max_range": 2200,
+                "time_between_shots": 0.1,
+                "physical_damages": 2.5
+            }
+        }
+    }
+    resp = client.put(f"/api/units/{unit_id}/tactical_stats", json=payload)
+    assert resp.status_code == 200
+    assert resp.get_json()["ok"] is True
+    
+    # 3. GET overridden stats
+    resp = client.get(f"/api/units/{unit_id}/tactical_stats")
+    assert resp.status_code == 200
+    data = resp.get_json()
+    assert data["health"]["override"] == 15
+    assert data["max_suppression"]["override"] == 900
+    assert data["supply_capacity"]["override"] == 500
+    assert data["weapons"][0]["max_range"]["override"] == 2200
+    assert data["weapons"][0]["time_between_shots"]["override"] == 0.1
+    assert data["weapons"][0]["physical_damages"]["override"] == 2.5
+    
+    # Verify overrides json was created
+    assert overrides_file.exists()
+    
+    # 3b. GET overrides summary
+    resp = client.get("/api/tactical_stats/summary")
+    assert resp.status_code == 200
+    summary = resp.get_json()
+    assert summary["unit_overrides_count"] == 1
+    assert summary["ammo_overrides_count"] == 1
+
+    # 4. Verify Export Direct applies these overrides
+    # Setup mock folders
+    mod_dir = tmp_path / "CRM_ArmyGeneral"
+    mod_dir.mkdir()
+    export_dir = tmp_path / "export_output"
+    
+    decks_dir = export_dir / "Generated" / "Gameplay" / "Decks"
+    decks_dir.mkdir(parents=True, exist_ok=True)
+    (decks_dir / "StrategicDecks.ndf").write_text(
+        "export Descriptor_Deck_pion_US_11ACR_4 is TDeckDescriptor\n(\n    DeckPackList = [\n    ]\n    DeckCombatGroupList = [\n    ]\n)\n",
+        encoding="utf-8"
+    )
+    (decks_dir / "StrategicPacks.ndf").write_text("// packs\n", encoding="utf-8")
+    (decks_dir / "StrategicCombatGroups.ndf").write_text("// groups\n", encoding="utf-8")
+    
+    csv_dir = export_dir / "Localisation" / "CRM_ArmyGeneral"
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    (csv_dir / "PLATOONS.csv").write_text('"TOKEN";"REFTEXT"\n', encoding="utf-8")
+    
+    gfx_dir = export_dir / "Generated" / "Gameplay" / "Gfx"
+    gfx_dir.mkdir(parents=True, exist_ok=True)
+    
+    unite_desc = gfx_dir / "UniteDescriptor.ndf"
+    unite_desc.write_text("""
+export Descriptor_Unit_WF_M1A2_Abrams is TEntityDescriptor
+(
+    DescriptorId       = GUID:{454ef2bc-ff1e-42fd-9c64-7988718c197d}
+    ModulesDescriptors = [
+        TStrategicDataModuleDescriptor(UnitAttackValue = 10 UnitDefenseValue = 10),
+        TBaseDamageModuleDescriptor(MaxPhysicalDamages = 10 MaxSuppressionDamages = ~/GroundUnit_MaxSuppressionDamages),
+        TSupplyModuleDescriptor(SupplyCapacity = 0.0),
+    ]
+)
+""", encoding="utf-8")
+    
+    ammo_desc = gfx_dir / "Ammunition.ndf"
+    ammo_desc.write_text("""
+Ammo_120mm_AP is TAmmunitionDescriptor
+(
+    DescriptorId                      = GUID:{087bb6a9-1efc-4203-b89d-b78667e320bc}
+    MaximumRangeGRU                   = 2000
+    TimeBetweenTwoShots               = 0.2
+    PhysicalDamages                   = 1.0
+)
+""", encoding="utf-8")
+    
+    # Create session and patch settings
+    resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
+    slug = resp.get_json()["slug"]
+    client.patch(f"/api/sessions/{slug}", json={
+        "target_mod_dir": str(mod_dir),
+        "export_dir": str(export_dir)
+    })
+    
+    # Setup deck states & replicas
+    from wif_ag_tool import replicas as rmod
+    monkeypatch.setattr(rmod.config, "REPLICAS_FILE", tmp_path / "data" / "wif_replicas.json")
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    rmod.save_replica(deck_name, [
+        {
+            "unit_id": "WF_M1A2_Abrams",
+            "xp": 1,
+            "count": 1,
+            "transport_id": None,
+            "attack_override": None,
+            "defense_override": None
+        }
+    ], path=tmp_path / "data" / "wif_replicas.json")
+    
+    mock_deck = DeckState(
+        name=deck_name,
+        division_ref="US_11ACR",
+        pack_list=[],
+        combat_group_list=[]
+    )
+    
+    set_state(
+        decks={deck_name: mock_deck},
+        units={unit_id: mock_unit}
+    )
+    
+    resp = client.post(f"/api/sessions/{slug}/export_direct")
+    assert resp.status_code == 200
+    
+    # Verify UniteDescriptor.ndf was patched with health=15, suppress=900, supply=500
+    patched_unite = unite_desc.read_text(encoding="utf-8")
+    assert "MaxPhysicalDamages = 15" in patched_unite
+    assert "MaxSuppressionDamages = 900" in patched_unite
+    assert "SupplyCapacity = 500.0" in patched_unite
+    
+    # Verify Ammunition.ndf was patched with max_range=2200, time_between_shots=0.1, physical_damages=2.5
+    patched_ammo = ammo_desc.read_text(encoding="utf-8")
+    import re
+    assert re.search(r'MaximumRangeGRU\s*=\s*2200', patched_ammo)
+    assert re.search(r'TimeBetweenTwoShots\s*=\s*0\.1', patched_ammo)
+    assert re.search(r'PhysicalDamages\s*=\s*2\.5', patched_ammo)
+
+
+

@@ -208,6 +208,175 @@
     text-align: center;
   }
 
+  /* Campaign Dashboard */
+  .dashboard-pane {
+    padding: 32px;
+    background: var(--bg-base);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .dashboard-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .dashboard-header h2 {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    color: var(--text-bright) !important;
+    margin: 0 0 6px 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    position: static !important;
+  }
+  
+  .dashboard-header p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 18px;
+  }
+  
+  .dashboard-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .dashboard-card:hover {
+    background: var(--bg-card);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .dashboard-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .dashboard-card:hover::before {
+    opacity: 1;
+  }
+  
+  .dashboard-card.accent-card::before {
+    background: var(--accent);
+  }
+  
+  .dashboard-card.warn-card::before {
+    background: var(--warn);
+  }
+
+  .dashboard-card-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+  }
+  
+  .dashboard-card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dashboard-card-desc {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    flex: 1;
+  }
+  
+  .dashboard-card-action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  
+  .dashboard-card-action button {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+
+  .dashboard-badge {
+    background: hsla(190, 95%, 48%, 0.15);
+    color: var(--accent);
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  
+  .dashboard-stats {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  .dashboard-stat-item {
+    flex: 1;
+    min-width: 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .dashboard-stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+  
+  .dashboard-stat-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+
   /* Picker View */
   .picker {
     padding: 32px 24px;
@@ -896,6 +1065,12 @@
   
   .x-btn:hover {
     background: var(--danger-bg);
+  }
+  
+  .modal-row.active {
+    background: rgba(0, 188, 212, 0.12) !important;
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0 !important;
   }
   
   .field-label {
@@ -1655,6 +1830,10 @@ const state = {
   modalUnits: [],
   modalFilters: { nation: "", role: "all", q: "", source: "all" },
   modalTarget: null,       // {groupIdx, platoonIdx} — where to add units from modal
+  statsManagerOpen: false,
+  statsManagerFilters: { nation: "", role: "all", q: "", source: "all" },
+  statsManagerSelectedId: null,
+  statsEditorData: null,
   exportOpen: false,
   platoonPickerOpen: false, // show platoon name picker modal
   platoonPickerGroupIdx: null,
@@ -1672,6 +1851,7 @@ const state = {
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   rawFilesAvailable: false,
   deckQuery: "",
+  tacticalSummary: null,
   vanillaCollapsedGroups: new Set(),
   vanillaCollapsedSmartGroups: new Set(),
   replicaCollapsedGroups: new Set(),
@@ -2029,6 +2209,7 @@ function render() {
   root.innerHTML = "";
   root.appendChild(state.view === "picker" ? renderPicker() : renderSession());
   if (state.modalOpen) root.appendChild(renderModal());
+  if (state.statsManagerOpen) root.appendChild(renderStatsManagerModal());
   if (state.exportOpen) root.appendChild(renderExportDialog());
   if (state.platoonPickerOpen) root.appendChild(renderPlatoonPicker());
   if (state.cloneReplicaOpen) root.appendChild(renderCloneReplicaModal());
@@ -2140,6 +2321,7 @@ function renderSession() {
     el("span", { class: "spacer" }),
     el("button", { class: "ghost", onclick: openHowto, title: "End-to-end guide: create a mod, build replicas, export & build" }, "❓ How to"),
     el("button", { class: "ghost", onclick: () => { state.settingsOpen = true; render(); }, title: "Configure mod and game folders" }, "⚙ Settings"),
+    el("button", { class: "ghost", onclick: openTacticalStatsManager, title: "Edit unit and weapon stats globally in the mod" }, "📊 Unit Stats"),
     el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : "Please configure WIF Mod Folder in Settings" }, "📥 Export Mod"),
     el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : "Please configure WIF Mod Folder in Settings" }, "⚡ Build Mod"),
     el("button", {
@@ -2160,17 +2342,19 @@ function renderSession() {
     el("button", { onclick: () => { state.exportOpen = true; render(); } }, "Export NDF"),
   ));
 
-  const tabSelector = el("div", { class: "session-tabs" },
-    el("button", {
-      class: state.activeTab === "vanilla" ? "active" : "",
-      onclick: () => { state.activeTab = "vanilla"; render(); }
-    }, "Vanilla Reference"),
-    el("button", {
-      class: state.activeTab === "replica" ? "active" : "",
-      onclick: () => { state.activeTab = "replica"; render(); }
-    }, "WIF Replica")
-  );
-  wrap.appendChild(tabSelector);
+  if (state.activeDeck) {
+    const tabSelector = el("div", { class: "session-tabs" },
+      el("button", {
+        class: state.activeTab === "vanilla" ? "active" : "",
+        onclick: () => { state.activeTab = "vanilla"; render(); }
+      }, "Vanilla Reference"),
+      el("button", {
+        class: state.activeTab === "replica" ? "active" : "",
+        onclick: () => { state.activeTab = "replica"; render(); }
+      }, "WIF Replica")
+    );
+    wrap.appendChild(tabSelector);
+  }
 
   const gridClasses = ["session"];
   if (state.leftPaneOpen) gridClasses.push("left-open");
@@ -2189,19 +2373,167 @@ function renderSession() {
 
   const leftPane = renderLeftPane();
   leftPane.classList.add("left-pane");
-
-  const vanillaPane = renderCenterPane();
-  vanillaPane.classList.add("vanilla-pane");
-
-  const replicaPane = renderRightPane();
-  replicaPane.classList.add("replica-pane");
-
   grid.appendChild(leftPane);
-  grid.appendChild(vanillaPane);
-  grid.appendChild(replicaPane);
+
+  if (!state.activeDeck) {
+    const dashboardPane = renderDashboardPane();
+    dashboardPane.classList.add("dashboard-pane");
+    dashboardPane.style.gridColumn = "span 2";
+    grid.appendChild(dashboardPane);
+  } else {
+    const vanillaPane = renderCenterPane();
+    vanillaPane.classList.add("vanilla-pane");
+
+    const replicaPane = renderRightPane();
+    replicaPane.classList.add("replica-pane");
+
+    grid.appendChild(vanillaPane);
+    grid.appendChild(replicaPane);
+  }
 
   wrap.appendChild(grid);
   return wrap;
+}
+
+function renderDashboardPane() {
+  const pane = el("section", { class: "pane dashboard-pane" });
+
+  const s = state.session;
+  
+  // Header
+  const header = el("div", { class: "dashboard-header" },
+    el("h2", {}, s.campaign),
+    el("p", {}, "Select a deck on the left to edit its slots, or use the campaign tools below to customize unit stats globally.")
+  );
+  pane.appendChild(header);
+
+  // Stats summary cards row
+  const totalReplicas = state.decks.filter(d => d.has_replica).length;
+  const totalDecks = state.decks.length;
+  const unitOverrides = state.tacticalSummary ? state.tacticalSummary.unit_overrides_count : 0;
+  const ammoOverrides = state.tacticalSummary ? state.tacticalSummary.ammo_overrides_count : 0;
+  
+  const statsContainer = el("div", { class: "dashboard-stats" },
+    el("div", { class: "dashboard-stat-item" },
+      el("span", { class: "dashboard-stat-label" }, "Active Decks"),
+      el("span", { class: "dashboard-stat-value" }, `${totalReplicas} / ${totalDecks}`)
+    ),
+    el("div", { class: "dashboard-stat-item" },
+      el("span", { class: "dashboard-stat-label" }, "Custom Unit Stats"),
+      el("span", { class: "dashboard-stat-value" }, `${unitOverrides}`)
+    ),
+    el("div", { class: "dashboard-stat-item" },
+      el("span", { class: "dashboard-stat-label" }, "Custom Ammo/Weapons"),
+      el("span", { class: "dashboard-stat-value" }, `${ammoOverrides}`)
+    ),
+    el("div", { class: "dashboard-stat-item" },
+      el("span", { class: "dashboard-stat-label" }, "WIF Mod Status"),
+      el("span", { class: "dashboard-stat-value", style: s.target_mod_dir ? "color: var(--primary);" : "color: var(--danger);" }, s.target_mod_dir ? "✓ Ready" : "✗ Not Configured")
+    )
+  );
+  pane.appendChild(statsContainer);
+
+  // Tools grid
+  pane.appendChild(el("h3", { style: "font-family: 'Outfit', sans-serif; font-size: 11px; margin: 8px 0 12px 0; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em;" }, "Campaign Tools"));
+  
+  const grid = el("div", { class: "dashboard-grid" });
+
+  // 1. Tactical Stats Card
+  const statsCard = el("div", { class: "dashboard-card accent-card" },
+    el("div", {},
+      el("div", { class: "dashboard-card-title" }, 
+        el("span", { class: "dashboard-card-icon" }, "📊"),
+        "Tactical Stats & Weapons Editor",
+        el("span", { class: "dashboard-badge" }, "Featured")
+      ),
+      el("div", { class: "dashboard-card-desc" }, 
+        "Edit core unit properties (health, suppression, supply capacity) and weapons characteristics (damage family, AP penetration, HE damage, range, rate of fire, salvo size, and supply cost) globally in this campaign."
+      )
+    ),
+    el("div", { class: "dashboard-card-action" },
+      el("button", { class: "primary", onclick: openTacticalStatsManager }, "Open Stats Editor")
+    )
+  );
+  grid.appendChild(statsCard);
+
+  // 2. Export Card
+  const exportCard = el("div", { class: "dashboard-card" },
+    el("div", {},
+      el("div", { class: "dashboard-card-title" },
+        el("span", { class: "dashboard-card-icon" }, "📥"),
+        "Export Mod Configuration"
+      ),
+      el("div", { class: "dashboard-card-desc" },
+        "Write the replica deck definitions and the custom tactical/weapon stats overrides directly to your configured WIF mod folder's source ndf files."
+      )
+    ),
+    el("div", { class: "dashboard-card-action" },
+      el("button", { 
+        disabled: !s.target_mod_dir, 
+        onclick: doDirectExport,
+        title: s.target_mod_dir ? "" : "Please configure WIF Mod Folder in Settings"
+      }, "Export Mod Files")
+    )
+  );
+  grid.appendChild(exportCard);
+
+  // 3. Build Card
+  const buildCard = el("div", { class: "dashboard-card warn-card" },
+    el("div", {},
+      el("div", { class: "dashboard-card-title" },
+        el("span", { class: "dashboard-card-icon" }, "⚡"),
+        "Compile & Build Mod"
+      ),
+      el("div", { class: "dashboard-card-desc" },
+        "Run the mod builder script (GenerateMod.bat) inside your target mod directory. This compiles the modified NDF files so the changes show up in the game."
+      )
+    ),
+    el("div", { class: "dashboard-card-action" },
+      el("button", { 
+        class: "warn",
+        disabled: !s.target_mod_dir, 
+        onclick: doBuildMod,
+        title: s.target_mod_dir ? "" : "Please configure WIF Mod Folder in Settings"
+      }, "Run Mod Builder")
+    )
+  );
+  grid.appendChild(buildCard);
+
+  // 4. Settings Card
+  const settingsCard = el("div", { class: "dashboard-card" },
+    el("div", {},
+      el("div", { class: "dashboard-card-title" },
+        el("span", { class: "dashboard-card-icon" }, "⚙"),
+        "Campaign Settings"
+      ),
+      el("div", { class: "dashboard-card-desc" },
+        "Configure paths to the WIF Mod folder, the Warno game directory, and select which factions/nations are in scope for this campaign session."
+      )
+    ),
+    el("div", { class: "dashboard-card-action" },
+      el("button", { class: "ghost", onclick: () => { state.settingsOpen = true; render(); } }, "Configure Settings")
+    )
+  );
+  grid.appendChild(settingsCard);
+
+  pane.appendChild(grid);
+  
+  // How to guide card at the bottom
+  const guideCard = el("div", { 
+    style: "background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--border-radius-lg); padding: 20px; display: flex; flex-direction: column; gap: 8px; margin-top: 12px; line-height: 1.5;" 
+  },
+    el("h4", { style: "font-family: 'Outfit', sans-serif; font-size: 14px; margin: 0; color: var(--text-bright);" }, "💡 Quick Workflow Guide"),
+    el("ol", { style: "margin: 4px 0 0 16px; padding: 0; font-size: 12.5px; color: var(--text-muted); display: flex; flex-direction: column; gap: 6px;" },
+      el("li", {}, "Select a deck on the left panel (e.g. US 11ACR) and click Copy Vanilla to seed your replica deck."),
+      el("li", {}, "Add or remove units, modify card packs and activation phases to customize your replica decks."),
+      el("li", {}, "Click the Tactical Stats & Weapons Editor tool above to tune health, ranges, firing rates, and damage indices of any unit globally."),
+      el("li", {}, "Click Export Mod to write your replica decks and stats overrides into the source files."),
+      el("li", {}, "Click Run Mod Builder to build the Warno mod. Once built, activate your mod in the game launcher and play!")
+    )
+  );
+  pane.appendChild(guideCard);
+
+  return pane;
 }
 
 // ── left pane ───────────────────────────────────────────────────────────────
@@ -3725,6 +4057,345 @@ function renderSettingsModal() {
   return backdrop;
 }
 
+
+function openTacticalStatsManager() {
+  state.statsManagerOpen = true;
+  state.statsManagerSelectedId = null;
+  state.statsEditorData = null;
+  state.statsManagerFilters = { nation: "", role: "all", q: "", source: "all" };
+  render();
+}
+
+
+function selectStatsManagerUnit(unitId) {
+  state.statsManagerSelectedId = unitId;
+  state.statsEditorData = null;
+  render();
+  
+  fetch(`/api/units/${unitId}/tactical_stats`)
+    .then(r => {
+      if (!r.ok) throw new Error("failed to fetch stats");
+      return r.json();
+    })
+    .then(data => {
+      if (state.statsManagerSelectedId === unitId) {
+        state.statsEditorData = data;
+        render();
+      }
+    })
+    .catch(err => {
+      alert("Failed to load tactical stats: " + err.message);
+      state.statsEditorData = null;
+      render();
+    });
+}
+
+
+function getStatsManagerUnits() {
+  const f = state.statsManagerFilters;
+  const q = (f.q || "").toLowerCase().trim();
+  const wantRole = f.role;
+  const wantSource = f.source;
+  const wantNation = f.nation;
+  
+  const matches = [];
+  for (const name in state.unitsIndex) {
+    const u = state.unitsIndex[name];
+    if (wantNation && u.nation !== wantNation) continue;
+    if (wantSource && wantSource !== "all" && u.source !== wantSource) continue;
+    if (wantRole && wantRole !== "all") {
+      if (wantRole === "transport") {
+        if (!u.is_transport) continue;
+      } else if (getNormalizedRole(u) !== wantRole) {
+        continue;
+      }
+    }
+    if (q) {
+      const hay = (u.name + " " + (u.display_name || "")).toLowerCase();
+      if (!hay.includes(q)) continue;
+    }
+    matches.push(u);
+  }
+  
+  matches.sort((a, b) =>
+    (a.display_name || a.name).localeCompare(b.display_name || b.name)
+  );
+  return matches;
+}
+
+
+function saveTacticalStats() {
+  const unitId = state.statsManagerSelectedId;
+  if (!unitId) return;
+  
+  const payload = {
+    health: null,
+    max_suppression: null,
+    supply_capacity: null,
+    ammo: {}
+  };
+  
+  const healthVal = document.getElementById("stats-health")?.value;
+  if (healthVal !== undefined && healthVal.trim() !== "") {
+    payload.health = parseInt(healthVal, 10);
+  }
+  const suppVal = document.getElementById("stats-suppression")?.value;
+  if (suppVal !== undefined && suppVal.trim() !== "") {
+    payload.max_suppression = parseInt(suppVal, 10);
+  }
+  const supplyVal = document.getElementById("stats-supply")?.value;
+  if (supplyVal !== undefined && supplyVal.trim() !== "") {
+    payload.supply_capacity = parseInt(supplyVal, 10);
+  }
+  
+  if (state.statsEditorData && state.statsEditorData.weapons) {
+    state.statsEditorData.weapons.forEach(w => {
+      const ammoId = w.ammo_id;
+      const ammoPayload = {};
+      
+      const df = document.getElementById(`ammo-${ammoId}-damage_family`)?.value;
+      if (df !== undefined && df.trim() !== "") ammoPayload.damage_family = df.trim();
+      
+      const di = document.getElementById(`ammo-${ammoId}-damage_index`)?.value;
+      if (di !== undefined && di.trim() !== "") ammoPayload.damage_index = parseInt(di, 10);
+      
+      const maxR = document.getElementById(`ammo-${ammoId}-max_range`)?.value;
+      if (maxR !== undefined && maxR.trim() !== "") ammoPayload.max_range = parseInt(maxR, 10);
+      
+      const minR = document.getElementById(`ammo-${ammoId}-min_range`)?.value;
+      if (minR !== undefined && minR.trim() !== "") ammoPayload.min_range = parseInt(minR, 10);
+      
+      const tbs = document.getElementById(`ammo-${ammoId}-time_between_shots`)?.value;
+      if (tbs !== undefined && tbs.trim() !== "") ammoPayload.time_between_shots = parseFloat(tbs);
+      
+      const tbsalv = document.getElementById(`ammo-${ammoId}-time_between_salvos`)?.value;
+      if (tbsalv !== undefined && tbsalv.trim() !== "") ammoPayload.time_between_salvos = parseFloat(tbsalv);
+      
+      const sps = document.getElementById(`ammo-${ammoId}-shots_per_salvo`)?.value;
+      if (sps !== undefined && sps.trim() !== "") ammoPayload.shots_per_salvo = parseInt(sps, 10);
+      
+      const pd = document.getElementById(`ammo-${ammoId}-physical_damages`)?.value;
+      if (pd !== undefined && pd.trim() !== "") ammoPayload.physical_damages = parseFloat(pd);
+      
+      const sd = document.getElementById(`ammo-${ammoId}-suppress_damages`)?.value;
+      if (sd !== undefined && sd.trim() !== "") ammoPayload.suppress_damages = parseFloat(sd);
+      
+      const sc = document.getElementById(`ammo-${ammoId}-supply_cost`)?.value;
+      if (sc !== undefined && sc.trim() !== "") ammoPayload.supply_cost = parseFloat(sc);
+      
+      payload.ammo[ammoId] = ammoPayload;
+    });
+  }
+  
+  fetch(`/api/units/${unitId}/tactical_stats`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  })
+    .then(r => {
+      if (!r.ok) throw new Error("failed to save stats");
+      return r.json();
+    })
+    .then(() => {
+      toast("Tactical stats overrides saved!");
+      selectStatsManagerUnit(unitId);
+      fetchTacticalSummary();
+    })
+    .catch(err => {
+      alert("Failed to save tactical stats: " + err.message);
+    });
+}
+
+
+function renderStatsManagerModal() {
+  const backdrop = el("div", { class: "backdrop",
+    onclick: e => { if (e.target === backdrop) { state.statsManagerOpen = false; render(); } } });
+    
+  const modal = el("div", { class: "modal", style: "max-width: 1000px; width: 95%; height: 85vh; display: flex; flex-direction: column;" });
+  
+  const modalHead = el("div", { class: "modal-head" },
+    el("h3", {}, "📊 Tactical Stats & Weapons Editor"),
+    el("button", { class: "ghost", onclick: () => { state.statsManagerOpen = false; render(); } }, "Done")
+  );
+  modal.appendChild(modalHead);
+  makeDraggable(modal, modalHead);
+  
+  const body = el("div", { class: "modal-body", style: "display: flex; flex-direction: row; gap: 15px; flex: 1; overflow: hidden; padding: 14px;" });
+  
+  // ── LEFT PANE: Search & Selector ──
+  const leftPane = el("div", { style: "width: 32%; display: flex; flex-direction: column; gap: 10px; border-right: 1px solid rgba(255,255,255,0.08); padding-right: 14px; height: 100%;" });
+  
+  const f = state.statsManagerFilters;
+  
+  // Filters grid
+  const filtersGrid = el("div", { style: "display: grid; grid-template-columns: 1fr 1fr; gap: 6px;" },
+    el("div", { style: "display: flex; flex-direction: column; gap: 2px;" },
+      el("span", { class: "field-label", style: "font-size: 8px;" }, "Source"),
+      mkSelect(["all", "wif", "vanilla"], f.source, v => { f.source = v; render(); })
+    ),
+    el("div", { style: "display: flex; flex-direction: column; gap: 2px;" },
+      el("span", { class: "field-label", style: "font-size: 8px;" }, "Nation"),
+      mkSelect(["", ...NATIONS], f.nation, v => { f.nation = v; render(); })
+    ),
+    el("div", { style: "grid-column: span 2; display: flex; flex-direction: column; gap: 2px;" },
+      el("span", { class: "field-label", style: "font-size: 8px;" }, "Role"),
+      mkSelect(ROLES, f.role, v => { f.role = v; render(); })
+    )
+  );
+  
+  // Search input
+  const searchInput = el("input", {
+    type: "text",
+    placeholder: "Search unit (e.g. Abrams)",
+    value: f.q || "",
+    style: "width: 100%;",
+    oninput: e => { f.q = e.target.value; render(); }
+  });
+  
+  leftPane.appendChild(searchInput);
+  leftPane.appendChild(filtersGrid);
+  
+  // Matching units list
+  const unitsList = el("div", { style: "flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 4px;" });
+  
+  const matches = getStatsManagerUnits();
+  if (matches.length === 0) {
+    unitsList.appendChild(el("div", { class: "hint pad", style: "text-align: center; color: #8aa;" }, "No matching units."));
+  } else {
+    matches.forEach(u => {
+      const isSelected = state.statsManagerSelectedId === u.name;
+      const row = el("div", {
+        class: "modal-row" + (isSelected ? " active" : ""),
+        style: "cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 4px; transition: background 0.2s;",
+        onclick: () => selectStatsManagerUnit(u.name)
+      },
+        el("span", { class: `unit-thumb-container role-${getNormalizedRole(u)}` },
+          el("img", { src: `/api/unit_icon/${u.name}`, loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
+        ),
+        el("span", { style: "flex: 1; min-width: 0; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" }, u.display_name || u.name),
+        el("span", {
+          class: `src-pill src-${u.source || "wif"}`,
+          style: "font-size: 8px;"
+        }, (u.source === "vanilla") ? "V" : "WIF")
+      );
+      unitsList.appendChild(row);
+    });
+  }
+  leftPane.appendChild(unitsList);
+  body.appendChild(leftPane);
+  
+  // ── RIGHT PANE: Parameter Editor ──
+  const rightPane = el("div", { style: "width: 68%; display: flex; flex-direction: column; gap: 12px; height: 100%; overflow-y: auto; padding-left: 6px;" });
+  
+  if (!state.statsManagerSelectedId) {
+    rightPane.appendChild(el("div", { style: "display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #8aa; font-size: 12px; gap: 8px;" },
+      el("span", { style: "font-size: 32px;" }, "📊"),
+      el("span", {}, "Select a unit from the left panel to edit its descriptors.")
+    ));
+  } else if (!state.statsEditorData) {
+    rightPane.appendChild(el("div", { style: "display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #8aa; font-size: 12px; gap: 12px;" },
+      el("div", { style: "border: 3px solid rgba(255,255,255,0.1); border-top-color: #00bcd4; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite;" }),
+      el("span", {}, "Fetching unit & ammunition descriptors...")
+    ));
+  } else {
+    const data = state.statsEditorData;
+    
+    // Core stats block
+    const unitGrid = el("div", { style: "display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 10px;" },
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Health / Max HP (Base: ${data.health.base})`),
+        el("input", { id: "stats-health", type: "number", value: data.health.override !== null ? data.health.override : "", placeholder: data.health.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Morale / Suppression (Base: ${data.max_suppression.base})`),
+        el("input", { id: "stats-suppression", type: "number", value: data.max_suppression.override !== null ? data.max_suppression.override : "", placeholder: data.max_suppression.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Supply Capacity (Base: ${data.supply_capacity.base})`),
+        el("input", { id: "stats-supply", type: "number", value: data.supply_capacity.override !== null ? data.supply_capacity.override : "", placeholder: data.supply_capacity.base, style: "width:100%;" })
+      )
+    );
+    
+    rightPane.appendChild(el("h4", { style: "margin: 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, `🛡️ Core Stats: ${data.display_name}`));
+    rightPane.appendChild(unitGrid);
+    
+    // Weapon stats block
+    rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "⚔️ Weapon Systems & Ammunition"));
+    
+    if (!data.weapons || data.weapons.length === 0) {
+      rightPane.appendChild(el("div", { style: "padding: 20px; text-align: center; color: #8aa; background: rgba(255,255,255,0.02); border-radius: 6px;" }, "No weapon manager or ammunition descriptors discovered for this unit."));
+    } else {
+      data.weapons.forEach(w => {
+        const weaponCard = el("div", {
+          style: "padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 12px; margin-bottom: 4px;"
+        });
+        
+        weaponCard.appendChild(el("div", { style: "font-weight: bold; color: #ffeb3b; font-size: 11px; display: flex; align-items: center; justify-content: space-between;" },
+          el("span", { style: "font-family: monospace; font-size: 12px;" }, w.ammo_id),
+          el("span", { style: "font-size: 9px; color: #00e5ff; text-transform: uppercase; background: rgba(0,229,255,0.1); padding: 2px 6px; border-radius: 4px;" }, w.damage_family.override || w.damage_family.base)
+        ));
+        
+        const inputsGrid = el("div", {
+          style: "display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;"
+        },
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Damage Family`),
+            el("input", { id: `ammo-${w.ammo_id}-damage_family`, type: "text", value: w.damage_family.override || "", placeholder: w.damage_family.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `AP Pen / Damage Index`),
+            el("input", { id: `ammo-${w.ammo_id}-damage_index`, type: "number", value: w.damage_index.override !== null ? w.damage_index.override : "", placeholder: w.damage_index.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `HE / Physical Damage`),
+            el("input", { id: `ammo-${w.ammo_id}-physical_damages`, type: "number", step: "0.1", value: w.physical_damages.override !== null ? w.physical_damages.override : "", placeholder: w.physical_damages.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Suppress Damage`),
+            el("input", { id: `ammo-${w.ammo_id}-suppress_damages`, type: "number", step: "1", value: w.suppress_damages.override !== null ? w.suppress_damages.override : "", placeholder: w.suppress_damages.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Max Range (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-max_range`, type: "number", value: w.max_range.override !== null ? w.max_range.override : "", placeholder: w.max_range.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Min Range (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-min_range`, type: "number", value: w.min_range.override !== null ? w.min_range.override : "", placeholder: w.min_range.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Time Between Shots (s)`),
+            el("input", { id: `ammo-${w.ammo_id}-time_between_shots`, type: "number", step: "0.01", value: w.time_between_shots.override !== null ? w.time_between_shots.override : "", placeholder: w.time_between_shots.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Time Between Salvos (s)`),
+            el("input", { id: `ammo-${w.ammo_id}-time_between_salvos`, type: "number", step: "0.1", value: w.time_between_salvos.override !== null ? w.time_between_salvos.override : "", placeholder: w.time_between_salvos.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Shots Per Salvo`),
+            el("input", { id: `ammo-${w.ammo_id}-shots_per_salvo`, type: "number", value: w.shots_per_salvo.override !== null ? w.shots_per_salvo.override : "", placeholder: w.shots_per_salvo.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Supply Cost`),
+            el("input", { id: `ammo-${w.ammo_id}-supply_cost`, type: "number", step: "0.1", value: w.supply_cost.override !== null ? w.supply_cost.override : "", placeholder: w.supply_cost.base, style: "font-size: 11px;" })
+          )
+        );
+        rightPane.appendChild(weaponCard);
+      });
+    }
+    
+    rightPane.appendChild(el("div", {
+      style: "display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; margin-top: 8px;"
+    },
+      el("span", { style: "font-size: 10px; color: #ff9800; font-weight: bold;" }, "⚠️ Ammo edits apply globally to all units firing this ammo type."),
+      el("button", { class: "warn", onclick: saveTacticalStats, style: "font-size: 12px; padding: 6px 16px;" }, "Save Overrides")
+    ));
+  }
+  body.appendChild(rightPane);
+  modal.appendChild(body);
+  backdrop.appendChild(modal);
+  return backdrop;
+}
+
 // ── HOW TO modal ─────────────────────────────────────────────────────────────
 
 function openHowto() {
@@ -3987,8 +4658,19 @@ async function openSession(slug) {
     state.lastScrollRight = 0;
     loadCollapseState();
     await reloadScopedDecks();
+    fetchTacticalSummary();
     render();
   } catch (e) { toast("Open failed: " + e.message, true); }
+}
+
+async function fetchTacticalSummary() {
+  try {
+    const summary = await api("GET", "/tactical_stats/summary");
+    state.tacticalSummary = summary;
+    render();
+  } catch (e) {
+    console.error("Failed to load tactical stats summary", e);
+  }
 }
 
 async function openOrCreateForCampaign(c) {

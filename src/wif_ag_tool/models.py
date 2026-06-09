@@ -42,6 +42,10 @@ class WifUnit:
     display_name: str = ""     # human-readable, from UNITS.csv via name_token; "" → fallback to pretty ID
     is_transport: bool = False
     is_transportable: bool = False
+    health: int = 10
+    max_suppression: int = 0
+    supply_capacity: int = 0
+    weapon_descriptor_ref: str = ""
 
     @property
     def descriptor_name(self) -> str:

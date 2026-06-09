@@ -21,6 +21,27 @@ _RE_ROLE      = re.compile(r"UnitRole\s*=\s*'(\w+)'")
 _RE_TOKEN     = re.compile(r"NameToken\s*=\s*'(\w+)'")
 _RE_BUTTON    = re.compile(r"ButtonTexture\s*=\s*'(Texture_Button_Unit_\w+)'")
 _RE_SPECIALTY = re.compile(r"'([^']+)'")   # used inside SpecialtiesList block
+_RE_HEALTH    = re.compile(r'MaxPhysicalDamages\s*=\s*(\d+)')
+_RE_SUPPRESS  = re.compile(r'MaxSuppressionDamages\s*=\s*(\S+)')
+_RE_SUPPLY    = re.compile(r'SupplyCapacity\s*=\s*(\d+(?:\.\d+)?)')
+_RE_WEAPON    = re.compile(r'\$/GFX/Weapon/WeaponDescriptor_(\S+)')
+
+
+def _resolve_suppression(val_str: str) -> int:
+    if 'Infanterie' in val_str:
+        return 600
+    if 'Helico' in val_str:
+        return 800
+    if 'Airplane' in val_str:
+        return 1000
+    if 'GroundUnit' in val_str:
+        return 800
+    try:
+        clean = val_str.replace('~/', '').strip()
+        return int(clean)
+    except ValueError:
+        return 800
+
 
 
 def parse_wif_units(
@@ -93,6 +114,11 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
     token_m   = _RE_TOKEN.search(block)
     button_m  = _RE_BUTTON.search(block)
 
+    health_m   = _RE_HEALTH.search(block)
+    suppress_m = _RE_SUPPRESS.search(block)
+    supply_m   = _RE_SUPPLY.search(block)
+    weapon_m   = _RE_WEAPON.search(block)
+
     # GUID is required; everything else gets a sensible default
     if not guid_m:
         return None
@@ -105,6 +131,11 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
     nation = country_m.group(1) if country_m else _infer_nation(name)
     is_transport = 'TTransporterModuleDescriptor' in block
     is_transportable = 'TTransportableModuleDescriptor' in block
+
+    health = int(health_m.group(1)) if health_m else 10
+    max_supp = _resolve_suppression(suppress_m.group(1)) if suppress_m else 0
+    supply = int(float(supply_m.group(1))) if supply_m else 0
+    weapon_ref = weapon_m.group(1) if weapon_m else ""
 
     return WifUnit(
         name=name,
@@ -119,6 +150,10 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         button_texture=button_m.group(1) if button_m else "",
         is_transport=is_transport,
         is_transportable=is_transportable,
+        health=health,
+        max_suppression=max_supp,
+        supply_capacity=supply,
+        weapon_descriptor_ref=weapon_ref,
     )
 
 

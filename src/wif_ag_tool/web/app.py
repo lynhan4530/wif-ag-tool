@@ -12,6 +12,8 @@ from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups, load_vani
 from wif_ag_tool.parser.deck_parser import list_decks
 from wif_ag_tool.parser.division_parser import parse_divisions, load_vanilla_divisions
 from wif_ag_tool.parser.localisation_csv import load_units_csv
+from wif_ag_tool.parser.weapon_parser import load_wif_weapons, load_vanilla_weapons
+from wif_ag_tool.parser.ammo_parser import load_wif_ammo, load_vanilla_ammo
 from wif_ag_tool.pipeline import load_deck_cache, migrate_legacy_assignments, refresh_deck_cache
 from wif_ag_tool.web.api import api_bp, set_state
 
@@ -85,10 +87,15 @@ def create_app(load_data: bool = True) -> Flask:
         packs = load_vanilla_packs()
         combat_groups = load_vanilla_combat_groups()
         divisions = load_vanilla_divisions(units_csv=units_csv)
+        wif_weapons = load_wif_weapons()
+        vanilla_weapons = load_vanilla_weapons()
+        wif_ammo = load_wif_ammo()
+        vanilla_ammo = load_vanilla_ammo()
     else:
         units, decks, icons, packs, combat_groups = {}, {}, {}, {}, {}
         units_csv, vanilla_units, divisions = {}, {}, {}
         platoons_csv = {}
+        wif_weapons, vanilla_weapons, wif_ammo, vanilla_ammo = {}, {}, {}, {}
 
     # Ensure sessions/data dirs exist so the API can write immediately
     config.SESSIONS_DIR.mkdir(parents=True, exist_ok=True)
@@ -99,6 +106,8 @@ def create_app(load_data: bool = True) -> Flask:
         packs=packs, combat_groups=combat_groups,
         vanilla_units=vanilla_units, divisions=divisions, units_csv=units_csv,
         platoons_csv=platoons_csv,
+        wif_weapons=wif_weapons, vanilla_weapons=vanilla_weapons,
+        wif_ammo=wif_ammo, vanilla_ammo=vanilla_ammo,
     )
 
     app.register_blueprint(api_bp, url_prefix="/api")

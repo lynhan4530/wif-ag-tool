@@ -15,6 +15,8 @@ WIF_ROOT = Path(os.environ.get(
     r"G:\Project\A-World-In-Flames"
 ))
 WIF_UNITE_DESCRIPTOR = WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
+WIF_WEAPON_DESCRIPTOR = WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "WeaponDescriptor.ndf"
+WIF_AMMO              = WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "Ammunition.ndf"
 WIF_BUTTON_TEXTURES  = WIF_ROOT / "Generated" / "UserInterface" / "Textures" / "ButtonTexturesUnites.ndf"
 WIF_UNITS_CSV        = WIF_ROOT / "Localisation" / "A World in Flames" / "UNITS.csv"
 
@@ -29,6 +31,8 @@ VANILLA_STRATEGIC_PACKS  = VANILLA_DECKS_DIR / "StrategicPacks.ndf"
 VANILLA_COMBAT_GROUPS    = VANILLA_DECKS_DIR / "StrategicCombatGroups.ndf"
 VANILLA_DIVISIONS_NDF    = VANILLA_DECKS_DIR / "Divisions.ndf"
 VANILLA_UNITE_DESCRIPTOR = VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
+VANILLA_WEAPON_DESCRIPTOR = VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "WeaponDescriptor.ndf"
+VANILLA_AMMO              = VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "Ammunition.ndf"
 
 # ── WARNO install + mod ───────────────────────────────────────────────────────
 WARNO_MODS_DIR = Path(os.environ.get(
@@ -55,3 +59,9 @@ VANILLA_COMBAT_GROUPS_CACHE = TOOL_ROOT / "data" / "vanilla_combat_groups_cache.
 VANILLA_PACKS_CACHE = TOOL_ROOT / "data" / "vanilla_packs_cache.json"   # Vanilla Packs cache
 VANILLA_DIVISIONS_CACHE = TOOL_ROOT / "data" / "vanilla_divisions_cache.json" # Vanilla Divisions cache
 CAMPAIGN_DECKS_YAML = TOOL_ROOT / "configs" / "campaign_decks.yaml"   # optional, v1 unused
+
+STATS_OVERRIDES_FILE = TOOL_ROOT / "data" / "unit_stats_overrides.json"
+WIF_WEAPONS_CACHE     = TOOL_ROOT / "data" / "wif_weapons_cache.json"
+WIF_AMMO_CACHE        = TOOL_ROOT / "data" / "wif_ammo_cache.json"
+VANILLA_WEAPONS_CACHE = TOOL_ROOT / "data" / "vanilla_weapons_cache.json"
+VANILLA_AMMO_CACHE    = TOOL_ROOT / "data" / "vanilla_ammo_cache.json"
