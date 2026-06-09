@@ -1977,10 +1977,6 @@ function unitLine(unit_id, extras) {
       })
     ) : null,
     el("span", { class: "name" }, unitDisplay(unit_id)),
-    u ? el("span", {
-      class: `src-pill src-${u.source || "wif"}`,
-      title: (u.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
-    }, (u.source === "vanilla") ? "V" : "WIF") : null,
     unit_id && !unitResolved(unit_id)
       ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
     u ? renderSpecialtyBadges(u.specialties, u.role) : null,
@@ -3250,6 +3246,10 @@ function renderReplicaRow(row, gi, pi, ui) {
         ),
         el("span", { class: "name", style: "display: flex; align-items: center; flex-wrap: wrap;" },
           unitDisplay(row.unit_id),
+          uInfo ? el("span", {
+            class: `src-pill src-${uInfo.source || "wif"}`,
+            title: (uInfo.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
+          }, (uInfo.source === "vanilla") ? "V" : "WIF") : null,
           renderSpecialtyBadges(uInfo?.specialties, uInfo?.role)
         ),
         !unitResolved(row.unit_id)
