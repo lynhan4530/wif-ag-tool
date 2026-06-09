@@ -1469,6 +1469,161 @@
     from { transform: translateX(24px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
   }
+
+  /* Deck Statistics Dashboard */
+  .stats-toggle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin: 8px 0 0 0;
+    user-select: none;
+    transition: var(--transition-smooth);
+  }
+  .stats-toggle-header:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-header);
+  }
+  .stats-toggle-header .stats-toggle-icon {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+  }
+  .stats-toggle-header.expanded .stats-toggle-icon {
+    transform: rotate(90deg);
+  }
+  .stats-content {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    background: hsla(225, 20%, 8%, 0.4);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    margin-top: 0;
+    margin-bottom: 12px;
+    animation: slideUp 0.2s ease-out;
+  }
+  .stats-content.expanded {
+    display: flex;
+  }
+  .stats-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .stats-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 54px;
+    transition: var(--transition-smooth);
+  }
+  .stats-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+  }
+  .stats-card .stats-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-bright);
+    line-height: 1.2;
+  }
+  .stats-card .stats-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .stats-progress-container {
+    width: 100%;
+    background: hsla(225, 20%, 8%, 0.8);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: 6px;
+    display: flex;
+  }
+  .stats-progress-bar {
+    height: 100%;
+    transition: width 0.3s ease;
+  }
+  .stats-progress-bar.wif {
+    background: var(--primary);
+  }
+  .stats-progress-bar.vanilla {
+    background: var(--text-muted);
+  }
+  .stats-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 12px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 12px;
+  }
+  .stats-role-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stats-role-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    font-family: 'Inter', sans-serif;
+  }
+  .stats-role-name {
+    color: var(--text-main);
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .stats-role-count {
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+  .stats-role-bar-outer {
+    width: 100%;
+    height: 4px;
+    background: hsla(225, 20%, 8%, 0.8);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .stats-role-bar-inner {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+  /* Color theme matching for role progress bars */
+  .role-bar-armor { background: hsl(150, 90%, 42%); }
+  .role-bar-infantry { background: hsl(190, 95%, 48%); }
+  .role-bar-recon { background: hsl(280, 85%, 60%); }
+  .role-bar-helicopter { background: hsl(35, 95%, 52%); }
+  .role-bar-plane { background: hsl(205, 90%, 50%); }
+  .role-bar-artillery { background: hsl(352, 90%, 55%); }
+  .role-bar-aa { background: hsl(0, 80%, 60%); }
+  .role-bar-ifv { background: hsl(160, 60%, 50%); }
+  .role-bar-engineer { background: hsl(80, 70%, 45%); }
+  .role-bar-supply { background: hsl(225, 10%, 62%); }
+  .role-bar-unknown { background: hsl(225, 10%, 45%); }
 </style>
 </head>
 <body>
@@ -1490,7 +1645,8 @@ const state = {
   decks: [],               // [{name, pack_count, has_replica, ...}]
   activeDeck: null,
   vanilla: null,           // {combat_groups: [...]}
-  replicaGroups: [],       // hierarchical: [{name, platoons: [{name, units: [{unit_id, xp, count, ...}]}]}]
+  replicaGroups: [],       // hierarchical: [{name, platoons: [{name, units: [{unit_id, xp, count, ...}]}]}],
+  statsExpanded: false,
   replicaDirty: false,
   sessionDirty: false,
   initialReplica: "",      // JSON snapshot to detect dirty
@@ -2273,6 +2429,153 @@ function countTotalUnits() {
   return n;
 }
 
+function renderReplicaStats() {
+  let totalAtk = 0;
+  let totalDef = 0;
+  let totalPlatoons = 0;
+  let totalUnits = 0;
+  let wifGear = 0;
+  let vanillaGear = 0;
+
+  const roleCounts = {
+    armor: 0,
+    infantry: 0,
+    recon: 0,
+    helicopter: 0,
+    plane: 0,
+    artillery: 0,
+    aa: 0,
+    ifv: 0,
+    engineer: 0,
+    supply: 0,
+    unknown: 0
+  };
+
+  for (const g of state.replicaGroups) {
+    totalPlatoons += g.platoons.length;
+    for (const p of g.platoons) {
+      for (const row of p.units) {
+        const u = state.unitsIndex[row.unit_id];
+        if (u) {
+          const count = row.count || 1;
+          const atk = row.attack_override !== null && row.attack_override !== undefined ? row.attack_override : (u.attack || 0);
+          const def = row.defense_override !== null && row.defense_override !== undefined ? row.defense_override : (u.defense || 0);
+          totalAtk += atk * count;
+          totalDef += def * count;
+          totalUnits += count;
+
+          const source = u.source || 'wif';
+          if (source === 'vanilla') {
+            vanillaGear += count;
+          } else {
+            wifGear += count;
+          }
+
+          const role = getNormalizedRole(u);
+          roleCounts[role] = (roleCounts[role] || 0) + count;
+        }
+
+        if (row.transport_id) {
+          const trsp = state.unitsIndex[row.transport_id];
+          if (trsp) {
+            const count = row.count || 1;
+            totalAtk += (trsp.attack || 0) * count;
+            totalDef += (trsp.defense || 0) * count;
+            totalUnits += count;
+
+            const source = trsp.source || 'wif';
+            if (source === 'vanilla') {
+              vanillaGear += count;
+            } else {
+              wifGear += count;
+            }
+
+            const role = getNormalizedRole(trsp);
+            roleCounts[role] = (roleCounts[role] || 0) + count;
+          }
+        }
+      }
+    }
+  }
+
+  const isExpanded = state.statsExpanded;
+  
+  const header = el("div", {
+    class: `stats-toggle-header ${isExpanded ? "expanded" : ""}`,
+    onclick: () => {
+      state.statsExpanded = !state.statsExpanded;
+      render();
+    }
+  },
+    el("span", { style: "display: flex; align-items: center; gap: 6px; font-weight: 600;" },
+      el("span", {}, "📊 Deck Statistics"),
+      el("span", { style: "font-size: 0.75rem; color: var(--text-muted); font-weight: normal;" }, 
+        `(${totalPlatoons} platoons | ${totalUnits} units)`
+      )
+    ),
+    el("span", { class: "stats-toggle-icon" }, isExpanded ? "▼" : "▶")
+  );
+
+  const content = el("div", { class: `stats-content ${isExpanded ? "expanded" : ""}` });
+
+  if (isExpanded) {
+    const totalGear = wifGear + vanillaGear;
+    const wifPct = totalGear > 0 ? Math.round((wifGear / totalGear) * 100) : 0;
+    const vanillaPct = totalGear > 0 ? 100 - wifPct : 0;
+
+    const summaryGrid = el("div", { class: "stats-summary-grid" },
+      el("div", { class: "stats-card" },
+        el("div", { class: "stats-value" }, String(totalAtk)),
+        el("div", { class: "stats-label" }, "Attack Power")
+      ),
+      el("div", { class: "stats-card" },
+        el("div", { class: "stats-value" }, String(totalDef)),
+        el("div", { class: "stats-label" }, "Defense Power")
+      ),
+      el("div", { class: "stats-card" },
+        el("div", { class: "stats-value" }, `${wifPct}%`),
+        el("div", { class: "stats-label" }, "WIF Gear Ratio"),
+        el("div", { class: "stats-progress-container", title: `WIF Units: ${wifGear} (${wifPct}%) | Vanilla Units: ${vanillaGear} (${vanillaPct}%)` },
+          el("div", { class: "stats-progress-bar wif", style: `width: ${wifPct}%` }),
+          el("div", { class: "stats-progress-bar vanilla", style: `width: ${vanillaPct}%` })
+        )
+      )
+    );
+    content.appendChild(summaryGrid);
+
+    const maxRoleCount = Math.max(...Object.values(roleCounts), 1);
+    const roleGrid = el("div", { class: "stats-role-grid" });
+    const sortedRoles = Object.keys(roleCounts).filter(role => roleCounts[role] > 0);
+    
+    if (sortedRoles.length === 0) {
+      content.appendChild(el("div", { style: "text-align: center; color: var(--text-muted); font-size: 0.75rem; padding: 4px 0;" }, "No units in deck yet."));
+    } else {
+      sortedRoles.sort((a, b) => roleCounts[b] - roleCounts[a]);
+      sortedRoles.forEach(role => {
+        const count = roleCounts[role];
+        const pctOfMax = Math.round((count / maxRoleCount) * 100);
+        
+        const roleItem = el("div", { class: "stats-role-item" },
+          el("div", { class: "stats-role-header" },
+            el("span", { class: "stats-role-name" }, role),
+            el("span", { class: "stats-role-count" }, String(count))
+          ),
+          el("div", { class: "stats-role-bar-outer" },
+            el("div", { class: `stats-role-bar-inner role-bar-${role}`, style: `width: ${pctOfMax}%` })
+          )
+        );
+        roleGrid.appendChild(roleItem);
+      });
+      content.appendChild(roleGrid);
+    }
+  }
+
+  const wrap = document.createDocumentFragment();
+  wrap.appendChild(header);
+  wrap.appendChild(content);
+  return wrap;
+}
+
 function renderRightPane() {
   const pane = el("section", { class: "pane" });
   pane.appendChild(el("h2", {}, state.activeDeck ? `WIF replica — ${deckShort(state.activeDeck)}` : "WIF replica"));
@@ -2301,6 +2604,8 @@ function renderRightPane() {
       onclick: saveDeckReplica,
     }, "Save deck"),
   ));
+
+  pane.appendChild(renderReplicaStats());
 
   const list = el("div", { class: "replica-list" });
   if (state.replicaGroups.length === 0) {

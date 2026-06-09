@@ -105,6 +105,10 @@ def create_app(load_data: bool = True) -> Flask:
 
     @app.route("/")
     def index():
-        return send_from_directory(STATIC_DIR, "ui.html")
+        resp = send_from_directory(STATIC_DIR, "ui.html")
+        resp.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        resp.headers["Pragma"] = "no-cache"
+        resp.headers["Expires"] = "0"
+        return resp
 
     return app
