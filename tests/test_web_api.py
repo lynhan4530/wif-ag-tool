@@ -578,3 +578,106 @@ def test_get_localized_fallback_name():
     assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=1, cg_name="1_Log", deck_name="pion_SOV_11") == "VZVOD OBESPECHENIYA"
     assert _get_localized_fallback_name("LOGISTICS", is_hq=False, count=2, cg_name="1_Log", deck_name="pion_SOV_11") == "VZVOD OBESPECHENIYA 2"
 
+
+def test_export_direct_patches_unite_descriptor(client, tmp_path, monkeypatch):
+    """Verify that export_direct snapshots and patches UniteDescriptor.ndf if it exists."""
+    mod_dir = tmp_path / "CRM_ArmyGeneral"
+    mod_dir.mkdir()
+    export_dir = tmp_path / "export_output"
+    
+    # Create required initial base files in export_dir
+    decks_dir = export_dir / "Generated" / "Gameplay" / "Decks"
+    decks_dir.mkdir(parents=True, exist_ok=True)
+    (decks_dir / "StrategicDecks.ndf").write_text(
+        "export Descriptor_Deck_pion_US_11ACR_4 is TDeckDescriptor\n(\n    DeckPackList = [\n    ]\n    DeckCombatGroupList = [\n    ]\n)\n",
+        encoding="utf-8"
+    )
+    (decks_dir / "StrategicPacks.ndf").write_text("// packs\n", encoding="utf-8")
+    (decks_dir / "StrategicCombatGroups.ndf").write_text("// groups\n", encoding="utf-8")
+    
+    csv_dir = export_dir / "Localisation" / "CRM_ArmyGeneral"
+    csv_dir.mkdir(parents=True, exist_ok=True)
+    (csv_dir / "PLATOONS.csv").write_text('"TOKEN";"REFTEXT"\n', encoding="utf-8")
+
+    # Create mock UniteDescriptor.ndf
+    gfx_dir = export_dir / "Generated" / "Gameplay" / "Gfx"
+    gfx_dir.mkdir(parents=True, exist_ok=True)
+    unite_desc = gfx_dir / "UniteDescriptor.ndf"
+    unite_desc.write_text("""
+export Descriptor_Unit_WF_M1A2_Abrams is TEntityDescriptor
+(
+    DescriptorId       = GUID:{454ef2bc-ff1e-42fd-9c64-7988718c197d}
+    ModulesDescriptors = [
+        TStrategicDataModuleDescriptor
+        (
+            UnitAttackValue          = 10
+            UnitDefenseValue         = 10
+            UnitBonusXpPerLevelValue = 1
+        ),
+    ]
+)
+""", encoding="utf-8")
+
+    # Create session and patch settings
+    resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
+    slug = resp.get_json()["slug"]
+    client.patch(f"/api/sessions/{slug}", json={
+        "target_mod_dir": str(mod_dir),
+        "export_dir": str(export_dir)
+    })
+    
+    # Mock replicas with overrides
+    from wif_ag_tool import replicas as rmod
+    monkeypatch.setattr(rmod.config, "REPLICAS_FILE", tmp_path / "data" / "wif_replicas.json")
+    
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    rmod.save_replica(deck_name, [
+        {
+            "unit_id": "WF_M1A2_Abrams",
+            "xp": 1,
+            "count": 1,
+            "transport_id": None,
+            "attack_override": 999,
+            "defense_override": 888
+        }
+    ], path=tmp_path / "data" / "wif_replicas.json")
+    
+    # Mock state decks and units
+    mock_deck = DeckState(
+        name=deck_name,
+        division_ref="US_11ACR",
+        pack_list=[],
+        combat_group_list=[]
+    )
+    mock_unit = WifUnit(
+        name="WF_M1A2_Abrams",
+        guid="mock-guid-12345",
+        nation="US",
+        attack=10,
+        defense=10,
+        xp_bonus=1,
+        role="armor",
+        name_token="M1A2_ABRAMS_TOKEN",
+        display_name="M1A2 Abrams"
+    )
+    set_state(
+        decks={deck_name: mock_deck},
+        units={"WF_M1A2_Abrams": mock_unit}
+    )
+    
+    # Trigger export_direct
+    resp = client.post(f"/api/sessions/{slug}/export_direct")
+    assert resp.status_code == 200
+    assert resp.get_json()["ok"] is True
+    
+    # Verify UniteDescriptor.ndf was patched
+    patched_content = unite_desc.read_text(encoding="utf-8")
+    assert "UnitAttackValue          = 999" in patched_content
+    assert "UnitDefenseValue         = 888" in patched_content
+
+    # Verify snapshot (.orig) was created
+    orig_file = unite_desc.with_suffix(".ndf.orig")
+    assert orig_file.exists()
+    assert "UnitAttackValue          = 10" in orig_file.read_text(encoding="utf-8")
+
+

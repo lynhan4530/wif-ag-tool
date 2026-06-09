@@ -255,6 +255,7 @@ def sessions_export_direct(slug: str):
     base_packs_ndf  = decks_dir / "StrategicPacks.ndf"
     base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
     base_csv        = export_path / "Localisation" / mod_name / "PLATOONS.csv"
+    base_units_ndf  = export_path / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
     direct_paths = {
         "summary": decks_dir / "StrategicDecks_patch_summary.txt",
         "csv": base_csv
@@ -280,10 +281,14 @@ def sessions_export_direct(slug: str):
             except Exception:
                 pass
 
+    base_files = [base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv]
+    if base_units_ndf.exists():
+        base_files.append(base_units_ndf)
+
     # Snapshot each base file to .orig on first export, then restore from .orig on
     # every subsequent export so repeated runs apply on a canvas instead of
     # accumulating duplicate definitions.
-    for base in (base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv):
+    for base in base_files:
         pristine = base.with_suffix(base.suffix + ".orig")
         
         if "PYTEST_CURRENT_TEST" not in os.environ:
@@ -390,6 +395,15 @@ def sessions_export_direct(slug: str):
             base_csv.write_text(merged, encoding="utf-8")
         else:
             base_csv.write_text(csv_text, encoding="utf-8")
+
+        # Apply stats overrides to UniteDescriptor.ndf if they exist and the file is present
+        overrides = {}
+        for a in assignments:
+            if a.attack_override is not None or a.defense_override is not None:
+                overrides[a.unit_id] = (a.attack_override, a.defense_override)
+        if base_units_ndf.exists() and overrides:
+            from wif_ag_tool.generator.unit_patcher import patch_unit_stats
+            patch_unit_stats(base_units_ndf, overrides)
     except Exception as e:
         return jsonify({"error": f"Failed to write export files: {str(e)}"}), 500
 
