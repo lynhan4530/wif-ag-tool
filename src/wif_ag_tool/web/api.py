@@ -321,8 +321,8 @@ def sessions_export_direct(slug: str):
                     need_recreate = True
                 else:
                     try:
-                        text = pristine.read_text(encoding="utf-8")
-                        if "_v_" in text or "_WIF_" in text or "WIF AG" in text:
+                        # If the .orig file bytes differ from the clean baseline, it is either dirty or outdated
+                        if pristine.read_bytes() != pristine_bytes:
                             need_recreate = True
                     except Exception:
                         need_recreate = True
