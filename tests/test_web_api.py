@@ -721,7 +721,8 @@ def test_tactical_stats_get_put_and_export(client, tmp_path, monkeypatch):
             "shots_per_salvo": 5,
             "physical_damages": 1.0,
             "suppress_damages": 15.0,
-            "supply_cost": 5.0
+            "supply_cost": 5.0,
+            "traits": ["MOTION"]
         }}
     )
     
@@ -736,17 +737,25 @@ def test_tactical_stats_get_put_and_export(client, tmp_path, monkeypatch):
     assert data["weapons"][0]["ammo_id"] == "Ammo_120mm_AP"
     assert data["weapons"][0]["max_range"]["base"] == 2000
     assert data["weapons"][0]["max_range"]["override"] is None
+    assert data["weapons"][0]["traits"]["base"] == ["MOTION"]
+    assert data["weapons"][0]["traits"]["override"] is None
     
     # 2. PUT stats overrides
     payload = {
         "health": 15,
         "max_suppression": 900,
         "supply_capacity": 500,
+        "optics": 3180.0,
+        "stealth": 1.25,
+        "fwd_deploy": 2473.0,
+        "amphibious": True,
+        "specialties": ["recon"],
         "ammo": {
             "Ammo_120mm_AP": {
                 "max_range": 2200,
                 "time_between_shots": 0.1,
-                "physical_damages": 2.5
+                "physical_damages": 2.5,
+                "traits": ["MOTION", "HEAT"]
             }
         }
     }
@@ -761,9 +770,18 @@ def test_tactical_stats_get_put_and_export(client, tmp_path, monkeypatch):
     assert data["health"]["override"] == 15
     assert data["max_suppression"]["override"] == 900
     assert data["supply_capacity"]["override"] == 500
+    assert data["optics"]["override"] == 3180.0
+    assert data["stealth"]["override"] == 1.25
+    assert data["fwd_deploy"]["override"] == 2473.0
+    assert data["amphibious"]["override"] is True
+    # Specialties should include synchronized _amphibie and _para
+    assert "_amphibie" in data["specialties"]["override"]
+    assert "_para" in data["specialties"]["override"]
+    assert "recon" in data["specialties"]["override"]
     assert data["weapons"][0]["max_range"]["override"] == 2200
     assert data["weapons"][0]["time_between_shots"]["override"] == 0.1
     assert data["weapons"][0]["physical_damages"]["override"] == 2.5
+    assert data["weapons"][0]["traits"]["override"] == ["MOTION", "HEAT"]
     
     # Verify overrides json was created
     assert overrides_file.exists()
@@ -871,6 +889,49 @@ Ammo_120mm_AP is TAmmunitionDescriptor
     assert re.search(r'MaximumRangeGRU\s*=\s*2200', patched_ammo)
     assert re.search(r'TimeBetweenTwoShots\s*=\s*0\.1', patched_ammo)
     assert re.search(r'PhysicalDamages\s*=\s*2\.5', patched_ammo)
+
+
+def test_sessions_decks_includes_updated_at(client, tmp_path, monkeypatch):
+    """GET /api/sessions/<slug>/decks should include the updated_at field from the replica."""
+    from wif_ag_tool import replicas as rmod
+    monkeypatch.setattr(rmod.config, "REPLICAS_FILE", tmp_path / "data" / "wif_replicas.json")
+    
+    deck_name = "Descriptor_Deck_pion_US_11ACR_4"
+    rmod.save_replica(deck_name, [
+        {
+            "unit_id": "WF_M1A2_Abrams",
+            "xp": 1,
+            "count": 1,
+            "transport_id": None,
+            "attack_override": None,
+            "defense_override": None
+        }
+    ], path=tmp_path / "data" / "wif_replicas.json")
+    
+    mock_deck = DeckState(
+        name=deck_name,
+        division_ref="US_11ACR",
+        pack_list=[],
+        combat_group_list=[]
+    )
+    
+    set_state(
+        decks={deck_name: mock_deck},
+        units={}
+    )
+    
+    resp = client.post("/api/sessions", json={"campaign": "CENTAG", "factions": ["US"]})
+    slug = resp.get_json()["slug"]
+    
+    # Get decks list
+    resp = client.get(f"/api/sessions/{slug}/decks?nations=US")
+    assert resp.status_code == 200
+    decks = resp.get_json()
+    assert len(decks) == 1
+    assert decks[0]["name"] == deck_name
+    assert "updated_at" in decks[0]
+    assert decks[0]["updated_at"] is not None
+
 
 
 

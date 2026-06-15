@@ -5,6 +5,8 @@ from pathlib import Path
 from typing import Any
 
 from wif_ag_tool.generator.unit_patcher import _set_field_in_module
+from wif_ag_tool.parser.block_utils import find_matching_bracket
+
 
 def patch_ammo_stats(
     ammo_path: Path,
@@ -32,20 +34,11 @@ def patch_ammo_stats(
         if open_paren < 0:
             continue
 
-        depth = 0
-        block_end = None
-        for i in range(open_paren, len(text)):
-            ch = text[i]
-            if ch == "(":
-                depth += 1
-            elif ch == ")":
-                depth -= 1
-                if depth == 0:
-                    block_end = i + 1
-                    break
-        if block_end is None:
+        close_paren = find_matching_bracket(text, open_paren, "(", ")")
+        if close_paren is None:
             continue
-
+            
+        block_end = close_paren + 1
         block = text[start:block_end]
 
         # Apply field replacements inside this block
@@ -73,6 +66,31 @@ def patch_ammo_stats(
 
         if "suppress_damages" in val and val["suppress_damages"] is not None:
             block = _set_field_in_module(block, "SuppressDamages", f"{float(val['suppress_damages'])}")
+
+        if "max_range_heli" in val and val["max_range_heli"] is not None:
+            block = _set_field_in_module(block, "MaximumRangeHelicopterGRU", val["max_range_heli"])
+
+        if "min_range_heli" in val and val["min_range_heli"] is not None:
+            block = _set_field_in_module(block, "MinimumRangeHelicopterGRU", val["min_range_heli"])
+
+        if "max_range_plane" in val and val["max_range_plane"] is not None:
+            block = _set_field_in_module(block, "MaximumRangeAirplaneGRU", val["max_range_plane"])
+
+        if "min_range_plane" in val and val["min_range_plane"] is not None:
+            block = _set_field_in_module(block, "MinimumRangeAirplaneGRU", val["min_range_plane"])
+
+        if "aiming_time" in val and val["aiming_time"] is not None:
+            block = _set_field_in_module(block, "AimingTime", f"{float(val['aiming_time'])}")
+
+        if "accuracy_static" in val and val["accuracy_static"] is not None:
+            idling_pattern = r'(\(EBaseHitValueModifier/Idling\s*,\s*)[-\d\.]+(\))'
+            if re.search(idling_pattern, block):
+                block = re.sub(idling_pattern, rf'\g<1>{val["accuracy_static"]}\g<2>', block)
+
+        if "accuracy_motion" in val and val["accuracy_motion"] is not None:
+            moving_pattern = r'(\(EBaseHitValueModifier/Moving\s*,\s*)[-\d\.]+(\))'
+            if re.search(moving_pattern, block):
+                block = re.sub(moving_pattern, rf'\g<1>{val["accuracy_motion"]}\g<2>', block)
             
         # Patch Arme Family and Index
         if ("damage_family" in val and val["damage_family"] is not None) or ("damage_index" in val and val["damage_index"] is not None):
@@ -87,6 +105,16 @@ def patch_ammo_stats(
                 
                 replacement = f"{arme_match.group(1)}{new_family}{arme_match.group(3)}{new_index}{arme_match.group(5)}"
                 block = re.sub(arme_pattern, replacement, block)
+
+        if "traits" in val and val["traits"] is not None:
+            formatted_list = "[ " + ", ".join(f"'{t}'" for t in val["traits"]) + ", ]" if val["traits"] else "[]"
+            traits_pattern = r'TraitsToken\s*=\s*\[[^\]]*\]'
+            if re.search(traits_pattern, block):
+                block = re.sub(traits_pattern, f"TraitsToken = {formatted_list}", block)
+            else:
+                last_paren = block.rfind(")")
+                if last_paren >= 0:
+                    block = block[:last_paren].rstrip() + f"\n    TraitsToken = {formatted_list}\n" + block[last_paren:]
 
         # Replace block in text
         text = text[:start] + block + text[block_end:]

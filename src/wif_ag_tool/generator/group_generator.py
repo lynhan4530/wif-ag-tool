@@ -8,14 +8,15 @@ verified in-game that AG accepts a fully-replaced deck.)
 """
 from __future__ import annotations
 
+from wif_ag_tool import config
 from wif_ag_tool.models import Assignment, DeckState
 from wif_ag_tool.generator.token_gen import make_unique_token, smart_token_key
 
 
-def wif_cg_name(deck_name: str, gname: str) -> str:
-    """Descriptor name for a WIF combat group: ``Descriptor_CombatGroup_<deck>_WIF_<gname>``."""
+def mod_cg_name(deck_name: str, gname: str) -> str:
+    """Descriptor name for a custom combat group: ``Descriptor_CombatGroup_<deck>_<MOD_TAG>_<gname>``."""
     deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
-    return f"Descriptor_CombatGroup_{deck_short}_WIF_{gname}"
+    return f"Descriptor_CombatGroup_{deck_short}_{config.MOD_TAG}_{gname}"
 
 
 def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list: list[str]) -> dict[str, str]:
@@ -25,7 +26,7 @@ def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list
     1. Match HQ group to vanilla HQ group.
     2. Match non-HQ groups by letter match (e.g. A matches _A_ or _A).
     3. Match any remaining unmatched replica groups to unmatched vanilla groups by index order.
-    4. Fall back to a WIF-prefixed name if no vanilla groups remain.
+    4. Fall back to a MOD_TAG-prefixed name if no vanilla groups remain.
 
     REQUIRED for the campaign to load: the AG campaign binds pre-placed pawns/battalions to
     vanilla combat-group *names*. Renaming a kept group (e.g. to ``_WIF_A``) hangs the
@@ -79,7 +80,7 @@ def resolve_all_cg_names(deck_name: str, group_order: list[str], vanilla_cg_list
     # Fallback for any replica groups that didn't get mapped
     for gname in group_order:
         if gname not in mapping:
-            mapping[gname] = wif_cg_name(deck_name, gname)
+            mapping[gname] = mod_cg_name(deck_name, gname)
 
     return mapping
 
@@ -90,7 +91,7 @@ def resolve_cg_name(deck_name: str, gname: str, vanilla_cg_list: list[str]) -> s
     Delegates to ``resolve_all_cg_names`` to keep behavior consistent.
     """
     mapping = resolve_all_cg_names(deck_name, [gname], vanilla_cg_list)
-    return mapping.get(gname, wif_cg_name(deck_name, gname))
+    return mapping.get(gname, mod_cg_name(deck_name, gname))
 
 
 def generate_combat_group(
@@ -126,7 +127,7 @@ def order_smart_groups(
     for sg_name, sg_assignments in smart_group_items:
         is_sg_hq = bool(sg_name and "HQ" in sg_name.upper())
         if sg_name:
-            token_key = f"sg_WIF_{gname}_{sg_name}"
+            token_key = f"sg_{config.MOD_TAG}_{gname}_{sg_name}"
         else:
             a = sg_assignments[0]
             xp = a.xp_levels[0] if a.xp_levels else 1
@@ -204,8 +205,8 @@ def generate_grouped_combat_group(
     passes the vanilla descriptor name and token so the campaign keeps binding to it (see
     ``resolve_cg_name``). Otherwise a WIF name/token is generated.
     """
-    group_name = cg_name or wif_cg_name(deck_name, gname)
-    group_token = cg_token or make_unique_token(f"cg_WIF_{gname}", deck_name, existing_tokens)
+    group_name = cg_name or mod_cg_name(deck_name, gname)
+    group_token = cg_token or make_unique_token(f"cg_{config.MOD_TAG}_{gname}", deck_name, existing_tokens)
     existing_tokens.add(group_token)
 
     lines = [
@@ -318,4 +319,8 @@ def generate_unmatched_combat_group(
         ])
     lines.extend(["    ]", ")"])
     return "\n".join(lines)
+
+
+# Backwards compatibility alias
+wif_cg_name = mod_cg_name
 

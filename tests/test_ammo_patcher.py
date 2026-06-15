@@ -28,6 +28,7 @@ Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30 is TAmmunitionDescriptor
     assert "Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30" in parsed
     ammo = parsed["Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30"]
     assert ammo["guid"] == "087bb6a9-1efc-4203-b89d-b78667e320bc"
+    assert ammo["name_token"] == "QHXGSTXDTE"
     assert ammo["damage_family"] == "DamageFamily_ap"
     assert ammo["damage_index"] == 11
     assert ammo["max_range"] == 1500
@@ -59,3 +60,72 @@ Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30 is TAmmunitionDescriptor
     assert re.search(r'SupplyCost\s*=\s*8\.0', patched_content)
     assert re.search(r'PhysicalDamages\s*=\s*2\.0', patched_content)
     assert re.search(r'SuppressDamages\s*=\s*30\.0', patched_content)
+
+
+def test_parse_and_patch_extended_ammo(tmp_path):
+    content = """
+Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30 is TAmmunitionDescriptor
+(
+    DescriptorId                      = GUID:{087bb6a9-1efc-4203-b89d-b78667e320bc}
+    Name                              = 'QHXGSTXDTE'
+    MinimumRangeHelicopterGRU         = 0
+    MaximumRangeHelicopterGRU         = 1000
+    MinimumRangeAirplaneGRU           = 0
+    MaximumRangeAirplaneGRU           = 0
+    AimingTime                        = 2.5
+    HitRollRuleDescriptor = TDiceHitRollRuleDescriptor
+    (
+        BaseCriticModifier = 25
+        BaseHitValueModifiers =
+        [
+            (EBaseHitValueModifier/Base, 0),
+            (EBaseHitValueModifier/Idling, 20),
+            (EBaseHitValueModifier/Moving, 10),
+            (EBaseHitValueModifier/Targeted, 0),
+        ]
+        DistanceToTarget = True
+    )
+)
+"""
+    f = tmp_path / "Ammunition.ndf"
+    f.write_text(content, encoding="utf-8")
+    
+    parsed = parse_ammo(f)
+    assert "Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30" in parsed
+    ammo = parsed["Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30"]
+    assert ammo["max_range_heli"] == 1000
+    assert ammo["min_range_heli"] == 0
+    assert ammo["max_range_plane"] == 0
+    assert ammo["min_range_plane"] == 0
+    assert ammo["aiming_time"] == 2.5
+    assert ammo["accuracy_static"] == 20
+    assert ammo["accuracy_motion"] == 10
+    assert ammo["traits"] == []
+    
+    overrides = {
+        "Ammo_AutoCanon_AP_20mm_M621_GIAT_AMX30": {
+            "max_range_heli": 1200,
+            "min_range_heli": 100,
+            "max_range_plane": 1500,
+            "min_range_plane": 200,
+            "aiming_time": 1.5,
+            "accuracy_static": 35,
+            "accuracy_motion": 25,
+            "traits": ["MOTION", "HEAT"]
+        }
+    }
+    
+    patch_ammo_stats(f, overrides)
+    
+    patched_content = f.read_text(encoding="utf-8")
+    import re
+    assert re.search(r'MaximumRangeHelicopterGRU\s*=\s*1200', patched_content)
+    assert re.search(r'MinimumRangeHelicopterGRU\s*=\s*100', patched_content)
+    assert re.search(r'MaximumRangeAirplaneGRU\s*=\s*1500', patched_content)
+    assert re.search(r'MinimumRangeAirplaneGRU\s*=\s*200', patched_content)
+    assert re.search(r'AimingTime\s*=\s*1\.5', patched_content)
+    assert re.search(r'\(EBaseHitValueModifier/Idling\s*,\s*35\)', patched_content)
+    assert re.search(r'\(EBaseHitValueModifier/Moving\s*,\s*25\)', patched_content)
+    assert "TraitsToken = [ 'MOTION', 'HEAT', ]" in patched_content
+
+

@@ -11,7 +11,7 @@ from pathlib import Path
 from wif_ag_tool.models import WifUnit
 
 # ── compiled regexes ──────────────────────────────────────────────────────────
-_RE_EXPORT    = re.compile(r'^export (Descriptor_Unit_\S+) is TEntityDescriptor')
+_RE_EXPORT    = re.compile(r'^(?:\s*|\s*\)\s*)export (Descriptor_Unit_\S+) is TEntityDescriptor')
 _RE_GUID      = re.compile(r'DescriptorId\s*=\s*GUID:\{([^}]+)\}')
 _RE_COUNTRY   = re.compile(r"MotherCountry\s*=\s*'(\w+)'")
 _RE_ATTACK    = re.compile(r'UnitAttackValue\s*=\s*(\d+)')
@@ -24,7 +24,19 @@ _RE_SPECIALTY = re.compile(r"'([^']+)'")   # used inside SpecialtiesList block
 _RE_HEALTH    = re.compile(r'MaxPhysicalDamages\s*=\s*(\d+)')
 _RE_SUPPRESS  = re.compile(r'MaxSuppressionDamages\s*=\s*(\S+)')
 _RE_SUPPLY    = re.compile(r'SupplyCapacity\s*=\s*(\d+(?:\.\d+)?)')
-_RE_WEAPON    = re.compile(r'\$/GFX/Weapon/WeaponDescriptor_(\S+)')
+_RE_WEAPON    = re.compile(r'\$/GFX/Weapon/WeaponDescriptor_([\w_]+)')
+_RE_COST      = re.compile(r'\(\s*\$/GFX/Resources/Resource_CommandPoints\s*,\s*(\d+)\s*\)')
+_RE_ARMOR_FRONT = re.compile(r'ResistanceFront\s*=\s*TResistanceTypeRTTI\s*\(\s*Family\s*=\s*[\w_]+\s+Index\s*=\s*(\d+)\s*\)')
+_RE_ARMOR_SIDES = re.compile(r'ResistanceSides\s*=\s*TResistanceTypeRTTI\s*\(\s*Family\s*=\s*[\w_]+\s+Index\s*=\s*(\d+)\s*\)')
+_RE_ARMOR_REAR  = re.compile(r'ResistanceRear\s*=\s*TResistanceTypeRTTI\s*\(\s*Family\s*=\s*[\w_]+\s+Index\s*=\s*(\d+)\s*\)')
+_RE_ARMOR_TOP   = re.compile(r'ResistanceTop\s*=\s*TResistanceTypeRTTI\s*\(\s*Family\s*=\s*[\w_]+\s+Index\s*=\s*(\d+)\s*\)')
+_RE_SPEED       = re.compile(r'MaxSpeedInKmph\s*=\s*(\d+)')
+_RE_ROAD_SPEED  = re.compile(r'DisplayRoadSpeedInKmph\s*=\s*(\d+)')
+_RE_FUEL_CAP    = re.compile(r'FuelCapacity\s*=\s*(\d+)')
+_RE_FUEL_MOVE   = re.compile(r'FuelMoveDuration\s*=\s*([-\d\.]+)')
+_RE_OPTICS      = re.compile(r'\(\s*EOpticalStrength/Standard\s*,\s*([-\d\.]+)\s*\)')
+_RE_STEALTH     = re.compile(r'UnitConcealmentBonus\s*=\s*([-\d\.]+)')
+_RE_FWD_DEPLOY  = re.compile(r'DeploymentShiftGRU\s*=\s*([-\d\.]+)')
 
 
 def _resolve_suppression(val_str: str) -> int:
@@ -118,6 +130,18 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
     suppress_m = _RE_SUPPRESS.search(block)
     supply_m   = _RE_SUPPLY.search(block)
     weapon_m   = _RE_WEAPON.search(block)
+    cost_m = _RE_COST.search(block)
+    armor_front_m = _RE_ARMOR_FRONT.search(block)
+    armor_sides_m = _RE_ARMOR_SIDES.search(block)
+    armor_rear_m = _RE_ARMOR_REAR.search(block)
+    armor_top_m = _RE_ARMOR_TOP.search(block)
+    speed_m = _RE_SPEED.search(block)
+    road_speed_m = _RE_ROAD_SPEED.search(block)
+    fuel_cap_m = _RE_FUEL_CAP.search(block)
+    fuel_move_m = _RE_FUEL_MOVE.search(block)
+    optics_m = _RE_OPTICS.search(block)
+    stealth_m = _RE_STEALTH.search(block)
+    fwd_m = _RE_FWD_DEPLOY.search(block)
 
     # GUID is required; everything else gets a sensible default
     if not guid_m:
@@ -136,6 +160,22 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
     max_supp = _resolve_suppression(suppress_m.group(1)) if suppress_m else 0
     supply = int(float(supply_m.group(1))) if supply_m else 0
     weapon_ref = weapon_m.group(1) if weapon_m else ""
+    cost = int(cost_m.group(1)) if cost_m else 0
+    armor_front = int(armor_front_m.group(1)) if armor_front_m else 0
+    armor_sides = int(armor_sides_m.group(1)) if armor_sides_m else 0
+    armor_rear = int(armor_rear_m.group(1)) if armor_rear_m else 0
+    armor_top = int(armor_top_m.group(1)) if armor_top_m else 0
+    speed = int(speed_m.group(1)) if speed_m else 0
+    road_speed = int(road_speed_m.group(1)) if road_speed_m else 0
+    fuel_cap = int(fuel_cap_m.group(1)) if fuel_cap_m else 0
+    fuel_move = float(fuel_move_m.group(1)) if fuel_move_m else 0.0
+    optics = float(optics_m.group(1)) if optics_m else 2473.0
+    stealth = float(stealth_m.group(1)) if stealth_m else 1.0
+    fwd_deploy = float(fwd_m.group(1)) if fwd_m else 0.0
+    amphibious = ("AmphibiousVehicle" in block or
+                  "TrackAmphibious" in block or
+                  "WheelAmphibious" in block or
+                  "'_amphibie'" in block)
 
     return WifUnit(
         name=name,
@@ -154,6 +194,19 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         max_suppression=max_supp,
         supply_capacity=supply,
         weapon_descriptor_ref=weapon_ref,
+        cost=cost,
+        armor_front=armor_front,
+        armor_sides=armor_sides,
+        armor_rear=armor_rear,
+        armor_top=armor_top,
+        speed=speed,
+        road_speed=road_speed,
+        fuel_capacity=fuel_cap,
+        fuel_move_duration=fuel_move,
+        optics=optics,
+        stealth=stealth,
+        fwd_deploy=fwd_deploy,
+        amphibious=amphibious,
     )
 
 
@@ -179,9 +232,25 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
     import json
     from dataclasses import asdict
 
+    ndf_path = config.WIF_UNITE_DESCRIPTOR
+    cache_path = config.UNITS_CACHE_FILE
+    use_cache = cache_path.exists() and (not ndf_path.exists() or cache_path.stat().st_mtime >= ndf_path.stat().st_mtime)
+
+    if use_cache:
+        try:
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            units = {name: WifUnit(**data) for name, data in cache_data.items()}
+            if units_csv:
+                for unit in units.values():
+                    if unit.name_token:
+                        unit.display_name = units_csv.get(unit.name_token, unit.display_name or "")
+            return units
+        except Exception as e:
+            print(f"warn: failed to load WIF units cache: {e}")
+
     units = {}
-    if config.WIF_UNITE_DESCRIPTOR.exists():
-        units = parse_wif_units(config.WIF_UNITE_DESCRIPTOR, units_csv=units_csv)
+    if ndf_path.exists():
+        units = parse_wif_units(ndf_path, units_csv=units_csv, prefix=config.MOD_UNIT_PREFIX)
         building_ndf = config.WIF_ROOT / "Generated" / "Gameplay" / "Gfx" / "BuildingDescriptors.ndf"
         if building_ndf.exists():
             try:
@@ -194,10 +263,14 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
             config.UNITS_CACHE_FILE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
         except Exception as e:
             print(f"warn: failed to cache WIF units: {e}")
-    elif config.UNITS_CACHE_FILE.exists():
+    elif cache_path.exists():
         try:
-            cache_data = json.loads(config.UNITS_CACHE_FILE.read_text(encoding="utf-8"))
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
             units = {name: WifUnit(**data) for name, data in cache_data.items()}
+            if units_csv:
+                for unit in units.values():
+                    if unit.name_token:
+                        unit.display_name = units_csv.get(unit.name_token, unit.display_name or "")
         except Exception as e:
             print(f"warn: failed to load WIF units cache: {e}")
     return units
@@ -209,9 +282,25 @@ def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, Wif
     import json
     from dataclasses import asdict
 
+    ndf_path = config.VANILLA_UNITE_DESCRIPTOR
+    cache_path = config.VANILLA_UNITS_CACHE
+    use_cache = cache_path.exists() and (not ndf_path.exists() or cache_path.stat().st_mtime >= ndf_path.stat().st_mtime)
+
+    if use_cache:
+        try:
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            units = {name: WifUnit(**data) for name, data in cache_data.items()}
+            if units_csv:
+                for unit in units.values():
+                    if unit.name_token:
+                        unit.display_name = units_csv.get(unit.name_token, unit.display_name or "")
+            return units
+        except Exception as e:
+            print(f"warn: failed to load vanilla units cache: {e}")
+
     units = {}
-    if config.VANILLA_UNITE_DESCRIPTOR.exists():
-        units = parse_wif_units(config.VANILLA_UNITE_DESCRIPTOR, units_csv=units_csv, prefix=None)
+    if ndf_path.exists():
+        units = parse_wif_units(ndf_path, units_csv=units_csv, prefix=None)
         building_ndf = config.VANILLA_ROOT / "Generated" / "Gameplay" / "Gfx" / "BuildingDescriptors.ndf"
         if building_ndf.exists():
             try:
@@ -224,10 +313,14 @@ def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, Wif
             config.VANILLA_UNITS_CACHE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
         except Exception as e:
             print(f"warn: failed to cache vanilla units: {e}")
-    elif config.VANILLA_UNITS_CACHE.exists():
+    elif cache_path.exists():
         try:
-            cache_data = json.loads(config.VANILLA_UNITS_CACHE.read_text(encoding="utf-8"))
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
             units = {name: WifUnit(**data) for name, data in cache_data.items()}
+            if units_csv:
+                for unit in units.values():
+                    if unit.name_token:
+                        unit.display_name = units_csv.get(unit.name_token, unit.display_name or "")
         except Exception as e:
             print(f"warn: failed to load vanilla units cache: {e}")
     return units

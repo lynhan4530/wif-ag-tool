@@ -3,13 +3,15 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 
+from wif_ag_tool import config
+
 
 def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0, deck_name: str | None = None) -> str:
     """Canonical name for a generated `DeckPackDescriptor` block.
 
-    WIF units (unit_id starts with ``WF_``) follow the historical format:
+    Mod units (unit_id starts with MOD_UNIT_PREFIX) follow the format:
         Descriptor_StrategicPack_<unit_id>[_<seq>]_<xp>
-    Vanilla units (no ``WF_`` prefix) get an additional ``_v`` marker so the
+    Vanilla units get an additional ``_v`` marker so the
     generated descriptor name can never collide with the pack Eugen already
     ships in StrategicPacks.ndf for the same unit+xp combo:
         Descriptor_StrategicPack_<unit_id>_v[_<seq>]_<xp>
@@ -18,7 +20,7 @@ def make_pack_descriptor_name(unit_id: str, xp: int, seq: int = 0, deck_name: st
     pack-list refs and the actual definition blocks always agree.
     """
     seq_suffix = f"_{seq}" if seq else ""
-    vanilla_marker = "" if unit_id.startswith("WF_") else "_v"
+    vanilla_marker = "" if (config.MOD_UNIT_PREFIX and unit_id.startswith(config.MOD_UNIT_PREFIX)) else "_v"
     deck_suffix = ""
     if deck_name:
         deck_short = deck_name.replace("Descriptor_Deck_pion_", "")
@@ -46,6 +48,19 @@ class WifUnit:
     max_suppression: int = 0
     supply_capacity: int = 0
     weapon_descriptor_ref: str = ""
+    cost: int = 0
+    armor_front: int = 0
+    armor_sides: int = 0
+    armor_rear: int = 0
+    armor_top: int = 0
+    speed: int = 0
+    road_speed: int = 0
+    fuel_capacity: int = 0
+    fuel_move_duration: float = 0.0
+    optics: float = 2473.0
+    stealth: float = 1.0
+    fwd_deploy: float = 0.0
+    amphibious: bool = False
 
     @property
     def descriptor_name(self) -> str:
@@ -109,4 +124,4 @@ class Assignment:
     def combat_group_name(self) -> str:
         """Generated CombatGroup descriptor name based on group_name."""
         deck_short = self.deck_name.replace("Descriptor_Deck_pion_", "")
-        return f"Descriptor_CombatGroup_{deck_short}_WIF_{self.group_name}"
+        return f"Descriptor_CombatGroup_{deck_short}_{config.MOD_TAG}_{self.group_name}"

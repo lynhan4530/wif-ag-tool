@@ -1541,14 +1541,12 @@
   }
   
   .searchable-select-dropdown {
-    position: absolute;
-    top: 105%;
-    right: 0;
+    position: fixed;
     width: 350px;
     background: var(--bg-card);
     border: 1px solid var(--border-hover);
     border-radius: var(--border-radius-sm);
-    z-index: 25;
+    z-index: 9999;
     box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
@@ -1643,6 +1641,213 @@
   @keyframes slideInRight {
     from { transform: translateX(24px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
+  }
+
+  /* Campaign Loader Overlay */
+  .loader-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 8, 12, 0.9);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .loader-container {
+    background: hsl(225, 20%, 8%);
+    border: 1px solid hsla(150, 90%, 42%, 0.25);
+    box-shadow: 0 0 40px hsla(150, 90%, 42%, 0.1);
+    border-radius: var(--border-radius-lg);
+    width: 90%;
+    max-width: 560px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  /* Cyber Scanline Overlay */
+  .loader-container::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 255, 0, 0.06));
+    z-index: 2;
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+  }
+
+  .loader-radar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid hsla(150, 90%, 42%, 0.15);
+    position: relative;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .loader-radar-sweep {
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 50%, hsla(150, 90%, 42%, 0.4));
+    animation: rotateSweep 2s linear infinite;
+  }
+
+  .loader-radar-crosshair-h {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: hsla(150, 90%, 42%, 0.2);
+  }
+
+  .loader-radar-crosshair-v {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background: hsla(150, 90%, 42%, 0.2);
+  }
+
+  .loader-radar-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--primary);
+    z-index: 3;
+    animation: pulseGlow 1.5s ease-in-out infinite;
+  }
+
+  .loader-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px hsla(150, 90%, 42%, 0.3);
+  }
+
+  .loader-subtitle {
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: blinkText 1s infinite;
+  }
+
+  .loader-progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: hsl(225, 20%, 4%);
+    border-radius: 2px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid hsla(150, 90%, 42%, 0.1);
+  }
+
+  .loader-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    box-shadow: 0 0 8px var(--primary);
+    transition: width 0.4s ease-out;
+  }
+
+  .loader-logs {
+    width: 100%;
+    height: 140px;
+    background: hsl(225, 20%, 4%);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    padding: 12px 16px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: left;
+  }
+
+  .log-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+  }
+
+  .log-line.ok {
+    color: var(--text-main);
+  }
+  .log-line.ok .log-status {
+    color: var(--primary);
+    font-weight: bold;
+  }
+
+  .log-line.run {
+    color: var(--text-bright);
+  }
+  .log-line.run .log-status {
+    color: var(--accent);
+    font-weight: bold;
+    animation: pulseGlowText 1s ease-in-out infinite;
+  }
+
+  .log-line.pending {
+    color: hsl(225, 10%, 35%);
+  }
+  .log-line.pending .log-status {
+    color: hsl(225, 10%, 35%);
+  }
+
+  .log-line.fail {
+    color: hsl(0, 85%, 65%);
+  }
+  .log-line.fail .log-status {
+    color: hsl(0, 85%, 55%);
+    font-weight: bold;
+  }
+
+  .blink-caret {
+    animation: blinkCaret 0.8s step-end infinite;
+  }
+
+  @keyframes rotateSweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); box-shadow: 0 0 4px var(--primary); }
+    50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 16px var(--primary); }
+  }
+
+  @keyframes pulseGlowText {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes blinkText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes blinkCaret {
+    from, to { color: transparent }
+    50% { color: var(--accent) }
   }
 
   /* Deck Statistics Dashboard */
@@ -1835,6 +2040,11 @@ const state = {
   statsManagerSelectedId: null,
   statsEditorData: null,
   exportOpen: false,
+  exportStatus: "idle",    // "idle" | "exporting" | "success" | "fail"
+  exportStep: 0,
+  exportText: "",
+  exportProgress: 0,
+  exportError: null,
   platoonPickerOpen: false, // show platoon name picker modal
   platoonPickerGroupIdx: null,
   platoonPickerRenamePi: null,
@@ -1848,9 +2058,14 @@ const state = {
   howtoOpen: false,        // show end-to-end guide modal
   howtoText: null,         // cached HOWTO.md text after first fetch
   howtoLoading: false,
+  loadingSession: false,
+  loadingStep: 0,
+  loadingText: "",
   unitsIndex: {},          // {unit_id: {display_name, attack, defense, role, nation, xp_bonus, specialties, button_texture, display_resolved}}
   rawFilesAvailable: false,
-  deckQuery: "",
+  deckQuery: localStorage.getItem("wif_ag_deck_query_v1") || "",
+  deckSort: localStorage.getItem("wif_ag_deck_sort_v1") || "asc",
+  shouldScrollActiveDeckToTop: false,
   tacticalSummary: null,
   vanillaCollapsedGroups: new Set(),
   vanillaCollapsedSmartGroups: new Set(),
@@ -1907,7 +2122,15 @@ const downloadBlob = (blob, name) => {
 };
 
 const deckShort = name => name.replace("Descriptor_Deck_pion_", "");
-const unitShort = name => (name || "").replace(/^WF_/, "").replace(/_/g, " ");
+const modTag = () => state.session?.mod_tag || "WIF";
+const unitShort = name => {
+  if (!name) return "";
+  const prefix = state.session?.mod_unit_prefix || "WF_";
+  if (prefix && name.startsWith(prefix)) {
+    return name.slice(prefix.length).replace(/_/g, " ");
+  }
+  return name.replace(/_/g, " ");
+};
 
 // Display name for a unit id: prefer resolved CSV name, fall back to pretty id.
 const unitDisplay = id => {
@@ -2216,13 +2439,34 @@ function render() {
   if (state.settingsOpen) root.appendChild(renderSettingsModal());
   if (state.buildOpen) root.appendChild(renderBuildModal());
   if (state.howtoOpen) root.appendChild(renderHowtoModal());
+  if (state.loadingSession) root.appendChild(renderLoadingOverlay());
+  if (state.exportStatus && state.exportStatus !== "idle") root.appendChild(renderExportProgressModal());
 
   // Restore scroll positions in the new DOM
   const newLeftPane = document.querySelector(".session > .pane.left-pane");
   const newCenterPane = document.querySelector(".session > .pane.vanilla-pane");
   const newRightPane = document.querySelector(".session > .pane.replica-pane");
   
-  if (newLeftPane && state.lastScrollLeft !== undefined) newLeftPane.scrollTop = state.lastScrollLeft;
+  if (newLeftPane) {
+    if (state.shouldScrollActiveDeckToTop && state.activeDeck) {
+      state.shouldScrollActiveDeckToTop = false;
+      const activeRow = newLeftPane.querySelector(`.deck-row[data-deck="${state.activeDeck}"]`);
+      if (activeRow) {
+        let top = 0;
+        let cur = activeRow;
+        while (cur && cur !== newLeftPane) {
+          top += cur.offsetTop;
+          cur = cur.offsetParent;
+        }
+        const headers = newLeftPane.querySelectorAll("h2");
+        const decksHeader = headers[headers.length - 1];
+        const offset = decksHeader ? decksHeader.offsetHeight : 0;
+        newLeftPane.scrollTop = top - offset;
+      }
+    } else if (state.lastScrollLeft !== undefined) {
+      newLeftPane.scrollTop = state.lastScrollLeft;
+    }
+  }
   if (newCenterPane && state.lastScrollCenter !== undefined) newCenterPane.scrollTop = state.lastScrollCenter;
   if (newRightPane && state.lastScrollRight !== undefined) newRightPane.scrollTop = state.lastScrollRight;
 
@@ -2322,8 +2566,8 @@ function renderSession() {
     el("button", { class: "ghost", onclick: openHowto, title: "End-to-end guide: create a mod, build replicas, export & build" }, "❓ How to"),
     el("button", { class: "ghost", onclick: () => { state.settingsOpen = true; render(); }, title: "Configure mod and game folders" }, "⚙ Settings"),
     el("button", { class: "ghost", onclick: openTacticalStatsManager, title: "Edit unit and weapon stats globally in the mod" }, "📊 Unit Stats"),
-    el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : "Please configure WIF Mod Folder in Settings" }, "📥 Export Mod"),
-    el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : "Please configure WIF Mod Folder in Settings" }, "⚡ Build Mod"),
+    el("button", { class: "ghost", disabled: !s.target_mod_dir, onclick: doDirectExport, title: s.target_mod_dir ? "Export NDF/CSV files directly to mod workspace" : `Please configure ${modTag()} Mod Folder in Settings` }, "📥 Export Mod"),
+    el("button", { class: "warn", disabled: !s.target_mod_dir, onclick: doBuildMod, title: s.target_mod_dir ? "Compile the mod using GenerateMod.bat" : `Please configure ${modTag()} Mod Folder in Settings` }, "⚡ Build Mod"),
     el("button", {
       class: "ghost",
       disabled: !state.rawFilesAvailable,
@@ -2351,7 +2595,7 @@ function renderSession() {
       el("button", {
         class: state.activeTab === "replica" ? "active" : "",
         onclick: () => { state.activeTab = "replica"; render(); }
-      }, "WIF Replica")
+      }, `${modTag()} Replica`)
     );
     wrap.appendChild(tabSelector);
   }
@@ -2559,9 +2803,30 @@ function renderLeftPane() {
       type: "text",
       placeholder: "search decks...",
       value: state.deckQuery || "",
-      style: "width: 100%; font-size: 11px; padding: 4px 8px;",
-      oninput: e => { state.deckQuery = e.target.value; render(); }
-    })
+      style: "flex: 1; min-width: 0; font-size: 11px; padding: 4px 8px;",
+      oninput: e => {
+        state.deckQuery = e.target.value;
+        localStorage.setItem("wif_ag_deck_query_v1", state.deckQuery);
+        render();
+      }
+    }),
+    el("select", {
+      id: "deck-sort-select",
+      style: "font-size: 11px; padding: 4px 8px; max-width: 90px; height: 25px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-bright); outline: none;",
+      onchange: e => {
+        state.deckSort = e.target.value;
+        localStorage.setItem("wif_ag_deck_sort_v1", state.deckSort);
+        if (state.activeDeck) {
+          state.shouldScrollActiveDeckToTop = true;
+        }
+        render();
+      }
+    },
+      el("option", { value: "asc", selected: state.deckSort === "asc" }, "A-Z"),
+      el("option", { value: "desc", selected: state.deckSort === "desc" }, "Z-A"),
+      el("option", { value: "newest", selected: state.deckSort === "newest" }, "Newest"),
+      el("option", { value: "oldest", selected: state.deckSort === "oldest" }, "Oldest")
+    )
   ));
 
   const query = (state.deckQuery || "").toLowerCase().trim();
@@ -2572,13 +2837,46 @@ function renderLeftPane() {
     return !query || display.includes(query) || name.includes(query) || short.includes(query);
   });
 
+  const getDeckDisplayName = d => d.display_name || d.name || "";
+  const sort = state.deckSort || "asc";
+  if (sort === "asc") {
+    filteredDecks.sort((a, b) => getDeckDisplayName(a).localeCompare(getDeckDisplayName(b)));
+  } else if (sort === "desc") {
+    filteredDecks.sort((a, b) => getDeckDisplayName(b).localeCompare(getDeckDisplayName(a)));
+  } else if (sort === "newest") {
+    filteredDecks.sort((a, b) => {
+      let aTime = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+      if (isNaN(aTime)) aTime = 0;
+      let bTime = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+      if (isNaN(bTime)) bTime = 0;
+      if (aTime !== bTime) {
+        return bTime - aTime;
+      }
+      return getDeckDisplayName(a).localeCompare(getDeckDisplayName(b));
+    });
+  } else if (sort === "oldest") {
+    filteredDecks.sort((a, b) => {
+      let aTime = a.updated_at ? new Date(a.updated_at).getTime() : Infinity;
+      if (isNaN(aTime)) aTime = Infinity;
+      let bTime = b.updated_at ? new Date(b.updated_at).getTime() : Infinity;
+      if (isNaN(bTime)) bTime = Infinity;
+      if (aTime !== bTime) {
+        return aTime - bTime;
+      }
+      return getDeckDisplayName(a).localeCompare(getDeckDisplayName(b));
+    });
+  }
+
   pane.appendChild(el("h2", {}, `Decks (${filteredDecks.length})`));
   const list = el("div");
   for (const d of filteredDecks) {
     const display = d.display_name || deckShort(d.name);
     const subtitle = `${d.short || deckShort(d.name)} · ${d.pack_count}p`;
-    const row = el("div", { class: "deck-row" + (d.name === state.activeDeck ? " active" : ""),
-      onclick: () => selectDeck(d.name) },
+    const row = el("div", {
+      class: "deck-row" + (d.name === state.activeDeck ? " active" : ""),
+      "data-deck": d.name,
+      onclick: () => selectDeck(d.name)
+    },
       el("div", { class: "deck-label" },
         el("span", { class: "deck-name" },
           display,
@@ -2587,10 +2885,10 @@ function renderLeftPane() {
         ),
         el("span", { class: "deck-sub" }, subtitle),
       ),
-      d.has_replica ? el("span", { class: "badge" }, `WIF·${d.replica_unit_count}`) : null,
-      d.has_replica ? el("span", { class: "ghost-x", title: "Clone WIF replica to other deck(s)",
+      d.has_replica ? el("span", { class: "badge" }, `${modTag()}·${d.replica_unit_count}`) : null,
+      d.has_replica ? el("span", { class: "ghost-x", title: `Clone ${modTag()} replica to other deck(s)`,
         onclick: e => { e.stopPropagation(); openCloneReplicaModal(d.name); } }, "⎘") : null,
-      d.has_replica ? el("span", { class: "ghost-x", title: "delete WIF replica",
+      d.has_replica ? el("span", { class: "ghost-x", title: `delete ${modTag()} replica`,
         onclick: e => { e.stopPropagation(); deleteReplica(d.name); } }, "✕") : null,
     );
     list.appendChild(row);
@@ -2866,8 +3164,8 @@ function renderReplicaStats() {
       ),
       el("div", { class: "stats-card" },
         el("div", { class: "stats-value" }, `${wifPct}%`),
-        el("div", { class: "stats-label" }, "WIF Gear Ratio"),
-        el("div", { class: "stats-progress-container", title: `WIF Units: ${wifGear} (${wifPct}%) | Vanilla Units: ${vanillaGear} (${vanillaPct}%)` },
+        el("div", { class: "stats-label" }, `${modTag()} Gear Ratio`),
+        el("div", { class: "stats-progress-container", title: `${modTag()} Units: ${wifGear} (${wifPct}%) | Vanilla Units: ${vanillaGear} (${vanillaPct}%)` },
           el("div", { class: "stats-progress-bar wif", style: `width: ${wifPct}%` }),
           el("div", { class: "stats-progress-bar vanilla", style: `width: ${vanillaPct}%` })
         )
@@ -2910,7 +3208,7 @@ function renderReplicaStats() {
 
 function renderRightPane() {
   const pane = el("section", { class: "pane" });
-  pane.appendChild(el("h2", {}, state.activeDeck ? `WIF replica — ${deckShort(state.activeDeck)}` : "WIF replica"));
+  pane.appendChild(el("h2", {}, state.activeDeck ? `${modTag()} replica — ${deckShort(state.activeDeck)}` : `${modTag()} replica`));
   if (!state.activeDeck) {
     pane.appendChild(el("div", { class: "pad hint" }, "Pick a deck on the left."));
     return pane;
@@ -3158,7 +3456,7 @@ function renderCloneReplicaModal() {
       cb,
       el("span", { style: "flex:1;" }, label),
       el("span", { class: "hint" }, d.short || ""),
-      d.has_replica ? el("span", { class: "badge", style: "background:#7a3b1a; color:#ffd9a8;" }, `WIF·${d.replica_unit_count} (will overwrite)`) : null,
+      d.has_replica ? el("span", { class: "badge", style: "background:#7a3b1a; color:#ffd9a8;" }, `${modTag()}·${d.replica_unit_count} (will overwrite)`) : null,
     );
   };
 
@@ -3580,8 +3878,8 @@ function renderReplicaRow(row, gi, pi, ui) {
           unitDisplay(row.unit_id),
           uInfo ? el("span", {
             class: `src-pill src-${uInfo.source || "wif"}`,
-            title: (uInfo.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
-          }, (uInfo.source === "vanilla") ? "V" : "WIF") : null,
+            title: (uInfo.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : `${modTag()} unit`
+          }, (uInfo.source === "vanilla") ? "V" : modTag()) : null,
           renderSpecialtyBadges(uInfo?.specialties, uInfo?.role)
         ),
         !unitResolved(row.unit_id)
@@ -3603,7 +3901,7 @@ function renderReplicaRow(row, gi, pi, ui) {
         name => {
           if (name === "(None)") return "(None)";
           const u = state.unitsIndex[name];
-          const tag = u && u.source === "vanilla" ? "[V]" : "[WIF]";
+          const tag = u && u.source === "vanilla" ? "[V]" : `[${modTag()}]`;
           const isRecon = u && getNormalizedRole(u) === "recon";
           const reconTag = isRecon ? " [RECON]" : "";
           return `${tag}${reconTag} ${unitDisplay(name)}`;
@@ -3678,7 +3976,7 @@ const mkSearchableSelect = (opts, val, onchange, labelFn, defaultNation) => {
     },
     onblur: e => {
       setTimeout(() => {
-        const drop = container.querySelector(".searchable-select-dropdown");
+        const drop = document.getElementById("global-searchable-select-dropdown");
         if (drop) drop.remove();
         input.value = valToLabel.get(val) || "";
       }, 200);
@@ -3690,12 +3988,27 @@ const mkSearchableSelect = (opts, val, onchange, labelFn, defaultNation) => {
   container.appendChild(input);
 
   function renderDropdown(filterText) {
-    let drop = container.querySelector(".searchable-select-dropdown");
+    let drop = document.getElementById("global-searchable-select-dropdown");
     if (!drop) {
-      drop = el("div", { class: "searchable-select-dropdown" });
-      container.appendChild(drop);
+      drop = el("div", { id: "global-searchable-select-dropdown", class: "searchable-select-dropdown" });
+      document.body.appendChild(drop);
     }
     drop.innerHTML = "";
+
+    // Position dropdown dynamically relative to the input field
+    const rect = input.getBoundingClientRect();
+    const dropdownHeightExpected = 340; // The max expected height of our dropdown
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+
+    if (spaceBelow < dropdownHeightExpected && spaceAbove > spaceBelow) {
+      drop.style.bottom = `${window.innerHeight - rect.top}px`;
+      drop.style.top = "auto";
+    } else {
+      drop.style.top = `${rect.bottom}px`;
+      drop.style.bottom = "auto";
+    }
+    drop.style.left = `${Math.max(10, rect.right - 350)}px`;
 
     // 1. Build Filter Bar
     const filterBar = el("div", { class: "dropdown-filter-bar" });
@@ -3894,7 +4207,7 @@ function renderModal() {
 
   const modal = el("div", { class: "modal" });
   const modalHead = el("div", { class: "modal-head" },
-    el("h3", {}, `Add WIF unit → ${deckShort(state.activeDeck || "")}`),
+    el("h3", {}, `Add ${modTag()} unit → ${deckShort(state.activeDeck || "")}`),
     el("button", { class: "ghost", onclick: closeModal }, "Done"),
   );
   modal.appendChild(modalHead);
@@ -3904,7 +4217,8 @@ function renderModal() {
   const f = state.modalFilters;
   filters.appendChild(el("span", { class: "field-label" }, "Source"));
   filters.appendChild(mkSelect(["all", "wif", "vanilla"], f.source || "all",
-    v => { f.source = v; reloadModalUnits(); }));
+    v => { f.source = v; reloadModalUnits(); },
+    v => v === "wif" ? modTag() : v));
   filters.appendChild(el("span", { class: "field-label" }, "Nation"));
   filters.appendChild(mkSelect(["", ...NATIONS], f.nation, v => { f.nation = v; reloadModalUnits(); }));
   filters.appendChild(el("span", { class: "field-label" }, "Role"));
@@ -3932,8 +4246,8 @@ function renderModal() {
         u.display_resolved === false ? el("span", { class: "warn-mark", title: "Localisation token missing" }, "⚠") : null,
         el("span", {
           class: `src-pill src-${u.source || "wif"}`,
-          title: (u.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : "WIF unit"
-        }, (u.source === "vanilla") ? "V" : "WIF"),
+          title: (u.source === "vanilla") ? "Vanilla unit (shipped with WARNO)" : `${modTag()} unit`
+        }, (u.source === "vanilla") ? "V" : modTag()),
         isCommandRole(u) ? el("span", { class: "hq-pill", title: "Command / HQ variant" }, "HQ") : null,
         renderSpecialtyBadges(u.specialties, u.role),
       ),
@@ -4004,16 +4318,18 @@ function renderSettingsModal() {
 
   const body = el("div", { class: "modal-body pad", style: "display:flex; flex-direction:column; gap:12px; padding:14px;" });
 
+  const modTag = state.session.mod_tag || "WIF";
+
   // WIF Mod Folder Input
   const targetModInput = el("input", {
     id: "settings-target-mod-dir",
     type: "text",
     value: state.session.target_mod_dir || "",
-    placeholder: "e.g. G:\\Program Files (x86)\\Steam\\steamapps\\common\\WARNO\\Mods\\CRM_ArmyGeneral",
+    placeholder: `e.g. G:\\Program Files (x86)\\Steam\\steamapps\\common\\WARNO\\Mods\\CRM_ArmyGeneral`,
     style: "width:100%; font-size:12px;"
   });
   body.appendChild(el("div", {},
-    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "WIF Mod Folder:"),
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, `${modTag} Mod Folder:`),
     targetModInput,
     el("div", { class: "hint" }, "Path to your mod development workspace folder containing the GenerateMod.bat script."),
   ));
@@ -4046,11 +4362,75 @@ function renderSettingsModal() {
     el("div", { class: "hint" }, "Where NDF/CSV additions will be written. If blank, compiles directly to the mod's GameData subfolders."),
   ));
 
+  // Source Mod Folder Input
+  const sourceModInput = el("input", {
+    id: "settings-source-mod-dir",
+    type: "text",
+    value: state.session.source_mod_dir || "",
+    placeholder: "e.g. G:\\Program Files (x86)\\Steam\\steamapps\\common\\WARNO\\Mods\\CRM_AWorldInFlames",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Source Mod Folder (Read-only reference):"),
+    sourceModInput,
+    el("div", { class: "hint" }, "Path to the source mod folder we are cloning units from."),
+  ));
+
+  // Mod Unit Prefix Input
+  const modUnitPrefixInput = el("input", {
+    id: "settings-mod-unit-prefix",
+    type: "text",
+    value: state.session.mod_unit_prefix || "WF_",
+    placeholder: "e.g. WF_",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Mod Unit Prefix:"),
+    modUnitPrefixInput,
+    el("div", { class: "hint" }, "The prefix custom units in this mod begin with (e.g. WF_)."),
+  ));
+
+  // Mod Tag Input
+  const modTagInput = el("input", {
+    id: "settings-mod-tag",
+    type: "text",
+    value: state.session.mod_tag || "WIF",
+    placeholder: "e.g. WIF",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Mod Tag:"),
+    modTagInput,
+    el("div", { class: "hint" }, "Short uppercase tag for generated tokens and cache files (e.g. WIF)."),
+  ));
+
+  // Mod Localisation Subfolder Input
+  const modLocFolderInput = el("input", {
+    id: "settings-mod-loc-folder",
+    type: "text",
+    value: state.session.mod_loc_folder || "A World in Flames",
+    placeholder: "e.g. A World in Flames",
+    style: "width:100%; font-size:12px;"
+  });
+  body.appendChild(el("div", {},
+    el("div", { class: "field-label", style: "font-weight:bold; margin-bottom:4px;" }, "Mod Localisation Folder name:"),
+    modLocFolderInput,
+    el("div", { class: "hint" }, "The subdirectory name under Localisation containing UNITS.csv/PLATOONS.csv."),
+  ));
+
   modal.appendChild(body);
 
   modal.appendChild(el("div", { class: "modal-foot" },
     el("button", { class: "ghost", onclick: () => { state.settingsOpen = false; render(); } }, "Cancel"),
-    el("button", { onclick: () => doSaveSettings(targetModInput.value, gameDirInput.value, exportDirInput.value) }, "Save"),
+    el("button", { onclick: () => doSaveSettings(
+      targetModInput.value,
+      gameDirInput.value,
+      exportDirInput.value,
+      sourceModInput.value,
+      modUnitPrefixInput.value,
+      modTagInput.value,
+      modLocFolderInput.value
+    ) }, "Save"),
   ));
 
   backdrop.appendChild(modal);
@@ -4132,21 +4512,89 @@ function saveTacticalStats() {
     health: null,
     max_suppression: null,
     supply_capacity: null,
+    cost: null,
+    armor_front: null,
+    armor_sides: null,
+    armor_rear: null,
+    armor_top: null,
+    speed: null,
+    road_speed: null,
+    fuel_capacity: null,
+    fuel_move_duration: null,
+    optics: null,
+    stealth: null,
+    fwd_deploy: null,
+    amphibious: null,
+    specialties: null,
     ammo: {}
   };
   
   const healthVal = document.getElementById("stats-health")?.value;
-  if (healthVal !== undefined && healthVal.trim() !== "") {
-    payload.health = parseInt(healthVal, 10);
-  }
+  if (healthVal !== undefined && healthVal.trim() !== "") payload.health = parseInt(healthVal, 10);
+  
   const suppVal = document.getElementById("stats-suppression")?.value;
-  if (suppVal !== undefined && suppVal.trim() !== "") {
-    payload.max_suppression = parseInt(suppVal, 10);
-  }
+  if (suppVal !== undefined && suppVal.trim() !== "") payload.max_suppression = parseInt(suppVal, 10);
+  
   const supplyVal = document.getElementById("stats-supply")?.value;
-  if (supplyVal !== undefined && supplyVal.trim() !== "") {
-    payload.supply_capacity = parseInt(supplyVal, 10);
+  if (supplyVal !== undefined && supplyVal.trim() !== "") payload.supply_capacity = parseInt(supplyVal, 10);
+
+  const costVal = document.getElementById("stats-cost")?.value;
+  if (costVal !== undefined && costVal.trim() !== "") payload.cost = parseInt(costVal, 10);
+
+  const armorFront = document.getElementById("stats-armor_front")?.value;
+  if (armorFront !== undefined && armorFront.trim() !== "") payload.armor_front = parseInt(armorFront, 10);
+
+  const armorSides = document.getElementById("stats-armor_sides")?.value;
+  if (armorSides !== undefined && armorSides.trim() !== "") payload.armor_sides = parseInt(armorSides, 10);
+
+  const armorRear = document.getElementById("stats-armor_rear")?.value;
+  if (armorRear !== undefined && armorRear.trim() !== "") payload.armor_rear = parseInt(armorRear, 10);
+
+  const armorTop = document.getElementById("stats-armor_top")?.value;
+  if (armorTop !== undefined && armorTop.trim() !== "") payload.armor_top = parseInt(armorTop, 10);
+
+  const speedVal = document.getElementById("stats-speed")?.value;
+  if (speedVal !== undefined && speedVal.trim() !== "") payload.speed = parseInt(speedVal, 10);
+
+  const roadSpeedVal = document.getElementById("stats-road_speed")?.value;
+  if (roadSpeedVal !== undefined && roadSpeedVal.trim() !== "") payload.road_speed = parseInt(roadSpeedVal, 10);
+
+  const fuelCapVal = document.getElementById("stats-fuel_capacity")?.value;
+  if (fuelCapVal !== undefined && fuelCapVal.trim() !== "") payload.fuel_capacity = parseInt(fuelCapVal, 10);
+
+  const fuelMoveVal = document.getElementById("stats-fuel_move_duration")?.value;
+  if (fuelMoveVal !== undefined && fuelMoveVal.trim() !== "") payload.fuel_move_duration = parseFloat(fuelMoveVal);
+
+  const opticsVal = document.getElementById("stats-optics")?.value;
+  if (opticsVal !== undefined && opticsVal.trim() !== "") payload.optics = parseFloat(opticsVal);
+
+  const stealthVal = document.getElementById("stats-stealth")?.value;
+  if (stealthVal !== undefined && stealthVal.trim() !== "") payload.stealth = parseFloat(stealthVal);
+
+  const fwdDeployVal = document.getElementById("stats-fwd_deploy")?.value;
+  if (fwdDeployVal !== undefined && fwdDeployVal.trim() !== "") payload.fwd_deploy = parseFloat(fwdDeployVal);
+
+  const amphibiousVal = document.getElementById("stats-amphibious")?.checked;
+  if (amphibiousVal !== undefined) payload.amphibious = amphibiousVal;
+
+  const specs = [];
+  const commonSpecs = ["_leader", "_choc", "_sf", "_reservist", "_militia", "_mp", "_resolute", "_security", "_sniper", "_mountaineer"];
+  commonSpecs.forEach(spec => {
+    if (document.getElementById(`spec-${spec}`)?.checked) {
+      specs.push(spec);
+    }
+  });
+
+  const rawSpecsVal = document.getElementById("stats-specialties-raw")?.value;
+  if (rawSpecsVal) {
+    rawSpecsVal.split(",").forEach(s => {
+      const clean = s.trim();
+      if (clean && !specs.includes(clean)) {
+        specs.push(clean);
+      }
+    });
   }
+  payload.specialties = specs;
   
   if (state.statsEditorData && state.statsEditorData.weapons) {
     state.statsEditorData.weapons.forEach(w => {
@@ -4164,6 +4612,27 @@ function saveTacticalStats() {
       
       const minR = document.getElementById(`ammo-${ammoId}-min_range`)?.value;
       if (minR !== undefined && minR.trim() !== "") ammoPayload.min_range = parseInt(minR, 10);
+
+      const maxRH = document.getElementById(`ammo-${ammoId}-max_range_heli`)?.value;
+      if (maxRH !== undefined && maxRH.trim() !== "") ammoPayload.max_range_heli = parseInt(maxRH, 10);
+
+      const minRH = document.getElementById(`ammo-${ammoId}-min_range_heli`)?.value;
+      if (minRH !== undefined && minRH.trim() !== "") ammoPayload.min_range_heli = parseInt(minRH, 10);
+
+      const maxRP = document.getElementById(`ammo-${ammoId}-max_range_plane`)?.value;
+      if (maxRP !== undefined && maxRP.trim() !== "") ammoPayload.max_range_plane = parseInt(maxRP, 10);
+
+      const minRP = document.getElementById(`ammo-${ammoId}-min_range_plane`)?.value;
+      if (minRP !== undefined && minRP.trim() !== "") ammoPayload.min_range_plane = parseInt(minRP, 10);
+
+      const accS = document.getElementById(`ammo-${ammoId}-accuracy_static`)?.value;
+      if (accS !== undefined && accS.trim() !== "") ammoPayload.accuracy_static = parseInt(accS, 10);
+
+      const accM = document.getElementById(`ammo-${ammoId}-accuracy_motion`)?.value;
+      if (accM !== undefined && accM.trim() !== "") ammoPayload.accuracy_motion = parseInt(accM, 10);
+
+      const aimT = document.getElementById(`ammo-${ammoId}-aiming_time`)?.value;
+      if (aimT !== undefined && aimT.trim() !== "") ammoPayload.aiming_time = parseFloat(aimT);
       
       const tbs = document.getElementById(`ammo-${ammoId}-time_between_shots`)?.value;
       if (tbs !== undefined && tbs.trim() !== "") ammoPayload.time_between_shots = parseFloat(tbs);
@@ -4182,6 +4651,32 @@ function saveTacticalStats() {
       
       const sc = document.getElementById(`ammo-${ammoId}-supply_cost`)?.value;
       if (sc !== undefined && sc.trim() !== "") ammoPayload.supply_cost = parseFloat(sc);
+      
+      // Serialize traits
+      const ammoTraits = [];
+      const commonTraits = ["MOTION", "STAT", "HEAT", "HE", "KINETIC", "TANDEM", "RADAR", "autoloader", "coax", "smoke", "tripod"];
+      commonTraits.forEach(t => {
+        if (document.getElementById(`ammo-${ammoId}-trait-${t}`)?.checked) {
+          ammoTraits.push(t);
+        }
+      });
+      const rawAmmoTraitsVal = document.getElementById(`ammo-${ammoId}-traits-raw`)?.value;
+      if (rawAmmoTraitsVal) {
+        rawAmmoTraitsVal.split(",").forEach(t => {
+          const clean = t.trim();
+          if (clean && !ammoTraits.includes(clean)) {
+            ammoTraits.push(clean);
+          }
+        });
+      }
+      
+      const baseTraits = w.traits.base || [];
+      const arraysEqual = ammoTraits.length === baseTraits.length && 
+                          ammoTraits.every(val => baseTraits.includes(val)) &&
+                          baseTraits.every(val => ammoTraits.includes(val));
+      if (!arraysEqual) {
+        ammoPayload.traits = ammoTraits;
+      }
       
       payload.ammo[ammoId] = ammoPayload;
     });
@@ -4264,6 +4759,9 @@ function renderStatsManagerModal() {
   } else {
     matches.forEach(u => {
       const isSelected = state.statsManagerSelectedId === u.name;
+      const hasDirectOverride = state.tacticalSummary && state.tacticalSummary.units && state.tacticalSummary.units.includes(u.name);
+      const hasWeaponOverride = state.tacticalSummary && state.tacticalSummary.units_with_ammo_overrides && state.tacticalSummary.units_with_ammo_overrides.includes(u.name);
+      
       const row = el("div", {
         class: "modal-row" + (isSelected ? " active" : ""),
         style: "cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 4px; transition: background 0.2s;",
@@ -4273,10 +4771,20 @@ function renderStatsManagerModal() {
           el("img", { src: `/api/unit_icon/${u.name}`, loading: "lazy", onerror: e => { e.target.style.display = "none"; } }),
         ),
         el("span", { style: "flex: 1; min-width: 0; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" }, u.display_name || u.name),
-        el("span", {
-          class: `src-pill src-${u.source || "wif"}`,
-          style: "font-size: 8px;"
-        }, (u.source === "vanilla") ? "V" : "WIF")
+        el("div", { style: "display: flex; align-items: center; gap: 4px;" },
+          hasDirectOverride ? el("span", {
+            class: "src-pill",
+            style: "font-size: 8px; background: #ff9800; color: #000; font-weight: bold; box-shadow: 0 0 6px rgba(255,152,0,0.4);"
+          }, "MOD") : null,
+          (!hasDirectOverride && hasWeaponOverride) ? el("span", {
+            class: "src-pill",
+            style: "font-size: 8px; background: #00e5ff; color: #000; font-weight: bold; box-shadow: 0 0 6px rgba(0,229,255,0.4);"
+          }, "WPN MOD") : null,
+          el("span", {
+            class: `src-pill src-${u.source || "wif"}`,
+            style: "font-size: 8px;"
+          }, (u.source === "vanilla") ? "V" : "WIF")
+        )
       );
       unitsList.appendChild(row);
     });
@@ -4301,23 +4809,131 @@ function renderStatsManagerModal() {
     const data = state.statsEditorData;
     
     // Core stats block
-    const unitGrid = el("div", { style: "display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 10px;" },
+    const unitGrid = el("div", { style: "display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 10px;" },
       el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
-        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Health / Max HP (Base: ${data.health.base})`),
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Health / HP (Base: ${data.health.base})`),
         el("input", { id: "stats-health", type: "number", value: data.health.override !== null ? data.health.override : "", placeholder: data.health.base, style: "width:100%;" })
       ),
       el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
-        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Morale / Suppression (Base: ${data.max_suppression.base})`),
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Morale / Suppression (Base: ${data.max_suppression.base})`),
         el("input", { id: "stats-suppression", type: "number", value: data.max_suppression.override !== null ? data.max_suppression.override : "", placeholder: data.max_suppression.base, style: "width:100%;" })
       ),
       el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
-        el("div", { class: "field-label", style: "font-weight:bold; font-size:11px;" }, `Supply Capacity (Base: ${data.supply_capacity.base})`),
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Command Cost (Base: ${data.cost.base})`),
+        el("input", { id: "stats-cost", type: "number", value: data.cost.override !== null ? data.cost.override : "", placeholder: data.cost.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Supply Capacity (Base: ${data.supply_capacity.base})`),
         el("input", { id: "stats-supply", type: "number", value: data.supply_capacity.override !== null ? data.supply_capacity.override : "", placeholder: data.supply_capacity.base, style: "width:100%;" })
       )
     );
     
     rightPane.appendChild(el("h4", { style: "margin: 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, `🛡️ Core Stats: ${data.display_name}`));
     rightPane.appendChild(unitGrid);
+
+    // Armor stats block
+    const armorGrid = el("div", { style: "display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; margin-bottom: 10px;" },
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px; color:#00e5ff;" }, `Front Armor (Base: ${data.armor_front.base})`),
+        el("input", { id: "stats-armor_front", type: "number", value: data.armor_front.override !== null ? data.armor_front.override : "", placeholder: data.armor_front.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px; color:#ffeb3b;" }, `Side Armor (Base: ${data.armor_sides.base})`),
+        el("input", { id: "stats-armor_sides", type: "number", value: data.armor_sides.override !== null ? data.armor_sides.override : "", placeholder: data.armor_sides.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px; color:#ff5252;" }, `Rear Armor (Base: ${data.armor_rear.base})`),
+        el("input", { id: "stats-armor_rear", type: "number", value: data.armor_rear.override !== null ? data.armor_rear.override : "", placeholder: data.armor_rear.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px; color:#e040fb;" }, `Top Armor (Base: ${data.armor_top.base})`),
+        el("input", { id: "stats-armor_top", type: "number", value: data.armor_top.override !== null ? data.armor_top.override : "", placeholder: data.armor_top.base, style: "width:100%;" })
+      )
+    );
+    rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "🧱 Armor Values"));
+    rightPane.appendChild(armorGrid);
+
+    // Movement and Autonomy block
+    const moveGrid = el("div", { style: "display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 10px;" },
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Speed (Base: ${data.speed.base} km/h)`),
+        el("input", { id: "stats-speed", type: "number", value: data.speed.override !== null ? data.speed.override : "", placeholder: data.speed.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Road Speed (Base: ${data.road_speed.base} km/h)`),
+        el("input", { id: "stats-road_speed", type: "number", value: data.road_speed.override !== null ? data.road_speed.override : "", placeholder: data.road_speed.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Fuel Capacity (Base: ${data.fuel_capacity.base} L)`),
+        el("input", { id: "stats-fuel_capacity", type: "number", value: data.fuel_capacity.override !== null ? data.fuel_capacity.override : "", placeholder: data.fuel_capacity.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Autonomy / Fuel Move (Base: ${data.fuel_move_duration.base} s)`),
+        el("input", { id: "stats-fuel_move_duration", type: "number", step: "0.1", value: data.fuel_move_duration.override !== null ? data.fuel_move_duration.override : "", placeholder: data.fuel_move_duration.base, style: "width:100%;" })
+      )
+    );
+    rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "🏃 Movement & Autonomy"));
+    rightPane.appendChild(moveGrid);
+
+    // Sensors, Stealth, Fwd Deploy, Amphibious block
+    const sensorGrid = el("div", { style: "display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 10px;" },
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Optics Quality (Base: ${data.optics.base})`),
+        el("input", { id: "stats-optics", type: "number", value: data.optics.override !== null ? data.optics.override : "", placeholder: data.optics.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Stealth / Concealment (Base: ${data.stealth.base})`),
+        el("input", { id: "stats-stealth", type: "number", step: "0.01", value: data.stealth.override !== null ? data.stealth.override : "", placeholder: data.stealth.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+        el("div", { class: "field-label", style: "font-weight:bold; font-size:10px;" }, `Forward Deploy (Base: ${data.fwd_deploy.base} m)`),
+        el("input", { id: "stats-fwd_deploy", type: "number", value: data.fwd_deploy.override !== null ? data.fwd_deploy.override : "", placeholder: data.fwd_deploy.base, style: "width:100%;" })
+      ),
+      el("div", { style: "display: flex; flex-direction: column; gap: 4px; justify-content: flex-end;" },
+        el("label", { style: "display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: bold; cursor: pointer; height: 32px;" },
+          el("input", { id: "stats-amphibious", type: "checkbox", checked: data.amphibious.override !== null ? data.amphibious.override : data.amphibious.base }),
+          el("span", {}, `Amphibious (Base: ${data.amphibious.base ? 'Yes' : 'No'})`)
+        )
+      )
+    );
+    rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "👁️ Sensors & Special Capabilities"));
+    rightPane.appendChild(sensorGrid);
+
+    // Specialties/Traits block
+    const specsList = data.specialties.override !== null ? data.specialties.override : data.specialties.base;
+    const commonSpecs = [
+      { id: "_leader", label: "👑 Leader" },
+      { id: "_choc", label: "⚡ Shock" },
+      { id: "_sf", label: "⚔️ Spec Ops" },
+      { id: "_reservist", label: "🛡️ Reservist" },
+      { id: "_militia", label: "✊ Militia" },
+      { id: "_mp", label: "👮 MP" },
+      { id: "_resolute", label: "💪 Resolute" },
+      { id: "_security", label: "🔒 Security" },
+      { id: "_sniper", label: "🎯 Sniper" },
+      { id: "_mountaineer", label: "🏔️ Mountaineer" }
+    ];
+    
+    const traitCheckboxes = el("div", { style: "display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px 12px; margin-bottom: 8px;" },
+      commonSpecs.map(spec => el("label", { style: "display: flex; align-items: center; gap: 6px; font-size: 11px; cursor: pointer;" },
+        el("input", { id: `spec-${spec.id}`, type: "checkbox", checked: specsList.includes(spec.id) }),
+        el("span", {}, spec.label)
+      ))
+    );
+
+    const otherSpecs = specsList.filter(s => !commonSpecs.map(c => c.id).includes(s) && s !== "_amphibie" && s !== "_para");
+
+    const traitText = el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+      el("div", { class: "field-label", style: "font-weight:bold; font-size:10px; color:#8aa;" }, `Other Specialties / Traits (Base: ${(data.specialties.base || []).filter(s => s !== '_amphibie' && s !== '_para').join(', ') || 'None'})`),
+      el("input", { id: "stats-specialties-raw", type: "text", value: otherSpecs.join(", "), placeholder: "e.g. MRAP, Radar, Slat, _airlift", style: "width:100%;" })
+    );
+
+    const traitContainer = el("div", { style: "background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; margin-bottom: 10px;" },
+      traitCheckboxes,
+      traitText
+    );
+    rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "🏷️ Specialties & Traits"));
+    rightPane.appendChild(traitContainer);
     
     // Weapon stats block
     rightPane.appendChild(el("h4", { style: "margin: 10px 0 0 0; padding-bottom: 6px; border-bottom: 1px solid rgba(255,255,255,0.1); color: #00bcd4; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;" }, "⚔️ Weapon Systems & Ammunition"));
@@ -4327,11 +4943,14 @@ function renderStatsManagerModal() {
     } else {
       data.weapons.forEach(w => {
         const weaponCard = el("div", {
-          style: "padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 12px; margin-bottom: 4px;"
+          style: "padding: 14px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px;"
         });
         
-        weaponCard.appendChild(el("div", { style: "font-weight: bold; color: #ffeb3b; font-size: 11px; display: flex; align-items: center; justify-content: space-between;" },
-          el("span", { style: "font-family: monospace; font-size: 12px;" }, w.ammo_id),
+        weaponCard.appendChild(el("div", { style: "font-weight: bold; font-size: 13px; display: flex; align-items: center; justify-content: space-between;" },
+          el("div", { style: "display: flex; flex-direction: column; gap: 2px;" },
+            el("span", { style: "color: #ffeb3b; font-family: 'Outfit', sans-serif; font-weight: 600;" }, w.display_name || w.ammo_id),
+            el("span", { style: "font-family: monospace; font-size: 10px; color: var(--text-muted);" }, w.ammo_id)
+          ),
           el("span", { style: "font-size: 9px; color: #00e5ff; text-transform: uppercase; background: rgba(0,229,255,0.1); padding: 2px 6px; border-radius: 4px;" }, w.damage_family.override || w.damage_family.base)
         ));
         
@@ -4348,19 +4967,47 @@ function renderStatsManagerModal() {
           ),
           el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
             el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `HE / Physical Damage`),
-            el("input", { id: `ammo-${w.ammo_id}-physical_damages`, type: "number", step: "0.1", value: w.physical_damages.override !== null ? w.physical_damages.override : "", placeholder: w.physical_damages.base, style: "font-size: 11px;" })
+            el("input", { id: `ammo-${w.ammo_id}-physical_damages`, type: "number", step: "0.01", value: w.physical_damages.override !== null ? w.physical_damages.override : "", placeholder: w.physical_damages.base, style: "font-size: 11px;" })
           ),
           el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
             el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Suppress Damage`),
             el("input", { id: `ammo-${w.ammo_id}-suppress_damages`, type: "number", step: "1", value: w.suppress_damages.override !== null ? w.suppress_damages.override : "", placeholder: w.suppress_damages.base, style: "font-size: 11px;" })
           ),
           el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
-            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Max Range (GRU)`),
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Max Range Ground (GRU)`),
             el("input", { id: `ammo-${w.ammo_id}-max_range`, type: "number", value: w.max_range.override !== null ? w.max_range.override : "", placeholder: w.max_range.base, style: "font-size: 11px;" })
           ),
           el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
-            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Min Range (GRU)`),
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Min Range Ground (GRU)`),
             el("input", { id: `ammo-${w.ammo_id}-min_range`, type: "number", value: w.min_range.override !== null ? w.min_range.override : "", placeholder: w.min_range.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Max Range Heli (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-max_range_heli`, type: "number", value: w.max_range_heli.override !== null ? w.max_range_heli.override : "", placeholder: w.max_range_heli.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Min Range Heli (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-min_range_heli`, type: "number", value: w.min_range_heli.override !== null ? w.min_range_heli.override : "", placeholder: w.min_range_heli.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Max Range Plane (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-max_range_plane`, type: "number", value: w.max_range_plane.override !== null ? w.max_range_plane.override : "", placeholder: w.max_range_plane.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Min Range Plane (GRU)`),
+            el("input", { id: `ammo-${w.ammo_id}-min_range_plane`, type: "number", value: w.min_range_plane.override !== null ? w.min_range_plane.override : "", placeholder: w.min_range_plane.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Static Accuracy (%)`),
+            el("input", { id: `ammo-${w.ammo_id}-accuracy_static`, type: "number", value: w.accuracy_static.override !== null ? w.accuracy_static.override : "", placeholder: w.accuracy_static.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Motion Accuracy (%)`),
+            el("input", { id: `ammo-${w.ammo_id}-accuracy_motion`, type: "number", value: w.accuracy_motion.override !== null ? w.accuracy_motion.override : "", placeholder: w.accuracy_motion.base, style: "font-size: 11px;" })
+          ),
+          el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+            el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Aiming Time (s)`),
+            el("input", { id: `ammo-${w.ammo_id}-aiming_time`, type: "number", step: "0.01", value: w.aiming_time.override !== null ? w.aiming_time.override : "", placeholder: w.aiming_time.base, style: "font-size: 11px;" })
           ),
           el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
             el("label", { style: "font-size: 10px; color: #8aa; font-weight: bold;" }, `Time Between Shots (s)`),
@@ -4379,6 +5026,48 @@ function renderStatsManagerModal() {
             el("input", { id: `ammo-${w.ammo_id}-supply_cost`, type: "number", step: "0.1", value: w.supply_cost.override !== null ? w.supply_cost.override : "", placeholder: w.supply_cost.base, style: "font-size: 11px;" })
           )
         );
+        weaponCard.appendChild(inputsGrid);
+        
+        // Weapon Traits Block
+        const traitsList = w.traits.override !== null ? w.traits.override : w.traits.base;
+        const commonTraits = [
+          { id: "MOTION", label: "🎯 Stabilizer (MOTION)" },
+          { id: "STAT", label: "🛑 Static Only (STAT)" },
+          { id: "HEAT", label: "🔥 HEAT" },
+          { id: "HE", label: "💥 HE" },
+          { id: "KINETIC", label: "🛡️ Kinetic" },
+          { id: "TANDEM", label: "💥 Tandem" },
+          { id: "RADAR", label: "📡 Radar" },
+          { id: "autoloader", label: "⚙️ Autoloader" },
+          { id: "coax", label: "coax" },
+          { id: "smoke", label: "smoke" },
+          { id: "tripod", label: "tripod" }
+        ];
+
+        const weaponTraitCheckboxes = el("div", { style: "display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 6px 12px; margin-bottom: 8px;" },
+          commonTraits.map(tr => el("label", { style: "display: flex; align-items: center; gap: 6px; font-size: 10px; cursor: pointer;" },
+            el("input", { id: `ammo-${w.ammo_id}-trait-${tr.id}`, type: "checkbox", checked: traitsList.includes(tr.id) }),
+            el("span", {}, tr.label)
+          ))
+        );
+
+        const otherWeaponTraits = traitsList.filter(t => !commonTraits.map(c => c.id).includes(t));
+
+        const weaponTraitText = el("div", { style: "display: flex; flex-direction: column; gap: 4px;" },
+          el("div", { style: "font-weight:bold; font-size:9px; color:#8aa;" }, `Other Traits (Base: ${(w.traits.base || []).filter(t => !commonTraits.map(c => c.id).includes(t)).join(', ') || 'None'})`),
+          el("input", { id: `ammo-${w.ammo_id}-traits-raw`, type: "text", value: otherWeaponTraits.join(", "), placeholder: "e.g. activeprotection, CLGP", style: "font-size: 11px; width: 100%;" })
+        );
+
+        const weaponTraitContainer = el("div", { style: "display: flex; flex-direction: column; gap: 8px; background: rgba(0, 0, 0, 0.15); padding: 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.03); margin-top: 8px;" },
+          el("div", { style: "font-size: 10px; font-weight: bold; color: #00bcd4; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;" },
+            el("span", {}, "⚔️ Weapon Traits"),
+            el("span", { style: "font-size: 9px; font-weight: normal; color: var(--text-muted);" }, "Base: " + (w.traits.base || []).join(", "))
+          ),
+          weaponTraitCheckboxes,
+          weaponTraitText
+        );
+        
+        weaponCard.appendChild(weaponTraitContainer);
         rightPane.appendChild(weaponCard);
       });
     }
@@ -4626,6 +5315,160 @@ function renderBuildModal() {
   return backdrop;
 }
 
+function renderLoadingOverlay() {
+  const steps = [
+    "Accessing WIF campaign storage",
+    "Loading game database & NDF cache",
+    "Parsing mod parameters & values",
+    "Reading localized string mappings",
+    "Caching unit attributes & decks",
+    "Compiling tactical statistics",
+    "Optimizing card rendering assets",
+    "Readying interface viewports"
+  ];
+
+  const currentStep = state.loadingStep || 0;
+  const progressPercent = Math.min(100, Math.round(((currentStep + 1) / steps.length) * 100));
+
+  const logContainer = el("div", { class: "loader-logs" });
+  for (let i = 0; i < steps.length; i++) {
+    let statusClass = "pending";
+    let statusText = "[ PEND ]";
+    let suffix = "";
+    
+    if (i < currentStep) {
+      statusClass = "ok";
+      statusText = "[  OK  ]";
+    } else if (i === currentStep) {
+      statusClass = "run";
+      statusText = "[ LOAD ]";
+      suffix = "...";
+    }
+
+    const kids = [
+      el("span", { class: "log-status" }, statusText),
+      " " + steps[i] + suffix
+    ];
+
+    if (i === currentStep) {
+      kids.push(el("span", { class: "blink-caret" }, "_"));
+    }
+
+    logContainer.appendChild(el("div", { class: "log-line " + statusClass }, ...kids));
+  }
+
+  // Auto scroll logs container to bottom if needed
+  setTimeout(() => {
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }, 0);
+
+  return el("div", { class: "loader-backdrop" },
+    el("div", { class: "loader-container" },
+      el("div", { class: "loader-radar" },
+        el("div", { class: "loader-radar-sweep" }),
+        el("div", { class: "loader-radar-crosshair-h" }),
+        el("div", { class: "loader-radar-crosshair-v" }),
+        el("div", { class: "loader-radar-dot" })
+      ),
+      el("div", { class: "loader-title" }, "Establishing Session"),
+      el("div", { class: "loader-subtitle" }, state.loadingText || "Connecting..."),
+      el("div", { class: "loader-progress-bar-bg" },
+        el("div", { class: "loader-progress-bar-fill", style: `width: ${progressPercent}%` })
+      ),
+      logContainer
+    )
+  );
+}
+
+function renderExportProgressModal() {
+  const modTagVal = state.session?.mod_tag || "WIF";
+  const steps = [
+    "Analyzing " + modTagVal + " replicas and assignments",
+    "Validating unit cache catalog",
+    "Backing up original game NDFs (.orig)",
+    "Generating StrategicDecks.ndf",
+    "Compiling StrategicPacks.ndf",
+    "Assembling StrategicCombatGroups.ndf",
+    "Writing PLATOONS.csv translations",
+    "Patching UniteDescriptor.ndf overrides",
+    "Finalizing mod directory structure"
+  ];
+
+  const currentStep = state.exportStep || 0;
+  const progressPercent = state.exportProgress || 0;
+
+  const logContainer = el("div", { class: "loader-logs" });
+  for (let i = 0; i < steps.length; i++) {
+    let statusClass = "pending";
+    let statusText = "[ PEND ]";
+    let suffix = "";
+
+    if (i < currentStep) {
+      statusClass = "ok";
+      statusText = "[  OK  ]";
+    } else if (i === currentStep) {
+      if (state.exportStatus === "fail") {
+        statusClass = "fail";
+        statusText = "[ FAIL ]";
+      } else {
+        statusClass = "run";
+        statusText = "[ BUSY ]";
+        suffix = "...";
+      }
+    }
+
+    const kids = [
+      el("span", { class: "log-status" }, statusText),
+      " " + steps[i] + suffix
+    ];
+
+    if (i === currentStep && state.exportStatus !== "fail") {
+      kids.push(el("span", { class: "blink-caret" }, "_"));
+    }
+
+    logContainer.appendChild(el("div", { class: "log-line " + statusClass }, ...kids));
+  }
+
+  // Auto scroll logs container to bottom if needed
+  setTimeout(() => {
+    logContainer.scrollTop = logContainer.scrollHeight;
+  }, 0);
+
+  if (state.exportStatus === "fail") {
+    logContainer.appendChild(el("div", {
+      class: "log-line fail",
+      style: "color: #ff5555; margin-top: 8px; font-weight: bold; border-top: 1px solid rgba(255, 85, 85, 0.25); padding-top: 8px;"
+    }, "[ERROR] " + (state.exportError || "Unknown error occurred during direct export.")));
+  }
+
+  const footer = state.exportStatus === "fail"
+    ? el("div", { style: "margin-top: 20px; width: 100%; display: flex; justify-content: flex-end;" },
+        el("button", {
+          style: "background: #cc2222; border-color: #ff4444; color: #fff; padding: 6px 16px; font-size: 0.85rem;",
+          onclick: () => { state.exportStatus = "idle"; render(); }
+        }, "Close")
+      )
+    : null;
+
+  return el("div", { class: "loader-backdrop" },
+    el("div", { class: "loader-container" },
+      el("div", { class: "loader-radar" },
+        el("div", { class: "loader-radar-sweep" }),
+        el("div", { class: "loader-radar-crosshair-h" }),
+        el("div", { class: "loader-radar-crosshair-v" }),
+        el("div", { class: "loader-radar-dot" })
+      ),
+      el("div", { class: "loader-title" }, "Exporting Mod Files"),
+      el("div", { class: "loader-subtitle" }, state.exportStatus === "fail" ? "Export Failed" : (state.exportText || "Processing...")),
+      el("div", { class: "loader-progress-bar-bg" },
+        el("div", { class: "loader-progress-bar-fill", style: `width: ${progressPercent}%; ${state.exportStatus === "fail" ? "background: #cc2222;" : ""}` })
+      ),
+      logContainer,
+      footer
+    )
+  );
+}
+
 // ── actions ─────────────────────────────────────────────────────────────────
 
 async function bootstrapPicker() {
@@ -4641,7 +5484,33 @@ async function bootstrapPicker() {
 }
 
 async function openSession(slug) {
+  state.loadingSession = true;
+  state.loadingStep = 0;
+  state.loadingText = "Initializing campaign connection...";
+  render();
+
+  const ticker = setInterval(() => {
+    if (!state.loadingSession) {
+      clearInterval(ticker);
+      return;
+    }
+    const steps = [
+      "Accessing WIF campaign storage",
+      "Loading game database & NDF cache",
+      "Parsing mod parameters & values",
+      "Reading localized string mappings",
+      "Caching unit attributes & decks",
+      "Compiling tactical statistics",
+      "Optimizing card rendering assets",
+      "Readying interface viewports"
+    ];
+    state.loadingStep = Math.min(state.loadingStep + 1, steps.length - 1);
+    state.loadingText = steps[state.loadingStep] + "...";
+    render();
+  }, 900);
+
   try {
+    state.unitsIndex = {};
     const session = await api("GET", `/sessions/${slug}`);
     state.session = session;
     state.activeSlug = slug;
@@ -4659,8 +5528,13 @@ async function openSession(slug) {
     loadCollapseState();
     await reloadScopedDecks();
     fetchTacticalSummary();
+  } catch (e) {
+    toast("Open failed: " + e.message, true);
+  } finally {
+    clearInterval(ticker);
+    state.loadingSession = false;
     render();
-  } catch (e) { toast("Open failed: " + e.message, true); }
+  }
 }
 
 async function fetchTacticalSummary() {
@@ -4869,6 +5743,7 @@ async function doExtractSession() {
 
 async function doRefreshDecks() {
   try {
+    state.unitsIndex = {};
     await api("POST", "/refresh");
     await reloadScopedDecks();
     toast("Deck cache refreshed.");
@@ -4885,21 +5760,29 @@ async function doExport(scope) {
   } catch (e) { toast("Export failed: " + e.message, true); }
 }
 
-async function doSaveSettings(targetModDir, gameDir, exportDir) {
+async function doSaveSettings(targetModDir, gameDir, exportDir, sourceModDir, modUnitPrefix, modTag, modLocFolder) {
   const pathsChanged = (targetModDir !== (state.session.target_mod_dir || "")) ||
                        (gameDir !== (state.session.game_dir || "")) ||
-                       (exportDir !== (state.session.export_dir || ""));
+                       (exportDir !== (state.session.export_dir || "")) ||
+                       (sourceModDir !== (state.session.source_mod_dir || "")) ||
+                       (modUnitPrefix !== (state.session.mod_unit_prefix || "")) ||
+                       (modTag !== (state.session.mod_tag || "")) ||
+                       (modLocFolder !== (state.session.mod_loc_folder || ""));
   try {
     const saved = await api("PATCH", `/sessions/${state.activeSlug}`, {
       target_mod_dir: targetModDir,
       game_dir: gameDir,
       export_dir: exportDir,
+      source_mod_dir: sourceModDir,
+      mod_unit_prefix: modUnitPrefix,
+      mod_tag: modTag,
+      mod_loc_folder: modLocFolder,
     });
     state.session = saved;
     state.settingsOpen = false;
     toast("Settings saved successfully.");
     if (pathsChanged) {
-      toast("Paths changed, refreshing catalog...");
+      toast("Settings changed, refreshing catalog...");
       await doRefreshDecks();
     } else {
       render();
@@ -4910,10 +5793,53 @@ async function doSaveSettings(targetModDir, gameDir, exportDir) {
 }
 
 async function doDirectExport() {
+  const modTagVal = state.session?.mod_tag || "WIF";
+  const steps = [
+    "Analyzing " + modTagVal + " replicas and assignments",
+    "Validating unit cache catalog",
+    "Backing up original game NDFs (.orig)",
+    "Generating StrategicDecks.ndf",
+    "Compiling StrategicPacks.ndf",
+    "Assembling StrategicCombatGroups.ndf",
+    "Writing PLATOONS.csv translations",
+    "Patching UniteDescriptor.ndf overrides",
+    "Finalizing mod directory structure"
+  ];
+
+  // Initialize export state
+  state.exportStatus = "exporting";
+  state.exportStep = 0;
+  state.exportText = steps[0];
+  state.exportProgress = 5;
+  state.exportError = null;
+  render();
+
+  // Start smooth progress simulation up to 92%
+  let currentStepIdx = 0;
+  const intervalId = setInterval(() => {
+    if (state.exportStatus === "exporting") {
+      if (currentStepIdx < steps.length - 1) {
+        currentStepIdx++;
+        state.exportStep = currentStepIdx;
+        state.exportText = steps[currentStepIdx];
+        state.exportProgress = Math.min(92, Math.round(((currentStepIdx + 1) / steps.length) * 92));
+        render();
+      }
+    }
+  }, 450);
+
   try {
     const res = await api("POST", `/sessions/${state.activeSlug}/export_direct`);
+    clearInterval(intervalId);
+    state.exportProgress = 100;
+    state.exportStatus = "idle"; // Completes/closes instantly
+    render();
     toast(res.message || "Direct export complete.");
   } catch (e) {
+    clearInterval(intervalId);
+    state.exportStatus = "fail";
+    state.exportError = e.message || "Unknown error occurred.";
+    render();
     toast("Export failed: " + e.message, true);
   }
 }

@@ -56,18 +56,29 @@ def load_vanilla_packs() -> dict[str, StrategicPack]:
     import json
     from dataclasses import asdict
 
+    ndf_path = config.VANILLA_STRATEGIC_PACKS
+    cache_path = config.VANILLA_PACKS_CACHE
+    use_cache = cache_path.exists() and (not ndf_path.exists() or cache_path.stat().st_mtime >= ndf_path.stat().st_mtime)
+
+    if use_cache:
+        try:
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            return {name: StrategicPack(**p) for name, p in cache_data.items()}
+        except Exception as e:
+            print(f"warn: failed to load vanilla packs cache: {e}")
+
     packs = {}
-    if config.VANILLA_STRATEGIC_PACKS.exists():
-        packs = parse_strategic_packs(config.VANILLA_STRATEGIC_PACKS)
+    if ndf_path.exists():
+        packs = parse_strategic_packs(ndf_path)
         try:
             config.VANILLA_PACKS_CACHE.parent.mkdir(parents=True, exist_ok=True)
             cache_data = {name: asdict(p) for name, p in packs.items()}
             config.VANILLA_PACKS_CACHE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
         except Exception as e:
             print(f"warn: failed to cache vanilla packs: {e}")
-    elif config.VANILLA_PACKS_CACHE.exists():
+    elif cache_path.exists():
         try:
-            cache_data = json.loads(config.VANILLA_PACKS_CACHE.read_text(encoding="utf-8"))
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
             packs = {name: StrategicPack(**p) for name, p in cache_data.items()}
         except Exception as e:
             print(f"warn: failed to load vanilla packs cache: {e}")

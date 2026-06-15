@@ -7,21 +7,23 @@ left untouched. Decoupled from the CLI and Flask layers so tests can call it dir
 """
 from __future__ import annotations
 import json
+import os
+import zipfile
 from dataclasses import asdict
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, Any
 
 from wif_ag_tool.models import Assignment, DeckState, WifUnit
 from wif_ag_tool.parser.deck_parser import parse_deck
-from wif_ag_tool.generator.pack_generator import generate_pack, generate_packs_for_assignment
+from wif_ag_tool.generator.pack_generator import generate_pack
 from wif_ag_tool.generator.group_generator import (
     generate_grouped_combat_group,
-    resolve_cg_name,
     emission_ordered_assignments,
 )
 from wif_ag_tool.generator.deck_patcher import generate_deck_patch
 from wif_ag_tool.generator.localisation import generate_platoons_rows
 from wif_ag_tool import replicas as _replicas
+from wif_ag_tool import config
 
 # Output filenames inside the user-supplied output dir
 PACKS_OUT = "StrategicPacks_additions.ndf"
@@ -99,7 +101,6 @@ def build_export_blocks(
     """
     if combat_groups is None:
         from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
-        from wif_ag_tool import config
         combat_groups = (
             parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
             if config.VANILLA_COMBAT_GROUPS.exists() else {}
@@ -212,7 +213,7 @@ def build_export_blocks(
             running.combat_group_list.append(cg_name)
 
         # Reorder new_groups to match the exact original order of combat groups in the deck,
-        # keeping any new/extra (WIF) groups appended at the end.
+        # keeping any new/extra (custom) groups appended at the end.
         vanilla_indices = {name: idx for idx, name in enumerate(deck.combat_group_list)}
         new_groups_orig = list(new_groups)
         new_groups.sort(key=lambda name: (
@@ -236,7 +237,6 @@ def run_export(
     output_dir.mkdir(parents=True, exist_ok=True)
 
     from wif_ag_tool.parser.combatgroup_parser import parse_combat_groups
-    from wif_ag_tool import config
     combat_groups = (
         parse_combat_groups(config.VANILLA_COMBAT_GROUPS)
         if config.VANILLA_COMBAT_GROUPS.exists() else {}
@@ -328,7 +328,6 @@ def migrate_legacy_assignments(
     Runs at most once. Returns the number of replicas written. After a successful
     migration the legacy file is renamed to ``<path>.migrated`` so this is idempotent.
     """
-    from wif_ag_tool import config
     legacy = legacy_path or config.ASSIGNMENTS_FILE
     if not legacy.exists():
         return 0
@@ -358,6 +357,212 @@ def migrate_legacy_assignments(
     return written
 
 
+def load_tactical_overrides() -> dict:
+    if config.STATS_OVERRIDES_FILE.exists():
+        try:
+            return json.loads(config.STATS_OVERRIDES_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {"units": {}, "ammo": {}}
+
+
+def export_direct(
+    session: dict,
+    decks_map: dict[str, DeckState],
+    units: dict[str, WifUnit],
+    combat_groups: dict,
+    scope: str = "all",
+) -> dict[str, Any]:
+    """Apply replica assignments and patches directly to target mod source NDFs."""
+    target_mod_dir = session.get("target_mod_dir", "").strip()
+    custom_export_dir = session.get("export_dir", "").strip()
+
+    if custom_export_dir:
+        export_path = Path(custom_export_dir)
+    elif target_mod_dir:
+        export_path = Path(target_mod_dir) / "GameData"
+    else:
+        export_path = config.TOOL_ROOT / "output"
+
+    export_path.mkdir(parents=True, exist_ok=True)
+
+    if target_mod_dir:
+        mod_name = Path(target_mod_dir).name
+    else:
+        mod_name = "CRM_ArmyGeneral"
+
+    scoped = None
+    if scope == "session":
+        from wif_ag_tool import session as session_mod
+        scoped = session_mod.scope_decks(session.get("nation_scope") or [], decks_map.keys())
+
+    store = _replicas.load_replicas()
+    assignments = _replicas.replicas_to_assignments(store, scope_decks=scoped)
+
+    if not assignments:
+        raise ValueError("No saved replicas in scope to export. Create a replica deck first.")
+
+    decks_dir = export_path / "Generated" / "Gameplay" / "Decks"
+    base_decks_ndf  = decks_dir / "StrategicDecks.ndf"
+    base_packs_ndf  = decks_dir / "StrategicPacks.ndf"
+    base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
+    base_csv        = export_path / "Localisation" / mod_name / "PLATOONS.csv"
+    base_units_ndf  = export_path / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
+    base_ammo_ndf   = export_path / "Generated" / "Gameplay" / "Gfx" / "Ammunition.ndf"
+    base_ammo_missiles_ndf = export_path / "Generated" / "Gameplay" / "Gfx" / "AmmunitionMissiles.ndf"
+    
+    direct_paths = {
+        "summary": decks_dir / "StrategicDecks_patch_summary.txt",
+        "csv": base_csv
+    }
+
+    for p in direct_paths.values():
+        p.parent.mkdir(parents=True, exist_ok=True)
+    decks_dir.mkdir(parents=True, exist_ok=True)
+
+    # Clean out stale sidecars
+    for stale_name in (
+        "StrategicPacks_additions.ndf",
+        "StrategicCombatGroups_additions.ndf",
+        "StrategicDecks_patch.ndf",
+    ):
+        stale = decks_dir / stale_name
+        if stale.exists():
+            try:
+                stale.unlink()
+            except Exception:
+                pass
+
+    base_files = [base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv]
+    if base_units_ndf.exists():
+        base_files.append(base_units_ndf)
+    if base_ammo_ndf.exists():
+        base_files.append(base_ammo_ndf)
+    if base_ammo_missiles_ndf.exists():
+        base_files.append(base_ammo_missiles_ndf)
+
+    # Backup & Restore canvases
+    for base in base_files:
+        pristine = base.with_suffix(base.suffix + ".orig")
+        
+        if "PYTEST_CURRENT_TEST" not in os.environ:
+            clean_source = None
+            if base.name == "StrategicDecks.ndf":
+                clean_source = config.VANILLA_STRATEGIC_DECKS
+            elif base.name == "StrategicPacks.ndf":
+                clean_source = config.VANILLA_STRATEGIC_PACKS
+            elif base.name == "StrategicCombatGroups.ndf":
+                clean_source = config.VANILLA_COMBAT_GROUPS
+
+            pristine_bytes = None
+            if clean_source and clean_source.exists():
+                try:
+                    pristine_bytes = clean_source.read_bytes()
+                except Exception:
+                    pass
+
+            if pristine_bytes is None and target_mod_dir:
+                base_zip_path = Path(target_mod_dir) / "base.zip"
+                if base_zip_path.exists():
+                    try:
+                        with zipfile.ZipFile(base_zip_path, 'r') as z:
+                            zip_internal_path = f"GameData/Generated/Gameplay/Decks/{base.name}"
+                            if base.name == "PLATOONS.csv":
+                                zip_internal_path = f"Localisation/{mod_name}/PLATOONS.csv"
+                            pristine_bytes = z.read(zip_internal_path)
+                    except Exception:
+                        pass
+
+            if pristine_bytes is not None:
+                need_recreate = False
+                if not pristine.exists():
+                    need_recreate = True
+                else:
+                    try:
+                        if pristine.read_bytes() != pristine_bytes:
+                            need_recreate = True
+                    except Exception:
+                        need_recreate = True
+                
+                if need_recreate:
+                    pristine.write_bytes(pristine_bytes)
+
+        if base.exists() and not pristine.exists():
+            pristine.write_bytes(base.read_bytes())
+        elif pristine.exists():
+            base.write_bytes(pristine.read_bytes())
+
+    # Generate blocks and apply patches
+    packs_blocks, groups_blocks, deck_lists = build_export_blocks(
+        assignments, decks_map, units, combat_groups)
+
+    deck_patches = []
+    from wif_ag_tool.generator.deck_patcher import replace_deck_lists, apply_combat_group_patches
+    for deck_name, (pack_refs, group_refs) in deck_lists.items():
+        try:
+            replace_deck_lists(base_decks_ndf, deck_name, pack_refs, group_refs)
+        except KeyError:
+            pass
+        deck_patches.append(generate_deck_patch(deck_name, pack_refs, group_refs))
+
+    csv_text = generate_platoons_rows(assignments, units, decks=decks_map, combat_groups=combat_groups)
+
+    if packs_blocks:
+        with base_packs_ndf.open("a", encoding="utf-8") as f:
+            f.write(f"\n\n// === {config.MOD_TAG} additions ===\n\n")
+            f.write("\n\n".join(packs_blocks))
+            f.write("\n")
+    if groups_blocks:
+        apply_combat_group_patches(base_groups_ndf, groups_blocks)
+
+    direct_paths["summary"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
+
+    new_rows = csv_text.split("\n", 1)[1] if "\n" in csv_text else ""
+    existing_csv = base_csv.read_text(encoding="utf-8") if base_csv.exists() else ""
+    if existing_csv.strip():
+        merged = existing_csv if existing_csv.endswith("\n") else existing_csv + "\n"
+        if new_rows.strip():
+            merged += new_rows if new_rows.endswith("\n") else new_rows + "\n"
+        base_csv.write_text(merged, encoding="utf-8")
+    else:
+        base_csv.write_text(csv_text, encoding="utf-8")
+
+    # Merge tactical unit overrides and strategic attack/defense overrides
+    tactical_overrides = load_tactical_overrides()
+    unit_overrides = {}
+    
+    for uid, fields in tactical_overrides.get("units", {}).items():
+        unit_overrides[uid] = dict(fields)
+        
+    for a in assignments:
+        if a.attack_override is not None or a.defense_override is not None:
+            if a.unit_id not in unit_overrides:
+                unit_overrides[a.unit_id] = {}
+            if isinstance(unit_overrides[a.unit_id], dict):
+                if a.attack_override is not None:
+                    unit_overrides[a.unit_id]["attack_override"] = a.attack_override
+                if a.defense_override is not None:
+                    unit_overrides[a.unit_id]["defense_override"] = a.defense_override
+                    
+    if base_units_ndf.exists() and unit_overrides:
+        from wif_ag_tool.generator.unit_patcher import patch_unit_stats
+        patch_unit_stats(base_units_ndf, unit_overrides)
+        
+    ammo_overrides = tactical_overrides.get("ammo", {})
+    if ammo_overrides:
+        from wif_ag_tool.generator.ammo_patcher import patch_ammo_stats
+        if base_ammo_ndf.exists():
+            patch_ammo_stats(base_ammo_ndf, ammo_overrides)
+        if base_ammo_missiles_ndf.exists():
+            patch_ammo_stats(base_ammo_missiles_ndf, ammo_overrides)
+
+    return {
+        "ok": True,
+        "message": f"Successfully exported files directly to {export_path.resolve()}",
+        "paths": {k: str(v.resolve()) for k, v in direct_paths.items()}
+    }
+
+
 __all__ = [
     "load_assignments",
     "save_assignments",
@@ -367,6 +572,8 @@ __all__ = [
     "migrate_legacy_assignments",
     "refresh_deck_cache",
     "load_deck_cache",
+    "load_tactical_overrides",
+    "export_direct",
     "PACKS_OUT",
     "GROUPS_OUT",
     "DECKS_OUT",

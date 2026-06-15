@@ -84,6 +84,19 @@ def load_vanilla_divisions(units_csv: dict[str, str] | None = None) -> dict[str,
     elif wif_divisions_ndf.exists():
         target_path = wif_divisions_ndf
 
+    cache_path = config.VANILLA_DIVISIONS_CACHE
+    use_cache = cache_path.exists()
+    if use_cache and target_path:
+        if cache_path.stat().st_mtime < target_path.stat().st_mtime:
+            use_cache = False
+
+    if use_cache:
+        try:
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            return {name: Division(**d) for name, d in cache_data.items()}
+        except Exception as e:
+            print(f"warn: failed to load vanilla divisions cache: {e}")
+
     if target_path:
         divisions = parse_divisions(target_path, units_csv=units_csv)
         try:
@@ -92,9 +105,9 @@ def load_vanilla_divisions(units_csv: dict[str, str] | None = None) -> dict[str,
             config.VANILLA_DIVISIONS_CACHE.write_text(json.dumps(cache_data, indent=2), encoding="utf-8")
         except Exception as e:
             print(f"warn: failed to cache vanilla divisions: {e}")
-    elif config.VANILLA_DIVISIONS_CACHE.exists():
+    elif cache_path.exists():
         try:
-            cache_data = json.loads(config.VANILLA_DIVISIONS_CACHE.read_text(encoding="utf-8"))
+            cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
             divisions = {name: Division(**d) for name, d in cache_data.items()}
         except Exception as e:
             print(f"warn: failed to load vanilla divisions cache: {e}")

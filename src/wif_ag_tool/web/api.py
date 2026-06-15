@@ -24,11 +24,121 @@ from wif_ag_tool.parser.save_parser import list_campaigns
 from wif_ag_tool.pipeline import (
     export_from_replicas,
     refresh_deck_cache,
+    load_tactical_overrides,
 )
+from wif_ag_tool.generator.localisation import _get_localized_fallback_name
 from wif_ag_tool.role_normalize import bucket_matches, normalize_role
 from wif_ag_tool.validator.unit_validator import validate_unit_exists, UnitNotFoundError
 
 api_bp = Blueprint("api", __name__)
+
+
+def reload_state_from_config() -> None:
+    """Reload the mod's catalog state dynamically using the current config paths."""
+    from wif_ag_tool.parser.unit_parser import load_wif_units, load_vanilla_units
+    from wif_ag_tool.parser.icon_parser import parse_button_textures
+    from wif_ag_tool.parser.localisation_csv import load_units_csv
+    from wif_ag_tool.parser.weapon_parser import load_wif_weapons, load_vanilla_weapons
+    from wif_ag_tool.parser.ammo_parser import load_wif_ammo, load_vanilla_ammo
+    from wif_ag_tool.parser.pack_parser import load_vanilla_packs
+    from wif_ag_tool.parser.combatgroup_parser import load_vanilla_combat_groups
+    from wif_ag_tool.parser.division_parser import load_vanilla_divisions
+    
+    units_csv = {}
+    vanilla_csv_path = config.WARNO_MODS_DIR / "ExampleAssets" / "Localisation" / "UNITS.csv"
+    if vanilla_csv_path.exists():
+        try:
+            units_csv.update(load_units_csv(vanilla_csv_path))
+        except Exception:
+            pass
+            
+    # Load from the configured mod localisation UNITS.csv
+    if config.WIF_UNITS_CSV.exists():
+        try:
+            units_csv.update(load_units_csv(config.WIF_UNITS_CSV))
+        except Exception:
+            pass
+            
+    units = load_wif_units(units_csv=units_csv)
+    vanilla_units = load_vanilla_units(units_csv=units_csv)
+    
+    # Reload icons/textures
+    icons = {}
+    if config.WIF_BUTTON_TEXTURES.exists():
+        try:
+            icons.update(parse_button_textures(config.WIF_BUTTON_TEXTURES, config.WIF_ROOT))
+        except Exception:
+            pass
+            
+    # Reload weapons/ammo
+    wif_weapons = load_wif_weapons()
+    vanilla_weapons = load_vanilla_weapons()
+    wif_ammo = load_wif_ammo()
+    vanilla_ammo = load_vanilla_ammo()
+    
+    # Reload packs, combat groups, divisions
+    packs = load_vanilla_packs()
+    combat_groups = load_vanilla_combat_groups()
+    divisions = load_vanilla_divisions(units_csv=units_csv)
+    
+    # Retrieve units CSV and platoons CSV
+    platoons_csv = {}
+    vanilla_platoons_path = config.WARNO_MODS_DIR / "ExampleAssets" / "Localisation" / "PLATOONS.csv"
+    if vanilla_platoons_path.exists():
+        try:
+            platoons_csv.update(load_units_csv(vanilla_platoons_path))
+        except Exception:
+            pass
+    wif_platoons_path = config.WIF_ROOT / "Localisation" / config.MOD_LOC_FOLDER / "PLATOONS.csv"
+    if wif_platoons_path.exists():
+        try:
+            platoons_csv.update(load_units_csv(wif_platoons_path))
+        except Exception:
+            pass
+            
+    set_state(
+        units=units,
+        icons=icons,
+        packs=packs,
+        combat_groups=combat_groups,
+        vanilla_units=vanilla_units,
+        divisions=divisions,
+        units_csv=units_csv,
+        platoons_csv=platoons_csv,
+        wif_weapons=wif_weapons,
+        vanilla_weapons=vanilla_weapons,
+        wif_ammo=wif_ammo,
+        vanilla_ammo=vanilla_ammo,
+    )
+    
+    mtime = 0.0
+    if config.UNITS_CACHE_FILE.exists():
+        mtime = config.UNITS_CACHE_FILE.stat().st_mtime
+    _state["last_cache_mtime"] = mtime
+
+
+def _activate_session(s: dict) -> None:
+    """Activate the session's configuration and reload catalog if it changed."""
+    prev_source_mod_dir = str(config.WIF_ROOT) if config.WIF_ROOT else ""
+    prev_prefix = config.MOD_UNIT_PREFIX
+    prev_tag = config.MOD_TAG
+    prev_loc_folder = config.MOD_LOC_FOLDER
+
+    config.apply_session_config(s)
+
+    current_mtime = 0.0
+    if config.UNITS_CACHE_FILE.exists():
+        current_mtime = config.UNITS_CACHE_FILE.stat().st_mtime
+
+    changed = (
+        s.get("source_mod_dir", "").strip() != prev_source_mod_dir or
+        s.get("mod_unit_prefix", "").strip() != prev_prefix or
+        s.get("mod_tag", "").strip() != prev_tag or
+        s.get("mod_loc_folder", "").strip() != prev_loc_folder or
+        current_mtime != _state.get("last_cache_mtime", 0.0)
+    )
+    if changed or not _state.get("units"):
+        reload_state_from_config()
 
 # In-process state (set by web.app.create_app)
 _state: dict[str, Any] = {
@@ -45,6 +155,7 @@ _state: dict[str, Any] = {
     "vanilla_weapons": {},
     "wif_ammo": {},
     "vanilla_ammo": {},
+    "last_cache_mtime": 0.0,
 }
 
 
@@ -120,7 +231,7 @@ def _serialize_unit(u: WifUnit, source: str = "wif") -> dict:
     and tags the unit's source so the SPA can show WIF vs vanilla."""
     d = asdict(u)
     if not d.get("display_name"):
-        d["display_name"] = u.name.removeprefix("WF_").replace("_", " ")
+        d["display_name"] = u.name.removeprefix(config.MOD_UNIT_PREFIX).replace("_", " ")
         d["display_resolved"] = False
     else:
         d["display_resolved"] = True
@@ -184,6 +295,7 @@ def sessions_get(slug: str):
     s = session_mod.load_session(slug)
     if s is None:
         return jsonify({"error": "session not found"}), 404
+    _activate_session(s)
     return jsonify(s)
 
 
@@ -205,6 +317,15 @@ def sessions_patch(slug: str):
         s["game_dir"] = str(body["game_dir"]).strip()
     if "export_dir" in body:
         s["export_dir"] = str(body["export_dir"]).strip()
+    if "source_mod_dir" in body:
+        s["source_mod_dir"] = str(body["source_mod_dir"]).strip()
+    if "mod_unit_prefix" in body:
+        s["mod_unit_prefix"] = str(body["mod_unit_prefix"]).strip()
+    if "mod_tag" in body:
+        s["mod_tag"] = str(body["mod_tag"]).strip()
+    if "mod_loc_folder" in body:
+        s["mod_loc_folder"] = str(body["mod_loc_folder"]).strip()
+    _activate_session(s)
     saved = session_mod.save_session(s)
     return jsonify(saved)
 
@@ -223,25 +344,7 @@ def sessions_export_direct(slug: str):
     if s is None:
         return jsonify({"error": "session not found"}), 404
 
-    target_mod_dir = s.get("target_mod_dir", "").strip()
-    custom_export_dir = s.get("export_dir", "").strip()
-
-    if custom_export_dir:
-        export_path = Path(custom_export_dir)
-    elif target_mod_dir:
-        export_path = Path(target_mod_dir) / "GameData"
-    else:
-        export_path = config.TOOL_ROOT / "output"
-
-    try:
-        export_path.mkdir(parents=True, exist_ok=True)
-    except Exception as e:
-        return jsonify({"error": f"Failed to create export directory {export_path}: {str(e)}"}), 500
-
-    if target_mod_dir:
-        mod_name = Path(target_mod_dir).name
-    else:
-        mod_name = "CRM_ArmyGeneral"
+    _activate_session(s)
 
     decks_map = _state["decks"]
     units = _state["units"]
@@ -252,202 +355,14 @@ def sessions_export_direct(slug: str):
     body = request.get_json(silent=True) or {}
     scope = request.args.get("scope") or body.get("scope") or "all"
 
-    scoped = None
-    if scope == "session":
-        scoped = session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys())
-
-    store = replicas_mod.load_replicas()
-    assignments = replicas_mod.replicas_to_assignments(store, scope_decks=scoped)
-
-    if not assignments:
-        return jsonify({"error": "No saved replicas in scope to export. Create a replica deck first."}), 400
-
-    decks_dir = export_path / "Generated" / "Gameplay" / "Decks"
-    base_decks_ndf  = decks_dir / "StrategicDecks.ndf"
-    base_packs_ndf  = decks_dir / "StrategicPacks.ndf"
-    base_groups_ndf = decks_dir / "StrategicCombatGroups.ndf"
-    base_csv        = export_path / "Localisation" / mod_name / "PLATOONS.csv"
-    base_units_ndf  = export_path / "Generated" / "Gameplay" / "Gfx" / "UniteDescriptor.ndf"
-    base_ammo_ndf   = export_path / "Generated" / "Gameplay" / "Gfx" / "Ammunition.ndf"
-    direct_paths = {
-        "summary": decks_dir / "StrategicDecks_patch_summary.txt",
-        "csv": base_csv
-    }
-
-    for p in direct_paths.values():
-        p.parent.mkdir(parents=True, exist_ok=True)
-    decks_dir.mkdir(parents=True, exist_ok=True)
-
-    # Older versions shipped sidecar files (StrategicPacks_additions.ndf,
-    # StrategicCombatGroups_additions.ndf, StrategicDecks_patch.ndf). The
-    # WARNO compiler only ingests the canonical base files, so the sidecars
-    # were silently ignored — leaving deck refs dangling. Clean them out.
-    for stale_name in (
-        "StrategicPacks_additions.ndf",
-        "StrategicCombatGroups_additions.ndf",
-        "StrategicDecks_patch.ndf",
-    ):
-        stale = decks_dir / stale_name
-        if stale.exists():
-            try:
-                stale.unlink()
-            except Exception:
-                pass
-
-    base_files = [base_decks_ndf, base_packs_ndf, base_groups_ndf, base_csv]
-    if base_units_ndf.exists():
-        base_files.append(base_units_ndf)
-    if base_ammo_ndf.exists():
-        base_files.append(base_ammo_ndf)
-
-    # Snapshot each base file to .orig on first export, then restore from .orig on
-    # every subsequent export so repeated runs apply on a canvas instead of
-    # accumulating duplicate definitions.
-    for base in base_files:
-        pristine = base.with_suffix(base.suffix + ".orig")
-        
-        if "PYTEST_CURRENT_TEST" not in os.environ:
-            clean_source = None
-            if base.name == "StrategicDecks.ndf":
-                clean_source = config.VANILLA_STRATEGIC_DECKS
-            elif base.name == "StrategicPacks.ndf":
-                clean_source = config.VANILLA_STRATEGIC_PACKS
-            elif base.name == "StrategicCombatGroups.ndf":
-                clean_source = config.VANILLA_COMBAT_GROUPS
-
-            pristine_bytes = None
-            if clean_source and clean_source.exists():
-                try:
-                    pristine_bytes = clean_source.read_bytes()
-                except Exception:
-                    pass
-
-            # Fall back to extracting from base.zip if clean_source isn't available
-            if pristine_bytes is None and target_mod_dir:
-                base_zip_path = Path(target_mod_dir) / "base.zip"
-                if base_zip_path.exists():
-                    try:
-                        with zipfile.ZipFile(base_zip_path, 'r') as z:
-                            zip_internal_path = f"GameData/Generated/Gameplay/Decks/{base.name}"
-                            if base.name == "PLATOONS.csv":
-                                zip_internal_path = "Localisation/CRM_ArmyGeneral/PLATOONS.csv"
-                            pristine_bytes = z.read(zip_internal_path)
-                    except Exception:
-                        pass
-
-            if pristine_bytes is not None:
-                need_recreate = False
-                if not pristine.exists():
-                    need_recreate = True
-                else:
-                    try:
-                        # If the .orig file bytes differ from the clean baseline, it is either dirty or outdated
-                        if pristine.read_bytes() != pristine_bytes:
-                            need_recreate = True
-                    except Exception:
-                        need_recreate = True
-                
-                if need_recreate:
-                    pristine.write_bytes(pristine_bytes)
-
-        if base.exists() and not pristine.exists():
-            pristine.write_bytes(base.read_bytes())
-        elif pristine.exists():
-            base.write_bytes(pristine.read_bytes())
-
-    # Full-replacement model: build the exact new lists for every replica'd deck.
-    # Pack indices count from 0 (build_export_blocks seeds an empty DeckState per deck).
-    from wif_ag_tool.pipeline import build_export_blocks
-    from wif_ag_tool.generator.deck_patcher import (
-        generate_deck_patch, replace_deck_lists, apply_combat_group_patches,
-    )
+    from wif_ag_tool.pipeline import export_direct
     try:
-        packs_blocks, groups_blocks, deck_lists = build_export_blocks(
-            assignments, decks_map, units, combat_groups)
+        res = export_direct(s, decks_map, units, combat_groups, scope=scope)
+        return jsonify(res)
     except ValueError as e:
-        # Pack-index invariant violated — would crash on pawn click. See NDF_REFERENCE.md §4.
-        return jsonify({"error": str(e)}), 500
-
-    deck_patches = []
-    for deck_name, (pack_refs, group_refs) in deck_lists.items():
-        # Replace the deck's two lists outright so the deck IS exactly the replica:
-        # only these packs, only these combat groups. Decks without a replica never
-        # appear here, so they stay untouched vanilla.
-        try:
-            replace_deck_lists(base_decks_ndf, deck_name, pack_refs, group_refs)
-        except KeyError:
-            # Deck not present in the base file (e.g. exporting against vanilla rather
-            # than the WIF source). Fall back to a summary entry only.
-            pass
-        deck_patches.append(generate_deck_patch(deck_name, pack_refs, group_refs))
-
-    from wif_ag_tool.generator.localisation import generate_platoons_rows
-    csv_text = generate_platoons_rows(assignments, units, decks=decks_map, combat_groups=combat_groups)
-
-    try:
-        # Append new pack defs to the base StrategicPacks.ndf so the compiler picks
-        # them up (sidecar _additions.ndf files are ignored by the WARNO compiler).
-        if packs_blocks:
-            with base_packs_ndf.open("a", encoding="utf-8") as f:
-                f.write("\n\n// === WIF AG additions ===\n\n")
-                f.write("\n\n".join(packs_blocks))
-                f.write("\n")
-        if groups_blocks:
-            apply_combat_group_patches(base_groups_ndf, groups_blocks)
-        direct_paths["summary"].write_text("\n\n".join(deck_patches) + "\n", encoding="utf-8")
-        # PLATOONS.csv is the mod's full localisation table (thousands of vanilla +
-        # WIF rows). generate_platoons_rows only emits our new AG tokens, so we must
-        # APPEND them (dropping its leading "TOKEN";"REFTEXT" header) instead of
-        # overwriting — otherwise every other platoon/unit name resolves to a missing
-        # token in-game. This mirrors the append-in-place treatment of
-        # StrategicPacks.ndf above; the .orig restore at the top keeps it idempotent.
-        new_rows = csv_text.split("\n", 1)[1] if "\n" in csv_text else ""
-        existing_csv = base_csv.read_text(encoding="utf-8") if base_csv.exists() else ""
-        if existing_csv.strip():
-            merged = existing_csv if existing_csv.endswith("\n") else existing_csv + "\n"
-            if new_rows.strip():
-                merged += new_rows if new_rows.endswith("\n") else new_rows + "\n"
-            base_csv.write_text(merged, encoding="utf-8")
-        else:
-            base_csv.write_text(csv_text, encoding="utf-8")
-
-        # Apply stats overrides to UniteDescriptor.ndf and Ammunition.ndf
-        tactical_overrides = load_tactical_overrides()
-        unit_overrides = {}
-        
-        # Populate with tactical unit overrides first
-        for uid, fields in tactical_overrides.get("units", {}).items():
-            unit_overrides[uid] = dict(fields)
-            
-        # Merge strategic attack/defense overrides from assignments
-        for a in assignments:
-            if a.attack_override is not None or a.defense_override is not None:
-                if a.unit_id not in unit_overrides:
-                    unit_overrides[a.unit_id] = {}
-                # Ensure they are dict overrides
-                if isinstance(unit_overrides[a.unit_id], dict):
-                    if a.attack_override is not None:
-                        unit_overrides[a.unit_id]["attack_override"] = a.attack_override
-                    if a.defense_override is not None:
-                        unit_overrides[a.unit_id]["defense_override"] = a.defense_override
-                        
-        if base_units_ndf.exists() and unit_overrides:
-            from wif_ag_tool.generator.unit_patcher import patch_unit_stats
-            patch_unit_stats(base_units_ndf, unit_overrides)
-            
-        # Apply ammunition overrides to Ammunition.ndf
-        ammo_overrides = tactical_overrides.get("ammo", {})
-        if base_ammo_ndf.exists() and ammo_overrides:
-            from wif_ag_tool.generator.ammo_patcher import patch_ammo_stats
-            patch_ammo_stats(base_ammo_ndf, ammo_overrides)
+        return jsonify({"error": str(e)}), 400
     except Exception as e:
         return jsonify({"error": f"Failed to write export files: {str(e)}"}), 500
-
-    return jsonify({
-        "ok": True,
-        "message": f"Successfully exported files directly to {export_path.resolve()}",
-        "paths": {k: str(v.resolve()) for k, v in direct_paths.items()}
-    })
 
 
 @api_bp.post("/sessions/<slug>/build")
@@ -455,6 +370,7 @@ def sessions_build(slug: str):
     s = session_mod.load_session(slug)
     if s is None:
         return jsonify({"error": "session not found"}), 404
+    _activate_session(s)
 
     target_mod_dir = s.get("target_mod_dir", "").strip()
     if not target_mod_dir:
@@ -522,6 +438,7 @@ def sessions_decks(slug: str):
     s = session_mod.load_session(slug)
     if s is None:
         return jsonify({"error": "session not found"}), 404
+    _activate_session(s)
     decks_map: dict[str, DeckState] = _state["decks"]
     nations_str = request.args.get("nations")
     if nations_str is not None:
@@ -549,6 +466,7 @@ def sessions_decks(slug: str):
             "next_index": decks_map[name].next_index,
             "has_replica": bool(store.get(name, {}).get("saved")),
             "replica_unit_count": _count_replica_units(store.get(name, {})),
+            "updated_at": store.get(name, {}).get("updated_at"),
             **_deck_label(name),
         }
         for name in scoped
@@ -560,6 +478,7 @@ def sessions_extract(slug: str):
     s = session_mod.load_session(slug)
     if s is None:
         return jsonify({"error": "session not found"}), 404
+    _activate_session(s)
     decks_map: dict[str, DeckState] = _state["decks"]
     scoped = set(session_mod.scope_decks(s.get("nation_scope") or [], decks_map.keys()))
     store = replicas_mod.load_replicas()
@@ -820,13 +739,7 @@ def unit_icon(unit_id: str):
     return resp
 
 
-def load_tactical_overrides() -> dict:
-    if config.STATS_OVERRIDES_FILE.exists():
-        try:
-            return json.loads(config.STATS_OVERRIDES_FILE.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return {"units": {}, "ammo": {}}
+# load_tactical_overrides is imported from wif_ag_tool.pipeline
 
 
 def save_tactical_overrides(overrides: dict) -> None:
@@ -845,7 +758,7 @@ def get_unit_tactical_stats(unit_id: str):
     
     response = {
         "unit_id": unit_id,
-        "display_name": unit.display_name or unit.name.removeprefix("WF_").replace("_", " "),
+        "display_name": unit.display_name or unit.name.removeprefix(config.MOD_UNIT_PREFIX).replace("_", " "),
         "health": {
             "base": unit.health,
             "override": unit_overrides.get("health")
@@ -857,6 +770,62 @@ def get_unit_tactical_stats(unit_id: str):
         "supply_capacity": {
             "base": unit.supply_capacity,
             "override": unit_overrides.get("supply_capacity")
+        },
+        "cost": {
+            "base": unit.cost,
+            "override": unit_overrides.get("cost")
+        },
+        "armor_front": {
+            "base": unit.armor_front,
+            "override": unit_overrides.get("armor_front")
+        },
+        "armor_sides": {
+            "base": unit.armor_sides,
+            "override": unit_overrides.get("armor_sides")
+        },
+        "armor_rear": {
+            "base": unit.armor_rear,
+            "override": unit_overrides.get("armor_rear")
+        },
+        "armor_top": {
+            "base": unit.armor_top,
+            "override": unit_overrides.get("armor_top")
+        },
+        "speed": {
+            "base": unit.speed,
+            "override": unit_overrides.get("speed")
+        },
+        "road_speed": {
+            "base": unit.road_speed,
+            "override": unit_overrides.get("road_speed")
+        },
+        "fuel_capacity": {
+            "base": unit.fuel_capacity,
+            "override": unit_overrides.get("fuel_capacity")
+        },
+        "fuel_move_duration": {
+            "base": unit.fuel_move_duration,
+            "override": unit_overrides.get("fuel_move_duration")
+        },
+        "optics": {
+            "base": unit.optics,
+            "override": unit_overrides.get("optics")
+        },
+        "stealth": {
+            "base": unit.stealth,
+            "override": unit_overrides.get("stealth")
+        },
+        "fwd_deploy": {
+            "base": unit.fwd_deploy,
+            "override": unit_overrides.get("fwd_deploy")
+        },
+        "amphibious": {
+            "base": unit.amphibious,
+            "override": unit_overrides.get("amphibious")
+        },
+        "specialties": {
+            "base": unit.specialties or [],
+            "override": unit_overrides.get("specialties")
         },
         "weapons": []
     }
@@ -874,6 +843,7 @@ def get_unit_tactical_stats(unit_id: str):
             ammo_override = overrides.get("ammo", {}).get(ammo_ref, {})
             response["weapons"].append({
                 "ammo_id": ammo_ref,
+                "display_name": _state["units_csv"].get(ammo_base.get("name_token"), ammo_ref),
                 "damage_family": {
                     "base": ammo_base.get("damage_family"),
                     "override": ammo_override.get("damage_family")
@@ -889,6 +859,22 @@ def get_unit_tactical_stats(unit_id: str):
                 "min_range": {
                     "base": ammo_base.get("min_range"),
                     "override": ammo_override.get("min_range")
+                },
+                "max_range_heli": {
+                    "base": ammo_base.get("max_range_heli", 0),
+                    "override": ammo_override.get("max_range_heli")
+                },
+                "min_range_heli": {
+                    "base": ammo_base.get("min_range_heli", 0),
+                    "override": ammo_override.get("min_range_heli")
+                },
+                "max_range_plane": {
+                    "base": ammo_base.get("max_range_plane", 0),
+                    "override": ammo_override.get("max_range_plane")
+                },
+                "min_range_plane": {
+                    "base": ammo_base.get("min_range_plane", 0),
+                    "override": ammo_override.get("min_range_plane")
                 },
                 "time_between_shots": {
                     "base": ammo_base.get("time_between_shots"),
@@ -913,6 +899,22 @@ def get_unit_tactical_stats(unit_id: str):
                 "supply_cost": {
                     "base": ammo_base.get("supply_cost"),
                     "override": ammo_override.get("supply_cost")
+                },
+                "aiming_time": {
+                    "base": ammo_base.get("aiming_time", 0.0),
+                    "override": ammo_override.get("aiming_time")
+                },
+                "accuracy_static": {
+                    "base": ammo_base.get("accuracy_static", 0.0),
+                    "override": ammo_override.get("accuracy_static")
+                },
+                "accuracy_motion": {
+                    "base": ammo_base.get("accuracy_motion", 0.0),
+                    "override": ammo_override.get("accuracy_motion")
+                },
+                "traits": {
+                    "base": ammo_base.get("traits", []),
+                    "override": ammo_override.get("traits")
                 }
             })
             
@@ -931,26 +933,58 @@ def put_unit_tactical_stats(unit_id: str):
     # 1. Update unit stats
     unit_overrides = {}
     
-    health = body.get("health")
-    if health is not None:
-        try:
-            unit_overrides["health"] = int(health)
-        except (ValueError, TypeError):
-            pass
-            
-    max_supp = body.get("max_suppression")
-    if max_supp is not None:
-        try:
-            unit_overrides["max_suppression"] = int(max_supp)
-        except (ValueError, TypeError):
-            pass
-            
-    supply = body.get("supply_capacity")
-    if supply is not None:
-        try:
-            unit_overrides["supply_capacity"] = int(supply)
-        except (ValueError, TypeError):
-            pass
+    # Int fields
+    for field_name in ("health", "max_suppression", "supply_capacity", "cost", "armor_front", "armor_sides", "armor_rear", "armor_top", "speed", "road_speed", "fuel_capacity"):
+        val = body.get(field_name)
+        if val is not None:
+            try:
+                unit_overrides[field_name] = int(val)
+            except (ValueError, TypeError):
+                pass
+                
+    # Float fields
+    for float_field in ("fuel_move_duration", "optics", "stealth", "fwd_deploy"):
+        val = body.get(float_field)
+        if val is not None:
+            try:
+                unit_overrides[float_field] = float(val)
+            except (ValueError, TypeError):
+                pass
+
+    # Boolean fields
+    amp = body.get("amphibious")
+    if amp is not None:
+        unit_overrides["amphibious"] = bool(amp)
+
+    # List of strings fields
+    specs = body.get("specialties")
+    if specs is not None:
+        if isinstance(specs, list):
+            unit_overrides["specialties"] = [str(s) for s in specs]
+
+    # Sync specialties and amphibious/fwd_deploy if any of them are modified
+    if "amphibious" in unit_overrides or "specialties" in unit_overrides:
+        target_amp = unit_overrides.get("amphibious", unit_overrides.get("amphibious", unit.amphibious))
+        target_specs = list(unit_overrides.get("specialties", unit.specialties or []))
+        if target_amp:
+            if "_amphibie" not in target_specs:
+                target_specs.append("_amphibie")
+        else:
+            if "_amphibie" in target_specs:
+                target_specs.remove("_amphibie")
+        unit_overrides["specialties"] = target_specs
+        unit_overrides["amphibious"] = target_amp
+
+    if "fwd_deploy" in unit_overrides or "specialties" in unit_overrides:
+        target_fwd = unit_overrides.get("fwd_deploy", unit_overrides.get("fwd_deploy", unit.fwd_deploy))
+        target_specs = list(unit_overrides.get("specialties", unit_overrides.get("specialties", unit.specialties or [])))
+        if target_fwd > 0:
+            if "_para" not in target_specs:
+                target_specs.append("_para")
+        else:
+            if "_para" in target_specs:
+                target_specs.remove("_para")
+        unit_overrides["specialties"] = target_specs
 
     # Clean up empty or null values
     unit_overrides = {k: v for k, v in unit_overrides.items() if v is not None}
@@ -980,19 +1014,26 @@ def put_unit_tactical_stats(unit_id: str):
         if "damage_family" in fields and fields["damage_family"] is not None:
             ammo_ov["damage_family"] = str(fields["damage_family"])
             
-        for float_field in ("time_between_shots", "time_between_salvos", "supply_cost", "physical_damages", "suppress_damages"):
+        for float_field in ("time_between_shots", "time_between_salvos", "supply_cost", "physical_damages", "suppress_damages", "aiming_time"):
             if float_field in fields and fields[float_field] is not None:
                 try:
                     ammo_ov[float_field] = float(fields[float_field])
                 except (ValueError, TypeError):
                     pass
                     
-        for int_field in ("damage_index", "max_range", "min_range", "shots_per_salvo"):
+        for int_field in ("damage_index", "max_range", "min_range", "shots_per_salvo", "max_range_heli", "min_range_heli", "max_range_plane", "min_range_plane", "accuracy_static", "accuracy_motion"):
             if int_field in fields and fields[int_field] is not None:
                 try:
                     ammo_ov[int_field] = int(fields[int_field])
                 except (ValueError, TypeError):
                     pass
+
+        if "traits" in fields:
+            traits_val = fields["traits"]
+            if traits_val is None:
+                ammo_ov["traits"] = None
+            elif isinstance(traits_val, list):
+                ammo_ov["traits"] = [str(t) for t in traits_val]
 
         # Clean null values
         ammo_ov = {k: v for k, v in ammo_ov.items() if v is not None}
@@ -1009,9 +1050,39 @@ def put_unit_tactical_stats(unit_id: str):
 @api_bp.get("/tactical_stats/summary")
 def get_tactical_stats_summary():
     overrides = load_tactical_overrides()
+    unit_ids = list(overrides.get("units", {}).keys())
+    ammo_ids = list(overrides.get("ammo", {}).keys())
+    
+    # Map overridden ammo back to units
+    units_with_ammo_overrides = set()
+    if ammo_ids:
+        overridden_weapon_descs = set()
+        for wd, ammos in _state["wif_weapons"].items():
+            if any(a in ammo_ids for a in ammos):
+                overridden_weapon_descs.add(wd)
+                overridden_weapon_descs.add(wd.removeprefix("WeaponDescriptor_"))
+                
+        for wd, ammos in _state["vanilla_weapons"].items():
+            if any(a in ammo_ids for a in ammos):
+                overridden_weapon_descs.add(wd)
+                overridden_weapon_descs.add(wd.removeprefix("WeaponDescriptor_"))
+                
+        for uid, u in _state["units"].items():
+            wref = u.weapon_descriptor_ref
+            if wref and (wref in overridden_weapon_descs or f"WeaponDescriptor_{wref}" in overridden_weapon_descs):
+                units_with_ammo_overrides.add(uid)
+                
+        for uid, u in _state["vanilla_units"].items():
+            wref = u.weapon_descriptor_ref
+            if wref and (wref in overridden_weapon_descs or f"WeaponDescriptor_{wref}" in overridden_weapon_descs):
+                units_with_ammo_overrides.add(uid)
+                
     return jsonify({
-        "unit_overrides_count": len(overrides.get("units", {})),
-        "ammo_overrides_count": len(overrides.get("ammo", {})),
+        "unit_overrides_count": len(unit_ids),
+        "ammo_overrides_count": len(ammo_ids),
+        "units": unit_ids,
+        "ammo": ammo_ids,
+        "units_with_ammo_overrides": list(units_with_ammo_overrides)
     })
 
 
@@ -1105,150 +1176,7 @@ def _unit_short(unit_ref: str | None) -> str | None:
     return unit_ref.rsplit("Descriptor_Unit_", 1)[-1]
 
 
-def _get_localized_fallback_name(primary: str, is_hq: bool, count: int, cg_name: str, deck_name: str) -> str:
-    """Generate localized platoon names when translation is missing from PLATOONS.csv."""
-    deck_lower = deck_name.lower()
-    cg_lower = cg_name.lower()
-
-    is_german = any(x in deck_lower for x in ["_rfa_", "_rda_", "_ddr_", "_ger_"])
-    is_french = "_fr_" in deck_lower
-    is_russian = any(x in deck_lower for x in ["_sov_", "_rus_"])
-
-    is_artillery = any(x in cg_lower for x in ["art", "artillerie", "bty", "bataillon_artillerie"])
-
-    if is_german:
-        if is_hq:
-            return "STAB"
-        else:
-            if is_artillery:
-                return f"{count}. BATTERIE"
-            elif primary == "RECON":
-                return f"{count}. AUFKLÄRUNGSZUG"
-            elif primary == "TANK":
-                return f"{count}. PANZERZUG"
-            elif primary == "ENGINEER":
-                return f"{count}. PIONIERZUG"
-            elif primary == "AA":
-                return f"{count}. FLUGABWEHRZUG"
-            elif primary == "LOGISTICS":
-                return "NACHSCHUBGRUPPE" if count == 1 else f"NACHSCHUBGRUPPE {count}"
-            elif primary == "RIFLE":
-                return f"{count}. INFANTERIEZUG"
-            elif primary == "SUPPORT":
-                return "UNTERSTÜTZUNGSGRUPPE" if count == 1 else f"UNTERSTÜTZUNGSGRUPPE {count}"
-            elif primary == "HELI":
-                return f"{count}. HUBSCHRAUBERZUG"
-            else:
-                return f"{count}. ZUG"
-
-    elif is_french:
-        def _fr_ord(n: int) -> str:
-            return "1ère" if n == 1 else f"{n}e"
-
-        if is_hq:
-            return "PELOTON DE COMMANDEMENT" if is_artillery else "QG"
-        else:
-            if is_artillery:
-                return f"{_fr_ord(count)} BATTERIE"
-            elif primary == "RECON":
-                return f"{_fr_ord(count)} PELOTON RECON"
-            elif primary == "TANK":
-                return f"{_fr_ord(count)} PELOTON DE CHARS"
-            elif primary == "ENGINEER":
-                return f"{_fr_ord(count)} SECTION DU GENIE"
-            elif primary == "AA":
-                return f"{_fr_ord(count)} SECTION SOL-AIR"
-            elif primary == "LOGISTICS":
-                return "GROUPE LOGISTIQUE" if count == 1 else f"GROUPE LOGISTIQUE {count}"
-            elif primary == "RIFLE":
-                return f"{_fr_ord(count)} SECTION D'INFANTERIE"
-            elif primary == "SUPPORT":
-                return "GROUPE D'APPUI" if count == 1 else f"GROUPE D'APPUI {count}"
-            elif primary == "HELI":
-                return f"{_fr_ord(count)} ESCADRILLE D'HELICOPTERES"
-            else:
-                return f"{_fr_ord(count)} SECTION"
-
-    elif is_russian:
-        if is_hq:
-            return "SHTAB"
-        else:
-            if is_artillery:
-                return f"{count}-YA BATAREYA"
-            elif primary == "RECON":
-                return f"{count}-Y VZVOD RAZVEDKI"
-            elif primary == "TANK":
-                return f"{count}-Y TANKOVYY VZVOD"
-            elif primary == "ENGINEER":
-                return f"{count}-Y SAPERNYY VZVOD"
-            elif primary == "AA":
-                return f"{count}-Y ZENITNYY VZVOD"
-            elif primary == "LOGISTICS":
-                return "VZVOD OBESPECHENIYA" if count == 1 else f"VZVOD OBESPECHENIYA {count}"
-            elif primary == "RIFLE":
-                return f"{count}-Y MOTOSTRELKOVYY VZVOD"
-            elif primary == "SUPPORT":
-                return "GRUPPA PODDERZHKI" if count == 1 else f"GRUPPA PODDERZHKI {count}"
-            elif primary == "HELI":
-                return f"{count}-Y VZVOD VERTOLETOV"
-            else:
-                return f"{count}-Y VZVOD"
-
-    else:
-        # Default English
-        def _ordinal(n: int) -> str:
-            if 11 <= (n % 100) <= 13:
-                return f"{n}TH"
-            return f"{n}" + {1: 'ST', 2: 'ND', 3: 'RD'}.get(n % 10, 'TH')
-
-        is_cavalry = any(x in cg_lower or x in deck_lower for x in ["acr", "cav", "cavalry"])
-
-        if is_hq:
-            if is_cavalry:
-                return "TROOP HQ"
-            elif is_artillery:
-                return "BATTERY HQ"
-            else:
-                return "COMPANY HQ"
-        else:
-            if is_cavalry:
-                if primary == "ENGINEER":
-                    return f"{count}/58ENG"
-                elif primary == "AA":
-                    return "AIR DEFENSE PLATO"
-                elif primary == "LOGISTICS":
-                    return "LOGISTICS GROUP" if count == 1 else f"LOGISTICS GROUP {count}"
-                elif primary == "RECON":
-                    return "RECON GROUP" if count == 1 else f"RECON GROUP {count}"
-                elif primary == "SUPPORT":
-                    return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
-                elif primary == "TANK":
-                    return f"{_ordinal(count)} TANK PLATOON"
-                elif primary == "RIFLE":
-                    return f"{_ordinal(count)} RIFLE PLATOON"
-                elif primary == "HELI":
-                    return f"{_ordinal(count)} HELI PLATOON"
-                else:
-                    return f"{_ordinal(count)} PLATOON"
-            else:
-                if primary == "RECON":
-                    return f"{_ordinal(count)} RECON PLATOON"
-                elif primary == "TANK":
-                    return f"{_ordinal(count)} TANK PLATOON"
-                elif primary == "ENGINEER":
-                    return f"{_ordinal(count)} ENGINEER PLATOON"
-                elif primary == "AA":
-                    return f"{_ordinal(count)} AIR DEFENSE PLATOON"
-                elif primary == "LOGISTICS":
-                    return f"{_ordinal(count)} SUPPLY PLATOON"
-                elif primary == "RIFLE":
-                    return f"{_ordinal(count)} RIFLE PLATOON"
-                elif primary == "SUPPORT":
-                    return "SUPPORT GROUP" if count == 1 else f"SUPPORT GROUP {count}"
-                elif primary == "HELI":
-                    return f"{_ordinal(count)} HELI PLATOON"
-                else:
-                    return f"{_ordinal(count)} PLATOON"
+# _get_localized_fallback_name is imported from wif_ag_tool.generator.localisation
 
 
 # Legacy /api/assign, /api/decks, /api/deck/<name> endpoints are gone.

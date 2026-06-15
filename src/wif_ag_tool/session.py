@@ -137,6 +137,10 @@ def create_session(
         "target_mod_dir": "",
         "game_dir": "",
         "export_dir": "",
+        "source_mod_dir": "",
+        "mod_unit_prefix": "WF_",
+        "mod_tag": "WIF",
+        "mod_loc_folder": "A World in Flames",
         "created_at": _now(),
         "updated_at": _now(),
     }

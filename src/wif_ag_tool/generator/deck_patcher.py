@@ -8,6 +8,8 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from wif_ag_tool.parser.block_utils import find_block_span, find_matching_bracket
+
 
 def generate_deck_patch(
     deck_name: str,
@@ -59,25 +61,7 @@ def replace_deck_lists(
 def _find_block_span_chars(text: str, deck_name: str) -> tuple[int, int] | None:
     """Char offsets [start, end) of the ``export <deck_name> is TDeckDescriptor(...)`` block."""
     header = f"export {deck_name} is TDeckDescriptor"
-    start = text.find(header)
-    if start < 0:
-        return None
-    # Walk parens from the first '(' after the header to find the block end.
-    open_paren = text.find("(", start)
-    if open_paren < 0:
-        return None
-    depth = 0
-    i = open_paren
-    while i < len(text):
-        ch = text[i]
-        if ch == "(":
-            depth += 1
-        elif ch == ")":
-            depth -= 1
-            if depth == 0:
-                return start, i + 1
-        i += 1
-    return start, len(text)
+    return find_block_span(text, header)
 
 
 def _replace_list_in_block(block: str, list_name: str, refs: list[str]) -> str:
@@ -88,16 +72,8 @@ def _replace_list_in_block(block: str, list_name: str, refs: list[str]) -> str:
     open_br = block.find("[", m.end())
     if open_br < 0:
         raise ValueError(f"no opening [ for {list_name}")
-    depth = 0
-    close_br = None
-    for i in range(open_br, len(block)):
-        if block[i] == "[":
-            depth += 1
-        elif block[i] == "]":
-            depth -= 1
-            if depth == 0:
-                close_br = i
-                break
+    
+    close_br = find_matching_bracket(block, open_br, "[", "]")
     if close_br is None:
         raise ValueError(f"unterminated list {list_name}")
 
@@ -110,18 +86,16 @@ def _replace_list_in_block(block: str, list_name: str, refs: list[str]) -> str:
 
 def _find_block_end(lines: list[str], start: int) -> int:
     """Return the line index just after the closing `)` of the descriptor block."""
-    depth = 0
-    seen_open = False
-    for i in range(start, len(lines)):
-        for ch in lines[i]:
-            if ch == "(":
-                depth += 1
-                seen_open = True
-            elif ch == ")":
-                depth -= 1
-                if seen_open and depth == 0:
-                    return i + 1
-    return len(lines)
+    text = "\n".join(lines[start:])
+    open_idx = text.find("(")
+    if open_idx < 0:
+        return len(lines)
+    close_idx = find_matching_bracket(text, open_idx, "(", ")")
+    if close_idx is None:
+        return len(lines)
+    # Count the number of newlines up to the closing paren
+    newlines = text[:close_idx].count("\n")
+    return start + newlines + 1
 
 
 def apply_combat_group_patches(
