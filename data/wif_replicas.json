@@ -8815,15 +8815,412 @@
         "name": "1",
         "platoons": [
           {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
             "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Sprut_CMD_RUS",
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "1_MSB",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_HMGteam_AGS30_RUS",
                 "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_HMGteam_NSV_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_CMD_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_MetisM1_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tunguska_2K22M1_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MTLB_Strela10_DNR",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Kamaz66_Supply_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BMP_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BMP_2M_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_2_reco_SOV",
+                "unit_id": "WF_HvyScout_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "GRUPPA PODDERZHKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "2S3M1_Akatsiya_SOV",
+                "xp": 2
               }
             ]
           }
@@ -8831,23 +9228,420 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:16:06.216250+00:00"
+    "updated_at": "2026-06-23T14:41:58.670877+00:00"
   },
   "Descriptor_Deck_pion_SOV_39GMRD_15GTk_2": {
     "groups": [
       {
-        "name": "1",
+        "name": "1_MSB",
         "platoons": [
           {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_HMGteam_AGS30_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_HMGteam_NSV_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_CMD_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_MetisM1_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
             "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Sprut_CMD_RUS",
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "5",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "6",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tunguska_2K22M1_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MTLB_Strela10_DNR",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Kamaz66_Supply_RUS",
                 "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BMP_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BMP_2M_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_2_reco_SOV",
+                "unit_id": "WF_HvyScout_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "GRUPPA PODDERZHKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "2S3M1_Akatsiya_SOV",
+                "xp": 2
               }
             ]
           }
@@ -8855,23 +9649,420 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:16:10.407547+00:00"
+    "updated_at": "2026-06-23T14:43:30.807904+00:00"
   },
   "Descriptor_Deck_pion_SOV_39GMRD_15GTk_3": {
     "groups": [
       {
-        "name": "1",
+        "name": "1_MSB",
         "platoons": [
           {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BMP_3_APP_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_HMGteam_AGS30_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_HMGteam_NSV_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_CMD_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_1P_Konkurs_SOV",
+                "unit_id": "WF_MotRifles_MetisM1_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "7",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
             "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Sprut_CMD_RUS",
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "8",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "9",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T72B3M_CMD_RUS",
+                "xp": 2
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Tunguska_2K22M1_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_MTLB_Strela10_DNR",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Kamaz66_Supply_RUS",
                 "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BMP_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BMP_2M_RUS",
+                "unit_id": "WF_MotRifles_BMP_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "BMP_2_reco_SOV",
+                "unit_id": "WF_HvyScout_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "GRUPPA PODDERZHKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "2S3M1_Akatsiya_SOV",
+                "xp": 2
               }
             ]
           }
@@ -8879,7 +10070,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:16:10.384009+00:00"
+    "updated_at": "2026-06-23T14:43:42.436493+00:00"
   },
   "Descriptor_Deck_pion_SOV_39GMRD_172GMSP_1": {
     "groups": [
@@ -10598,14 +11789,292 @@
         "name": "1",
         "platoons": [
           {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_BMP_1P_reco_Res_RUS",
+                "unit_id": "WF_HvyScout_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
             "name": "2-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_Reco_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "unit_id": "BMP_1_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_BMP_1P_reco_Res_RUS",
+                "unit_id": "WF_HvyScout_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_Reco_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BMP_1_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 4,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRDM_2M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BTR_82AT_RUS",
+                "unit_id": "WF_Scout_LRRP_RUS",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "2-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BTR_82AT_RUS",
+                "unit_id": "WF_Scout_LRRP_RUS",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "3-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BTR_82AT_RUS",
+                "unit_id": "WF_Scout_LRRP_RUS",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "4-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "WF_BTR_82AT_RUS",
+                "unit_id": "WF_Scout_LRRP_RUS",
+                "xp": 3
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Kamaz66_Supply_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BRDM_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BRM_1M_RUS",
                 "xp": 1
               }
             ]
@@ -10614,7 +12083,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T20:14:29.500703+00:00"
+    "updated_at": "2026-06-23T13:54:54.625184+00:00"
   },
   "Descriptor_Deck_pion_SOV_57GMRD_128Art_1": {
     "groups": [
@@ -17114,14 +18583,328 @@
         "name": "1",
         "platoons": [
           {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
             "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_T62M_CMD_DNR",
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_ARENA_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "4",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "5",
+        "platoons": [
+          {
+            "name": "1-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90S_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "2-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_RUS",
+                "xp": 2
+              }
+            ]
+          },
+          {
+            "name": "3-Y TANKOVYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90M_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T90A_CMD_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "VZVOD OBESPECHENIYA",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Kamaz66_Supply_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_BMP_3_CMD_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_T80BV_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 2,
+                "defense_override": null,
+                "transport_id": "BMP_2AG_SOV",
+                "unit_id": "WF_MotRifles_BMP_RUS",
                 "xp": 1
               }
             ]
@@ -17130,7 +18913,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:53:58.088209+00:00"
+    "updated_at": "2026-06-23T14:04:28.586984+00:00"
   },
   "Descriptor_Deck_pion_SOV_57GMRD_51GTk_1": {
     "groups": [
@@ -19636,15 +21419,267 @@
         "name": "1",
         "platoons": [
           {
-            "name": "1-Y VZVOD RAZVEDKI",
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "unit_id": "UAZ_469_CMD_SOV",
                 "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BRDM_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_ATteam_KonkursM_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_Radar_RUS",
+                "xp": 2
               }
             ]
           }
@@ -19652,7 +21687,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:48:40.108388+00:00"
+    "updated_at": "2026-06-23T14:57:01.689204+00:00"
   },
   "Descriptor_Deck_pion_SOV_8GA_520SAM": {
     "groups": [
@@ -19660,15 +21695,267 @@
         "name": "1",
         "platoons": [
           {
-            "name": "1-Y VZVOD RAZVEDKI",
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_T62M_CMD_DNR",
+                "unit_id": "UAZ_469_CMD_SOV",
                 "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BRDM_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_ATteam_KonkursM_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_Radar_RUS",
+                "xp": 2
               }
             ]
           }
@@ -19676,7 +21963,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:44:29.880375+00:00"
+    "updated_at": "2026-06-23T14:57:01.644742+00:00"
   },
   "Descriptor_Deck_pion_SOV_8GA_526SAM": {
     "groups": [
@@ -19684,15 +21971,267 @@
         "name": "1",
         "platoons": [
           {
-            "name": "1-Y VZVOD RAZVEDKI",
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_BMP_3_CMD_RUS",
+                "unit_id": "UAZ_469_CMD_SOV",
                 "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BRDM_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_ATteam_KonkursM_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_Radar_RUS",
+                "xp": 2
               }
             ]
           }
@@ -19700,7 +22239,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:48:24.999837+00:00"
+    "updated_at": "2026-06-23T14:53:30.783555+00:00"
   },
   "Descriptor_Deck_pion_SOV_8GA_923SAM": {
     "groups": [
@@ -19708,15 +22247,267 @@
         "name": "1",
         "platoons": [
           {
-            "name": "1-Y VZVOD RAZVEDKI",
+            "name": "SHTAB",
             "units": [
               {
                 "attack_override": null,
                 "count": 1,
                 "defense_override": null,
                 "transport_id": null,
-                "unit_id": "WF_Rifle_ODON_CMD_RUS",
+                "unit_id": "UAZ_469_CMD_SOV",
                 "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "2",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "UAZ_469_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MotRifles_HMG_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y VZVOD RAZVEDKI",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_Scout_RUS",
+                "xp": 1
+              }
+            ]
+          },
+          {
+            "name": "1-Y ZENITNYY VZVOD",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_S350_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_Buk_M3_RUS",
+                "xp": 2
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_BAZ_64022_RUS",
+                "unit_id": "WF_DCA_S400_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 6,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Rota",
+        "platoons": [
+          {
+            "name": "SHTAB",
+            "units": [
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "BRDM_2_CMD_SOV",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_ATteam_KonkursM_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 1,
+                "defense_override": null,
+                "transport_id": "WF_Tigr_RUS",
+                "unit_id": "WF_MANPAD_Igla_S_RUS",
+                "xp": 1
+              },
+              {
+                "attack_override": null,
+                "count": 3,
+                "defense_override": null,
+                "transport_id": null,
+                "unit_id": "WF_DCA_Radar_RUS",
+                "xp": 2
               }
             ]
           }
@@ -19724,7 +22515,7 @@
       }
     ],
     "saved": true,
-    "updated_at": "2026-05-30T19:12:48.271369+00:00"
+    "updated_at": "2026-06-23T14:57:01.596850+00:00"
   },
   "Descriptor_Deck_pion_SOV_931ORAP": {
     "groups": [
