@@ -61,6 +61,8 @@ class WifUnit:
     stealth: float = 1.0
     fwd_deploy: float = 0.0
     amphibious: bool = False
+    is_plane: bool = False
+    is_helo: bool = False
 
     @property
     def descriptor_name(self) -> str:

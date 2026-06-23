@@ -28,13 +28,17 @@ CANONICAL_BUCKETS = (
 )
 
 
-def normalize_role(raw: str | None) -> str:
+def normalize_role(raw: str | None, is_plane: bool = False, is_helo: bool = False) -> str:
     """Return the *primary* canonical bucket for a raw `UnitRole` value.
 
     A unit may belong to multiple buckets (e.g. ``hq_tank`` is both ``armor``
     and ``command``). This returns the bucket that best describes the unit's
     combat role; use :func:`bucket_matches` to test multi-bucket membership.
     """
+    if is_plane:
+        return "plane"
+    if is_helo:
+        return "helicopter"
     if not raw:
         return "unknown"
     r = raw.strip().lower()
@@ -70,7 +74,7 @@ def normalize_role(raw: str | None) -> str:
     return "unknown"
 
 
-def bucket_matches(raw: str | None, target: str) -> bool:
+def bucket_matches(raw: str | None, target: str, is_plane: bool = False, is_helo: bool = False) -> bool:
     """True if `raw` belongs to the `target` bucket.
 
     ``target`` is one of :data:`CANONICAL_BUCKETS` or ``"all"`` / empty string.
@@ -80,17 +84,15 @@ def bucket_matches(raw: str | None, target: str) -> bool:
     """
     if not target or target == "all":
         return True
-    if not raw:
-        return False
-    r = raw.strip().lower()
-    if not r:
-        return False
     if target == "command":
+        if not raw:
+            return False
+        r = raw.strip().lower()
         # Any HQ-prefixed role is command. Vanilla/WIF use hq_inf, hq_tank,
         # hq_helo, hq_veh — and just in case Eugen adds a new variant, we
         # match the prefix rather than enumerating.
         return r.startswith("hq_") or r == "hq"
-    return normalize_role(r) == target
+    return normalize_role(raw, is_plane=is_plane, is_helo=is_helo) == target
 
 
 __all__ = ["CANONICAL_BUCKETS", "normalize_role", "bucket_matches"]

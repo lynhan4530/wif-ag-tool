@@ -90,3 +90,19 @@ def test_bucket_matches_empty_or_none_raw():
     # But "all" still accepts empty raw — listing should not drop unitss
     # whose role didn't parse.
     assert bucket_matches(None, "all") is True
+
+
+def test_role_override_for_plane_and_helo():
+    # Even if raw role is AA, AT, appui, or reco, if is_plane or is_helo is set, it overrides to plane/helicopter.
+    assert normalize_role("AA", is_plane=True) == "plane"
+    assert normalize_role("AT", is_plane=True) == "plane"
+    assert normalize_role("appui", is_plane=True) == "plane"
+    assert normalize_role("reco", is_plane=True) == "plane"
+
+    assert normalize_role("AA", is_helo=True) == "helicopter"
+    assert normalize_role("AT", is_helo=True) == "helicopter"
+    assert normalize_role("appui", is_helo=True) == "helicopter"
+    assert normalize_role("reco", is_helo=True) == "helicopter"
+
+    assert bucket_matches("AA", "plane", is_plane=True) is True
+    assert bucket_matches("AT", "helicopter", is_helo=True) is True

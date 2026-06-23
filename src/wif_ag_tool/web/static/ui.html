@@ -2146,6 +2146,8 @@ const unitResolved = id => !!(state.unitsIndex[id] && state.unitsIndex[id].displ
 // so the badge/icon a row paints matches the bucket the filter dropdown selects.
 const getNormalizedRole = u => {
   if (!u) return "unknown";
+  if (u.is_plane) return "plane";
+  if (u.is_helo) return "helicopter";
   const r = (u.role || "").toLowerCase().trim();
   if (!r) return "unknown";
   if (r.includes("helo") || r.includes("heli")) return "helicopter";

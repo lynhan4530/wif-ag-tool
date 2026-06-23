@@ -565,7 +565,7 @@ def decks_vanilla(deck_name: str):
                     if unit_short:
                         unit_obj = _lookup_unit(unit_short)
                         if unit_obj:
-                            r = normalize_role(unit_obj.role)
+                            r = normalize_role(unit_obj.role, is_plane=unit_obj.is_plane, is_helo=unit_obj.is_helo)
                             roles.append(r)
                             if r == "unknown":
                                 u_lower = unit_short.lower()
@@ -693,7 +693,7 @@ def wif_units():
     for u in units.values():
         if nation and u.nation != nation:
             continue
-        if role and role != "all" and not bucket_matches(u.role, role):
+        if role and role != "all" and not bucket_matches(u.role, role, is_plane=u.is_plane, is_helo=u.is_helo):
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue
@@ -715,7 +715,7 @@ def vanilla_units():
     for u in units.values():
         if nation and u.nation != nation:
             continue
-        if role and role != "all" and not bucket_matches(u.role, role):
+        if role and role != "all" and not bucket_matches(u.role, role, is_plane=u.is_plane, is_helo=u.is_helo):
             continue
         if q and q not in u.name.lower() and q not in (u.display_name or "").lower():
             continue

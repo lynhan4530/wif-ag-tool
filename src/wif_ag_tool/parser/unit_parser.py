@@ -176,6 +176,8 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
                   "TrackAmphibious" in block or
                   "WheelAmphibious" in block or
                   "'_amphibie'" in block)
+    is_plane = ('TAirplane' in block or 'AirplanePosition' in block or 'AirplaneFlags' in block or 'AirplaneModule' in block)
+    is_helo = ('THelicopter' in block or 'HelicopterPosition' in block or 'HeliApparence' in block or 'HelicopterMovement' in block)
 
     return WifUnit(
         name=name,
@@ -207,6 +209,8 @@ def _parse_block(full_name: str, block: str) -> WifUnit | None:
         stealth=stealth,
         fwd_deploy=fwd_deploy,
         amphibious=amphibious,
+        is_plane=is_plane,
+        is_helo=is_helo,
     )
 
 
@@ -239,6 +243,8 @@ def load_wif_units(units_csv: dict[str, str] | None = None) -> dict[str, WifUnit
     if use_cache:
         try:
             cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            if cache_data and not any("is_plane" in d for d in cache_data.values()):
+                raise ValueError("Cache needs rebuild for new is_plane/is_helo fields")
             units = {name: WifUnit(**data) for name, data in cache_data.items()}
             if units_csv:
                 for unit in units.values():
@@ -289,6 +295,8 @@ def load_vanilla_units(units_csv: dict[str, str] | None = None) -> dict[str, Wif
     if use_cache:
         try:
             cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+            if cache_data and not any("is_plane" in d for d in cache_data.values()):
+                raise ValueError("Cache needs rebuild for new is_plane/is_helo fields")
             units = {name: WifUnit(**data) for name, data in cache_data.items()}
             if units_csv:
                 for unit in units.values():
