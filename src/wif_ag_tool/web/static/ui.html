@@ -2051,6 +2051,8 @@ const state = {
   cloneReplicaOpen: false,
   cloneReplicaSource: null,
   cloneReplicaTargets: new Set(),
+  cloneReplicaQuery: "",
+  lastScrollCloneReplica: 0,
   settingsOpen: false,     // show settings modal
   buildOpen: false,        // show build log modal
   buildLog: "",
@@ -2422,10 +2424,12 @@ function render() {
   const leftPane = document.querySelector(".session > .pane.left-pane");
   const centerPane = document.querySelector(".session > .pane.vanilla-pane");
   const rightPane = document.querySelector(".session > .pane.replica-pane");
+  const cloneReplicaBody = document.querySelector(".clone-replica-body");
   
   if (leftPane) state.lastScrollLeft = leftPane.scrollTop;
   if (centerPane) state.lastScrollCenter = centerPane.scrollTop;
   if (rightPane) state.lastScrollRight = rightPane.scrollTop;
+  if (cloneReplicaBody) state.lastScrollCloneReplica = cloneReplicaBody.scrollTop;
 
   const activeId = document.activeElement?.id;
   const selStart = document.activeElement?.selectionStart;
@@ -2448,6 +2452,7 @@ function render() {
   const newLeftPane = document.querySelector(".session > .pane.left-pane");
   const newCenterPane = document.querySelector(".session > .pane.vanilla-pane");
   const newRightPane = document.querySelector(".session > .pane.replica-pane");
+  const newCloneReplicaBody = document.querySelector(".clone-replica-body");
   
   if (newLeftPane) {
     if (state.shouldScrollActiveDeckToTop && state.activeDeck) {
@@ -2471,6 +2476,9 @@ function render() {
   }
   if (newCenterPane && state.lastScrollCenter !== undefined) newCenterPane.scrollTop = state.lastScrollCenter;
   if (newRightPane && state.lastScrollRight !== undefined) newRightPane.scrollTop = state.lastScrollRight;
+  if (newCloneReplicaBody && state.lastScrollCloneReplica !== undefined) {
+    newCloneReplicaBody.scrollTop = state.lastScrollCloneReplica;
+  }
 
   if (activeId) {
     const activeEl = document.getElementById(activeId);
@@ -3363,6 +3371,8 @@ function openCloneReplicaModal(sourceDeckName) {
   state.cloneReplicaOpen = true;
   state.cloneReplicaSource = sourceDeckName;
   state.cloneReplicaTargets = new Set();
+  state.cloneReplicaQuery = "";
+  state.lastScrollCloneReplica = 0;
   render();
 }
 
@@ -3370,6 +3380,8 @@ function closeCloneReplicaModal() {
   state.cloneReplicaOpen = false;
   state.cloneReplicaSource = null;
   state.cloneReplicaTargets = new Set();
+  state.cloneReplicaQuery = "";
+  state.lastScrollCloneReplica = 0;
   render();
 }
 
@@ -3428,8 +3440,20 @@ function renderCloneReplicaModal() {
   // Family = name minus trailing _<digits>; matches "US_11ACR_1" → "US_11ACR".
   const family = (source || "").replace(/_\d+$/, "");
   const candidates = state.decks.filter(d => d.name !== source);
-  const sameFamily = candidates.filter(d => family && d.name.startsWith(family + "_"));
-  const others     = candidates.filter(d => !family || !d.name.startsWith(family + "_"));
+
+  const query = (state.cloneReplicaQuery || "").trim().toLowerCase();
+  const filterFn = d => {
+    if (!query) return true;
+    const name = d.name.toLowerCase();
+    const displayName = (d.display_name || "").toLowerCase();
+    const shortName = deckShort(d.name).toLowerCase();
+    const info = (d.short || "").toLowerCase();
+    return name.includes(query) || displayName.includes(query) || shortName.includes(query) || info.includes(query);
+  };
+  const filteredCandidates = candidates.filter(filterFn);
+  const sameFamily = filteredCandidates.filter(d => family && d.name.startsWith(family + "_"));
+  const others     = filteredCandidates.filter(d => !family || !d.name.startsWith(family + "_"));
+  const selectedDecks = state.decks.filter(d => d.name !== source && state.cloneReplicaTargets.has(d.name));
 
   const backdrop = el("div", { class: "backdrop",
     onclick: e => { if (e.target === backdrop) closeCloneReplicaModal(); } });
@@ -3442,9 +3466,25 @@ function renderCloneReplicaModal() {
   modal.appendChild(modalHead);
   makeDraggable(modal, modalHead);
 
-  const body = el("div", { class: "modal-body", style: "max-height:60vh;" });
+  const filters = el("div", { class: "modal-filters" });
+  filters.appendChild(el("span", { class: "field-label" }, "🔍"));
+  const searchInput = el("input", {
+    id: "clone-replica-search",
+    type: "text",
+    placeholder: "Search decks...",
+    value: state.cloneReplicaQuery || "",
+    style: "flex: 1; min-width: 0; font-size: 11px; padding: 4px 8px;",
+    oninput: e => {
+      state.cloneReplicaQuery = e.target.value;
+      render();
+    }
+  });
+  filters.appendChild(searchInput);
+  modal.appendChild(filters);
 
-  const renderRow = d => {
+  const body = el("div", { class: "modal-body clone-replica-body", style: "max-height:60vh;" });
+
+  const renderRow = (d, isSelectedSection = false) => {
     const checked = state.cloneReplicaTargets.has(d.name);
     const cb = el("input", { type: "checkbox" });
     cb.checked = checked;
@@ -3454,7 +3494,9 @@ function renderCloneReplicaModal() {
       render();
     };
     const label = d.display_name || deckShort(d.name);
-    return el("label", { class: "platoon-picker-opt", style: "display:flex; gap:8px; align-items:center; cursor:pointer;" },
+    const styleStr = "display:flex; gap:8px; align-items:center; cursor:pointer;" + 
+      (isSelectedSection ? " background: var(--accent-bg);" : "");
+    return el("label", { class: "platoon-picker-opt", style: styleStr },
       cb,
       el("span", { style: "flex:1;" }, label),
       el("span", { class: "hint" }, d.short || ""),
@@ -3462,15 +3504,24 @@ function renderCloneReplicaModal() {
     );
   };
 
+  if (selectedDecks.length) {
+    body.appendChild(el("div", { class: "platoon-picker-section", style: "color: var(--accent); border-bottom: 1px solid var(--border-color); margin-bottom: 6px; padding-bottom: 4px;" }, `Selected Decks (${selectedDecks.length})`));
+    for (const d of selectedDecks) {
+      body.appendChild(renderRow(d, true));
+    }
+  }
+
   if (sameFamily.length) {
-    body.appendChild(el("div", { class: "platoon-picker-section" }, "Same family"));
+    body.appendChild(el("div", { class: "platoon-picker-section", style: selectedDecks.length ? "margin-top:8px;" : "" }, "Same family"));
     for (const d of sameFamily) body.appendChild(renderRow(d));
   }
   if (others.length) {
     body.appendChild(el("div", { class: "platoon-picker-section", style: "margin-top:8px;" }, "Other decks"));
     for (const d of others) body.appendChild(renderRow(d));
   }
-  if (!candidates.length) {
+  if (!filteredCandidates.length && !selectedDecks.length) {
+    body.appendChild(el("div", { class: "pad hint" }, "No decks match the search query."));
+  } else if (!candidates.length) {
     body.appendChild(el("div", { class: "pad hint" }, "No other decks available in this scope."));
   }
   modal.appendChild(body);
